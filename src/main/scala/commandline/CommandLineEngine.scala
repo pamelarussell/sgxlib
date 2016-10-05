@@ -1,6 +1,8 @@
 package commandline
 
-object CommandLineEngine extends App {
+import commandline.program.HelloWorld
+
+object CommandLineEngine extends CommandLineProgram {
 
   println("Hello command line engine!")
 
