@@ -849,6 +849,12 @@ package object feature extends FunSuite {
       Block("chr2", 1900, 2100, Plus, "block"),
       Block("chr2", 2900, 6000, Plus, "block")
     ),"bs")
-
+    val chr1_1000_1100_1200_1300_3200_3300_3400_4000_5500_6000_plus = BlockSet(List(
+      Block("chr1", 1000, 1100, Plus, "block"),
+      Block("chr1", 1200, 1300, Plus, "block"),
+      Block("chr1", 3200, 3300, Plus, "block"),
+      Block("chr1", 3400, 4000, Plus, "block"),
+      Block("chr1", 5500, 6000, Plus, "block")
+    ), "bs")
 
 }

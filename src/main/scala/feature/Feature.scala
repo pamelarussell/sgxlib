@@ -762,7 +762,14 @@ case class BlockSet(blocks: List[Block], name: String) extends Feature {
     * @param feat Other [[Feature]]
     * @return True iff the other [[Feature]] is contained in this [[Feature]]
     */
-  override def contains(feat: Feature): Boolean = ???
+  override def contains(feat: Feature): Boolean = {
+    feat match {
+      case Empty => false
+      case b: Block => blocks.exists(_.contains(b))
+      case BlockSet(bs, nm) => bs.forall(contains(_))
+      case _ => throw new IllegalArgumentException("Not implemented for " + feat.toString)
+    }
+  }
 
   /**
     * Get the number of blocks
