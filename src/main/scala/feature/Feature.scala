@@ -233,7 +233,20 @@ object Feature {
     * @return The intersection of the two [[Feature]]s
     */
   def intersection(b: Block, bs: BlockSet, name: String): Feature = {
-    ???
+    val it: Iterator[Block] = bs.blocks.iterator
+    val rtrnBlks: collection.mutable.MutableList[Block] = collection.mutable.MutableList.empty // Blocks of the returned feature
+    while(it.hasNext) {
+      val blk = it.next()
+      val is = b.intersection(blk, "")
+      is match {
+        case Empty => Unit
+        case isBlk : Block => rtrnBlks += Block(isBlk.chr, isBlk.start, isBlk.end, isBlk.orientation, "")
+        case _ => throw new IllegalArgumentException("Not supported")
+      }
+    }
+    if(rtrnBlks.isEmpty) Empty
+    else if(rtrnBlks.size == 1) rtrnBlks.head.rename(name)
+    else BlockSet(rtrnBlks.toList, name)
   }
 
   /**
