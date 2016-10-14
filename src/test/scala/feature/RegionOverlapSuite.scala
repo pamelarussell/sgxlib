@@ -5,7 +5,7 @@ import org.scalatest.FunSuite
 /**
   * Created by prussell on 9/30/16.
   */
-class FeatureOverlapSuite extends FunSuite {
+class RegionOverlapSuite extends FunSuite {
 
   overlapBlockBlock()
   overlapBlockSetBlock()
@@ -87,91 +87,91 @@ class FeatureOverlapSuite extends FunSuite {
       assert(chr1_1000_1100_1900_2000_plus.overlaps(chr1_1000_2000_both), "Block completely contains block set, sharing two endpoints")
       assert(chr1_1000_1100_1200_1300_1900_2000_plus.overlaps(chr1_1000_2000_both), "Block completely contains block set, sharing two endpoints")
       // Block nested inside block set sharing one endpoint
-      assert(chr1_1000_1100_1200_1300_1900_2000_plus.overlaps(Block("chr1", 1000, 1050, Plus, "block")), "Block nested inside block set sharing one endpoint")
-      assert(chr1_1000_1100_1200_1300_1900_2000_plus.overlaps(Block("chr1", 1050, 1100, Plus, "block")), "Block nested inside block set sharing one endpoint")
-      assert(chr1_1000_1100_1200_1300_1900_2000_plus.overlaps(Block("chr1", 1200, 1250, Plus, "block")), "Block nested inside block set sharing one endpoint")
-      assert(chr1_1000_1100_1200_1300_1900_2000_plus.overlaps(Block("chr1", 1250, 1300, Plus, "block")), "Block nested inside block set sharing one endpoint")
-      assert(chr1_1000_1100_1200_1300_1900_2000_plus.overlaps(Block("chr1", 1900, 1950, Plus, "block")), "Block nested inside block set sharing one endpoint")
-      assert(chr1_1000_1100_1200_1300_1900_2000_plus.overlaps(Block("chr1", 1950, 2000, Plus, "block")), "Block nested inside block set sharing one endpoint")
+      assert(chr1_1000_1100_1200_1300_1900_2000_plus.overlaps(Block("chr1", 1000, 1050, Plus)), "Block nested inside block set sharing one endpoint")
+      assert(chr1_1000_1100_1200_1300_1900_2000_plus.overlaps(Block("chr1", 1050, 1100, Plus)), "Block nested inside block set sharing one endpoint")
+      assert(chr1_1000_1100_1200_1300_1900_2000_plus.overlaps(Block("chr1", 1200, 1250, Plus)), "Block nested inside block set sharing one endpoint")
+      assert(chr1_1000_1100_1200_1300_1900_2000_plus.overlaps(Block("chr1", 1250, 1300, Plus)), "Block nested inside block set sharing one endpoint")
+      assert(chr1_1000_1100_1200_1300_1900_2000_plus.overlaps(Block("chr1", 1900, 1950, Plus)), "Block nested inside block set sharing one endpoint")
+      assert(chr1_1000_1100_1200_1300_1900_2000_plus.overlaps(Block("chr1", 1950, 2000, Plus)), "Block nested inside block set sharing one endpoint")
       // Overlapping one block off end
       assert(chr1_1900_2100_3000_4000_plus.overlaps(chr1_1000_2000_both), "Overlapping one block off end")
       assert(chr1_1900_2100_3000_4000_plus.overlaps(chr1_1500_2500_plus), "Overlapping one block")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1400, 1550, Plus, "block")), "Overlapping one block off end")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1550, 1650, Plus, "block")), "Overlapping one block off end")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1650, 1750, Plus, "block")), "Overlapping one block off end")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1750, 1850, Plus, "block")), "Overlapping one block off end")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2000, 2150, Plus, "block")), "Overlapping one block off end")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2200, 2350, Plus, "block")), "Overlapping one block off end")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1400, 1550, Plus)), "Overlapping one block off end")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1550, 1650, Plus)), "Overlapping one block off end")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1650, 1750, Plus)), "Overlapping one block off end")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1750, 1850, Plus)), "Overlapping one block off end")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2000, 2150, Plus)), "Overlapping one block off end")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2200, 2350, Plus)), "Overlapping one block off end")
       // Overlapping two blocks off end
       assert(chr1_1700_1800_1900_2100_plus.overlaps(chr1_1000_2000_both), "Overlapping two blocks off end")
-      assert(chr1_1700_1800_1900_2100_plus.overlaps(Block("chr1", 1750, 2200, Plus, "block")), "Overlapping two blocks off end")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1400, 1750, Plus, "block")), "Overlapping two blocks off end")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1550, 1850, Plus, "block")), "Overlapping two blocks off end")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1650, 2200, Plus, "block")), "Overlapping two blocks off end")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1750, 2400, Plus, "block")), "Overlapping two blocks off end")
+      assert(chr1_1700_1800_1900_2100_plus.overlaps(Block("chr1", 1750, 2200, Plus)), "Overlapping two blocks off end")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1400, 1750, Plus)), "Overlapping two blocks off end")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1550, 1850, Plus)), "Overlapping two blocks off end")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1650, 2200, Plus)), "Overlapping two blocks off end")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1750, 2400, Plus)), "Overlapping two blocks off end")
       // Overlapping one block and intron
       assert(chr1_1500_1600_2100_2300_plus.overlaps(chr1_1000_2000_both), "Overlapping one block and an intron")
       assert(chr1_1500_1600_2100_2300_plus.overlaps(chr1_2000_3000_plus), "Overlapping one block and an intron")
       // Overlapping two blocks and intron
       assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(chr1_1000_2000_both), "Overlapping two blocks and an intron")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1650, 2400, Plus, "block")), "Overlapping two blocks and an intron")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1650, 2400, Plus)), "Overlapping two blocks and an intron")
       // Overlapping three blocks and intron
-      assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus.overlaps(Block("chr1", 500, 6500, Plus, "block")), "Overlapping three blocks and an intron")
-      assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus.overlaps(Block("chr1", 2500, 8500, Plus, "block")), "Overlapping three blocks and an intron")
+      assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus.overlaps(Block("chr1", 500, 6500, Plus)), "Overlapping three blocks and an intron")
+      assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus.overlaps(Block("chr1", 2500, 8500, Plus)), "Overlapping three blocks and an intron")
       // Same span as one block
       assert(chr1_1000_2000_3000_4000_plus.overlaps(chr1_1000_2000_both), "Same span as one block")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1500, 1600, Plus, "block")), "Same span as one block")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1700, 1800, Plus, "block")), "Same span as one block")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2100, 2300, Plus, "block")), "Same span as one block")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1500, 1600, Plus)), "Same span as one block")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1700, 1800, Plus)), "Same span as one block")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2100, 2300, Plus)), "Same span as one block")
       // Contains one block and overlaps two adjacent blocks
       assert(chr1_900_1100_1500_1600_1900_2100_plus.overlaps(chr1_1000_2000_both), "Contains one block and overlaps two adjacent blocks")
       // Contains two blocks and overlaps two adjacent blocks
-      assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus.overlaps(Block("chr1", 1500, 7500, Plus, "block")), "Contains two blocks and overlaps two adjacent blocks")
+      assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus.overlaps(Block("chr1", 1500, 7500, Plus)), "Contains two blocks and overlaps two adjacent blocks")
       // Contains one block sharing an endpoint
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1400, 1600, Plus, "block")), "Contains one block sharing an endpoint")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1500, 1650, Plus, "block")), "Contains one block sharing an endpoint")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1650, 1800, Plus, "block")), "Contains one block sharing an endpoint")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1700, 1850, Plus, "block")), "Contains one block sharing an endpoint")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2000, 2300, Plus, "block")), "Contains one block sharing an endpoint")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2100, 2400, Plus, "block")), "Contains one block sharing an endpoint")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1400, 1600, Plus)), "Contains one block sharing an endpoint")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1500, 1650, Plus)), "Contains one block sharing an endpoint")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1650, 1800, Plus)), "Contains one block sharing an endpoint")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1700, 1850, Plus)), "Contains one block sharing an endpoint")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2000, 2300, Plus)), "Contains one block sharing an endpoint")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2100, 2400, Plus)), "Contains one block sharing an endpoint")
       // Non-overlapping because different spans
       assert(!chr1_100_200_300_400_plus.overlaps(chr1_1000_2000_plus_1), "Non-overlapping because different spans")
-      assert(!chr1_100_200_300_400_plus.overlaps(Block("chr1", 500, 600, Both, "block")), "Non-overlapping because different spans")
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1000, 1100, Both, "block")), "Non-overlapping because different spans")
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2400, 2500, Both, "block")), "Non-overlapping because different spans")
+      assert(!chr1_100_200_300_400_plus.overlaps(Block("chr1", 500, 600, Both)), "Non-overlapping because different spans")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1000, 1100, Both)), "Non-overlapping because different spans")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2400, 2500, Both)), "Non-overlapping because different spans")
       // Non-overlapping because different orientations
       assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(chr1_1000_2000_minus), "Non-overlapping because different orientations")
       // Different chromosomes
       assert(!chr1_1000_2000_3000_4000_5000_6000_7000_8000_minus.overlaps(chr2_1000_2000_plus), "Different chromosomes")
       // Same span as an intron
       // Two blocks
-      assert(!chr1_100_200_300_400_plus.overlaps(Block("chr1", 200, 300, Plus, "block")), "Same span as an intron")
+      assert(!chr1_100_200_300_400_plus.overlaps(Block("chr1", 200, 300, Plus)), "Same span as an intron")
       // Three blocks
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1600, 1700, Plus, "block")), "Same span as an intron")
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1800, 2100, Plus, "block")), "Same span as an intron")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1600, 1700, Plus)), "Same span as an intron")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1800, 2100, Plus)), "Same span as an intron")
       // Adjacent to span
       // Two blocks
-      assert(!chr1_100_200_300_400_plus.overlaps(Block("chr1", 50, 100, Plus, "block")), "Adjacent to span")
-      assert(!chr1_100_200_300_400_plus.overlaps(Block("chr1", 400, 500, Plus, "block")), "Adjacent to span")
+      assert(!chr1_100_200_300_400_plus.overlaps(Block("chr1", 50, 100, Plus)), "Adjacent to span")
+      assert(!chr1_100_200_300_400_plus.overlaps(Block("chr1", 400, 500, Plus)), "Adjacent to span")
       // Three blocks
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1400, 1500, Plus, "block")), "Same span as an intron")
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2300, 2400, Plus, "block")), "Same span as an intron")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1400, 1500, Plus)), "Same span as an intron")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2300, 2400, Plus)), "Same span as an intron")
       // 1bp gap between blocks
       // In intron
-      assert(!chr1_100_200_300_400_plus.overlaps(Block("chr1", 201, 300, Plus, "block")), "1bp gap between blocks")
-      assert(!chr1_100_200_300_400_plus.overlaps(Block("chr1", 200, 299, Plus, "block")), "1bp gap between blocks")
-      assert(!chr1_100_200_300_400_plus.overlaps(Block("chr1", 201, 299, Plus, "block")), "1bp gap between blocks")
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1801, 2099, Plus, "block")), "1bp gap between blocks")
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1601, 1699, Plus, "block")), "1bp gap between blocks")
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1801, 2099, Plus, "block")), "1bp gap between blocks")
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1600, 1699, Plus, "block")), "1bp gap between blocks")
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1800, 2099, Plus, "block")), "1bp gap between blocks")
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1601, 1700, Plus, "block")), "1bp gap between blocks")
+      assert(!chr1_100_200_300_400_plus.overlaps(Block("chr1", 201, 300, Plus)), "1bp gap between blocks")
+      assert(!chr1_100_200_300_400_plus.overlaps(Block("chr1", 200, 299, Plus)), "1bp gap between blocks")
+      assert(!chr1_100_200_300_400_plus.overlaps(Block("chr1", 201, 299, Plus)), "1bp gap between blocks")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1801, 2099, Plus)), "1bp gap between blocks")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1601, 1699, Plus)), "1bp gap between blocks")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1801, 2099, Plus)), "1bp gap between blocks")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1600, 1699, Plus)), "1bp gap between blocks")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1800, 2099, Plus)), "1bp gap between blocks")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1601, 1700, Plus)), "1bp gap between blocks")
       // Outside span
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1400, 1499, Plus, "block")), "1bp gap between blocks")
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2301, 2400, Plus, "block")), "1bp gap between blocks")
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1400, 1500, Plus, "block")), "1bp gap between blocks")
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2300, 2400, Plus, "block")), "1bp gap between blocks")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1400, 1499, Plus)), "1bp gap between blocks")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2301, 2400, Plus)), "1bp gap between blocks")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 1400, 1500, Plus)), "1bp gap between blocks")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("chr1", 2300, 2400, Plus)), "1bp gap between blocks")
 
 
       /*
@@ -187,91 +187,91 @@ class FeatureOverlapSuite extends FunSuite {
       assert(chr1_1000_2000_both.overlaps(chr1_1000_1100_1900_2000_plus), "Block completely contains block set, sharing two endpoints")
       assert(chr1_1000_2000_both.overlaps(chr1_1000_1100_1200_1300_1900_2000_plus), "Block completely contains block set, sharing two endpoints")
       // Block nested inside block set sharing one endpoint
-      assert(Block("chr1", 1000, 1050, Plus, "block").overlaps(chr1_1000_1100_1200_1300_1900_2000_plus), "Block nested inside block set sharing one endpoint")
-      assert(Block("chr1", 1050, 1100, Plus, "block").overlaps(chr1_1000_1100_1200_1300_1900_2000_plus), "Block nested inside block set sharing one endpoint")
-      assert(Block("chr1", 1200, 1250, Plus, "block").overlaps(chr1_1000_1100_1200_1300_1900_2000_plus), "Block nested inside block set sharing one endpoint")
-      assert(Block("chr1", 1250, 1300, Plus, "block").overlaps(chr1_1000_1100_1200_1300_1900_2000_plus), "Block nested inside block set sharing one endpoint")
-      assert(Block("chr1", 1900, 1950, Plus, "block").overlaps(chr1_1000_1100_1200_1300_1900_2000_plus), "Block nested inside block set sharing one endpoint")
-      assert(Block("chr1", 1950, 2000, Plus, "block").overlaps(chr1_1000_1100_1200_1300_1900_2000_plus), "Block nested inside block set sharing one endpoint")
+      assert(Block("chr1", 1000, 1050, Plus).overlaps(chr1_1000_1100_1200_1300_1900_2000_plus), "Block nested inside block set sharing one endpoint")
+      assert(Block("chr1", 1050, 1100, Plus).overlaps(chr1_1000_1100_1200_1300_1900_2000_plus), "Block nested inside block set sharing one endpoint")
+      assert(Block("chr1", 1200, 1250, Plus).overlaps(chr1_1000_1100_1200_1300_1900_2000_plus), "Block nested inside block set sharing one endpoint")
+      assert(Block("chr1", 1250, 1300, Plus).overlaps(chr1_1000_1100_1200_1300_1900_2000_plus), "Block nested inside block set sharing one endpoint")
+      assert(Block("chr1", 1900, 1950, Plus).overlaps(chr1_1000_1100_1200_1300_1900_2000_plus), "Block nested inside block set sharing one endpoint")
+      assert(Block("chr1", 1950, 2000, Plus).overlaps(chr1_1000_1100_1200_1300_1900_2000_plus), "Block nested inside block set sharing one endpoint")
       // Overlapping one block off end
       assert(chr1_1000_2000_both.overlaps(chr1_1900_2100_3000_4000_plus), "Overlapping one block off end")
       assert(chr1_1500_2500_plus.overlaps(chr1_1900_2100_3000_4000_plus), "Overlapping one block")
-      assert(Block("chr1", 1400, 1550, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping one block off end")
-      assert(Block("chr1", 1550, 1650, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping one block off end")
-      assert(Block("chr1", 1650, 1750, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping one block off end")
-      assert(Block("chr1", 1750, 1850, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping one block off end")
-      assert(Block("chr1", 2000, 2150, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping one block off end")
-      assert(Block("chr1", 2200, 2350, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping one block off end")
+      assert(Block("chr1", 1400, 1550, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping one block off end")
+      assert(Block("chr1", 1550, 1650, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping one block off end")
+      assert(Block("chr1", 1650, 1750, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping one block off end")
+      assert(Block("chr1", 1750, 1850, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping one block off end")
+      assert(Block("chr1", 2000, 2150, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping one block off end")
+      assert(Block("chr1", 2200, 2350, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping one block off end")
       // Overlapping two blocks off end
       assert(chr1_1000_2000_both.overlaps(chr1_1700_1800_1900_2100_plus), "Overlapping two blocks off end")
-      assert(Block("chr1", 1750, 2200, Plus, "block").overlaps(chr1_1700_1800_1900_2100_plus), "Overlapping two blocks off end")
-      assert(Block("chr1", 1400, 1750, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping two blocks off end")
-      assert(Block("chr1", 1550, 1850, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping two blocks off end")
-      assert(Block("chr1", 1650, 2200, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping two blocks off end")
-      assert(Block("chr1", 1750, 2400, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping two blocks off end")
+      assert(Block("chr1", 1750, 2200, Plus).overlaps(chr1_1700_1800_1900_2100_plus), "Overlapping two blocks off end")
+      assert(Block("chr1", 1400, 1750, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping two blocks off end")
+      assert(Block("chr1", 1550, 1850, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping two blocks off end")
+      assert(Block("chr1", 1650, 2200, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping two blocks off end")
+      assert(Block("chr1", 1750, 2400, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping two blocks off end")
       // Overlapping one block and intron
       assert(chr1_1000_2000_both.overlaps(chr1_1500_1600_2100_2300_plus), "Overlapping one block and an intron")
       assert(chr1_2000_3000_plus.overlaps(chr1_1500_1600_2100_2300_plus), "Overlapping one block and an intron")
       // Overlapping two blocks and intron
       assert(chr1_1000_2000_both.overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping two blocks and an intron")
-      assert(Block("chr1", 1650, 2400, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping two blocks and an intron")
+      assert(Block("chr1", 1650, 2400, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Overlapping two blocks and an intron")
       // Overlapping three blocks and intron
-      assert(Block("chr1", 500, 6500, Plus, "block").overlaps(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus), "Overlapping three blocks and an intron")
-      assert(Block("chr1", 2500, 8500, Plus, "block").overlaps(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus), "Overlapping three blocks and an intron")
+      assert(Block("chr1", 500, 6500, Plus).overlaps(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus), "Overlapping three blocks and an intron")
+      assert(Block("chr1", 2500, 8500, Plus).overlaps(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus), "Overlapping three blocks and an intron")
       // Same span as one block
       assert(chr1_1000_2000_both.overlaps(chr1_1000_2000_3000_4000_plus), "Same span as one block")
-      assert(Block("chr1", 1500, 1600, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Same span as one block")
-      assert(Block("chr1", 1700, 1800, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Same span as one block")
-      assert(Block("chr1", 2100, 2300, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Same span as one block")
+      assert(Block("chr1", 1500, 1600, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Same span as one block")
+      assert(Block("chr1", 1700, 1800, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Same span as one block")
+      assert(Block("chr1", 2100, 2300, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Same span as one block")
       // Contains one block and overlaps two adjacent blocks
       assert(chr1_1000_2000_both.overlaps(chr1_900_1100_1500_1600_1900_2100_plus), "Contains one block and overlaps two adjacent blocks")
       // Contains two blocks and overlaps two adjacent blocks
-      assert(Block("chr1", 1500, 7500, Plus, "block").overlaps(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus), "Contains two blocks and overlaps two adjacent blocks")
+      assert(Block("chr1", 1500, 7500, Plus).overlaps(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus), "Contains two blocks and overlaps two adjacent blocks")
       // Contains one block sharing an endpoint
-      assert(Block("chr1", 1400, 1600, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Contains one block sharing an endpoint")
-      assert(Block("chr1", 1500, 1650, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Contains one block sharing an endpoint")
-      assert(Block("chr1", 1650, 1800, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Contains one block sharing an endpoint")
-      assert(Block("chr1", 1700, 1850, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Contains one block sharing an endpoint")
-      assert(Block("chr1", 2000, 2300, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Contains one block sharing an endpoint")
-      assert(Block("chr1", 2100, 2400, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Contains one block sharing an endpoint")
+      assert(Block("chr1", 1400, 1600, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Contains one block sharing an endpoint")
+      assert(Block("chr1", 1500, 1650, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Contains one block sharing an endpoint")
+      assert(Block("chr1", 1650, 1800, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Contains one block sharing an endpoint")
+      assert(Block("chr1", 1700, 1850, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Contains one block sharing an endpoint")
+      assert(Block("chr1", 2000, 2300, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Contains one block sharing an endpoint")
+      assert(Block("chr1", 2100, 2400, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Contains one block sharing an endpoint")
       // Non-overlapping because different spans
       assert(!chr1_1000_2000_plus_1.overlaps(chr1_100_200_300_400_plus), "Non-overlapping because different spans")
-      assert(!Block("chr1", 500, 600, Both, "block").overlaps(chr1_100_200_300_400_plus), "Non-overlapping because different spans")
-      assert(!Block("chr1", 1000, 1100, Both, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different spans")
-      assert(!Block("chr1", 2400, 2500, Both, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different spans")
+      assert(!Block("chr1", 500, 600, Both).overlaps(chr1_100_200_300_400_plus), "Non-overlapping because different spans")
+      assert(!Block("chr1", 1000, 1100, Both).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different spans")
+      assert(!Block("chr1", 2400, 2500, Both).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different spans")
       // Non-overlapping because different orientations
       assert(!chr1_1000_2000_minus.overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different orientations")
       // Different chromosomes
       assert(!chr2_1000_2000_plus.overlaps(chr1_1000_2000_3000_4000_5000_6000_7000_8000_minus), "Different chromosomes")
       // Same span as an intron
       // Two blocks
-      assert(!Block("chr1", 200, 300, Plus, "block").overlaps(chr1_100_200_300_400_plus), "Same span as an intron")
+      assert(!Block("chr1", 200, 300, Plus).overlaps(chr1_100_200_300_400_plus), "Same span as an intron")
       // Three blocks
-      assert(!Block("chr1", 1600, 1700, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Same span as an intron")
-      assert(!Block("chr1", 1800, 2100, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Same span as an intron")
+      assert(!Block("chr1", 1600, 1700, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Same span as an intron")
+      assert(!Block("chr1", 1800, 2100, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Same span as an intron")
       // Adjacent to span
       // Two blocks
-      assert(!Block("chr1", 50, 100, Plus, "block").overlaps(chr1_100_200_300_400_plus), "Adjacent to span")
-      assert(!Block("chr1", 400, 500, Plus, "block").overlaps(chr1_100_200_300_400_plus), "Adjacent to span")
+      assert(!Block("chr1", 50, 100, Plus).overlaps(chr1_100_200_300_400_plus), "Adjacent to span")
+      assert(!Block("chr1", 400, 500, Plus).overlaps(chr1_100_200_300_400_plus), "Adjacent to span")
       // Three blocks
-      assert(!Block("chr1", 1400, 1500, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Same span as an intron")
-      assert(!Block("chr1", 2300, 2400, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Same span as an intron")
+      assert(!Block("chr1", 1400, 1500, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Same span as an intron")
+      assert(!Block("chr1", 2300, 2400, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Same span as an intron")
       // 1bp gap between blocks
       // In intron
-      assert(!Block("chr1", 201, 300, Plus, "block").overlaps(chr1_100_200_300_400_plus), "1bp gap between blocks")
-      assert(!Block("chr1", 200, 299, Plus, "block").overlaps(chr1_100_200_300_400_plus), "1bp gap between blocks")
-      assert(!Block("chr1", 201, 299, Plus, "block").overlaps(chr1_100_200_300_400_plus), "1bp gap between blocks")
-      assert(!Block("chr1", 1801, 2099, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
-      assert(!Block("chr1", 1601, 1699, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
-      assert(!Block("chr1", 1801, 2099, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
-      assert(!Block("chr1", 1600, 1699, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
-      assert(!Block("chr1", 1800, 2099, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
-      assert(!Block("chr1", 1601, 1700, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
+      assert(!Block("chr1", 201, 300, Plus).overlaps(chr1_100_200_300_400_plus), "1bp gap between blocks")
+      assert(!Block("chr1", 200, 299, Plus).overlaps(chr1_100_200_300_400_plus), "1bp gap between blocks")
+      assert(!Block("chr1", 201, 299, Plus).overlaps(chr1_100_200_300_400_plus), "1bp gap between blocks")
+      assert(!Block("chr1", 1801, 2099, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
+      assert(!Block("chr1", 1601, 1699, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
+      assert(!Block("chr1", 1801, 2099, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
+      assert(!Block("chr1", 1600, 1699, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
+      assert(!Block("chr1", 1800, 2099, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
+      assert(!Block("chr1", 1601, 1700, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
       // Outside span
-      assert(!Block("chr1", 1400, 1499, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
-      assert(!Block("chr1", 2301, 2400, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
-      assert(!Block("chr1", 1400, 1500, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
-      assert(!Block("chr1", 2300, 2400, Plus, "block").overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
+      assert(!Block("chr1", 1400, 1499, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
+      assert(!Block("chr1", 2301, 2400, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
+      assert(!Block("chr1", 1400, 1500, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
+      assert(!Block("chr1", 2300, 2400, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "1bp gap between blocks")
 
     }
   }

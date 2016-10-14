@@ -5,7 +5,7 @@ import org.scalatest.FunSuite
 /**
   * Created by prussell on 8/30/16.
   */
-class FeatureMiscSuite extends FunSuite {
+class RegionMiscSuite extends FunSuite {
 
   // Run all tests
   adjacencyBlockBlock()
@@ -14,9 +14,7 @@ class FeatureMiscSuite extends FunSuite {
   featureStart()
   featureEnd()
   featureOrientation()
-  featureName()
   featureGetBlocks()
-  featureRename()
 
 
   def featureNumBlocks(): Unit = {
@@ -39,12 +37,12 @@ class FeatureMiscSuite extends FunSuite {
 
   def adjacencyBlockBlock(): Unit = {
     test("Block adjacency with block") {
-      assert(Block("chr1", 1, 5, Plus, "name").adjacent(Block("chr1", 5, 10, Minus, "name")))
-      assert(!Block("chr1", 1, 5, Plus, "name").adjacent(Block("chr1", 6, 10, Plus, "name")))
-      assert(!Block("chr1", 1, 5, Plus, "name").adjacent(Block("chr1", 4, 10, Plus, "name")))
-      assert(!Block("chr1", 1, 5, Plus, "name").adjacent(Block("chr2", 5, 10, Plus, "name")))
-      assert(Block("chr1", 10, 12, Plus, "name").adjacent(Block("chr1", 6, 10, Minus, "name")))
-      assert(Block("chr1", 10, 11, Plus, "name").adjacent(Block("chr1", 9, 10, Minus, "name")))
+      assert(Block("chr1", 1, 5, Plus).adjacent(Block("chr1", 5, 10, Minus)))
+      assert(!Block("chr1", 1, 5, Plus).adjacent(Block("chr1", 6, 10, Plus)))
+      assert(!Block("chr1", 1, 5, Plus).adjacent(Block("chr1", 4, 10, Plus)))
+      assert(!Block("chr1", 1, 5, Plus).adjacent(Block("chr2", 5, 10, Plus)))
+      assert(Block("chr1", 10, 12, Plus).adjacent(Block("chr1", 6, 10, Minus)))
+      assert(Block("chr1", 10, 11, Plus).adjacent(Block("chr1", 9, 10, Minus)))
     }
   }
 
@@ -82,33 +80,14 @@ class FeatureMiscSuite extends FunSuite {
     }
   }
 
-  def featureName(): Unit = {
-    test("Feature name") {
-      assert(chr1_1000_2000_minus.name === "block1")
-      assert(chr1_100_200_300_400_plus.name === "bs1")
-      intercept[IllegalStateException](Empty.name)
-    }
-  }
-
   def featureGetBlocks(): Unit = {
     test("Feature get blocks") {
-      assert(chr1_1000_2000_minus.blocks === List(Block("chr1", 1000, 2000, Minus, chr1_1000_2000_minus.name)))
+      assert(chr1_1000_2000_minus.blocks === List(Block("chr1", 1000, 2000, Minus)))
       assert(chr1_100_200_300_400_plus.blocks === List(
-        Block("chr1", 100, 200, Plus, "block0"),
-        Block("chr1", 300, 400, Plus, "block1")
+        Block("chr1", 100, 200, Plus),
+        Block("chr1", 300, 400, Plus)
       ))
       assert(Empty.blocks === Nil)
-    }
-  }
-
-  def featureRename(): Unit = {
-    test("Feature rename") {
-      assert(chr2_3000_4000_plus.rename("newname") === Block("chr2", 3000, 4000, Plus, "newname"))
-      assert(chr1_100_200_300_400_plus.rename("newname") === BlockSet(List(
-        Block("chr1", 100, 200, Plus, "block0"),
-        Block("chr1", 300, 400, Plus, "block1")
-      ), "newname"))
-      intercept[IllegalStateException](Empty.rename("name"))
     }
   }
 

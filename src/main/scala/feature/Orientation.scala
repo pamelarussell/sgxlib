@@ -2,7 +2,7 @@ package feature
 
 /**
   * Created by prussell on 8/29/16.
-  * A feature orientation
+  * A region orientation
   */
 sealed abstract class Orientation
 
@@ -40,8 +40,9 @@ object Orientation {
   def consensus(o1: Orientation, o2: Orientation): Orientation = consensus((o1, o2))
 
   /**
-    * Tells whether [[Feature]]s with the two [[Orientation]]s are eligible to overlap
+    * Tells whether [[Region]]s with the two [[Orientation]]s are eligible to overlap
     * based on their orientations
+ *
     * @param os Pair of [[Orientation]]s
     * @return True iff the two [[Orientation]]s are compatible
     */
@@ -59,8 +60,9 @@ object Orientation {
   }
 
   /**
-    * Tells whether [[Feature]]s with the two [[Orientation]]s are eligible to overlap
+    * Tells whether [[Region]]s with the two [[Orientation]]s are eligible to overlap
     * based on their orientations
+ *
     * @param o1 [[Orientation]] 1
     * @param o2 [[Orientation]] 2
     * @return True iff the two [[Orientation]]s are compatible
@@ -68,12 +70,13 @@ object Orientation {
   def isCompatible(o1: Orientation, o2: Orientation): Boolean = isCompatible((o1, o2))
 
   /**
-    * Tells whether the [[Feature]]s are eligible to overlap / have compatible orientations
-    * @param f1 Feature 1
-    * @param f2 Feature 2
+    * Tells whether the [[Region]]s are eligible to overlap / have compatible orientations
+ *
+    * @param f1 Region 1
+    * @param f2 Region 2
     * @return True iff the two orientations are compatible
     */
-  def isCompatible(f1: Feature, f2: Feature): Boolean = {
+  def isCompatible(f1: Region, f2: Region): Boolean = {
     if(f1 == Empty || f2 == Empty) false
     else isCompatible((f1.orientation, f2.orientation))
   }
