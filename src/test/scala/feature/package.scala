@@ -98,12 +98,53 @@ package object feature extends FunSuite {
       Block("chr1", 5000, 6000, Minus),
       Block("chr1", 7000, 8000, Minus)
     ))
-
     val chr1_1000_2000_2500_3000_4000_5000_6000_6500_7000_8000_plus = BlockSet(List(
       Block("chr1", 1000, 2000, Plus),
       Block("chr1", 2500, 3000, Plus),
       Block("chr1", 4000, 5000, Plus),
       Block("chr1", 6000, 6500, Plus),
+      Block("chr1", 7000, 8000, Plus)
+    ))
+    val chr1_1000_2100_2500_3000_4000_5000_6000_6500_7000_8000_plus = BlockSet(List(
+      Block("chr1", 1000, 2100, Plus),
+      Block("chr1", 2500, 3000, Plus),
+      Block("chr1", 4000, 5000, Plus),
+      Block("chr1", 6000, 6500, Plus),
+      Block("chr1", 7000, 8000, Plus)
+    ))
+    val chr1_1000_2000_2400_3000_4000_5000_6000_6500_7000_8000_plus = BlockSet(List(
+      Block("chr1", 1000, 2000, Plus),
+      Block("chr1", 2400, 3000, Plus),
+      Block("chr1", 4000, 5000, Plus),
+      Block("chr1", 6000, 6500, Plus),
+      Block("chr1", 7000, 8000, Plus)
+    ))
+    val chr1_1000_2000_2600_3000_4000_5000_6000_6500_7000_8000_plus = BlockSet(List(
+      Block("chr1", 1000, 2000, Plus),
+      Block("chr1", 2600, 3000, Plus),
+      Block("chr1", 4000, 5000, Plus),
+      Block("chr1", 6000, 6500, Plus),
+      Block("chr1", 7000, 8000, Plus)
+    ))
+    val chr1_1000_2000_4000_5000_6000_6500_6600_6700_7000_8000_plus = BlockSet(List(
+      Block("chr1", 1000, 2000, Plus),
+      Block("chr1", 4000, 5000, Plus),
+      Block("chr1", 6000, 6500, Plus),
+      Block("chr1", 6600, 6700, Plus),
+      Block("chr1", 7000, 8000, Plus)
+    ))
+    val chr1_1000_2000_2500_3000_4000_5000_6000_6500_7100_8000_plus = BlockSet(List(
+      Block("chr1", 1000, 2000, Plus),
+      Block("chr1", 2500, 3000, Plus),
+      Block("chr1", 4000, 5000, Plus),
+      Block("chr1", 6000, 6500, Plus),
+      Block("chr1", 7100, 8000, Plus)
+    ))
+    val chr1_1000_2000_2500_3000_4000_5000_6000_6600_7000_8000_plus = BlockSet(List(
+      Block("chr1", 1000, 2000, Plus),
+      Block("chr1", 2500, 3000, Plus),
+      Block("chr1", 4000, 5000, Plus),
+      Block("chr1", 6000, 6600, Plus),
       Block("chr1", 7000, 8000, Plus)
     ))
     val chr1_1000_2000_2500_6500_7000_8000_plus = BlockSet(List(
@@ -856,5 +897,20 @@ package object feature extends FunSuite {
       Block("chr1", 3400, 4000, Plus),
       Block("chr1", 5500, 6000, Plus)
     ))
+  val chr1_1000_2000_3000_4000_5000_6000_minus = BlockSet(List(
+    Block("chr1", 1000, 2000, Minus),
+    Block("chr1", 3000, 4000, Minus),
+    Block("chr1", 5000, 6000, Minus)
+  ))
+  val chr2_1000_2000_3000_4000_5000_6000_plus = BlockSet(List(
+    Block("chr2", 1000, 2000, Plus),
+    Block("chr2", 3000, 4000, Plus),
+    Block("chr2", 5000, 6000, Plus)
+  ))
+  val chr2_1000_2000_3000_4000_5000_6000_minus = BlockSet(List(
+    Block("chr2", 1000, 2000, Minus),
+    Block("chr2", 3000, 4000, Minus),
+    Block("chr2", 5000, 6000, Minus)
+  ))
 
 }

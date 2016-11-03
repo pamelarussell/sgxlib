@@ -53,4 +53,23 @@ class OrientationSuite extends FunSuite {
     assert(isCompatible(Unstranded, Unstranded))
   }
 
+  test("Arbitrary ordering") {
+    assert(ArbitraryOrdering.compare(Plus, Plus) === 0)
+    assert(ArbitraryOrdering.compare(Plus, Minus) < 0)
+    assert(ArbitraryOrdering.compare(Plus, Both) < 0)
+    assert(ArbitraryOrdering.compare(Plus, Unstranded) < 0)
+    assert(ArbitraryOrdering.compare(Minus, Plus) > 0)
+    assert(ArbitraryOrdering.compare(Minus, Minus) === 0)
+    assert(ArbitraryOrdering.compare(Minus, Both) < 0)
+    assert(ArbitraryOrdering.compare(Minus, Unstranded) < 0)
+    assert(ArbitraryOrdering.compare(Both, Plus) > 0)
+    assert(ArbitraryOrdering.compare(Both, Minus) > 0)
+    assert(ArbitraryOrdering.compare(Both, Both) === 0)
+    assert(ArbitraryOrdering.compare(Both, Unstranded) < 0)
+    assert(ArbitraryOrdering.compare(Unstranded, Plus) > 0)
+    assert(ArbitraryOrdering.compare(Unstranded, Minus) > 0)
+    assert(ArbitraryOrdering.compare(Unstranded, Both) > 0)
+    assert(ArbitraryOrdering.compare(Unstranded, Unstranded) === 0)
+  }
+
 }

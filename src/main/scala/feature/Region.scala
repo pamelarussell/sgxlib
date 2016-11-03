@@ -6,7 +6,7 @@ import scala.collection.mutable.ListBuffer
   * Created by prussell on 8/29/16.
   * A genomic annotation consisting of blocks
   */
-sealed abstract class Region {
+sealed abstract class Region extends Ordered[Region] {
 
   /**
     * Test whether this [[Region]] overlaps another [[Region]]
@@ -98,6 +98,18 @@ sealed abstract class Region {
     * @return New [[Region]] with [[Block]] added
     */
   def addBlock(block: Block): Region
+
+  /**
+    * Obtain a new [[Region]] by intersecting with an interval
+    * @param newStart New start position
+    * @param newEnd New end position
+    * @return The region trimmed to the new start and end positions
+    */
+  def trim(newStart: Int, newEnd: Int): Region = {
+    if(newStart > newEnd) throw new IllegalArgumentException("New start must be <= new end")
+    if(newStart < 0) throw new IllegalArgumentException("New start must be >= 0")
+    intersection(Block(chr, newStart, newEnd, orientation))
+  }
 
 }
 
@@ -229,7 +241,6 @@ object Region {
 
   /**
     * Remove the intersection of two blocks from one of the blocks
- *
     * @param b1   Block to subtract from
     * @param b2   Block to subtract
     * @return [[Region]] representing the first block minus the intersection with the second block
@@ -256,6 +267,75 @@ object Region {
     } else { // b1 and b2 overlap, neither is contained in the other
       if(b1.start < b2.start) Block(b1.chr, b1.start, b2.start, b1.orientation)
       else Block(b1.chr, b2.end, b1.end, b1.orientation)
+    }
+  }
+
+  /**
+    * Compare two blocks
+    * @param b1 Block 1
+    * @param b2 Block 2
+    * @return Positive integer if block 1 is greater; negative if block 2 is greater; zero if equal
+    */
+  def compare(b1: Block, b2: Block): Int = {
+    // First compare chromosomes
+    val cc = scala.math.Ordering.String.compare(b1.chr, b2.chr)
+    if(cc != 0) cc
+    else {
+      // Next compare start positions
+      val sc = b1.start - b2.start
+      if(sc != 0) sc
+      else {
+        // Next compare end positions
+        val ec = b1.end - b2.end
+        // Finally compare orientations
+        if(ec != 0) ec
+        else Orientation.ArbitraryOrdering.compare(b1.orientation, b2.orientation)
+      }
+    }
+  }
+
+  /**
+    * Compare block and block set
+    * @param b Block
+    * @param bs Block set
+    * @return Positive integer if block is greater; negative if block set is greater
+    */
+  def compare(b: Block, bs: BlockSet): Int = {
+    // First compare span
+    val cb = compare(b, Block(bs.chr, bs.start, bs.end, bs.orientation))
+    if(cb != 0) cb
+    else -1 // If same span, block is less than block set
+  }
+
+  /**
+    * Compare block set and block
+    * @param bs Block set
+    * @param b Block
+    * @return Positive integer if block set is greater; negative if block is greater
+    */
+  def compare(bs: BlockSet, b: Block): Int = -1 * compare(b, bs)
+
+  /**
+    * Compare two block sets
+    * @param bs1 Block set 1
+    * @param bs2 Block set 2
+    * @return Positive integer if block set 1 is greater; negative if block set 2 is greater; zero if equal
+    */
+  def compare(bs1: BlockSet, bs2: BlockSet): Int = {
+    // First compare on span only
+    val cb: Int = compare(Block(bs1.chr, bs1.start, bs1.end, bs1.orientation),
+      Block(bs2.chr, bs2.start, bs2.end, bs2.orientation))
+    if(cb != 0) cb
+    else { // Block sets have same span and orientation
+      // Compare number of blocks
+      val cn: Int = bs1.numBlocks - bs2.numBlocks
+      if(cn != 0) cn
+      else { // Same number of blocks
+        // Return comparison of first pair of different blocks
+        val db: List[(Block, Block)] = (bs1.blocks zip bs2.blocks).dropWhile(bp => compare(bp._1, bp._2) == 0)
+        if(db.isEmpty) 0
+        else compare(db.head._1, db.head._2)
+      }
     }
   }
 
@@ -364,8 +444,16 @@ case object Empty extends Region {
     */
   override def numBlocks: Int = 0
 
+  override def trim(newStart: Int, newEnd: Int): Region = Empty
+
   override def toString: String = "Empty"
 
+  override def compare(that: Region): Int = {
+    that match {
+      case Empty => 0
+      case _ => 1
+    }
+  }
 }
 
 /**
@@ -530,6 +618,14 @@ case class Block(chr: String, start: Int, end: Int, orientation: Orientation) ex
     sb.toString()
   }
 
+  override def compare(that: Region): Int = {
+    that match {
+      case Empty => -1 * (Empty compare this)
+      case b: Block => Region.compare(this, b)
+      case bs: BlockSet => Region.compare(this, bs)
+    }
+  }
+
 }
 
 /**
@@ -690,6 +786,14 @@ case class BlockSet(blocks: List[Block]) extends Region {
     sb.append(blocks.mkString(", "))
     sb.append(']')
     sb.toString()
+  }
+
+  override def compare(that: Region): Int = {
+    that match {
+      case Empty => -1 * (Empty compare this)
+      case b: Block => Region.compare(this, b)
+      case bs: BlockSet => Region.compare(this, bs)
+    }
   }
 
 }

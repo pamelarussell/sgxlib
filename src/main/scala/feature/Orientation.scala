@@ -27,7 +27,7 @@ object Orientation {
       case (os._1, Both) => os._1
       case (Unstranded, os._2) => Unstranded
       case (os._1, Unstranded) => Unstranded
-      case _ => throw new IllegalArgumentException("Not implemented: " + os.toString())
+      case _ => throw new UnsupportedOperationException("Not implemented: " + os.toString())
     }
   }
 
@@ -55,7 +55,7 @@ object Orientation {
       case (os._1, Unstranded) => false
       case (Both, os._2) => true
       case (os._1, Both) => true
-      case _ => throw new IllegalArgumentException("Not implemented: " + os.toString())
+      case _ => throw new UnsupportedOperationException("Not implemented: " + os.toString())
     }
   }
 
@@ -79,6 +79,24 @@ object Orientation {
   def isCompatible(f1: Region, f2: Region): Boolean = {
     if(f1 == Empty || f2 == Empty) false
     else isCompatible((f1.orientation, f2.orientation))
+  }
+
+  /**
+    * An arbitrary ordering for orientations
+    */
+  object ArbitraryOrdering extends Ordering[Orientation] {
+    override def compare(o1: Orientation, o2: Orientation): Int = {
+      (o1, o2) match {
+        case (x, y) if x == y => 0
+        case (Plus, _) => -1
+        case (_, Plus) => 1
+        case (Unstranded, _) => 1
+        case (Minus, _) => -1
+        case (Both, Minus) => 1
+        case (Both, _) => -1
+        case _ => throw new UnsupportedOperationException("Not implemented: " + o1 + " " + o2)
+      }
+    }
   }
 
 }
