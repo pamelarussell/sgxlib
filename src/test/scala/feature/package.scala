@@ -24,6 +24,7 @@ package object feature extends FunSuite {
     val chr1_5_6_minus = Block("chr1", 5, 6, Minus)
     val chr1_4_6_minus = Block("chr1", 4, 6, Minus)
     val chr1_6_7_minus = Block("chr1", 6, 7, Minus)
+    val chr1_1000_2000_plus = Block("chr1", 1000, 2000, Plus)
 
     // Block sets
     val chr1_100_200_300_400_plus = BlockSet(List(
