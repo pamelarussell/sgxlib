@@ -50,13 +50,13 @@ class FeatureMiscSuite extends FunSuite {
   }
 
   test("Messenger RNA equals and hashCode") {
-    val mr1 = MessengerRNA(chr1_1000_2000_plus_1, 1500, 1600, Some("name"), Some("gene"))
-    val mr2 = MessengerRNA(chr1_1000_2000_plus_2, 1500, 1600, Some("name"), Some("gene"))
-    val mr3 = MessengerRNA(chr1_1000_2000_plus_1, 1500, 1700, Some("name"), Some("gene"))
-    val mr4 = MessengerRNA(chr1_1000_2000_plus_1, 1400, 1600, Some("name"), Some("gene"))
-    val mr5 = MessengerRNA(chr1_1000_2000_plus_1, 1500, 1600, Some("name2"), Some("gene"))
-    val mr6 = MessengerRNA(chr1_1000_2000_plus_1, 1500, 1600, Some("name"), Some("gene2"))
-    val mr7 = MessengerRNA(chr1_900_2100_3000_4000_plus, 1500, 1600, Some("name"), Some("gene"))
+    val mr1 = MessengerRNA(chr1_1000_2000_plus_1, 1500, 1599, Some("name"), Some("gene"))
+    val mr2 = MessengerRNA(chr1_1000_2000_plus_2, 1500, 1599, Some("name"), Some("gene"))
+    val mr3 = MessengerRNA(chr1_1000_2000_plus_1, 1500, 1740, Some("name"), Some("gene"))
+    val mr4 = MessengerRNA(chr1_1000_2000_plus_1, 1400, 1640, Some("name"), Some("gene"))
+    val mr5 = MessengerRNA(chr1_1000_2000_plus_1, 1500, 1599, Some("name2"), Some("gene"))
+    val mr6 = MessengerRNA(chr1_1000_2000_plus_1, 1500, 1599, Some("name"), Some("gene2"))
+    val mr7 = MessengerRNA(chr1_900_2100_3000_4000_plus, 1500, 1599, Some("name"), Some("gene"))
     assert(mr1.hashCode === mr2.hashCode)
     assert(mr1 === mr2)
     assert(mr1 != mr3)
@@ -74,8 +74,8 @@ class FeatureMiscSuite extends FunSuite {
   test("Inter-class equals") {
     val gf = new GenericFeature(chr1_1000_2000_plus_1, Some("name"))
     val tr = new Transcript(chr1_1000_2000_plus_1, Some("name"), Some("gene"))
-    val mr = MessengerRNA(chr1_1000_2000_plus_1, 1500, 1600, Some("name"), Some("gene"))
-    val mr2 = MessengerRNA(chr1_1000_2000_plus_1, 1000, 1500, Some("name"), Some("gene"))
+    val mr = MessengerRNA(chr1_1000_2000_plus_1, 1500, 1599, Some("name"), Some("gene"))
+    val mr2 = MessengerRNA(chr1_1000_2000_plus_1, 1000, 1300, Some("name"), Some("gene"))
     assert(gf != tr)
     assert(gf != mr)
     assert(gf != mr2)
@@ -101,10 +101,10 @@ class FeatureMiscSuite extends FunSuite {
     intercept[IllegalArgumentException]{ new Transcript(b3, Some("name"), Some("gene")) }
     intercept[IllegalArgumentException]{ new Transcript(bs1, Some("name"), Some("gene")) }
     intercept[IllegalArgumentException]{ new Transcript(bs2, Some("name"), Some("gene")) }
-    intercept[IllegalArgumentException]{ MessengerRNA(b1, 1500, 1600, Some("name"), Some("gene")) }
-    intercept[IllegalArgumentException]{ MessengerRNA(b3, 1500, 1600, Some("name"), Some("gene")) }
-    intercept[IllegalArgumentException]{ MessengerRNA(bs1, 1500, 1600, Some("name"), Some("gene")) }
-    intercept[IllegalArgumentException]{ MessengerRNA(bs2, 1500, 1600, Some("name"), Some("gene")) }
+    intercept[IllegalArgumentException]{ MessengerRNA(b1, 1500, 1599, Some("name"), Some("gene")) }
+    intercept[IllegalArgumentException]{ MessengerRNA(b3, 1500, 1599, Some("name"), Some("gene")) }
+    intercept[IllegalArgumentException]{ MessengerRNA(bs1, 1500, 1599, Some("name"), Some("gene")) }
+    intercept[IllegalArgumentException]{ MessengerRNA(bs2, 1500, 1599, Some("name"), Some("gene")) }
   }
 
   test("Num blocks") {
@@ -116,16 +116,16 @@ class FeatureMiscSuite extends FunSuite {
     assert(new Transcript(chr1_100_200_300_400_plus, Some("name"), Some("gene")).numBlocks === 2)
     assert(new Transcript(chr1_100_200_300_400_minus, Some("name"), Some("gene")).numBlocks === 2)
     assert(new Transcript(chr1_1000_1100_1200_1300_1900_2000_plus, Some("name"), Some("gene")).numBlocks === 3)
-    assert(MessengerRNA(Block("chr1", 1000, 2000, Plus), 1000, 2000, Some("name"), Some("gene")).numBlocks === 1)
-    assert(MessengerRNA(chr1_100_200_300_400_plus, 150, 350, Some("name"), Some("gene")).numBlocks === 2)
-    assert(MessengerRNA(chr1_100_200_300_400_minus, 150, 350, Some("name"), Some("gene")).numBlocks === 2)
-    assert(MessengerRNA(chr1_1000_1100_1200_1300_1900_2000_plus, 1000, 1250, Some("name"), Some("gene")).numBlocks === 3)
+    assert(MessengerRNA(Block("chr1", 1000, 2000, Plus), 1000, 1099, Some("name"), Some("gene")).numBlocks === 1)
+    assert(MessengerRNA(chr1_100_200_300_400_plus, 150, 180, Some("name"), Some("gene")).numBlocks === 2)
+    assert(MessengerRNA(chr1_100_200_300_400_minus, 150, 180, Some("name"), Some("gene")).numBlocks === 2)
+    assert(MessengerRNA(chr1_1000_1100_1200_1300_1900_2000_plus, 1000, 1220, Some("name"), Some("gene")).numBlocks === 3)
   }
 
   test("Illegal empty region") {
     intercept[IllegalArgumentException]{ new GenericFeature(Empty, Some("name")) }
     intercept[IllegalArgumentException]{ new Transcript(Empty, Some("name"), Some("gene")) }
-    intercept[IllegalArgumentException]{ MessengerRNA(Empty, 5, 6, Some("name"), Some("gene")) }
+    intercept[IllegalArgumentException]{ MessengerRNA(Empty, 50, 62, Some("name"), Some("gene")) }
   }
 
 }

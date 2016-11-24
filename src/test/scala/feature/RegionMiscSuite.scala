@@ -9,26 +9,34 @@ class RegionMiscSuite extends FunSuite {
 
   // Run all tests
   adjacencyBlockBlock()
-  featureEmptiness()
-  featureChr()
-  featureStart()
-  featureEnd()
-  featureOrientation()
-  featureGetBlocks()
+  regionEmptiness()
+  regionChr()
+  regionStart()
+  regionEnd()
+  regionOrientation()
+  regionGetBlocks()
+  regionSize()
 
+  def regionSize(): Unit = {
+    test("Region size") {
+      assert(Empty.size === 0)
+      assert(chr1_500_600_700_800_900_1100_both.size === 400)
+      assert(chr1_1000_2000_plus_1.size === 1000)
+    }
+  }
 
-  def featureNumBlocks(): Unit = {
+  def regionNumBlocks(): Unit = {
     test("Number of blocks") {
-      assert(Empty.numBlocks === 0, "Empty feature should have 0 blocks")
+      assert(Empty.numBlocks === 0, "Empty region should have 0 blocks")
       assert(chr1_5_6_minus.numBlocks === 1, "Block should have 1 block")
       assert(chr1_500_600_700_800_900_1100_both.numBlocks === 3, "Block set with 3 blocks")
     }
   }
 
 
-  def featureEmptiness(): Unit = {
-    test("Feature emptiness") {
-      assert(Empty.isEmpty, "Empty feature should be empty")
+  def regionEmptiness(): Unit = {
+    test("Region emptiness") {
+      assert(Empty.isEmpty, "Empty region should be empty")
       assert(!chr1_1000_2000_plus_1.isEmpty, "Nonempty block should not be empty")
       assert(!chr1_100_200_300_400_plus.isEmpty, "Block set should not be empty")
     }
@@ -47,32 +55,32 @@ class RegionMiscSuite extends FunSuite {
   }
 
 
-  def featureChr(): Unit = {
-    test("Feature chr") {
+  def regionChr(): Unit = {
+    test("Region chr") {
       assert(chr1_1000_2000_both.chr === "chr1")
       assert(chr1_100_200_300_400_plus.chr === "chr1")
       intercept[IllegalStateException](Empty.chr)
     }
   }
 
-  def featureStart(): Unit = {
-    test("Feature start") {
+  def regionStart(): Unit = {
+    test("Region start") {
       assert(chr1_1000_2000_both.start === 1000)
       assert(chr1_100_200_300_400_plus.start === 100)
       intercept[IllegalStateException](Empty.start)
     }
   }
 
-  def featureEnd(): Unit = {
-    test("Feature end") {
+  def regionEnd(): Unit = {
+    test("Region end") {
       assert(chr2_1000_2000_plus.end === 2000)
       assert(chr1_100_200_300_400_plus.end === 400)
       intercept[IllegalStateException](Empty.end)
     }
   }
 
-  def featureOrientation(): Unit = {
-    test("Feature orientation") {
+  def regionOrientation(): Unit = {
+    test("Region orientation") {
       assert(chr2_1000_2000_plus.orientation === Plus)
       assert(chr1_1000_2000_unstranded.orientation === Unstranded)
       assert(chr1_100_200_300_400_plus.orientation === Plus)
@@ -80,8 +88,8 @@ class RegionMiscSuite extends FunSuite {
     }
   }
 
-  def featureGetBlocks(): Unit = {
-    test("Feature get blocks") {
+  def regionGetBlocks(): Unit = {
+    test("Region get blocks") {
       assert(chr1_1000_2000_minus.blocks === List(Block("chr1", 1000, 2000, Minus)))
       assert(chr1_100_200_300_400_plus.blocks === List(
         Block("chr1", 100, 200, Plus),

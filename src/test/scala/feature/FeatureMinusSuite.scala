@@ -29,9 +29,9 @@ class FeatureMinusSuite extends FunSuite {
 
   test("Generic feature minus mRNA") {
     assert(new GenericFeature(chr1_900_2100_3000_4000_plus, Some("name"))
-      .minus(MessengerRNA(chr1_1000_2000_plus, 1000, 2000, Some("name"), Some("gene"))) === Some(new GenericFeature(bs, None)))
+      .minus(MessengerRNA(chr1_1000_2000_plus, 1000, 1099, Some("name"), Some("gene"))) === Some(new GenericFeature(bs, None)))
     assert(new GenericFeature(chr1_1100_1200_1300_1400_plus, Some("name"))
-      .minus(MessengerRNA(chr1_1000_2000_plus, 1000, 2000, Some("name"), Some("gene"))) === None)
+      .minus(MessengerRNA(chr1_1000_2000_plus, 1000, 1099, Some("name"), Some("gene"))) === None)
   }
 
   test("Transcript minus generic feature") {
@@ -50,30 +50,30 @@ class FeatureMinusSuite extends FunSuite {
 
   test("Transcript minus mRNA") {
     assert(new Transcript(chr1_900_2100_3000_4000_plus, Some("name"), Some("gene"))
-      .minus(MessengerRNA(chr1_1000_2000_plus, 1000, 2000, Some("name"), Some("gene"))) === Some(new GenericFeature(bs, None)))
+      .minus(MessengerRNA(chr1_1000_2000_plus, 1000, 1099, Some("name"), Some("gene"))) === Some(new GenericFeature(bs, None)))
     assert(new Transcript(chr1_1100_1200_1300_1400_plus, Some("name"), Some("gene"))
-      .minus(MessengerRNA(chr1_1000_2000_plus, 1000, 2000, Some("name"), Some("gene"))) === None)
+      .minus(MessengerRNA(chr1_1000_2000_plus, 1000, 1099, Some("name"), Some("gene"))) === None)
   }
 
   test("mRNA minus generic feature") {
-    assert(MessengerRNA(chr1_900_2100_3000_4000_plus, 900, 2100, Some("name"), Some("gene"))
+    assert(MessengerRNA(chr1_900_2100_3000_4000_plus, 900, 999, Some("name"), Some("gene"))
       .minus(new GenericFeature(chr1_1000_2000_plus, Some("name"))) === Some(new GenericFeature(bs, None)))
-    assert(MessengerRNA(chr1_1100_1200_1300_1400_plus, 1100, 1200, Some("name"), Some("gene"))
+    assert(MessengerRNA(chr1_1100_1200_1300_1400_plus, 1100, 1199, Some("name"), Some("gene"))
       .minus(new GenericFeature(chr1_1000_2000_plus, Some("name"))) === None)
   }
 
   test("mRNA minus transcript") {
-    assert(MessengerRNA(chr1_900_2100_3000_4000_plus, 900, 2100, Some("name"), Some("gene"))
+    assert(MessengerRNA(chr1_900_2100_3000_4000_plus, 900, 999, Some("name"), Some("gene"))
       .minus(new Transcript(chr1_1000_2000_plus, Some("name"), Some("gene"))) === Some(new GenericFeature(bs, None)))
-    assert(MessengerRNA(chr1_1100_1200_1300_1400_plus, 1100, 1200, Some("name"), Some("gene"))
+    assert(MessengerRNA(chr1_1100_1200_1300_1400_plus, 1100, 1199, Some("name"), Some("gene"))
       .minus(new Transcript(chr1_1000_2000_plus, Some("name"), Some("gene"))) === None)
   }
 
   test("mRNA minus mRNA") {
-    assert(MessengerRNA(chr1_900_2100_3000_4000_plus, 900, 2100, Some("name"), Some("gene"))
-      .minus(MessengerRNA(chr1_1000_2000_plus, 1000, 2000, Some("name"), Some("gene"))) === Some(new GenericFeature(bs, None)))
-    assert(MessengerRNA(chr1_1100_1200_1300_1400_plus, 1100, 1200, Some("name"), Some("gene"))
-      .minus(MessengerRNA(chr1_1000_2000_plus, 1000, 2000, Some("name"), Some("gene"))) === None)
+    assert(MessengerRNA(chr1_900_2100_3000_4000_plus, 900, 999, Some("name"), Some("gene"))
+      .minus(MessengerRNA(chr1_1000_2000_plus, 1000, 1099, Some("name"), Some("gene"))) === Some(new GenericFeature(bs, None)))
+    assert(MessengerRNA(chr1_1100_1200_1300_1400_plus, 1100, 1199, Some("name"), Some("gene"))
+      .minus(MessengerRNA(chr1_1000_2000_plus, 1000, 1099, Some("name"), Some("gene"))) === None)
   }
 
 }
