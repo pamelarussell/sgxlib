@@ -163,6 +163,12 @@ package object feature extends FunSuite {
       Block("chr1", 5000, 6000, Both),
       Block("chr1", 7000, 8000, Both)
     ))
+  val chr1_1000_2000_3000_4000_5000_6000_7000_8000_unstranded = BlockSet(List(
+      Block("chr1", 1000, 2000, Unstranded),
+      Block("chr1", 3000, 4000, Unstranded),
+      Block("chr1", 5000, 6000, Unstranded),
+      Block("chr1", 7000, 8000, Unstranded)
+    ))
     val chr1_1000_2000_3000_4000_5000_6000_both = BlockSet(List(
       Block("chr1", 1000, 2000, Both),
       Block("chr1", 3000, 4000, Both),

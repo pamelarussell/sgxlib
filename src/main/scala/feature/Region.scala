@@ -18,7 +18,7 @@ sealed abstract class Region extends Ordered[Region] {
 
   /**
     * Test whether this [[Region]] contains another [[Region]]
- *
+    *
     * @param feat Other [[Region]]
     * @return True iff the other [[Region]] is contained in this [[Region]]
     */
@@ -80,7 +80,7 @@ sealed abstract class Region extends Ordered[Region] {
 
   /**
     * Get the [[Block]]s of this [[Region]]
- *
+    *
     * @return List of [[Block]]s in order by coordinates
     */
   def blocks: List[Block]
@@ -111,6 +111,31 @@ sealed abstract class Region extends Ordered[Region] {
     intersection(Block(chr, newStart, newEnd, orientation))
   }
 
+  /**
+    * Get the size of the region
+    * @return The total length of the blocks
+    */
+  def size: Int = blocks.map(b => b.end - b.start).sum
+
+  /**
+    * Get the relative position within the region of a chromosome position
+    * Region must have a defined orientation (positive or negative)
+    * @param chrPos Chromosome position
+    * @return Relative position within the region of the chromosome position,
+    *         accounting for region orientation, or None if the chromosome position
+    *         doesn't overlap the region
+    */
+  def relativePos(chrPos: Int): Option[Int]
+
+  /**
+    * Get the chromosome position corresponding to a relative position within the region
+    * Region must have a defined orientation (positive or negative)
+    * @param relativePos Relative position within the region, accounting for region orientation
+    * @return Chromosome position corresponding to the relative position within the region,
+    *         accounting for region orientation
+    */
+  def chrPos(relativePos: Int): Int
+
 }
 
 /**
@@ -120,7 +145,7 @@ object Region {
 
   /**
     * Take the union of two [[Block]]s
- *
+    *
     * @param b1   Block 1
     * @param b2   Block 2
     * @return The union of the two [[Block]]s as a new [[Region]]
@@ -149,7 +174,7 @@ object Region {
 
   /**
     * Take the intersection of two [[Block]]s
- *
+    *
     * @param b1   Block 1
     * @param b2   Block 2
     * @return The intersection of the two [[Block]]s as a new [[Region]]
@@ -163,7 +188,7 @@ object Region {
 
   /**
     * Take the union of a [[Block]] and a [[BlockSet]]
- *
+    *
     * @param b    A [[Block]]
     * @param bs   A [[BlockSet]]
     * @return The union of the two [[Region]]s
@@ -217,7 +242,7 @@ object Region {
 
   /**
     * Take the intersection of a [[Block]] and a [[BlockSet]]
- *
+    *
     * @param b    A [[Block]]
     * @param bs   A [[BlockSet]]
     * @return The intersection of the two [[Region]]s
@@ -327,12 +352,12 @@ object Region {
       Block(bs2.chr, bs2.start, bs2.end, bs2.orientation))
     if(cb != 0) cb
     else { // Block sets have same span and orientation
-      // Compare number of blocks
-      val cn: Int = bs1.numBlocks - bs2.numBlocks
+    // Compare number of blocks
+    val cn: Int = bs1.numBlocks - bs2.numBlocks
       if(cn != 0) cn
       else { // Same number of blocks
-        // Return comparison of first pair of different blocks
-        val db: List[(Block, Block)] = (bs1.blocks zip bs2.blocks).dropWhile(bp => compare(bp._1, bp._2) == 0)
+      // Return comparison of first pair of different blocks
+      val db: List[(Block, Block)] = (bs1.blocks zip bs2.blocks).dropWhile(bp => compare(bp._1, bp._2) == 0)
         if(db.isEmpty) 0
         else compare(db.head._1, db.head._2)
       }
@@ -454,6 +479,27 @@ case object Empty extends Region {
       case _ => 1
     }
   }
+
+  /**
+    * Get the relative position within the region of a genomic position
+    * Region must have a defined orientation (positive or negative)
+    *
+    * @param chrPos Chromosome position
+    * @return Relative position within the region of the chromosome position,
+    *         accounting for region orientation, or None if the chromosome position
+    *         doesn't overlap the region
+    */
+  override def relativePos(chrPos: Int): Option[Int] = None
+
+  /**
+    * Get the chromosome position corresponding to a relative position within the region
+    * Region must have a defined orientation (positive or negative)
+    *
+    * @param relativePos Relative position within the region, accounting for region orientation
+    * @return Chromosome position corresponding to the relative position within the region,
+    *         accounting for region orientation
+    */
+  override def chrPos(relativePos: Int): Int = throw new IllegalStateException("Empty region")
 }
 
 /**
@@ -463,7 +509,7 @@ case object Empty extends Region {
   * @param end Zero based end position (exclusive)
   * @param orientation Orientation
   */
-case class Block(chr: String, start: Int, end: Int, orientation: Orientation) extends Region {
+final case class Block(chr: String, start: Int, end: Int, orientation: Orientation) extends Region {
 
   if(start < 0) throw new IllegalArgumentException("Start must be nonnegative")
   if(end <= start) throw new IllegalArgumentException("End must be greater than start. Otherwise use empty region")
@@ -626,14 +672,51 @@ case class Block(chr: String, start: Int, end: Int, orientation: Orientation) ex
     }
   }
 
+  /**
+    * Get the relative position within the region of a genomic position
+    * Region must have a defined orientation (positive or negative)
+    *
+    * @param chrPos Chromosome position
+    * @return Relative position within the region of the chromosome position,
+    *         accounting for region orientation, or None if the chromosome position
+    *         doesn't overlap the region
+    */
+  override def relativePos(chrPos: Int): Option[Int] = {
+    orientation match {
+      case _ if orientation != Plus && orientation != Minus =>
+        throw new IllegalArgumentException("Orientation must be positive or negative")
+      case Plus if chrPos >= start && chrPos < end => Some(chrPos - start)
+      case Minus if chrPos >= start && chrPos < end => Some(end - 1 - chrPos)
+      case _ => None
+    }
+  }
+
+  /**
+    * Get the chromosome position corresponding to a relative position within the region
+    * Region must have a defined orientation (positive or negative)
+    *
+    * @param relativePos Relative position within the region, accounting for region orientation
+    * @return Chromosome position corresponding to the relative position within the region,
+    *         accounting for region orientation
+    */
+  override def chrPos(relativePos: Int): Int = {
+    if(relativePos < 0 || relativePos >= size) throw new IllegalArgumentException("Relative position must be between 0 and region size")
+    else {
+      orientation match {
+        case Plus => start + relativePos
+        case Minus => end - 1 - relativePos
+        case _ => throw new IllegalArgumentException("Orientation must be positive or negative")
+      }
+    }
+  }
 }
 
 /**
   * A region consisting of multiple blocks
   * @param blocks The blocks
   */
-case class BlockSet(blocks: List[Block]) extends Region {
-
+final case class BlockSet(blocks: List[Block]) extends Region {
+  
   override val end = validateAndGetEnd()
 
   /**
@@ -796,4 +879,78 @@ case class BlockSet(blocks: List[Block]) extends Region {
     }
   }
 
+  /**
+    * Get the relative position within the region of a genomic position
+    * Region must have a defined orientation (positive or negative)
+    *
+    * @param chrPos Chromosome position
+    * @return Relative position within the region of the chromosome position,
+    *         accounting for region orientation, or None if the chromosome position
+    *         doesn't overlap the region
+    */
+  override def relativePos(chrPos: Int): Option[Int] = {
+    orientation match {
+      case _ if orientation != Plus && orientation != Minus =>
+        throw new IllegalArgumentException("Orientation must be positive or negative")
+      case Plus if chrPos >= start && chrPos < end =>
+        val lo: (Int, Boolean) = // lo = (Cumulative size, whether we've found a block that the chromosome position overlaps)
+          blocks.foldLeft[(Int, Boolean)]((0, false))((ib, blk) => {
+            if(chrPos >= blk.start && chrPos < blk.end) { // Chromosome position overlaps this block
+              (ib._1 + chrPos - blk.start, true)
+            }
+            else { // Chromosome position does not overlap this block
+              if(chrPos < blk.start) ib // We've passed the chromosome position already
+              else (ib._1 + blk.size, ib._2) // We haven't encountered the chromosome position yet. Add the size of this block.
+            }
+          })
+        if(lo._2) Some(lo._1) else None
+      case Minus if chrPos >= start && chrPos < end =>
+        val lo: (Int, Boolean) = // lo = (Cumulative size, whether we've found a block that the chromosome position overlaps)
+          blocks.foldRight[(Int, Boolean)]((0, false))((blk, ib) => {
+            if(chrPos >= blk.start && chrPos < blk.end) { // Chromosome position overlaps this block
+              (ib._1 + blk.end - 1 - chrPos, true)
+            }
+            else { // Chromosome position does not overlap this block
+              if(chrPos >= blk.end) ib // We've passed the chromosome position already
+              else (ib._1 + blk.size, ib._2) // We haven't encountered the chromosome position yet. Add the size of this block.
+            }
+          })
+        if(lo._2) Some(lo._1) else None
+      case _ => None
+    }
+  }
+
+  /**
+    * Get the chromosome position corresponding to a relative position within the region
+    * Region must have a defined orientation (positive or negative)
+    *
+    * @param relativePos Relative position within the region, accounting for region orientation
+    * @return Chromosome position corresponding to the relative position within the region,
+    *         accounting for region orientation
+    */
+  override def chrPos(relativePos: Int): Int = {
+    if(relativePos < 0 || relativePos >= size) throw new IllegalArgumentException("Relative position must be between 0 and region size")
+    else {
+      orientation match {
+        case Plus =>
+          val firstBlockSize = blocks.head.size
+          if(firstBlockSize > relativePos) start + relativePos // The relative position is within the first block
+          else {
+            if(blocks.size > 2) BlockSet(blocks.tail).chrPos(relativePos - firstBlockSize)
+            else if(blocks.size == 2) blocks.tail.head.chrPos(relativePos - firstBlockSize)
+            else throw new IllegalStateException("There are less than 2 blocks")
+          } // Call recursively on tail of block list and add size of first block
+        case Minus =>
+          val lastBlock = blocks.last
+          val lastBlockSize = lastBlock.size
+          if(lastBlockSize > relativePos) lastBlock.end - 1 - relativePos // The relative position is within the last block
+          else {
+            if(blocks.size > 2) BlockSet(blocks.init).chrPos(relativePos - lastBlockSize)
+            else if(blocks.size == 2) blocks.head.chrPos(relativePos - lastBlockSize)
+            else throw new IllegalStateException("There are less than 2 blocks")
+          } // Call recursively on init of block list and add size of first block
+        case _ => throw new IllegalArgumentException("Orientation must be positive or negative")
+      }
+    }
+  }
 }
