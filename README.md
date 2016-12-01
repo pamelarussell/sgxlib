@@ -1,3 +1,3 @@
 # sgxlib
-Scala Genomics Library
+Genomics library for the Scala programming language
 
