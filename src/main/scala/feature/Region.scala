@@ -386,11 +386,9 @@ case object Empty extends Region {
     * @param feat Other [[Region]]
     * @return Region representing the union of the blocks of the two [[Region]]s
     */
-  override def union(feat: Region): Region = {
-    feat match {
-      case Empty => Empty
-      case _ => feat
-    }
+  override def union(feat: Region): Region = feat match {
+    case Empty => Empty
+    case _ => feat
   }
 
   /**
@@ -467,17 +465,15 @@ case object Empty extends Region {
     *
     * @return The number of blocks
     */
-  override def numBlocks: Int = 0
+  override val numBlocks: Int = 0
 
   override def trim(newStart: Int, newEnd: Int): Region = Empty
 
   override def toString: String = "Empty"
 
-  override def compare(that: Region): Int = {
-    that match {
-      case Empty => 0
-      case _ => 1
-    }
+  override def compare(that: Region): Int = that match {
+    case Empty => 0
+    case _ => 1
   }
 
   /**
@@ -521,19 +517,16 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
     * @param feat Other [[Region]]
     * @return True iff the [[Region]]s overlap
     */
-  override def overlaps(feat: Region): Boolean = {
-    feat match {
-      case Empty => false
-      case Block(c, s, e, o) =>
-        if(chr != c) false
-        else if(!Orientation.isCompatible(orientation, o)) false
-        else (start < e && e <= end) || (s < end && end <= e)
-      case BlockSet(bs) =>
-        if(chr != feat.chr) false
-        else if(!Orientation.isCompatible(orientation, feat.orientation)) false
-        else bs.foldLeft(false)((c: Boolean, b: Block) => c || b.overlaps(this)) // Check for overlap of any block
-      case _ => throw new IllegalArgumentException("Not implemented for " + feat.toString)
-    }
+  override def overlaps(feat: Region): Boolean = feat match {
+    case Empty => false
+    case Block(c, s, e, o) =>
+      if(chr != c) false
+      else if(!Orientation.isCompatible(orientation, o)) false
+      else (start < e && e <= end) || (s < end && end <= e)
+    case BlockSet(bs) =>
+      if(chr != feat.chr) false
+      else if(!Orientation.isCompatible(orientation, feat.orientation)) false
+      else bs.foldLeft(false)((c: Boolean, b: Block) => c || b.overlaps(this)) // Check for overlap of any block
   }
 
   /**
@@ -543,13 +536,10 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
     * @param feat Other [[Region]]
     * @return Region representing the union of the blocks of the two [[Region]]s
     */
-  override def union(feat: Region): Region = {
-    feat match {
-      case Empty => this
-      case b: Block => Region.union(this, b)
-      case bs: BlockSet => Region.union(this, bs)
-      case _ => throw new IllegalArgumentException("Not implemented for " + feat.toString)
-    }
+  override def union(feat: Region): Region = feat match {
+    case Empty => this
+    case b: Block => Region.union(this, b)
+    case bs: BlockSet => Region.union(this, bs)
   }
 
   /**
@@ -559,13 +549,10 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
     * @param feat Other [[Region]]
     * @return Region representing the intersection of the blocks of the two [[Region]]s
     */
-  override def intersection(feat: Region): Region = {
-    feat match {
-      case Empty => Empty
-      case b: Block => Region.intersection(this, b)
-      case bs: BlockSet => Region.intersection(this, bs)
-      case _ => throw new IllegalArgumentException("Not implemented for " + feat.toString)
-    }
+  override def intersection(feat: Region): Region = feat match {
+    case Empty => Empty
+    case b: Block => Region.intersection(this, b)
+    case bs: BlockSet => Region.intersection(this, bs)
   }
 
   /**
@@ -582,7 +569,6 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
       case Empty => this
       case b: Block => Region.minus(this, b)
       case BlockSet(bs) => bs.foldLeft[Region](this)((f, b) => f.minus(b))
-      case _ => throw new IllegalArgumentException("Not implemented for " + feat.toString)
     }
   }
 
@@ -621,15 +607,12 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
     * @param feat Other [[Region]]
     * @return True iff the other [[Region]] is contained in this [[Region]]
     */
-  override def contains(feat: Region): Boolean = {
-    feat match {
-      case Empty => false
-      case f: Region => Orientation.isCompatible(this, f) &&
-        chr == f.chr &&
-        f.start >= start &&
-        f.end <= end
-      case _ => throw new IllegalArgumentException("Not implemented for " + feat.toString)
-    }
+  override def contains(feat: Region): Boolean = feat match {
+    case Empty => false
+    case f: Region => Orientation.isCompatible(this, f) &&
+      chr == f.chr &&
+      f.start >= start &&
+      f.end <= end
   }
 
   /**
@@ -664,12 +647,10 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
     sb.toString()
   }
 
-  override def compare(that: Region): Int = {
-    that match {
-      case Empty => -1 * (Empty compare this)
-      case b: Block => Region.compare(this, b)
-      case bs: BlockSet => Region.compare(this, bs)
-    }
+  override def compare(that: Region): Int = that match {
+    case Empty => -1 * (Empty compare this)
+    case b: Block => Region.compare(this, b)
+    case bs: BlockSet => Region.compare(this, bs)
   }
 
   /**
@@ -681,14 +662,12 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
     *         accounting for region orientation, or None if the chromosome position
     *         doesn't overlap the region
     */
-  override def relativePos(chrPos: Int): Option[Int] = {
-    orientation match {
-      case _ if orientation != Plus && orientation != Minus =>
-        throw new IllegalArgumentException("Orientation must be positive or negative")
-      case Plus if chrPos >= start && chrPos < end => Some(chrPos - start)
-      case Minus if chrPos >= start && chrPos < end => Some(end - 1 - chrPos)
-      case _ => None
-    }
+  override def relativePos(chrPos: Int): Option[Int] = orientation match {
+    case _ if orientation != Plus && orientation != Minus =>
+      throw new IllegalArgumentException("Orientation must be positive or negative")
+    case Plus if chrPos >= start && chrPos < end => Some(chrPos - start)
+    case Minus if chrPos >= start && chrPos < end => Some(end - 1 - chrPos)
+    case _ => None
   }
 
   /**
@@ -701,12 +680,10 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
     */
   override def chrPos(relativePos: Int): Int = {
     if(relativePos < 0 || relativePos >= size) throw new IllegalArgumentException("Relative position must be between 0 and region size")
-    else {
-      orientation match {
-        case Plus => start + relativePos
-        case Minus => end - 1 - relativePos
-        case _ => throw new IllegalArgumentException("Orientation must be positive or negative")
-      }
+    else orientation match {
+      case Plus => start + relativePos
+      case Minus => end - 1 - relativePos
+      case _ => throw new IllegalArgumentException("Orientation must be positive or negative")
     }
   }
 }
@@ -716,7 +693,7 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
   * @param blocks The blocks
   */
 final case class BlockSet(blocks: List[Block]) extends Region {
-  
+
   override val end = validateAndGetEnd()
 
   /**
@@ -743,13 +720,10 @@ final case class BlockSet(blocks: List[Block]) extends Region {
     * @param feat Other [[Region]]
     * @return True iff the [[Region]]s overlap
     */
-  override def overlaps(feat: Region): Boolean = {
-    feat match {
-      case Empty => false
-      case b: Block => blocks.foldLeft(false)((bool, blk) => bool || b.overlaps(blk))
-      case BlockSet(bs) => bs.foldLeft(false)((bool, blk) => bool || blk.overlaps(this))
-      case _ => throw new IllegalArgumentException("Not implemented for " + feat.toString)
-    }
+  override def overlaps(feat: Region): Boolean = feat match {
+    case Empty => false
+    case b: Block => blocks.foldLeft(false)((bool, blk) => bool || b.overlaps(blk))
+    case BlockSet(bs) => bs.foldLeft(false)((bool, blk) => bool || blk.overlaps(this))
   }
 
   /**
@@ -759,13 +733,10 @@ final case class BlockSet(blocks: List[Block]) extends Region {
     * @param feat Other [[Region]]
     * @return Region representing the union of the blocks of the two [[Region]]s
     */
-  override def union(feat: Region): Region = {
-    feat match {
-      case Empty => this
-      case b: Block => Region.union(b, this)
-      case BlockSet(bs) => bs.foldLeft[Region](this)((f, b) => b.union(f))
-      case _ => throw new IllegalArgumentException("Not implemented for " + feat.toString)
-    }
+  override def union(feat: Region): Region = feat match {
+    case Empty => this
+    case b: Block => Region.union(b, this)
+    case BlockSet(bs) => bs.foldLeft[Region](this)((f, b) => b.union(f))
   }
 
   /**
@@ -775,13 +746,10 @@ final case class BlockSet(blocks: List[Block]) extends Region {
     * @param feat Other [[Region]]
     * @return Region representing the intersection of the blocks of the two [[Region]]s
     */
-  override def intersection(feat: Region): Region = {
-    feat match {
-      case Empty => Empty
-      case b: Block => Region.intersection(b, this)
-      case BlockSet(bs) => bs.foldLeft[Region](Empty)((f, b) => f.union(b.intersection(this)))
-      case _ => throw new IllegalArgumentException("Not implemented for " + feat.toString)
-    }
+  override def intersection(feat: Region): Region = feat match {
+    case Empty => Empty
+    case b: Block => Region.intersection(b, this)
+    case BlockSet(bs) => bs.foldLeft[Region](Empty)((f, b) => f.union(b.intersection(this)))
   }
 
   /**
@@ -791,24 +759,21 @@ final case class BlockSet(blocks: List[Block]) extends Region {
     * @param feat Other [[Region]]
     * @return Region representing this [[Region]] minus the intersection with other [[Region]]
     */
-  override def minus(feat: Region): Region = {
-    feat match {
-      case Empty => BlockSet(blocks.map(b => Block(chr, b.start, b.end, orientation)))
-      case b: Block =>
-        val newBlks = ListBuffer[Block]()
-        blocks.foreach(blk => {
-          val m = blk.minus(b)
-          if(!m.isEmpty) newBlks ++= m.blocks
-        })
-        if(newBlks.isEmpty) Empty
-        else {
-          val bl : List[Block] = newBlks.toList
-          if(bl.length == 1) bl.head
-          else BlockSet(bl)
-        }
-      case bs: BlockSet => blocks.foldLeft[Region](Empty)((f, b) => f.union(b.minus(bs)))
-      case _ => throw new IllegalArgumentException("Not implemented for " + feat.toString)
-    }
+  override def minus(feat: Region): Region = feat match {
+    case Empty => BlockSet(blocks.map(b => Block(chr, b.start, b.end, orientation)))
+    case b: Block =>
+      val newBlks = ListBuffer[Block]()
+      blocks.foreach(blk => {
+        val m = blk.minus(b)
+        if(!m.isEmpty) newBlks ++= m.blocks
+      })
+      if(newBlks.isEmpty) Empty
+      else {
+        val bl : List[Block] = newBlks.toList
+        if(bl.length == 1) bl.head
+        else BlockSet(bl)
+      }
+    case bs: BlockSet => blocks.foldLeft[Region](Empty)((f, b) => f.union(b.minus(bs)))
   }
 
   /**
@@ -847,13 +812,10 @@ final case class BlockSet(blocks: List[Block]) extends Region {
     * @param feat Other [[Region]]
     * @return True iff the other [[Region]] is contained in this [[Region]]
     */
-  override def contains(feat: Region): Boolean = {
-    feat match {
-      case Empty => false
-      case b: Block => blocks.exists(_.contains(b))
-      case BlockSet(bs) => bs.forall(contains(_))
-      case _ => throw new IllegalArgumentException("Not implemented for " + feat.toString)
-    }
+  override def contains(feat: Region): Boolean = feat match {
+    case Empty => false
+    case b: Block => blocks.exists(_.contains(b))
+    case BlockSet(bs) => bs.forall(contains(_))
   }
 
   /**
@@ -871,12 +833,10 @@ final case class BlockSet(blocks: List[Block]) extends Region {
     sb.toString()
   }
 
-  override def compare(that: Region): Int = {
-    that match {
-      case Empty => -1 * (Empty compare this)
-      case b: Block => Region.compare(this, b)
-      case bs: BlockSet => Region.compare(this, bs)
-    }
+  override def compare(that: Region): Int = that match {
+    case Empty => -1 * (Empty compare this)
+    case b: Block => Region.compare(this, b)
+    case bs: BlockSet => Region.compare(this, bs)
   }
 
   /**
@@ -888,36 +848,34 @@ final case class BlockSet(blocks: List[Block]) extends Region {
     *         accounting for region orientation, or None if the chromosome position
     *         doesn't overlap the region
     */
-  override def relativePos(chrPos: Int): Option[Int] = {
-    orientation match {
-      case _ if orientation != Plus && orientation != Minus =>
-        throw new IllegalArgumentException("Orientation must be positive or negative")
-      case Plus if chrPos >= start && chrPos < end =>
-        val lo: (Int, Boolean) = // lo = (Cumulative size, whether we've found a block that the chromosome position overlaps)
-          blocks.foldLeft[(Int, Boolean)]((0, false))((ib, blk) => {
-            if(chrPos >= blk.start && chrPos < blk.end) { // Chromosome position overlaps this block
-              (ib._1 + chrPos - blk.start, true)
-            }
-            else { // Chromosome position does not overlap this block
-              if(chrPos < blk.start) ib // We've passed the chromosome position already
-              else (ib._1 + blk.size, ib._2) // We haven't encountered the chromosome position yet. Add the size of this block.
-            }
-          })
-        if(lo._2) Some(lo._1) else None
-      case Minus if chrPos >= start && chrPos < end =>
-        val lo: (Int, Boolean) = // lo = (Cumulative size, whether we've found a block that the chromosome position overlaps)
-          blocks.foldRight[(Int, Boolean)]((0, false))((blk, ib) => {
-            if(chrPos >= blk.start && chrPos < blk.end) { // Chromosome position overlaps this block
-              (ib._1 + blk.end - 1 - chrPos, true)
-            }
-            else { // Chromosome position does not overlap this block
-              if(chrPos >= blk.end) ib // We've passed the chromosome position already
-              else (ib._1 + blk.size, ib._2) // We haven't encountered the chromosome position yet. Add the size of this block.
-            }
-          })
-        if(lo._2) Some(lo._1) else None
-      case _ => None
-    }
+  override def relativePos(chrPos: Int): Option[Int] = orientation match {
+    case _ if orientation != Plus && orientation != Minus =>
+      throw new IllegalArgumentException("Orientation must be positive or negative")
+    case Plus if chrPos >= start && chrPos < end =>
+      val lo: (Int, Boolean) = // lo = (Cumulative size, whether we've found a block that the chromosome position overlaps)
+        blocks.foldLeft[(Int, Boolean)]((0, false))((ib, blk) => {
+          if(chrPos >= blk.start && chrPos < blk.end) { // Chromosome position overlaps this block
+            (ib._1 + chrPos - blk.start, true)
+          }
+          else { // Chromosome position does not overlap this block
+            if(chrPos < blk.start) ib // We've passed the chromosome position already
+            else (ib._1 + blk.size, ib._2) // We haven't encountered the chromosome position yet. Add the size of this block.
+          }
+        })
+      if(lo._2) Some(lo._1) else None
+    case Minus if chrPos >= start && chrPos < end =>
+      val lo: (Int, Boolean) = // lo = (Cumulative size, whether we've found a block that the chromosome position overlaps)
+        blocks.foldRight[(Int, Boolean)]((0, false))((blk, ib) => {
+          if(chrPos >= blk.start && chrPos < blk.end) { // Chromosome position overlaps this block
+            (ib._1 + blk.end - 1 - chrPos, true)
+          }
+          else { // Chromosome position does not overlap this block
+            if(chrPos >= blk.end) ib // We've passed the chromosome position already
+            else (ib._1 + blk.size, ib._2) // We haven't encountered the chromosome position yet. Add the size of this block.
+          }
+        })
+      if(lo._2) Some(lo._1) else None
+    case _ => None
   }
 
   /**
@@ -930,27 +888,25 @@ final case class BlockSet(blocks: List[Block]) extends Region {
     */
   override def chrPos(relativePos: Int): Int = {
     if(relativePos < 0 || relativePos >= size) throw new IllegalArgumentException("Relative position must be between 0 and region size")
-    else {
-      orientation match {
-        case Plus =>
-          val firstBlockSize = blocks.head.size
-          if(firstBlockSize > relativePos) start + relativePos // The relative position is within the first block
-          else {
-            if(blocks.size > 2) BlockSet(blocks.tail).chrPos(relativePos - firstBlockSize)
-            else if(blocks.size == 2) blocks.tail.head.chrPos(relativePos - firstBlockSize)
-            else throw new IllegalStateException("There are less than 2 blocks")
-          } // Call recursively on tail of block list and add size of first block
-        case Minus =>
-          val lastBlock = blocks.last
-          val lastBlockSize = lastBlock.size
-          if(lastBlockSize > relativePos) lastBlock.end - 1 - relativePos // The relative position is within the last block
-          else {
-            if(blocks.size > 2) BlockSet(blocks.init).chrPos(relativePos - lastBlockSize)
-            else if(blocks.size == 2) blocks.head.chrPos(relativePos - lastBlockSize)
-            else throw new IllegalStateException("There are less than 2 blocks")
-          } // Call recursively on init of block list and add size of first block
-        case _ => throw new IllegalArgumentException("Orientation must be positive or negative")
-      }
+    else orientation match {
+      case Plus =>
+        val firstBlockSize = blocks.head.size
+        if(firstBlockSize > relativePos) start + relativePos // The relative position is within the first block
+        else {
+          if(blocks.size > 2) BlockSet(blocks.tail).chrPos(relativePos - firstBlockSize)
+          else if(blocks.size == 2) blocks.tail.head.chrPos(relativePos - firstBlockSize)
+          else throw new IllegalStateException("There are less than 2 blocks")
+        } // Call recursively on tail of block list and add size of first block
+      case Minus =>
+        val lastBlock = blocks.last
+        val lastBlockSize = lastBlock.size
+        if(lastBlockSize > relativePos) lastBlock.end - 1 - relativePos // The relative position is within the last block
+        else {
+          if(blocks.size > 2) BlockSet(blocks.init).chrPos(relativePos - lastBlockSize)
+          else if(blocks.size == 2) blocks.head.chrPos(relativePos - lastBlockSize)
+          else throw new IllegalStateException("There are less than 2 blocks")
+        } // Call recursively on init of block list and add size of first block
+      case _ => throw new IllegalArgumentException("Orientation must be positive or negative")
     }
   }
 }

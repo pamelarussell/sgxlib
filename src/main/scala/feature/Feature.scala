@@ -202,7 +202,6 @@ sealed class GenericFeature(override val blocks: Region, override val name: Opti
         case mr: MessengerRNA => -1
         case tr: Transcript => -1
         case gf: GenericFeature => c
-        case _ => throw new UnsupportedOperationException("Not implemented")
       }
     }
   }
@@ -286,7 +285,6 @@ sealed class Transcript(override val blocks: Region, name: Option[String], val g
           else -1
         case tr: Transcript => Feature.optStrCompare(geneId, tr.geneId)
         case gf: GenericFeature => 1
-        case _ => throw new UnsupportedOperationException("Not implemented")
       }
     }
   }
@@ -468,7 +466,6 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
         if(gc != 0) gc
         else 1
       case gf: GenericFeature => 1
-      case _ => throw new UnsupportedOperationException("Not implemented")
     }
   }
 

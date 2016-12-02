@@ -47,6 +47,9 @@ class FeatureMiscSuite extends FunSuite {
     assert(new Transcript(chr1_1000_2000_plus_1, Some("name"), Some("gene")).hashCode === new Transcript(chr1_1000_2000_plus_2, Some("name"), Some("gene")).hashCode)
     assert(new Transcript(chr1_1000_2000_plus_1, None, Some("gene")).hashCode === new Transcript(chr1_1000_2000_plus_2, None, Some("gene")).hashCode)
     assert(new Transcript(chr1_1000_2000_plus_1, None, Some("gene")).hashCode === new Transcript(chr1_1000_2000_plus_1, None, Some("gene")).hashCode)
+    assert(new Transcript(chr1_1000_2000_plus_1, Some("name"), Some("gene")) != MessengerRNA(chr1_1000_2000_plus_1, 1000, 1006, Some("name"), Some("gene")))
+    assert(new GenericFeature(chr1_1000_2000_plus_1, Some("name")) != MessengerRNA(chr1_1000_2000_plus_1, 1000, 1006, Some("name"), Some("gene")))
+    assert(new Transcript(chr1_1000_2000_plus_1, Some("name"), Some("gene")) != MessengerRNA(chr1_1000_2000_plus_1, 1000, 1006, Some("name"), Some("gene")))
   }
 
   test("Messenger RNA equals and hashCode") {
@@ -126,6 +129,15 @@ class FeatureMiscSuite extends FunSuite {
     intercept[IllegalArgumentException]{ new GenericFeature(Empty, Some("name")) }
     intercept[IllegalArgumentException]{ new Transcript(Empty, Some("name"), Some("gene")) }
     intercept[IllegalArgumentException]{ MessengerRNA(Empty, 50, 62, Some("name"), Some("gene")) }
+  }
+
+  test("toString") {
+    assert(new GenericFeature(chr1_1900_2000_3000_4000_plus, Some("name")).toString ===
+      "(feature.GenericFeature[[chr1:1900-2000:+], [chr1:3000-4000:+]],Some(name))")
+    assert(new Transcript(chr1_1900_2000_3000_4000_plus, Some("name"), Some("gene")).toString ===
+      "(feature.Transcript[[chr1:1900-2000:+], [chr1:3000-4000:+]],Some(name),Some(gene))")
+    assert(MessengerRNA(chr1_1900_2000_3000_4000_plus, 1900, 1906, Some("name"), Some("gene")).toString ===
+      "(feature.MessengerRNA[[chr1:1900-2000:+], [chr1:3000-4000:+]],Some(name),Some(gene),CDS:1900-1906)")
   }
 
 }

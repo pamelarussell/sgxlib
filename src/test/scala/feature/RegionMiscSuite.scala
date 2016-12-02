@@ -18,6 +18,13 @@ class RegionMiscSuite extends FunSuite {
   regionSize()
   regionRelativePos()
   regionChrPos()
+  regionToString()
+
+  def regionToString(): Unit = {
+    test("Region toString") {
+      assert(Empty.toString === "Empty")
+    }
+  }
 
   def regionSize(): Unit = {
     test("Region size") {
