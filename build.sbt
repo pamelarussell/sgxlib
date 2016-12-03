@@ -26,5 +26,5 @@ apiMappings += (
   )
 
 // Scaladoc
-target in Compile in doc := baseDirectory.value / "docs"
+target in Compile in doc := baseDirectory.value / "docs/api"
 
