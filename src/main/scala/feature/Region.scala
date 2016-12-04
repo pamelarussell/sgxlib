@@ -888,14 +888,14 @@ final case class BlockSet(blocks: List[Block]) extends Region {
     */
   override def chrPos(relativePos: Int): Int = {
     if(relativePos < 0 || relativePos >= size) throw new IllegalArgumentException("Relative position must be between 0 and region size")
+    if(blocks.size < 2) throw new IllegalStateException("There are less than 2 blocks")
     else orientation match {
       case Plus =>
         val firstBlockSize = blocks.head.size
         if(firstBlockSize > relativePos) start + relativePos // The relative position is within the first block
         else {
           if(blocks.size > 2) BlockSet(blocks.tail).chrPos(relativePos - firstBlockSize)
-          else if(blocks.size == 2) blocks.tail.head.chrPos(relativePos - firstBlockSize)
-          else throw new IllegalStateException("There are less than 2 blocks")
+          else blocks.tail.head.chrPos(relativePos - firstBlockSize)
         } // Call recursively on tail of block list and add size of first block
       case Minus =>
         val lastBlock = blocks.last
@@ -903,8 +903,7 @@ final case class BlockSet(blocks: List[Block]) extends Region {
         if(lastBlockSize > relativePos) lastBlock.end - 1 - relativePos // The relative position is within the last block
         else {
           if(blocks.size > 2) BlockSet(blocks.init).chrPos(relativePos - lastBlockSize)
-          else if(blocks.size == 2) blocks.head.chrPos(relativePos - lastBlockSize)
-          else throw new IllegalStateException("There are less than 2 blocks")
+          else blocks.head.chrPos(relativePos - lastBlockSize)
         } // Call recursively on init of block list and add size of first block
       case _ => throw new IllegalArgumentException("Orientation must be positive or negative")
     }

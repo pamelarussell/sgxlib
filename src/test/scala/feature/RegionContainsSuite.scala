@@ -49,6 +49,11 @@ class RegionContainsSuite extends FunSuite {
   test("BlockSet contains") {
 
     /*
+    Block set contains empty
+     */
+    assert(!chr1_900_2100_3000_4000_plus.contains(Empty))
+
+    /*
     Block set contains block
      */
 

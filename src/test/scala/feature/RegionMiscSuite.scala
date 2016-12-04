@@ -19,6 +19,7 @@ class RegionMiscSuite extends FunSuite {
   regionRelativePos()
   regionChrPos()
   regionToString()
+  blockChangeOrientation()
 
   def regionToString(): Unit = {
     test("Region toString") {
@@ -211,6 +212,12 @@ class RegionMiscSuite extends FunSuite {
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_minus.chrPos(3000) === 1999)
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_minus.chrPos(3500) === 1499)
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_minus.chrPos(3999) === 1000)
+    }
+  }
+
+  def blockChangeOrientation(): Unit = {
+    test("Block change orientation") {
+      assert(Block("chr1", 1000, 2000, Plus).changeOrientation(Minus) === Block("chr1", 1000, 2000, Minus))
     }
   }
 

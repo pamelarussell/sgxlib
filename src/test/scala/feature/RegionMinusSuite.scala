@@ -54,6 +54,8 @@ class RegionMinusSuite extends FunSuite {
       // Same span
       assert(chr1_1000_2000_minus.minus(chr1_1000_2000_both) === Empty,
         "Block minus block with same span should be empty")
+      // Equal blocks
+      assert(chr1_1000_2000_plus_1.minus(chr1_1000_2000_plus_2) === Empty)
     }
   }
 

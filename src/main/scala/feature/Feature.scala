@@ -95,7 +95,7 @@ sealed abstract class Feature(val blocks: Region, val name: Option[String]) exte
     */
   def numBlocks: Int = blocks.numBlocks
 
-  override def compare(that: Feature): Int = Feature.compare(this, that)
+  override def compare(that: Feature): Int
 
 }
 
@@ -389,10 +389,9 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
     * @return Shifted position in genomic coordinates
     */
   private def shiftChrPos(origPos: Int, relShift: Int): Int = {
-    val origRel = blocks.relativePos(origPos) match {
-      case Some(rp) => rp
-      case _ => throw new IllegalArgumentException("Invalid relative position")
-    }
+    val relPos = blocks.relativePos(origPos)
+    if(relPos.isEmpty) throw new IllegalArgumentException("Invalid relative position")
+    val origRel = relPos.get
     blocks.chrPos(origRel + relShift)
   }
 
