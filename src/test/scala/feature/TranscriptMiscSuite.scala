@@ -26,4 +26,9 @@ class TranscriptMiscSuite extends FunSuite {
       Block("chr1", 6000, 7000, Minus)))
   }
 
+  test("Illegal orientation") {
+    intercept[IllegalArgumentException](new Transcript(chr1_1000_2000_both, Some("name"), Some("gene")))
+    intercept[IllegalArgumentException](new Transcript(chr1_1000_2000_unstranded, Some("name"), Some("gene")))
+  }
+
 }

@@ -1,8 +1,7 @@
 package feature
 
 /**
-  * Created by prussell on 8/29/16.
-  * A region orientation
+  *
   */
 sealed abstract class Orientation
 

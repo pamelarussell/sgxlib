@@ -137,6 +137,8 @@ private object Feature {
   */
 sealed class GenericFeature(override val blocks: Region, override val name: Option[String]) extends Feature(blocks, name) {
 
+  if(name == Some("")) throw new IllegalArgumentException("Name cannot be empty string. Use None instead.")
+
   /**
     * Create a new [[Feature]] by taking the union of positions covered by the blocks
     * of this and another [[Feature]]
@@ -232,6 +234,8 @@ sealed class Transcript(override val blocks: Region, name: Option[String], val g
 
   // Function to validate the parameters
   private def validateParams(): Unit = {
+    if(name == Some("")) throw new IllegalArgumentException("Name cannot be empty string. Use None instead.")
+    if(geneId == Some("")) throw new IllegalArgumentException("geneId cannot be empty string. Use None instead.")
     val or = getOrientation
     // Require that orientation be positive or negative
     if(or != Plus && or != Minus) throw new IllegalArgumentException(s"Invalid orientation: $getOrientation. Options: ${Plus.toString}, ${Minus.toString}")
@@ -312,6 +316,9 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
 
   // Function to validate the constructor parameters
   private def validateParams(): Unit = {
+
+    if(name == Some("")) throw new IllegalArgumentException("Name cannot be empty string. Use None instead.")
+    if(geneId == Some("")) throw new IllegalArgumentException("geneId cannot be empty string. Use None instead.")
 
     // Require that CDS start be at least feature start
     if(cdsStart < getStart) throw new IllegalArgumentException(s"CDS start ($cdsStart) must be >= feature start ($getStart)")

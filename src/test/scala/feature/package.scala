@@ -6,6 +6,7 @@ import org.scalatest.FunSuite
 package object feature extends FunSuite {
 
   // Single blocks
+    val chr1_500_600_plus = Block("chr1", 500, 600, Plus)
     val chr1_1000_2000_minus = Block("chr1", 1000, 2000, Minus)
     val chr1_1000_2000_both = Block("chr1", 1000, 2000, Both)
     val chr1_1000_2000_unstranded = Block("chr1", 1000, 2000, Unstranded)
@@ -20,7 +21,9 @@ package object feature extends FunSuite {
     val chr1_2000_3000_plus = Block("chr1", 2000, 3000, Plus)
     val chr2_1000_2000_plus = Block("chr2", 1000, 2000, Plus)
     val chr2_3000_4000_plus = Block("chr2", 3000, 4000, Plus)
+    val chr1_3000_4000_plus = Block("chr1", 3000, 4000, Plus)
     val chr2_3000_4000_both = Block("chr2", 3000, 4000, Both)
+    val chr1_3000_4000_minus = Block("chr1", 3000, 4000, Minus)
     val chr1_5_6_minus = Block("chr1", 5, 6, Minus)
     val chr1_4_6_minus = Block("chr1", 4, 6, Minus)
     val chr1_6_7_minus = Block("chr1", 6, 7, Minus)

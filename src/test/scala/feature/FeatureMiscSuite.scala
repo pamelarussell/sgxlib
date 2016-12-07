@@ -127,6 +127,14 @@ class FeatureMiscSuite extends FunSuite {
     assert(MessengerRNA(chr1_1000_1100_1200_1300_1900_2000_plus, 1000, 1220, Some("name"), Some("gene")).numBlocks === 3)
   }
 
+  test("Illegal empty names") {
+    intercept[IllegalArgumentException](new GenericFeature(chr1_1000_2000_plus_1, Some("")))
+    intercept[IllegalArgumentException](new Transcript(chr1_1000_2000_plus_1, Some(""), Some("gene")))
+    intercept[IllegalArgumentException](new Transcript(chr1_1000_2000_plus_1, Some("name"), Some("")))
+    intercept[IllegalArgumentException](MessengerRNA(chr1_1000_2000_plus_1, 1000, 1012, Some(""), Some("gene")))
+    intercept[IllegalArgumentException](MessengerRNA(chr1_1000_2000_plus_1, 1000, 1012, Some("name"), Some("")))
+  }
+
   test("Illegal empty region") {
     intercept[IllegalArgumentException]{ new GenericFeature(Empty, Some("name")) }
     intercept[IllegalArgumentException]{ new Transcript(Empty, Some("name"), Some("gene")) }
