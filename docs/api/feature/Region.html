@@ -28,12 +28,10 @@
         </head>
         <body class="type">
       <div id="definition">
-        <a href="Region$.html" title="See companion object"><img alt="Class/Object" src="../lib/class_to_object_big.png" /></a>
+        <img alt="Class" src="../lib/class_big.png" />
         <p id="owner"><a href="package.html" class="extype" name="feature">feature</a></p>
-        <h1><a href="Region$.html" title="See companion object">Region</a></h1><h3><span class="morelinks"><div>
-            Related Docs:
-            <a href="Region$.html" title="See companion object">object Region</a>
-            | <a href="package.html" class="extype" name="feature">package feature</a>
+        <h1>Region</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="package.html" class="extype" name="feature">package feature</a>
           </div></span></h3><span class="permalink">
       <a href="../index.html#feature.Region" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
@@ -51,9 +49,8 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Created by prussell on 8/29/16.
-A genomic annotation consisting of blocks
-</p></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A genomic region.</p><p>Can include zero, one, or multiple blocks on a chromosome. Includes an orientation.
+Does not include any further information.</p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.math.Ordered">Ordered</span>[<a href="" class="extype" name="feature.Region">Region</a>], <span class="extype" name="java.lang.Comparable">Comparable</span>[<a href="" class="extype" name="feature.Region">Region</a>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
@@ -115,9 +112,9 @@ A genomic annotation consisting of blocks
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Obtain a new <a href="" class="extype" name="feature.Region">Region</a> by adding a <a href="Block.html" class="extype" name="feature.Block">Block</a> to this <a href="" class="extype" name="feature.Region">Region</a>
-</p><div class="fullcomment"><div class="comment cmt"><p>Obtain a new <a href="" class="extype" name="feature.Region">Region</a> by adding a <a href="Block.html" class="extype" name="feature.Block">Block</a> to this <a href="" class="extype" name="feature.Region">Region</a>
-</p></div><dl class="paramcmts block"><dt class="param">block</dt><dd class="cmt"><p>Block to add</p></dd><dt>returns</dt><dd class="cmt"><p>New <a href="" class="extype" name="feature.Region">Region</a> with <a href="Block.html" class="extype" name="feature.Block">Block</a> added</p></dd></dl></div>
+      <p class="shortcomment cmt">Returns a merged <a href="" class="extype" name="feature.Region">Region</a> representing this plus an additional <a href="Block.html" class="extype" name="feature.Block">Block</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a merged <a href="" class="extype" name="feature.Region">Region</a> representing this plus an additional <a href="Block.html" class="extype" name="feature.Block">Block</a>.</p><p>The new <a href="Block.html" class="extype" name="feature.Block">Block</a> is merged into this <a href="" class="extype" name="feature.Region">Region</a> as in the <a href="#union(o:feature.Region):feature.Region" class="extmbr" name="feature.Region#union">Region.union</a> method.</p><p>If this and the new <a href="Block.html" class="extype" name="feature.Block">Block</a> have incompatible <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s or are on different
+chromosomes, an exception is thrown.
+</p></div><dl class="paramcmts block"><dt class="param">block</dt><dd class="cmt"><p>New <a href="Block.html" class="extype" name="feature.Block">Block</a> to add</p></dd><dt>returns</dt><dd class="cmt"><p><a href="" class="extype" name="feature.Region">Region</a> representing this with the additional <a href="Block.html" class="extype" name="feature.Block">Block</a> merged in</p></dd></dl></div>
     </li><li name="feature.Region#blocks" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="blocks:List[feature.Block]"></a>
       <a id="blocks:List[Block]"></a>
@@ -134,10 +131,9 @@ A genomic annotation consisting of blocks
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Get the <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="" class="extype" name="feature.Region">Region</a>
-</p><div class="fullcomment"><div class="comment cmt"><p>Get the <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="" class="extype" name="feature.Region">Region</a>
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>List of <a href="Block.html" class="extype" name="feature.Block">Block</a>s in order by coordinates</p></dd></dl></div>
-    </li><li name="feature.Region#chr" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <p class="shortcomment cmt">Returns a list of the <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="" class="extype" name="feature.Region">Region</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a list of the <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="" class="extype" name="feature.Region">Region</a>.</p><p>Regardless of <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>, the returned list is in sorted order by chromosome coordinates.
+</p></div></div>
+    </li><li name="feature.Region#chr" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="chr:String"></a>
       <a id="chr:String"></a>
       <h4 class="signature">
@@ -153,7 +149,7 @@ A genomic annotation consisting of blocks
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Chromosome name</p></dd></dl></div>
+      <p class="shortcomment cmt">Returns the name of the chromosome on which this <a href="" class="extype" name="feature.Region">Region</a> is located.</p>
     </li><li name="feature.Region#chrPos" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="chrPos(relativePos:Int):Int"></a>
       <a id="chrPos(Int):Int"></a>
@@ -170,10 +166,15 @@ A genomic annotation consisting of blocks
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Get the chromosome position corresponding to a relative position within the region
-Region must have a defined orientation (positive or negative)</p><div class="fullcomment"><div class="comment cmt"><p>Get the chromosome position corresponding to a relative position within the region
-Region must have a defined orientation (positive or negative)</p></div><dl class="paramcmts block"><dt class="param">relativePos</dt><dd class="cmt"><p>Relative position within the region, accounting for region orientation</p></dd><dt>returns</dt><dd class="cmt"><p>Chromosome position corresponding to the relative position within the region,
-        accounting for region orientation</p></dd></dl></div>
+      <p class="shortcomment cmt">Returns the position in chromosome coordinates corresponding to a relative position along this <a href="" class="extype" name="feature.Region">Region</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the position in chromosome coordinates corresponding to a relative position along this <a href="" class="extype" name="feature.Region">Region</a>.</p><p>The requested relative position counts with respect to the &quot;beginning&quot; or &quot;5-prime end&quot; of this
+<a href="" class="extype" name="feature.Region">Region</a>. It counts along the <a href="Block.html" class="extype" name="feature.Block">Block</a>s only, ignoring intervening areas (&quot;introns&quot;).</p><p>For example, if this <a href="" class="extype" name="feature.Region">Region</a> has <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a>, the relative position zero
+would map to the start position in chromosome coordinates by this method, and the relative
+position <a href="#size:Int" class="extmbr" name="feature.Region#size">Region.size</a> minus one would map to the last position (the end position minus one)
+in chromosome coordinates. If this <a href="" class="extype" name="feature.Region">Region</a> has <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>,
+position zero would map to the last position of the <a href="" class="extype" name="feature.Region">Region</a> (the end position minus one)
+by this method, and <a href="#size:Int" class="extmbr" name="feature.Region#size">Region.size</a> minus one would map to the start position.</p><p>This <a href="" class="extype" name="feature.Region">Region</a> must have <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a> or <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>. The requested relative position
+must be between zero (inclusive) and <a href="#size:Int" class="extmbr" name="feature.Region#size">Region.size</a> (exclusive). Otherwise, an exception is thrown.
+</p></div><dl class="paramcmts block"><dt class="param">relativePos</dt><dd class="cmt"><p>Zero-based relative position with respect to this <a href="" class="extype" name="feature.Region">Region</a></p></dd><dt>returns</dt><dd class="cmt"><p>The zero-based position in chromosome coordinates</p></dd></dl></div>
     </li><li name="scala.math.Ordered#compare" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="compare(that:A):Int"></a>
       <a id="compare(Region):Int"></a>
@@ -192,7 +193,7 @@ Region must have a defined orientation (positive or negative)</p></div><dl class
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Ordered</dd></dl></div>
     </li><li name="feature.Region#contains" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="contains(feat:feature.Region):Boolean"></a>
+      <a id="contains(o:feature.Region):Boolean"></a>
       <a id="contains(Region):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -200,16 +201,17 @@ Region must have a defined orientation (positive or negative)</p></div><dl class
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">contains</span><span class="params">(<span name="feat">feat: <a href="" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">contains</span><span class="params">(<span name="o">o: <a href="" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.Region@contains(feat:feature.Region):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#feature.Region@contains(o:feature.Region):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Test whether this <a href="" class="extype" name="feature.Region">Region</a> contains another <a href="" class="extype" name="feature.Region">Region</a>
-</p><div class="fullcomment"><div class="comment cmt"><p>Test whether this <a href="" class="extype" name="feature.Region">Region</a> contains another <a href="" class="extype" name="feature.Region">Region</a>
-</p></div><dl class="paramcmts block"><dt class="param">feat</dt><dd class="cmt"><p>Other <a href="" class="extype" name="feature.Region">Region</a></p></dd><dt>returns</dt><dd class="cmt"><p>True iff the other <a href="" class="extype" name="feature.Region">Region</a> is contained in this <a href="" class="extype" name="feature.Region">Region</a></p></dd></dl></div>
+      <p class="shortcomment cmt">Returns a boolean value representing whether this <a href="" class="extype" name="feature.Region">Region</a> contains another <a href="" class="extype" name="feature.Region">Region</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a boolean value representing whether this <a href="" class="extype" name="feature.Region">Region</a> contains another <a href="" class="extype" name="feature.Region">Region</a>.</p><p>In order to contain the other, the two <a href="" class="extype" name="feature.Region">Region</a>s must be on the same chromosome, have
+compatible <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s, and every block of the other <a href="" class="extype" name="feature.Region">Region</a> must be fully contained in
+the span of a block of this <a href="" class="extype" name="feature.Region">Region</a>.
+</p></div><dl class="paramcmts block"><dt class="param">o</dt><dd class="cmt"><p>Other <a href="" class="extype" name="feature.Region">Region</a></p></dd><dt>returns</dt><dd class="cmt"><p>Boolean value representing whether this <a href="" class="extype" name="feature.Region">Region</a> contains the other</p></dd></dl></div>
     </li><li name="feature.Region#end" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="end:Int"></a>
       <a id="end:Int"></a>
@@ -226,9 +228,13 @@ Region must have a defined orientation (positive or negative)</p></div><dl class
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Zero based end position (exclusive)</p></dd></dl></div>
+      <p class="shortcomment cmt">Returns the zero-based end position of this region.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the zero-based end position of this region.</p><p>Regardless of <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>, this one plus the largest (rightmost)
+position included in the region span in chromosome coordinates.
+That is to say, the end position is exclusive.
+(All coordinate intervals are half-open. All genomic positions are zero-based.)
+</p></div></div>
     </li><li name="feature.Region#intersection" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="intersection(feat:feature.Region):feature.Region"></a>
+      <a id="intersection(o:feature.Region):feature.Region"></a>
       <a id="intersection(Region):Region"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -236,18 +242,18 @@ Region must have a defined orientation (positive or negative)</p></div><dl class
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">intersection</span><span class="params">(<span name="feat">feat: <a href="" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <a href="" class="extype" name="feature.Region">Region</a></span>
+        <span class="name">intersection</span><span class="params">(<span name="o">o: <a href="" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <a href="" class="extype" name="feature.Region">Region</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.Region@intersection(feat:feature.Region):feature.Region" title="Permalink" target="_top">
+      <a href="../index.html#feature.Region@intersection(o:feature.Region):feature.Region" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Create a new <a href="" class="extype" name="feature.Region">Region</a> by taking the intersection of positions covered by the blocks
-of this and another <a href="" class="extype" name="feature.Region">Region</a>
-</p><div class="fullcomment"><div class="comment cmt"><p>Create a new <a href="" class="extype" name="feature.Region">Region</a> by taking the intersection of positions covered by the blocks
-of this and another <a href="" class="extype" name="feature.Region">Region</a>
-</p></div><dl class="paramcmts block"><dt class="param">feat</dt><dd class="cmt"><p>Other <a href="" class="extype" name="feature.Region">Region</a></p></dd><dt>returns</dt><dd class="cmt"><p><a href="" class="extype" name="feature.Region">Region</a> representing the intersection of the blocks of the two <a href="" class="extype" name="feature.Region">Region</a>s</p></dd></dl></div>
+      <p class="shortcomment cmt">Returns a <a href="" class="extype" name="feature.Region">Region</a> representing the intersection of this with another <a href="" class="extype" name="feature.Region">Region</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a <a href="" class="extype" name="feature.Region">Region</a> representing the intersection of this with another <a href="" class="extype" name="feature.Region">Region</a>.</p><p>If the two <a href="" class="extype" name="feature.Region">Region</a>s overlap (<a href="#overlaps(o:feature.Region):Boolean" class="extmbr" name="feature.Region#overlaps">Region.overlaps</a>), a <a href="" class="extype" name="feature.Region">Region</a> is returned whose
+blocks are the disjoint sections of overlap between the blocks of the two original <a href="" class="extype" name="feature.Region">Region</a>s,
+and whose <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is the consensus (<a href="Orientation$.html#consensus(o1:feature.Orientation,o2:feature.Orientation):feature.Orientation" class="extmbr" name="feature.Orientation#consensus">Orientation.consensus</a>) of those of the two
+original <a href="" class="extype" name="feature.Region">Region</a>s. If the two <a href="" class="extype" name="feature.Region">Region</a>s do not overlap, <a href="Empty$.html" class="extype" name="feature.Empty">Empty</a> is returned.
+</p></div><dl class="paramcmts block"><dt class="param">o</dt><dd class="cmt"><p>Other <a href="" class="extype" name="feature.Region">Region</a></p></dd><dt>returns</dt><dd class="cmt"><p><a href="" class="extype" name="feature.Region">Region</a> representing the intersection of this with the other <a href="" class="extype" name="feature.Region">Region</a></p></dd></dl></div>
     </li><li name="feature.Region#isEmpty" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="isEmpty:Boolean"></a>
       <a id="isEmpty:Boolean"></a>
@@ -264,11 +270,11 @@ of this and another <a href="" class="extype" name="feature.Region">Region</a>
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Check if the <a href="" class="extype" name="feature.Region">Region</a> is empty
-</p><div class="fullcomment"><div class="comment cmt"><p>Check if the <a href="" class="extype" name="feature.Region">Region</a> is empty
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>True iff the <a href="" class="extype" name="feature.Region">Region</a> is empty</p></dd></dl></div>
+      <p class="shortcomment cmt">Returns a boolean value representing whether this <a href="" class="extype" name="feature.Region">Region</a> is empty.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a boolean value representing whether this <a href="" class="extype" name="feature.Region">Region</a> is empty.</p><p>The only possible way for a region to be empty (have no blocks) is for it
+to be equal to <a href="Empty$.html" class="extype" name="feature.Empty">Empty</a>.
+</p></div></div>
     </li><li name="feature.Region#minus" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="minus(feat:feature.Region):feature.Region"></a>
+      <a id="minus(o:feature.Region):feature.Region"></a>
       <a id="minus(Region):Region"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -276,18 +282,18 @@ of this and another <a href="" class="extype" name="feature.Region">Region</a>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">minus</span><span class="params">(<span name="feat">feat: <a href="" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <a href="" class="extype" name="feature.Region">Region</a></span>
+        <span class="name">minus</span><span class="params">(<span name="o">o: <a href="" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <a href="" class="extype" name="feature.Region">Region</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.Region@minus(feat:feature.Region):feature.Region" title="Permalink" target="_top">
+      <a href="../index.html#feature.Region@minus(o:feature.Region):feature.Region" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Create a new <a href="" class="extype" name="feature.Region">Region</a> by removing positions covered by the blocks of this
-and another <a href="" class="extype" name="feature.Region">Region</a>
-</p><div class="fullcomment"><div class="comment cmt"><p>Create a new <a href="" class="extype" name="feature.Region">Region</a> by removing positions covered by the blocks of this
-and another <a href="" class="extype" name="feature.Region">Region</a>
-</p></div><dl class="paramcmts block"><dt class="param">feat</dt><dd class="cmt"><p>Other <a href="" class="extype" name="feature.Region">Region</a></p></dd><dt>returns</dt><dd class="cmt"><p><a href="" class="extype" name="feature.Region">Region</a> representing this <a href="" class="extype" name="feature.Region">Region</a> minus the intersection with other <a href="" class="extype" name="feature.Region">Region</a></p></dd></dl></div>
+      <p class="shortcomment cmt">Returns a <a href="" class="extype" name="feature.Region">Region</a> representing this minus the overlap with another <a href="" class="extype" name="feature.Region">Region</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a <a href="" class="extype" name="feature.Region">Region</a> representing this minus the overlap with another <a href="" class="extype" name="feature.Region">Region</a>.</p><p>If the two <a href="" class="extype" name="feature.Region">Region</a>s overlap (<a href="#overlaps(o:feature.Region):Boolean" class="extmbr" name="feature.Region#overlaps">Region.overlaps</a>), a <a href="" class="extype" name="feature.Region">Region</a> is returned whose
+blocks are the sections of this <a href="" class="extype" name="feature.Region">Region</a>'s blocks that are not part of the overlap.
+Otherwise, this is returned. In either case, the returned <a href="" class="extype" name="feature.Region">Region</a> has the same
+<a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> as this <a href="" class="extype" name="feature.Region">Region</a>.
+</p></div><dl class="paramcmts block"><dt class="param">o</dt><dd class="cmt"><p>Other <a href="" class="extype" name="feature.Region">Region</a></p></dd><dt>returns</dt><dd class="cmt"><p><a href="" class="extype" name="feature.Region">Region</a> representing this minus the other <a href="" class="extype" name="feature.Region">Region</a></p></dd></dl></div>
     </li><li name="feature.Region#numBlocks" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="numBlocks:Int"></a>
       <a id="numBlocks:Int"></a>
@@ -304,8 +310,9 @@ and another <a href="" class="extype" name="feature.Region">Region</a>
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Get the number of blocks</p><div class="fullcomment"><div class="comment cmt"><p>Get the number of blocks</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>The number of blocks</p></dd></dl></div>
-    </li><li name="feature.Region#orientation" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <p class="shortcomment cmt">Returns the number of <a href="Block.html" class="extype" name="feature.Block">Block</a>s in this <a href="" class="extype" name="feature.Region">Region</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the number of <a href="Block.html" class="extype" name="feature.Block">Block</a>s in this <a href="" class="extype" name="feature.Region">Region</a>.</p><p><a href="Empty$.html" class="extype" name="feature.Empty">Empty</a> has zero <a href="Block.html" class="extype" name="feature.Block">Block</a>s.
+</p></div></div>
+    </li><li name="feature.Region#orientation" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="orientation:feature.Orientation"></a>
       <a id="orientation:Orientation"></a>
       <h4 class="signature">
@@ -321,9 +328,9 @@ and another <a href="" class="extype" name="feature.Region">Region</a>
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><a href="" class="extype" name="feature.Region">Region</a> orientation</p></dd></dl></div>
+      <p class="shortcomment cmt">Returns the <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> of this region.</p>
     </li><li name="feature.Region#overlaps" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="overlaps(feat:feature.Region):Boolean"></a>
+      <a id="overlaps(o:feature.Region):Boolean"></a>
       <a id="overlaps(Region):Boolean"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -331,16 +338,16 @@ and another <a href="" class="extype" name="feature.Region">Region</a>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">overlaps</span><span class="params">(<span name="feat">feat: <a href="" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">overlaps</span><span class="params">(<span name="o">o: <a href="" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.Region@overlaps(feat:feature.Region):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#feature.Region@overlaps(o:feature.Region):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Test whether this <a href="" class="extype" name="feature.Region">Region</a> overlaps another <a href="" class="extype" name="feature.Region">Region</a>
-</p><div class="fullcomment"><div class="comment cmt"><p>Test whether this <a href="" class="extype" name="feature.Region">Region</a> overlaps another <a href="" class="extype" name="feature.Region">Region</a>
-</p></div><dl class="paramcmts block"><dt class="param">feat</dt><dd class="cmt"><p>Other <a href="" class="extype" name="feature.Region">Region</a></p></dd><dt>returns</dt><dd class="cmt"><p>True iff the <a href="" class="extype" name="feature.Region">Region</a>s overlap</p></dd></dl></div>
+      <p class="shortcomment cmt">Returns a boolean value representing whether this <a href="" class="extype" name="feature.Region">Region</a> overlaps another <a href="" class="extype" name="feature.Region">Region</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a boolean value representing whether this <a href="" class="extype" name="feature.Region">Region</a> overlaps another <a href="" class="extype" name="feature.Region">Region</a>.</p><p>In order to overlap, the two <a href="" class="extype" name="feature.Region">Region</a>s must be on the same chromosome, have compatible
+<a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s, and have some pair of respective <a href="Block.html" class="extype" name="feature.Block">Block</a>s with overlapping spans.
+</p></div><dl class="paramcmts block"><dt class="param">o</dt><dd class="cmt"><p>Other <a href="" class="extype" name="feature.Region">Region</a></p></dd><dt>returns</dt><dd class="cmt"><p>Boolean value representing whether this <a href="" class="extype" name="feature.Region">Region</a> overlaps the other</p></dd></dl></div>
     </li><li name="feature.Region#relativePos" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="relativePos(chrPos:Int):Option[Int]"></a>
       <a id="relativePos(Int):Option[Int]"></a>
@@ -357,11 +364,15 @@ and another <a href="" class="extype" name="feature.Region">Region</a>
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Get the relative position within the region of a chromosome position
-Region must have a defined orientation (positive or negative)</p><div class="fullcomment"><div class="comment cmt"><p>Get the relative position within the region of a chromosome position
-Region must have a defined orientation (positive or negative)</p></div><dl class="paramcmts block"><dt class="param">chrPos</dt><dd class="cmt"><p>Chromosome position</p></dd><dt>returns</dt><dd class="cmt"><p>Relative position within the region of the chromosome position,
-        accounting for region orientation, or None if the chromosome position
-        doesn't overlap the region</p></dd></dl></div>
+      <p class="shortcomment cmt">Returns the position relative to this <a href="" class="extype" name="feature.Region">Region</a> accounting for splicing and <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the position relative to this <a href="" class="extype" name="feature.Region">Region</a> accounting for splicing and <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.</p><p>The returned position counts with respect to the &quot;beginning&quot; or &quot;5-prime end&quot; of this
+<a href="" class="extype" name="feature.Region">Region</a>. It counts along the <a href="Block.html" class="extype" name="feature.Block">Block</a>s only, ignoring intervening areas (&quot;introns&quot;).</p><p>For example, if this <a href="" class="extype" name="feature.Region">Region</a> has <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a>, the start position
+would map to position zero by this method, and the last position (the end position minus one)
+would map to position <a href="#size:Int" class="extmbr" name="feature.Region#size">Region.size</a> minus one. If this <a href="" class="extype" name="feature.Region">Region</a> has <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>,
+the last position of the <a href="" class="extype" name="feature.Region">Region</a> (the end position minus one) would map to position zero
+by this method, and the start position would map to position <a href="#size:Int" class="extmbr" name="feature.Region#size">Region.size</a> minus one.</p><p>This <a href="" class="extype" name="feature.Region">Region</a> must have <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a> or <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>. Otherwise an exception is thrown.</p><p>If the requested chromosome position does not lie within one of the <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="" class="extype" name="feature.Region">Region</a>,
+<span class="extype" name="None">None</span> is returned.
+</p></div><dl class="paramcmts block"><dt class="param">chrPos</dt><dd class="cmt"><p>Zero-based position in chromosome coordinates</p></dd><dt>returns</dt><dd class="cmt"><p>The zero-based converted position with respect to this <a href="" class="extype" name="feature.Region">Region</a>, or <span class="extype" name="None">None</span> if the requested
+        position does not overlap a <a href="Block.html" class="extype" name="feature.Block">Block</a> of this <a href="" class="extype" name="feature.Region">Region</a></p></dd></dl></div>
     </li><li name="feature.Region#start" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="start:Int"></a>
       <a id="start:Int"></a>
@@ -378,9 +389,12 @@ Region must have a defined orientation (positive or negative)</p></div><dl class
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>Zero based start position (inclusive)</p></dd></dl></div>
+      <p class="shortcomment cmt">Returns the zero-based start position of this region.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the zero-based start position of this region.</p><p>Regardless of <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>, this is the smallest (leftmost) position
+of the region in chromosome coordinates. The start position is inclusive.
+(All coordinate intervals are half open. All genomic positions are zero-based.)
+</p></div></div>
     </li><li name="feature.Region#union" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="union(feat:feature.Region):feature.Region"></a>
+      <a id="union(o:feature.Region):feature.Region"></a>
       <a id="union(Region):Region"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -388,18 +402,18 @@ Region must have a defined orientation (positive or negative)</p></div><dl class
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">union</span><span class="params">(<span name="feat">feat: <a href="" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <a href="" class="extype" name="feature.Region">Region</a></span>
+        <span class="name">union</span><span class="params">(<span name="o">o: <a href="" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <a href="" class="extype" name="feature.Region">Region</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.Region@union(feat:feature.Region):feature.Region" title="Permalink" target="_top">
+      <a href="../index.html#feature.Region@union(o:feature.Region):feature.Region" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Create a new <a href="" class="extype" name="feature.Region">Region</a> by taking the union of positions covered by the blocks
-of this and another <a href="" class="extype" name="feature.Region">Region</a>
-</p><div class="fullcomment"><div class="comment cmt"><p>Create a new <a href="" class="extype" name="feature.Region">Region</a> by taking the union of positions covered by the blocks
-of this and another <a href="" class="extype" name="feature.Region">Region</a>
-</p></div><dl class="paramcmts block"><dt class="param">feat</dt><dd class="cmt"><p>Other <a href="" class="extype" name="feature.Region">Region</a></p></dd><dt>returns</dt><dd class="cmt"><p><a href="" class="extype" name="feature.Region">Region</a> representing the union of the blocks of the two <a href="" class="extype" name="feature.Region">Region</a>s</p></dd></dl></div>
+      <p class="shortcomment cmt">Returns a <a href="" class="extype" name="feature.Region">Region</a> representing the union of this with another <a href="" class="extype" name="feature.Region">Region</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a <a href="" class="extype" name="feature.Region">Region</a> representing the union of this with another <a href="" class="extype" name="feature.Region">Region</a>.</p><p>If the two <a href="" class="extype" name="feature.Region">Region</a>s are on the same chromosome and have compatible <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s,
+the blocks will be merged and assigned the consensus <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> (<a href="Orientation$.html#consensus(o1:feature.Orientation,o2:feature.Orientation):feature.Orientation" class="extmbr" name="feature.Orientation#consensus">Orientation.consensus</a>)
+for the final returned <a href="" class="extype" name="feature.Region">Region</a>.</p><p>If this or the other <a href="" class="extype" name="feature.Region">Region</a> is <a href="Empty$.html" class="extype" name="feature.Empty">Empty</a>, the non-empty <a href="" class="extype" name="feature.Region">Region</a> will be
+returned, or if both are <a href="Empty$.html" class="extype" name="feature.Empty">Empty</a>, <a href="Empty$.html" class="extype" name="feature.Empty">Empty</a> will be returned.</p><p>Otherwise, an exception is thrown.
+</p></div><dl class="paramcmts block"><dt class="param">o</dt><dd class="cmt"><p>Other <a href="" class="extype" name="feature.Region">Region</a></p></dd><dt>returns</dt><dd class="cmt"><p><a href="" class="extype" name="feature.Region">Region</a> representing the union of this with the other <a href="" class="extype" name="feature.Region">Region</a></p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -756,7 +770,10 @@ of this and another <a href="" class="extype" name="feature.Region">Region</a>
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Get the size of the region</p><div class="fullcomment"><div class="comment cmt"><p>Get the size of the region</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>The total length of the blocks</p></dd></dl></div>
+      <p class="shortcomment cmt">Returns the sum of the lengths of the <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="" class="extype" name="feature.Region">Region</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the sum of the lengths of the <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="" class="extype" name="feature.Region">Region</a>.</p><p><a href="Block.html" class="extype" name="feature.Block">Block</a> length is the end position minus the start position, where, as always,
+start position is inclusive and end position is exclusive. Therefore, size is
+the number of individual genomic positions included in the <a href="" class="extype" name="feature.Region">Region</a>.</p><p>The size of <a href="Empty$.html" class="extype" name="feature.Empty">Empty</a> is zero.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>The sum of the lengths of the <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="" class="extype" name="feature.Region">Region</a></p></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -807,7 +824,11 @@ of this and another <a href="" class="extype" name="feature.Region">Region</a>
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Obtain a new <a href="" class="extype" name="feature.Region">Region</a> by intersecting with an interval</p><div class="fullcomment"><div class="comment cmt"><p>Obtain a new <a href="" class="extype" name="feature.Region">Region</a> by intersecting with an interval</p></div><dl class="paramcmts block"><dt class="param">newStart</dt><dd class="cmt"><p>New start position</p></dd><dt class="param">newEnd</dt><dd class="cmt"><p>New end position</p></dd><dt>returns</dt><dd class="cmt"><p>The region trimmed to the new start and end positions</p></dd></dl></div>
+      <p class="shortcomment cmt">Returns a <a href="" class="extype" name="feature.Region">Region</a> resulting from trimming back the start and end positions of this <a href="" class="extype" name="feature.Region">Region</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a <a href="" class="extype" name="feature.Region">Region</a> resulting from trimming back the start and end positions of this <a href="" class="extype" name="feature.Region">Region</a>.</p><p>This <a href="" class="extype" name="feature.Region">Region</a> is truncated to the new start and end positions in chromosome coordinates.
+This may mean some <a href="Block.html" class="extype" name="feature.Block">Block</a>s are removed altogether, some are shortened, and some
+are left intact. If the new start or end position is outside the span of this <a href="" class="extype" name="feature.Region">Region</a>,
+that parameter will not affect the returned <a href="" class="extype" name="feature.Region">Region</a>.</p><p>As always, start positions are inclusive and end positions are exclusive.
+</p></div><dl class="paramcmts block"><dt class="param">newStart</dt><dd class="cmt"><p>New zero-based start position in chromosome coordinates</p></dd><dt class="param">newEnd</dt><dd class="cmt"><p>New zero-based end position in chromosome coordinates</p></dd><dt>returns</dt><dd class="cmt"><p><a href="" class="extype" name="feature.Region">Region</a> representing this with truncated start and end positions</p></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>

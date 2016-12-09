@@ -1,98 +1,32 @@
 package feature
 
-/**
-  * A genomic feature consisting of a genomic region and a name
-  * @param blocks Genomic region
-  * @param name Feature name
-  */
 sealed abstract class Feature(val blocks: Region, val name: Option[String]) extends Ordered[Feature] {
 
   // Require that region be nonempty
   if(blocks.isEmpty) throw new IllegalArgumentException("Region must be nonempty")
 
-  /**
-    * Get the chromosome name for the [[Feature]]
-    * @return Chromosome name
-    */
   def getChr: String = blocks.chr
 
-  /**
-    * Get the start position of the [[Feature]]
-    * @return Start position
-    */
   def getStart: Int = blocks.start
 
-  /**
-    * Get the end position of the [[Feature]]
-    * @return End position
-    */
   def getEnd: Int = blocks.end
 
-  /**
-    * Get the orientation of the [[Feature]]
-    * @return Orientation
-    */
   def getOrientation: Orientation = blocks.orientation
 
-  /**
-    * Get a list of the blocks
-    * @return List of blocks
-    */
   def getBlocks: List[Block] = blocks.blocks
 
-  /**
-    * Test whether this [[Feature]] overlaps another [[Feature]]
-    * @param other Other [[Feature]]
-    * @return True iff the [[Feature]]s overlap
-    */
   def overlaps(other: Feature): Boolean = blocks.overlaps(other.blocks)
 
-  /**
-    * Test whether this [[Feature]] contains another [[Feature]]
-    * @param other Other [[Feature]]
-    * @return True iff this [[Feature]] contains the other [[Feature]]
-    */
   def contains(other: Feature): Boolean = blocks.contains(other.blocks)
 
-  /**
-    * Create a new [[Feature]] by taking the union of positions covered by the blocks
-    * of this and another [[Feature]]
-    *
-    * @param other Other [[Feature]]
-    * @return [[Feature]] representing the union of the blocks of the two [[Feature]]s
-    */
   def union(other: Feature): Feature
 
-  /**
-    * Create a new [[Feature]] by taking the intersection of positions covered by the blocks
-    * of this and another [[Feature]]
-    *
-    * @param other Other [[Feature]]
-    * @return [[Feature]] representing the intersection of the blocks of the two [[Feature]]s
-    */
   def intersection(other: Feature): Option[Feature]
 
-  /**
-    * Create a new [[Feature]] by removing positions covered by the blocks of this
-    * and another [[Feature]]
-    *
-    * @param other Other [[Feature]]
-    * @return [[Feature]] representing this [[Feature]] minus the intersection with other [[Feature]]
-    */
   def minus(other: Feature): Option[Feature]
 
-  /**
-    * Obtain a new [[Feature]] by adding a [[Block]] to this [[Feature]]
-    *
-    * @param block Block to add
-    * @return New [[Feature]] with [[Block]] added
-    */
   def addBlock(block: Block): Feature
 
-  /**
-    * Get the number of blocks in this [[Feature]]
-    * @return Number of blocks
-    */
   def numBlocks: Int = blocks.numBlocks
 
   override def compare(that: Feature): Int
@@ -102,14 +36,6 @@ sealed abstract class Feature(val blocks: Region, val name: Option[String]) exte
 // Some private functions
 private object Feature {
 
-  /**
-    * Compare two features
-    * @param f1 [[Feature]] 1
-    * @param f2 [[Feature]] 2
-    * @return Positive integer if [[Feature]] 1 is greater;
-    *         Negative integer if [[Feature]] 2 is greater;
-    *         Zero if the neither is greater
-    */
   def compare(f1: Feature, f2: Feature): Int = {
     val rc = f1.blocks compare f2.blocks
     if(rc != 0) rc // If regions are different compare regions
@@ -130,55 +56,23 @@ private object Feature {
 
 }
 
-/**
-  * A generic [[Feature]]
-  * @param blocks Genomic region
-  * @param name Feature name
-  */
 sealed class GenericFeature(override val blocks: Region, override val name: Option[String]) extends Feature(blocks, name) {
 
   if(name == Some("")) throw new IllegalArgumentException("Name cannot be empty string. Use None instead.")
 
-  /**
-    * Create a new [[Feature]] by taking the union of positions covered by the blocks
-    * of this and another [[Feature]]
-    *
-    * @param other Other [[Feature]]
-    * @return [[Feature]] representing the union of the blocks of the two [[Feature]]s
-    */
   final override def union(other: Feature): Feature = new GenericFeature(blocks.union(other.blocks), None)
 
-  /**
-    * Create a new [[Feature]] by taking the intersection of positions covered by the blocks
-    * of this and another [[Feature]]
-    *
-    * @param other Other [[Feature]]
-    * @return [[Feature]] representing the intersection of the blocks of the two [[Feature]]s
-    */
   final override def intersection(other: Feature): Option[Feature] = {
     val in = blocks.intersection(other.blocks)
     if(in.isEmpty) None else Some(new GenericFeature(in, None))
 
   }
 
-  /**
-    * Create a new [[Feature]] by removing positions covered by the blocks of this
-    * and another [[Feature]]
-    *
-    * @param other Other [[Feature]]
-    * @return [[Feature]] representing this [[Feature]] minus the intersection with other [[Feature]]
-    */
   final override def minus(other: Feature): Option[Feature] = {
     val mn = blocks.minus(other.blocks)
     if(mn.isEmpty) None else Some(new GenericFeature(mn, None))
   }
 
-  /**
-    * Obtain a new [[Feature]] by adding a [[Block]] to this [[Feature]]
-    *
-    * @param block Block to add
-    * @return New [[Feature]] with [[Block]] added
-    */
   final override def addBlock(block: Block): Feature = new GenericFeature(blocks.addBlock(block), None)
 
   def canEqual(other: Any): Boolean = other.isInstanceOf[GenericFeature]
@@ -222,12 +116,6 @@ sealed class GenericFeature(override val blocks: Region, override val name: Opti
 
 }
 
-/**
-  * A transcript with blocks, a transcript name, and a gene ID
-  * @param blocks Genomic region
-  * @param name Feature name
-  * @param geneId Gene ID
-  */
 sealed class Transcript(override val blocks: Region, name: Option[String], val geneId: Option[String]) extends GenericFeature(blocks, name) {
 
   validateParams()
@@ -241,10 +129,6 @@ sealed class Transcript(override val blocks: Region, name: Option[String], val g
     if(or != Plus && or != Minus) throw new IllegalArgumentException(s"Invalid orientation: $getOrientation. Options: ${Plus.toString}, ${Minus.toString}")
   }
 
-  /**
-    * Get the introns as a list of blocks
-    * @return The introns
-    */
   def getIntrons: List[Block] = {
     if(numBlocks < 2) Nil
     else {
@@ -295,21 +179,10 @@ sealed class Transcript(override val blocks: Region, name: Option[String], val g
 
 }
 
-/**
-  * A messenger RNA with blocks, CDS coordinates, an mRNA ID, and a gene ID
-  * @param blocks Genomic region
-  * @param cdsStart CDS start position
-  * @param cdsEnd CDS end position
-  * @param name Feature name
-  * @param geneId Gene ID
-  */
 final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd: Int, override val name: Option[String],
                               override val geneId: Option[String])
   extends Transcript(blocks, name, geneId) {
 
-  /**
-    * Get the CDS as a [[Region]]
-    */
   lazy val getCDS: Region = blocks.trim(cdsStart, cdsEnd)
 
   validateParams()
@@ -354,10 +227,6 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
 
   }
 
-  /**
-    * Get the 3'-UTR as a [[Region]]
-    * @return 3'-UTR or None if there is no UTR
-    */
   def get3UTR: Option[Region] = {
     getOrientation match {
       case Plus =>
@@ -370,10 +239,6 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
     }
   }
 
-  /**
-    * Get the 5'-UTR as a [[Region]]
-    * @return 5'-UTR or None if there is no UTR
-    */
   def get5UTR: Option[Region] = {
     getOrientation match {
       case Plus =>
@@ -386,15 +251,6 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
     }
   }
 
-  /**
-    * Shift a genomic position by a certain transcript distance within the transcript,
-    * then return the corresponding shifted genomic position
-    * @param origPos Original position in genomic coordinates
-    * @param relShift Amount to shift by in transcript distance, accounting for orientation.
-    *                 Positive if shifting toward the 3' end;
-    *                 Negative if shifting toward the 5' end
-    * @return Shifted position in genomic coordinates
-    */
   private def shiftChrPos(origPos: Int, relShift: Int): Int = {
     val relPos = blocks.relativePos(origPos)
     if(relPos.isEmpty) throw new IllegalArgumentException("Invalid relative position")
@@ -402,10 +258,6 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
     blocks.chrPos(origRel + relShift)
   }
 
-  /**
-    * Get the start codon as a [[Region]]
-    * @return The start codon
-    */
   def getStartCodon: Region = {
     getOrientation match {
       case Plus => blocks.trim(cdsStart, shiftChrPos(cdsStart, 3))
@@ -414,10 +266,6 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
     }
   }
 
-  /**
-    * Get the stop codon as a [[Region]]
-    * @return The stop codon
-    */
   def getStopCodon: Region = {
     getOrientation match {
       case Plus => blocks.trim(shiftChrPos(cdsEnd - 1, -2), cdsEnd)
@@ -477,9 +325,4 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
 
 }
 
-/**
-  * A collection of transcripts constituting a gene
-  * @param transcripts List of transcripts
-  * @param name Gene name
-  */
 final case class Gene(transcripts: List[Transcript], name: String)

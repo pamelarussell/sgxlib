@@ -2,108 +2,143 @@ package feature
 
 import scala.collection.mutable.ListBuffer
 
-/**
-  * Created by prussell on 8/29/16.
-  * A genomic annotation consisting of blocks
+/** A genomic region.
+  *
+  * Can include zero, one, or multiple blocks on a chromosome. Includes an orientation.
+  * Does not include any further information.
+  *
   */
 sealed abstract class Region extends Ordered[Region] {
 
-  /**
-    * Test whether this [[Region]] overlaps another [[Region]]
+  /** Returns a boolean value representing whether this [[Region]] overlaps another [[Region]].
     *
-    * @param feat Other [[Region]]
-    * @return True iff the [[Region]]s overlap
+    * In order to overlap, the two [[Region]]s must be on the same chromosome, have compatible
+    * [[Orientation]]s, and have some pair of respective [[Block]]s with overlapping spans.
+    *
+    * @param o Other [[Region]]
+    * @return Boolean value representing whether this [[Region]] overlaps the other
     */
-  def overlaps(feat: Region): Boolean
+  def overlaps(o: Region): Boolean
 
-  /**
-    * Test whether this [[Region]] contains another [[Region]]
+  /** Returns a boolean value representing whether this [[Region]] contains another [[Region]].
     *
-    * @param feat Other [[Region]]
-    * @return True iff the other [[Region]] is contained in this [[Region]]
+    * In order to contain the other, the two [[Region]]s must be on the same chromosome, have
+    * compatible [[Orientation]]s, and every block of the other [[Region]] must be fully contained in
+    * the span of a block of this [[Region]].
+    *
+    * @param o Other [[Region]]
+    * @return Boolean value representing whether this [[Region]] contains the other
     */
-  def contains(feat: Region): Boolean
+  def contains(o: Region): Boolean
 
-  /**
-    * Create a new [[Region]] by taking the union of positions covered by the blocks
-    * of this and another [[Region]]
+  /** Returns a [[Region]] representing the union of this with another [[Region]].
     *
-    * @param feat Other [[Region]]
-    * @return [[Region]] representing the union of the blocks of the two [[Region]]s
+    * If the two [[Region]]s are on the same chromosome and have compatible [[Orientation]]s,
+    * the blocks will be merged and assigned the consensus [[Orientation]] ([[Orientation.consensus]])
+    * for the final returned [[Region]].
+    *
+    * If this or the other [[Region]] is [[Empty]], the non-empty [[Region]] will be
+    * returned, or if both are [[Empty]], [[Empty]] will be returned.
+    *
+    * Otherwise, an exception is thrown.
+    *
+    * @param o Other [[Region]]
+    * @return [[Region]] representing the union of this with the other [[Region]]
     */
-  def union(feat: Region): Region
+  def union(o: Region): Region
 
-  /**
-    * Create a new [[Region]] by taking the intersection of positions covered by the blocks
-    * of this and another [[Region]]
+  /** Returns a [[Region]] representing the intersection of this with another [[Region]].
     *
-    * @param feat Other [[Region]]
-    * @return [[Region]] representing the intersection of the blocks of the two [[Region]]s
+    * If the two [[Region]]s overlap ([[Region.overlaps]]), a [[Region]] is returned whose
+    * blocks are the disjoint sections of overlap between the blocks of the two original [[Region]]s,
+    * and whose [[Orientation]] is the consensus ([[Orientation.consensus]]) of those of the two
+    * original [[Region]]s. If the two [[Region]]s do not overlap, [[Empty]] is returned.
+    *
+    * @param o Other [[Region]]
+    * @return [[Region]] representing the intersection of this with the other [[Region]]
     */
-  def intersection(feat: Region): Region
+  def intersection(o: Region): Region
 
-  /**
-    * Create a new [[Region]] by removing positions covered by the blocks of this
-    * and another [[Region]]
+  /** Returns a [[Region]] representing this minus the overlap with another [[Region]].
     *
-    * @param feat Other [[Region]]
-    * @return [[Region]] representing this [[Region]] minus the intersection with other [[Region]]
+    * If the two [[Region]]s overlap ([[Region.overlaps]]), a [[Region]] is returned whose
+    * blocks are the sections of this [[Region]]'s blocks that are not part of the overlap.
+    * Otherwise, this is returned. In either case, the returned [[Region]] has the same
+    * [[Orientation]] as this [[Region]].
+    *
+    * @param o Other [[Region]]
+    * @return [[Region]] representing this minus the other [[Region]]
     */
-  def minus(feat: Region): Region
+  def minus(o: Region): Region
 
-  /**
-    * Check if the [[Region]] is empty
+  /** Returns a boolean value representing whether this [[Region]] is empty.
     *
-    * @return True iff the [[Region]] is empty
+    * The only possible way for a region to be empty (have no blocks) is for it
+    * to be equal to [[Empty]].
     */
   def isEmpty: Boolean
 
-  /**
-    * @return Chromosome name
-    */
+  /** Returns the name of the chromosome on which this [[Region]] is located. */
   def chr: String
 
-  /**
-    * @return Zero based start position (inclusive)
+  /** Returns the zero-based start position of this region.
+    *
+    * Regardless of [[Orientation]], this is the smallest (leftmost) position
+    * of the region in chromosome coordinates. The start position is inclusive.
+    * (All coordinate intervals are half open. All genomic positions are zero-based.)
     */
   def start: Int
 
-  /**
-    * @return Zero based end position (exclusive)
+  /** Returns the zero-based end position of this region.
+    *
+    * Regardless of [[Orientation]], this one plus the largest (rightmost)
+    * position included in the region span in chromosome coordinates.
+    * That is to say, the end position is exclusive.
+    * (All coordinate intervals are half-open. All genomic positions are zero-based.)
+    *
+    * @return
     */
   def end: Int
 
-  /**
-    * @return [[Region]] orientation
-    */
+  /** Returns the [[Orientation]] of this region. */
   def orientation: Orientation
 
-  /**
-    * Get the [[Block]]s of this [[Region]]
+  /** Returns a list of the [[Block]]s of this [[Region]].
     *
-    * @return List of [[Block]]s in order by coordinates
+    * Regardless of [[Orientation]], the returned list is in sorted order by chromosome coordinates.
     */
   def blocks: List[Block]
 
-  /**
-    * Get the number of blocks
-    * @return The number of blocks
+  /** Returns the number of [[Block]]s in this [[Region]].
+    *
+    * [[Empty]] has zero [[Block]]s.
     */
   def numBlocks: Int
 
-  /**
-    * Obtain a new [[Region]] by adding a [[Block]] to this [[Region]]
+  /** Returns a merged [[Region]] representing this plus an additional [[Block]].
     *
-    * @param block Block to add
-    * @return New [[Region]] with [[Block]] added
+    * The new [[Block]] is merged into this [[Region]] as in the [[Region.union]] method.
+    *
+    * If this and the new [[Block]] have incompatible [[Orientation]]s or are on different
+    * chromosomes, an exception is thrown.
+    *
+    * @param block New [[Block]] to add
+    * @return [[Region]] representing this with the additional [[Block]] merged in
     */
   def addBlock(block: Block): Region
 
-  /**
-    * Obtain a new [[Region]] by intersecting with an interval
-    * @param newStart New start position
-    * @param newEnd New end position
-    * @return The region trimmed to the new start and end positions
+  /** Returns a [[Region]] resulting from trimming back the start and end positions of this [[Region]].
+    *
+    * This [[Region]] is truncated to the new start and end positions in chromosome coordinates.
+    * This may mean some [[Block]]s are removed altogether, some are shortened, and some
+    * are left intact. If the new start or end position is outside the span of this [[Region]],
+    * that parameter will not affect the returned [[Region]].
+    *
+    * As always, start positions are inclusive and end positions are exclusive.
+    *
+    * @param newStart New zero-based start position in chromosome coordinates
+    * @param newEnd New zero-based end position in chromosome coordinates
+    * @return [[Region]] representing this with truncated start and end positions
     */
   def trim(newStart: Int, newEnd: Int): Region = {
     if(newStart > newEnd) throw new IllegalArgumentException("New start must be <= new end")
@@ -111,50 +146,69 @@ sealed abstract class Region extends Ordered[Region] {
     intersection(Block(chr, newStart, newEnd, orientation))
   }
 
-  /**
-    * Get the size of the region
-    * @return The total length of the blocks
+  /** Returns the sum of the lengths of the [[Block]]s of this [[Region]].
+    *
+    * [[Block]] length is the end position minus the start position, where, as always,
+    * start position is inclusive and end position is exclusive. Therefore, size is
+    * the number of individual genomic positions included in the [[Region]].
+    *
+    * The size of [[Empty]] is zero.
+    *
+    * @return The sum of the lengths of the [[Block]]s of this [[Region]]
     */
   def size: Int = blocks.map(b => b.end - b.start).sum
 
-  /**
-    * Get the relative position within the region of a chromosome position
-    * Region must have a defined orientation (positive or negative)
-    * @param chrPos Chromosome position
-    * @return Relative position within the region of the chromosome position,
-    *         accounting for region orientation, or None if the chromosome position
-    *         doesn't overlap the region
+  /** Returns the position relative to this [[Region]] accounting for splicing and [[Orientation]].
+    *
+    * The returned position counts with respect to the "beginning" or "5-prime end" of this
+    * [[Region]]. It counts along the [[Block]]s only, ignoring intervening areas ("introns").
+    *
+    * For example, if this [[Region]] has [[Orientation]] [[Plus]], the start position
+    * would map to position zero by this method, and the last position (the end position minus one)
+    * would map to position [[Region.size]] minus one. If this [[Region]] has [[Orientation]] [[Minus]],
+    * the last position of the [[Region]] (the end position minus one) would map to position zero
+    * by this method, and the start position would map to position [[Region.size]] minus one.
+    *
+    * This [[Region]] must have [[Orientation]] [[Plus]] or [[Minus]]. Otherwise an exception is thrown.
+    *
+    * If the requested chromosome position does not lie within one of the [[Block]]s of this [[Region]],
+    * [[None]] is returned.
+    *
+    * @param chrPos Zero-based position in chromosome coordinates
+    * @return The zero-based converted position with respect to this [[Region]], or [[None]] if the requested
+    *         position does not overlap a [[Block]] of this [[Region]]
     */
   def relativePos(chrPos: Int): Option[Int]
 
-  /**
-    * Get the chromosome position corresponding to a relative position within the region
-    * Region must have a defined orientation (positive or negative)
-    * @param relativePos Relative position within the region, accounting for region orientation
-    * @return Chromosome position corresponding to the relative position within the region,
-    *         accounting for region orientation
+  /** Returns the position in chromosome coordinates corresponding to a relative position along this [[Region]].
+    *
+    * The requested relative position counts with respect to the "beginning" or "5-prime end" of this
+    * [[Region]]. It counts along the [[Block]]s only, ignoring intervening areas ("introns").
+    *
+    * For example, if this [[Region]] has [[Orientation]] [[Plus]], the relative position zero
+    * would map to the start position in chromosome coordinates by this method, and the relative
+    * position [[Region.size]] minus one would map to the last position (the end position minus one)
+    * in chromosome coordinates. If this [[Region]] has [[Orientation]] [[Minus]],
+    * position zero would map to the last position of the [[Region]] (the end position minus one)
+    * by this method, and [[Region.size]] minus one would map to the start position.
+    *
+    * This [[Region]] must have [[Orientation]] [[Plus]] or [[Minus]]. The requested relative position
+    * must be between zero (inclusive) and [[Region.size]] (exclusive). Otherwise, an exception is thrown.
+    *
+    * @param relativePos Zero-based relative position with respect to this [[Region]]
+    * @return The zero-based position in chromosome coordinates
     */
   def chrPos(relativePos: Int): Int
 
 }
 
-/**
-  * Static methods
-  */
-object Region {
+private object Region {
 
-  /**
-    * Take the union of two [[Block]]s
-    *
-    * @param b1   Block 1
-    * @param b2   Block 2
-    * @return The union of the two [[Block]]s as a new [[Region]]
-    */
   def union(b1: Block, b2: Block): Region = {
     if(!Orientation.isCompatible(b1, b2)) throw new IllegalArgumentException("Orientations must be compatible")
     if(b1.chr != b2.chr) throw new IllegalArgumentException("Blocks must have same chromosome")
     val or = Orientation.consensus(b1.orientation, b2.orientation)
-    if(b1.overlaps(b2) || b1.adjacent(b2)) {
+    if(b1.overlaps(b2) || adjacent(b1, b2)) {
       Block(b1.chr, scala.math.min(b1.start, b2.start), scala.math.max(b1.end, b2.end), or)
     }
     else {
@@ -172,13 +226,6 @@ object Region {
     }
   }
 
-  /**
-    * Take the intersection of two [[Block]]s
-    *
-    * @param b1   Block 1
-    * @param b2   Block 2
-    * @return The intersection of the two [[Block]]s as a new [[Region]]
-    */
   def intersection(b1: Block, b2: Block): Region = {
     if(b1.overlaps(b2)) {
       Block(b1.chr, scala.math.max(b1.start, b2.start), scala.math.min(b1.end, b2.end),
@@ -186,13 +233,6 @@ object Region {
     } else Empty
   }
 
-  /**
-    * Take the union of a [[Block]] and a [[BlockSet]]
-    *
-    * @param b    A [[Block]]
-    * @param bs   A [[BlockSet]]
-    * @return The union of the two [[Region]]s
-    */
   def union(b: Block, bs: BlockSet): Region = {
 
     // Check for compatible orientations and chromosomes, then save consensus
@@ -240,13 +280,6 @@ object Region {
     else BlockSet(rtrnBlks.toList)
   }
 
-  /**
-    * Take the intersection of a [[Block]] and a [[BlockSet]]
-    *
-    * @param b    A [[Block]]
-    * @param bs   A [[BlockSet]]
-    * @return The intersection of the two [[Region]]s
-    */
   def intersection(b: Block, bs: BlockSet): Region = {
     val it: Iterator[Block] = bs.blocks.iterator
     val rtrnBlks: collection.mutable.MutableList[Block] = collection.mutable.MutableList.empty // Blocks of the returned region
@@ -264,12 +297,6 @@ object Region {
     else BlockSet(rtrnBlks.toList)
   }
 
-  /**
-    * Remove the intersection of two blocks from one of the blocks
-    * @param b1   Block to subtract from
-    * @param b2   Block to subtract
-    * @return [[Region]] representing the first block minus the intersection with the second block
-    */
   def minus(b1: Block, b2: Block): Region = {
     if(!Orientation.isCompatible(b1, b2)) b1
     else if(!b1.overlaps(b2)) b1
@@ -295,12 +322,12 @@ object Region {
     }
   }
 
-  /**
-    * Compare two blocks
-    * @param b1 Block 1
-    * @param b2 Block 2
-    * @return Positive integer if block 1 is greater; negative if block 2 is greater; zero if equal
-    */
+  def adjacent(b1: Block, b2: Block): Boolean = {
+    if(b1.chr != b2.chr) false
+    else b1.start == b2.end || b1.end == b2.start
+  }
+
+
   def compare(b1: Block, b2: Block): Int = {
     // First compare chromosomes
     val cc = scala.math.Ordering.String.compare(b1.chr, b2.chr)
@@ -319,12 +346,6 @@ object Region {
     }
   }
 
-  /**
-    * Compare block and block set
-    * @param b Block
-    * @param bs Block set
-    * @return Positive integer if block is greater; negative if block set is greater
-    */
   def compare(b: Block, bs: BlockSet): Int = {
     // First compare span
     val cb = compare(b, Block(bs.chr, bs.start, bs.end, bs.orientation))
@@ -332,20 +353,8 @@ object Region {
     else -1 // If same span, block is less than block set
   }
 
-  /**
-    * Compare block set and block
-    * @param bs Block set
-    * @param b Block
-    * @return Positive integer if block set is greater; negative if block is greater
-    */
   def compare(bs: BlockSet, b: Block): Int = -1 * compare(b, bs)
 
-  /**
-    * Compare two block sets
-    * @param bs1 Block set 1
-    * @param bs2 Block set 2
-    * @return Positive integer if block set 1 is greater; negative if block set 2 is greater; zero if equal
-    */
   def compare(bs1: BlockSet, bs2: BlockSet): Int = {
     // First compare on span only
     val cb: Int = compare(Block(bs1.chr, bs1.start, bs1.end, bs1.orientation),
@@ -366,107 +375,49 @@ object Region {
 
 }
 
-/**
-  * Empty [[Region]]
-  */
+/** An empty region. [[Empty]] has no chromosome, [[Block]]s, or [[Orientation]]. */
 case object Empty extends Region {
 
-  /**
-    * Test whether this [[Region]] overlaps another [[Region]]
-    *
-    * @param feat Other [[Region]]
-    * @return True iff the [[Region]]s overlap
-    */
+  /** Returns false */
   override def overlaps(feat: Region): Boolean = false
 
-  /**
-    * Create a new [[Region]] by taking the union of positions covered by the blocks
-    * of this and another [[Region]]
-    *
-    * @param feat Other [[Region]]
-    * @return Region representing the union of the blocks of the two [[Region]]s
-    */
-  override def union(feat: Region): Region = feat match {
-    case Empty => Empty
-    case _ => feat
-  }
+  /** Returns the other [[Region]] */
+  override def union(feat: Region): Region = feat
 
-  /**
-    * Create a new [[Region]] by taking the intersection of positions covered by the blocks
-    * of this and another [[Region]]
-    *
-    * @param feat Other [[Region]]
-    * @return Region representing the intersection of the blocks of the two [[Region]]s
-    */
+  /** Returns [[Empty]] */
   override def intersection(feat: Region): Region = Empty
 
-  /**
-    * Create a new [[Region]] by removing positions covered by the blocks of this
-    * and another [[Region]]
-    *
-    * @param feat Other [[Region]]
-    * @return Region representing this [[Region]] minus the intersection with other [[Region]]
-    */
+  /** Returns [[Empty]] */
   override def minus(feat: Region): Region = Empty
 
-
-  /**
-    * Check if the [[Region]] is empty
-    *
-    * @return True iff the [[Region]] is empty
-    */
+  /** Returns true */
   override def isEmpty: Boolean = true
 
-  /**
-    * @return Chromosome name
-    */
+  /** Throws an IllegalStateException */
   override def chr: String = throw new IllegalStateException("Empty region")
 
-  /**
-    * @return Zero based start position (inclusive)
-    */
+  /** Throws an IllegalStateException */
   override def start: Int = throw new IllegalStateException("Empty region")
 
-  /**
-    * @return Zero based end position (exclusive)
-    */
+  /** Throws an IllegalStateException */
   override def end: Int = throw new IllegalStateException("Empty region")
 
-  /**
-    * @return Region orientation
-    */
+  /** Throws an IllegalStateException */
   override def orientation: Orientation = throw new IllegalStateException("Empty region")
 
-  /**
-    * Get the [[Block]]s of this [[Region]]
-    *
-    * @return List of [[Block]]s in order by coordinates
-    */
+  /** Returns Nil */
   override def blocks: List[Block] = Nil
 
-  /**
-    * Obtain a new [[Region]] by adding a [[Block]] to this [[Region]]
-    *
-    * @param block Block to add
-    * @return New [[Region]] with [[Block]] added
-    */
+  /** Returns the [[Block]] */
   override def addBlock(block: Block): Region = block
 
-  /**
-    * Test whether this [[Region]] contains another [[Region]]
-    *
-    * @param feat Other [[Region]]
-    * @return True iff the other [[Region]] is contained in this [[Region]]
-    */
+  /** Returns false */
   override def contains(feat: Region): Boolean = false
 
-  /**
-    * Get the number of blocks
-    *
-    * @return The number of blocks
-    */
+  /** Returns zero */
   override val numBlocks: Int = 0
 
+  /** Returns [[Empty]] */
   override def trim(newStart: Int, newEnd: Int): Region = Empty
 
   override def toString: String = "Empty"
@@ -476,34 +427,19 @@ case object Empty extends Region {
     case _ => 1
   }
 
-  /**
-    * Get the relative position within the region of a genomic position
-    * Region must have a defined orientation (positive or negative)
-    *
-    * @param chrPos Chromosome position
-    * @return Relative position within the region of the chromosome position,
-    *         accounting for region orientation, or None if the chromosome position
-    *         doesn't overlap the region
-    */
+  /** Returns None */
   override def relativePos(chrPos: Int): Option[Int] = None
 
-  /**
-    * Get the chromosome position corresponding to a relative position within the region
-    * Region must have a defined orientation (positive or negative)
-    *
-    * @param relativePos Relative position within the region, accounting for region orientation
-    * @return Chromosome position corresponding to the relative position within the region,
-    *         accounting for region orientation
-    */
+  /** Throws an IllegalStateException */
   override def chrPos(relativePos: Int): Int = throw new IllegalStateException("Empty region")
 }
 
-/**
-  * A single contiguous block
+/** A single contiguous block on a chromosome with an [[Orientation]].
+  *
   * @param chr Chromosome name
-  * @param start Zero based start position (inclusive)
-  * @param end Zero based end position (exclusive)
-  * @param orientation Orientation
+  * @param start Zero-based start position (inclusive)
+  * @param end Zero-based end position (exclusive)
+  * @param orientation Block orientation
   */
 final case class Block(chr: String, start: Int, end: Int, orientation: Orientation) extends Region {
 
@@ -511,12 +447,6 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
   if(end <= start) throw new IllegalArgumentException("End must be greater than start. Otherwise use empty region")
   if(chr.isEmpty) throw new IllegalArgumentException("Chromosome name must not be empty")
 
-  /**
-    * Test whether this [[Region]] overlaps another [[Region]]
-    *
-    * @param feat Other [[Region]]
-    * @return True iff the [[Region]]s overlap
-    */
   override def overlaps(feat: Region): Boolean = feat match {
     case Empty => false
     case Block(c, s, e, o) =>
@@ -529,39 +459,18 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
       else bs.foldLeft(false)((c: Boolean, b: Block) => c || b.overlaps(this)) // Check for overlap of any block
   }
 
-  /**
-    * Create a new [[Region]] by taking the union of positions covered by the blocks
-    * of this and another [[Region]]
-    *
-    * @param feat Other [[Region]]
-    * @return Region representing the union of the blocks of the two [[Region]]s
-    */
   override def union(feat: Region): Region = feat match {
     case Empty => this
     case b: Block => Region.union(this, b)
     case bs: BlockSet => Region.union(this, bs)
   }
 
-  /**
-    * Create a new [[Region]] by taking the intersection of positions covered by the blocks
-    * of this and another [[Region]]
-    *
-    * @param feat Other [[Region]]
-    * @return Region representing the intersection of the blocks of the two [[Region]]s
-    */
   override def intersection(feat: Region): Region = feat match {
     case Empty => Empty
     case b: Block => Region.intersection(this, b)
     case bs: BlockSet => Region.intersection(this, bs)
   }
 
-  /**
-    * Create a new [[Region]] by removing positions covered by the blocks of this
-    * and another [[Region]]
-    *
-    * @param feat Other [[Region]]
-    * @return Region representing this [[Region]] minus the intersection with other [[Region]]
-    */
   override def minus(feat: Region): Region = {
     if(feat.isEmpty) this
     else if(!Orientation.isCompatible(orientation, feat.orientation)) this
@@ -572,41 +481,12 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
     }
   }
 
-  /**
-    * Check if the [[Region]] is empty
-    *
-    * @return True iff the [[Region]] is empty
-    */
   override def isEmpty: Boolean = false
 
-  /**
-    * Get the [[Block]]s of this [[Region]]
-    *
-    * @return List of [[Block]]s in order by coordinates
-    */
   override def blocks: List[Block] = List(this)
 
-  /**
-    * Obtain a new [[Region]] by adding a [[Block]] to this [[Region]]
-    *
-    * @param block Block to add
-    * @return New [[Region]] with [[Block]] added
-    */
   override def addBlock(block: Block): Region = Region.union(this, block)
 
-  /**
-    * Get a copy of this block with the orientation changed
-    * @param or New orientation
-    * @return Copy of this block with the orientation changed
-    */
-  def changeOrientation(or: Orientation): Block = Block(chr, start, end, or)
-
-  /**
-    * Test whether this [[Region]] contains another [[Region]]
-    *
-    * @param feat Other [[Region]]
-    * @return True iff the other [[Region]] is contained in this [[Region]]
-    */
   override def contains(feat: Region): Boolean = feat match {
     case Empty => false
     case f: Region => Orientation.isCompatible(this, f) &&
@@ -615,23 +495,7 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
       f.end <= end
   }
 
-  /**
-    * Get the number of blocks
-    *
-    * @return The number of blocks
-    */
   override def numBlocks: Int = 1
-
-  /**
-    * Check whether blocks are directly adjacent but not overlapping
-    * Ignores orientation
-    * @param block Other block
-    * @return True iff there is no gap between the blocks and they don't overlap
-    */
-  def adjacent(block: Block): Boolean = {
-    if(chr != block.chr) false
-    else start == block.end || end == block.start
-  }
 
   override def toString: String = {
     val sb = new StringBuilder
@@ -653,15 +517,6 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
     case bs: BlockSet => Region.compare(this, bs)
   }
 
-  /**
-    * Get the relative position within the region of a genomic position
-    * Region must have a defined orientation (positive or negative)
-    *
-    * @param chrPos Chromosome position
-    * @return Relative position within the region of the chromosome position,
-    *         accounting for region orientation, or None if the chromosome position
-    *         doesn't overlap the region
-    */
   override def relativePos(chrPos: Int): Option[Int] = orientation match {
     case _ if orientation != Plus && orientation != Minus =>
       throw new IllegalArgumentException("Orientation must be positive or negative")
@@ -670,14 +525,6 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
     case _ => None
   }
 
-  /**
-    * Get the chromosome position corresponding to a relative position within the region
-    * Region must have a defined orientation (positive or negative)
-    *
-    * @param relativePos Relative position within the region, accounting for region orientation
-    * @return Chromosome position corresponding to the relative position within the region,
-    *         accounting for region orientation
-    */
   override def chrPos(relativePos: Int): Int = {
     if(relativePos < 0 || relativePos >= size) throw new IllegalArgumentException("Relative position must be between 0 and region size")
     else orientation match {
@@ -688,18 +535,20 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
   }
 }
 
-/**
-  * A region consisting of multiple blocks
-  * @param blocks The blocks
+/** A collection of non-overlapping [[Block]]s on the same chromosome with the same [[Orientation]]
+  *
+  * A [[BlockSet]] can represent the structure of, e.g., a spliced RNA transcript.
+  *
+  * A [[BlockSet]] must have at least two [[Block]]s. For [[Region]]s with one [[Block]], use a [[Block]] instead.
+  * The list of [[Block]]s passed to the constructor must be non-overlapping and on the same chromosome, and
+  * have the same [[Orientation]]. They must be in ascending order of chromosome position.
+  *
+  * @param blocks Nonempty list of [[Block]]s
   */
 final case class BlockSet(blocks: List[Block]) extends Region {
 
   override val end = validateAndGetEnd()
 
-  /**
-    * Check that the blocks are valid and return the end coordinate of the last block
-    * @return End coordinate of last block
-    */
   private def validateAndGetEnd(): Int = {
     if(blocks.length < 2) throw new IllegalArgumentException(s"Block set must have at least two blocks: ${blocks.mkString(", ")}")
     var lastEnd : Int = -1
@@ -714,51 +563,24 @@ final case class BlockSet(blocks: List[Block]) extends Region {
     lastEnd
   }
 
-  /**
-    * Test whether this [[Region]] overlaps another [[Region]]
-    *
-    * @param feat Other [[Region]]
-    * @return True iff the [[Region]]s overlap
-    */
   override def overlaps(feat: Region): Boolean = feat match {
     case Empty => false
     case b: Block => blocks.foldLeft(false)((bool, blk) => bool || b.overlaps(blk))
     case BlockSet(bs) => bs.foldLeft(false)((bool, blk) => bool || blk.overlaps(this))
   }
 
-  /**
-    * Create a new [[Region]] by taking the union of positions covered by the blocks
-    * of this and another [[Region]]
-    *
-    * @param feat Other [[Region]]
-    * @return Region representing the union of the blocks of the two [[Region]]s
-    */
   override def union(feat: Region): Region = feat match {
     case Empty => this
     case b: Block => Region.union(b, this)
     case BlockSet(bs) => bs.foldLeft[Region](this)((f, b) => b.union(f))
   }
 
-  /**
-    * Create a new [[Region]] by taking the intersection of positions covered by the blocks
-    * of this and another [[Region]]
-    *
-    * @param feat Other [[Region]]
-    * @return Region representing the intersection of the blocks of the two [[Region]]s
-    */
   override def intersection(feat: Region): Region = feat match {
     case Empty => Empty
     case b: Block => Region.intersection(b, this)
     case BlockSet(bs) => bs.foldLeft[Region](Empty)((f, b) => f.union(b.intersection(this)))
   }
 
-  /**
-    * Create a new [[Region]] by removing positions covered by the blocks of this
-    * and another [[Region]]
-    *
-    * @param feat Other [[Region]]
-    * @return Region representing this [[Region]] minus the intersection with other [[Region]]
-    */
   override def minus(feat: Region): Region = feat match {
     case Empty => BlockSet(blocks.map(b => Block(chr, b.start, b.end, orientation)))
     case b: Block =>
@@ -776,53 +598,22 @@ final case class BlockSet(blocks: List[Block]) extends Region {
     case bs: BlockSet => blocks.foldLeft[Region](Empty)((f, b) => f.union(b.minus(bs)))
   }
 
-  /**
-    * Check if the [[Region]] is empty
-    *
-    * @return True iff the [[Region]] is empty
-    */
   override def isEmpty: Boolean = false
 
-  /**
-    * @return Chromosome name
-    */
   override def chr: String = blocks.head.chr
 
-  /**
-    * @return Zero based start position (inclusive)
-    */
   override def start: Int = blocks.head.start
 
-  /**
-    * @return Region orientation
-    */
   override def orientation: Orientation = blocks.head.orientation
 
-  /**
-    * Obtain a new [[Region]] by adding a [[Block]] to this [[Region]]
-    *
-    * @param block Block to add
-    * @return New [[Region]] with [[Block]] added
-    */
   override def addBlock(block: Block): Region = union(block)
 
-  /**
-    * Test whether this [[Region]] contains another [[Region]]
-    *
-    * @param feat Other [[Region]]
-    * @return True iff the other [[Region]] is contained in this [[Region]]
-    */
   override def contains(feat: Region): Boolean = feat match {
     case Empty => false
     case b: Block => blocks.exists(_.contains(b))
     case BlockSet(bs) => bs.forall(contains(_))
   }
 
-  /**
-    * Get the number of blocks
-    *
-    * @return The number of blocks
-    */
   override def numBlocks: Int = blocks.length
 
   override def toString: String = {
@@ -839,15 +630,6 @@ final case class BlockSet(blocks: List[Block]) extends Region {
     case bs: BlockSet => Region.compare(this, bs)
   }
 
-  /**
-    * Get the relative position within the region of a genomic position
-    * Region must have a defined orientation (positive or negative)
-    *
-    * @param chrPos Chromosome position
-    * @return Relative position within the region of the chromosome position,
-    *         accounting for region orientation, or None if the chromosome position
-    *         doesn't overlap the region
-    */
   override def relativePos(chrPos: Int): Option[Int] = orientation match {
     case _ if orientation != Plus && orientation != Minus =>
       throw new IllegalArgumentException("Orientation must be positive or negative")
@@ -878,14 +660,6 @@ final case class BlockSet(blocks: List[Block]) extends Region {
     case _ => None
   }
 
-  /**
-    * Get the chromosome position corresponding to a relative position within the region
-    * Region must have a defined orientation (positive or negative)
-    *
-    * @param relativePos Relative position within the region, accounting for region orientation
-    * @return Chromosome position corresponding to the relative position within the region,
-    *         accounting for region orientation
-    */
   override def chrPos(relativePos: Int): Int = {
     if(relativePos < 0 || relativePos >= size) throw new IllegalArgumentException("Relative position must be between 0 and region size")
     if(blocks.size < 2) throw new IllegalStateException("There are less than 2 blocks")

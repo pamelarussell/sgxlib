@@ -51,7 +51,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Utility methods for calculations on <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s</p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -163,8 +163,7 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">An arbitrary ordering for orientations
-</p>
+      <p class="shortcomment cmt">An arbitrary ordering on <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s.</p>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -221,7 +220,8 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Consensus of two <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s</p><div class="fullcomment"><div class="comment cmt"><p>Consensus of two <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s</p></div><dl class="paramcmts block"><dt class="param">o1</dt><dd class="cmt"><p><a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> 1</p></dd><dt class="param">o2</dt><dd class="cmt"><p><a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> 2</p></dd><dt>returns</dt><dd class="cmt"><p>Consensus <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a></p></dd></dl></div>
+      <p class="shortcomment cmt">Returns the consensus of two possibly different <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the consensus of two possibly different <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s.</p><p>The consensus is <a href="Unstranded$.html" class="extype" name="feature.Unstranded">Unstranded</a> if the two <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s are incompatible.
+</p></div><dl class="paramcmts block"><dt class="param">o1</dt><dd class="cmt"><p><a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> 1</p></dd><dt class="param">o2</dt><dd class="cmt"><p><a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> 2</p></dd><dt>returns</dt><dd class="cmt"><p>The consensus <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a></p></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -329,9 +329,11 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Tells whether the <a href="Region.html" class="extype" name="feature.Region">Region</a>s are eligible to overlap / have compatible orientations
-</p><div class="fullcomment"><div class="comment cmt"><p>Tells whether the <a href="Region.html" class="extype" name="feature.Region">Region</a>s are eligible to overlap / have compatible orientations
-</p></div><dl class="paramcmts block"><dt class="param">f1</dt><dd class="cmt"><p>Region 1</p></dd><dt class="param">f2</dt><dd class="cmt"><p>Region 2</p></dd><dt>returns</dt><dd class="cmt"><p>True iff the two orientations are compatible</p></dd></dl></div>
+      <p class="shortcomment cmt">Returns a boolean value representing whether the <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s of two <a href="Region.html" class="extype" name="feature.Region">Region</a>s are compatible.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a boolean value representing whether the <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s of two <a href="Region.html" class="extype" name="feature.Region">Region</a>s are compatible.</p><p>The notion of compatibility is used when, e.g., merging or intersecting <a href="Region.html" class="extype" name="feature.Region">Region</a>s.</p><p>Every <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is compatible with itself.
+<a href="Plus$.html" class="extype" name="feature.Plus">Plus</a> and <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a> are incompatible with each other.
+<a href="Unstranded$.html" class="extype" name="feature.Unstranded">Unstranded</a> is incompatible with every other orientation.
+<a href="Both$.html" class="extype" name="feature.Both">Both</a> is compatible with <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a> and <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>.
+</p></div><dl class="paramcmts block"><dt class="param">f1</dt><dd class="cmt"><p><a href="Region.html" class="extype" name="feature.Region">Region</a> 1</p></dd><dt class="param">f2</dt><dd class="cmt"><p><a href="Region.html" class="extype" name="feature.Region">Region</a> 2</p></dd><dt>returns</dt><dd class="cmt"><p>The boolean value indicating compatibility</p></dd></dl></div>
     </li><li name="feature.Orientation#isCompatible" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isCompatible(o1:feature.Orientation,o2:feature.Orientation):Boolean"></a>
       <a id="isCompatible(Orientation,Orientation):Boolean"></a>
@@ -348,11 +350,11 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Tells whether <a href="Region.html" class="extype" name="feature.Region">Region</a>s with the two <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s are eligible to overlap
-based on their orientations
-</p><div class="fullcomment"><div class="comment cmt"><p>Tells whether <a href="Region.html" class="extype" name="feature.Region">Region</a>s with the two <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s are eligible to overlap
-based on their orientations
-</p></div><dl class="paramcmts block"><dt class="param">o1</dt><dd class="cmt"><p><a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> 1</p></dd><dt class="param">o2</dt><dd class="cmt"><p><a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> 2</p></dd><dt>returns</dt><dd class="cmt"><p>True iff the two <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s are compatible</p></dd></dl></div>
+      <p class="shortcomment cmt">Returns a boolean value representing whether two <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s are compatible.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a boolean value representing whether two <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s are compatible.</p><p>The notion of compatibility is used when, e.g., merging or intersecting <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s.</p><p>Every <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is compatible with itself.
+<a href="Plus$.html" class="extype" name="feature.Plus">Plus</a> and <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a> are incompatible with each other.
+<a href="Unstranded$.html" class="extype" name="feature.Unstranded">Unstranded</a> is incompatible with every other orientation.
+<a href="Both$.html" class="extype" name="feature.Both">Both</a> is compatible with <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a> and <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>.
+</p></div><dl class="paramcmts block"><dt class="param">o1</dt><dd class="cmt"><p><a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> 1</p></dd><dt class="param">o2</dt><dd class="cmt"><p><a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> 2</p></dd><dt>returns</dt><dd class="cmt"><p>The boolean value indicating compatibility</p></dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>

@@ -19,7 +19,6 @@ class RegionMiscSuite extends FunSuite {
   regionRelativePos()
   regionChrPos()
   regionToString()
-  blockChangeOrientation()
 
   def regionToString(): Unit = {
     test("Region toString") {
@@ -55,12 +54,12 @@ class RegionMiscSuite extends FunSuite {
 
   def adjacencyBlockBlock(): Unit = {
     test("Block adjacency with block") {
-      assert(Block("chr1", 1, 5, Plus).adjacent(Block("chr1", 5, 10, Minus)))
-      assert(!Block("chr1", 1, 5, Plus).adjacent(Block("chr1", 6, 10, Plus)))
-      assert(!Block("chr1", 1, 5, Plus).adjacent(Block("chr1", 4, 10, Plus)))
-      assert(!Block("chr1", 1, 5, Plus).adjacent(Block("chr2", 5, 10, Plus)))
-      assert(Block("chr1", 10, 12, Plus).adjacent(Block("chr1", 6, 10, Minus)))
-      assert(Block("chr1", 10, 11, Plus).adjacent(Block("chr1", 9, 10, Minus)))
+      assert(Region.adjacent(Block("chr1", 1, 5, Plus), Block("chr1", 5, 10, Minus)))
+      assert(!Region.adjacent(Block("chr1", 1, 5, Plus), Block("chr1", 6, 10, Plus)))
+      assert(!Region.adjacent(Block("chr1", 1, 5, Plus), Block("chr1", 4, 10, Plus)))
+      assert(!Region.adjacent(Block("chr1", 1, 5, Plus), Block("chr2", 5, 10, Plus)))
+      assert(Region.adjacent(Block("chr1", 10, 12, Plus), Block("chr1", 6, 10, Minus)))
+      assert(Region.adjacent(Block("chr1", 10, 11, Plus), Block("chr1", 9, 10, Minus)))
     }
   }
 
@@ -212,12 +211,6 @@ class RegionMiscSuite extends FunSuite {
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_minus.chrPos(3000) === 1999)
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_minus.chrPos(3500) === 1499)
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_minus.chrPos(3999) === 1000)
-    }
-  }
-
-  def blockChangeOrientation(): Unit = {
-    test("Block change orientation") {
-      assert(Block("chr1", 1000, 2000, Plus).changeOrientation(Minus) === Block("chr1", 1000, 2000, Minus))
     }
   }
 

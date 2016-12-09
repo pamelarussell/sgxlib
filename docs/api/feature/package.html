@@ -47,13 +47,39 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"></div>
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Provides classes to represent genomic features, i.e., annotations with block coordinates, an orientation,
+and other associated information.</p><p>The main classes to use are <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">feature.GenericFeature</a>, <a href="Transcript.html" class="extype" name="feature.Transcript">feature.Transcript</a>, and <a href="MessengerRNA.html" class="extype" name="feature.MessengerRNA">feature.MessengerRNA</a>.
+These can be instantiated directly or by using a <a href="FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">feature.FeatureBuilder</a>.</p><p>In addition, genomic annotations with no associated information can be represented with <a href="Block.html" class="extype" name="feature.Block">feature.Block</a>,
+a single contiguous block, and <a href="BlockSet.html" class="extype" name="feature.BlockSet">feature.BlockSet</a>, an annotation consisting of multiple blocks.
+</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
         
 
       <div id="mbrsel">
         <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
-        
-        
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By Inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="feature"><span>feature</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show All</span></li>
+            </ol>
+          </div>
         <div id="visbl">
             <span class="filtertype">Visibility</span>
             <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
@@ -82,7 +108,8 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">A single contiguous block</p><div class="fullcomment"><div class="comment cmt"><p>A single contiguous block</p></div><dl class="paramcmts block"><dt class="param">chr</dt><dd class="cmt"><p>Chromosome name</p></dd><dt class="param">start</dt><dd class="cmt"><p>Zero based start position (inclusive)</p></dd><dt class="param">end</dt><dd class="cmt"><p>Zero based end position (exclusive)</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>Orientation</p></dd></dl></div>
+      <p class="shortcomment cmt">A single contiguous block on a chromosome with an <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.</p><div class="fullcomment"><div class="comment cmt"><p>A single contiguous block on a chromosome with an <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.
+</p></div><dl class="paramcmts block"><dt class="param">chr</dt><dd class="cmt"><p>Chromosome name</p></dd><dt class="param">start</dt><dd class="cmt"><p>Zero-based start position (inclusive)</p></dd><dt class="param">end</dt><dd class="cmt"><p>Zero-based end position (exclusive)</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>Block orientation</p></dd></dl></div>
     </li><li name="feature.BlockSet" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="BlockSetextendsRegionwithProductwithSerializable"></a>
       <a id="BlockSet:BlockSet"></a>
@@ -99,7 +126,10 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">A region consisting of multiple blocks</p><div class="fullcomment"><div class="comment cmt"><p>A region consisting of multiple blocks</p></div><dl class="paramcmts block"><dt class="param">blocks</dt><dd class="cmt"><p>The blocks</p></dd></dl></div>
+      <p class="shortcomment cmt">A collection of non-overlapping <a href="Block.html" class="extype" name="feature.Block">Block</a>s on the same chromosome with the same <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a></p><div class="fullcomment"><div class="comment cmt"><p>A collection of non-overlapping <a href="Block.html" class="extype" name="feature.Block">Block</a>s on the same chromosome with the same <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a></p><p>A <a href="BlockSet.html" class="extype" name="feature.BlockSet">BlockSet</a> can represent the structure of, e.g., a spliced RNA transcript.</p><p>A <a href="BlockSet.html" class="extype" name="feature.BlockSet">BlockSet</a> must have at least two <a href="Block.html" class="extype" name="feature.Block">Block</a>s. For <a href="Region.html" class="extype" name="feature.Region">Region</a>s with one <a href="Block.html" class="extype" name="feature.Block">Block</a>, use a <a href="Block.html" class="extype" name="feature.Block">Block</a> instead.
+The list of <a href="Block.html" class="extype" name="feature.Block">Block</a>s passed to the constructor must be non-overlapping and on the same chromosome, and
+have the same <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>. They must be in ascending order of chromosome position.
+</p></div><dl class="paramcmts block"><dt class="param">blocks</dt><dd class="cmt"><p>Nonempty list of <a href="Block.html" class="extype" name="feature.Block">Block</a>s</p></dd></dl></div>
     </li><li name="feature.Feature" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="FeatureextendsOrdered[feature.Feature]"></a>
       <a id="Feature:Feature"></a>
@@ -116,7 +146,7 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">A genomic feature consisting of a genomic region and a name</p>
+      
     </li><li name="feature.FeatureBuilder" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="FeatureBuilderextendsAnyRef"></a>
       <a id="FeatureBuilder:FeatureBuilder"></a>
@@ -134,7 +164,7 @@
       </a>
     </span>
       
-    </li><li name="feature.Gene" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="feature.Gene" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="GeneextendsProductwithSerializable"></a>
       <a id="Gene:Gene"></a>
       <h4 class="signature">
@@ -150,7 +180,7 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">A collection of transcripts constituting a gene</p><div class="fullcomment"><div class="comment cmt"><p>A collection of transcripts constituting a gene</p></div><dl class="paramcmts block"><dt class="param">transcripts</dt><dd class="cmt"><p>List of transcripts</p></dd><dt class="param">name</dt><dd class="cmt"><p>Gene name</p></dd></dl></div>
+      
     </li><li name="feature.GenericFeature" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="GenericFeatureextendsFeature"></a>
       <a id="GenericFeature:GenericFeature"></a>
@@ -167,8 +197,8 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">A generic <a href="Feature.html" class="extype" name="feature.Feature">Feature</a></p>
-    </li><li name="feature.MessengerRNA" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      
+    </li><li name="feature.MessengerRNA" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="MessengerRNAextendsTranscriptwithProductwithSerializable"></a>
       <a id="MessengerRNA:MessengerRNA"></a>
       <h4 class="signature">
@@ -184,7 +214,7 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">A messenger RNA with blocks, CDS coordinates, an mRNA ID, and a gene ID</p><div class="fullcomment"><div class="comment cmt"><p>A messenger RNA with blocks, CDS coordinates, an mRNA ID, and a gene ID</p></div><dl class="paramcmts block"><dt class="param">blocks</dt><dd class="cmt"><p>Genomic region</p></dd><dt class="param">cdsStart</dt><dd class="cmt"><p>CDS start position</p></dd><dt class="param">cdsEnd</dt><dd class="cmt"><p>CDS end position</p></dd><dt class="param">name</dt><dd class="cmt"><p>Feature name</p></dd><dt class="param">geneId</dt><dd class="cmt"><p>Gene ID</p></dd></dl></div>
+      
     </li><li name="feature.Orientation" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="OrientationextendsAnyRef"></a>
       <a id="Orientation:Orientation"></a>
@@ -201,8 +231,8 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Created by prussell on 8/29/16.</p><div class="fullcomment"><div class="comment cmt"><p>Created by prussell on 8/29/16.
-A region orientation
+      <p class="shortcomment cmt">An orientation for a genomic feature.</p><div class="fullcomment"><div class="comment cmt"><p>An orientation for a genomic feature.</p><p>Can refer to a particular DNA strand if the feature is associated with
+a strand, or alternatives if not.
 </p></div></div>
     </li><li name="feature.Region" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="RegionextendsOrdered[feature.Region]"></a>
@@ -220,9 +250,8 @@ A region orientation
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Created by prussell on 8/29/16.</p><div class="fullcomment"><div class="comment cmt"><p>Created by prussell on 8/29/16.
-A genomic annotation consisting of blocks
-</p></div></div>
+      <p class="shortcomment cmt">A genomic region.</p><div class="fullcomment"><div class="comment cmt"><p>A genomic region.</p><p>Can include zero, one, or multiple blocks on a chromosome. Includes an orientation.
+Does not include any further information.</p></div></div>
     </li><li name="feature.Transcript" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="TranscriptextendsGenericFeature"></a>
       <a id="Transcript:Transcript"></a>
@@ -239,7 +268,7 @@ A genomic annotation consisting of blocks
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">A transcript with blocks, a transcript name, and a gene ID</p>
+      
     </li></ol>
             </div>
 
@@ -263,8 +292,8 @@ A genomic annotation consisting of blocks
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="feature.Empty" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">Both strands of DNA</p>
+    </li><li name="feature.Empty" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="Empty"></a>
       <a id="Empty:Empty"></a>
       <h4 class="signature">
@@ -280,8 +309,7 @@ A genomic annotation consisting of blocks
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Empty <a href="Region.html" class="extype" name="feature.Region">Region</a>
-</p>
+      <p class="shortcomment cmt">An empty region.</p><div class="fullcomment"><div class="comment cmt"><p>An empty region. <a href="Empty$.html" class="extype" name="feature.Empty">Empty</a> has no chromosome, <a href="Block.html" class="extype" name="feature.Block">Block</a>s, or <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.</p></div></div>
     </li><li name="feature.Minus" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Minus"></a>
       <a id="Minus:Minus"></a>
@@ -298,7 +326,7 @@ A genomic annotation consisting of blocks
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">The minus strand of DNA</p>
     </li><li name="feature.Orientation" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Orientation"></a>
       <a id="Orientation:Orientation"></a>
@@ -315,7 +343,7 @@ A genomic annotation consisting of blocks
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Utility methods for calculations on <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>s</p>
     </li><li name="feature.Plus" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Plus"></a>
       <a id="Plus:Plus"></a>
@@ -332,25 +360,7 @@ A genomic annotation consisting of blocks
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="feature.Region" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Region"></a>
-      <a id="Region:Region"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="Region$.html"><span class="name">Region</span></a>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.package@Region" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Static methods
-</p>
+      <p class="shortcomment cmt">The plus strand of DNA</p>
     </li><li name="feature.Unstranded" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Unstranded"></a>
       <a id="Unstranded:Unstranded"></a>
@@ -367,7 +377,7 @@ A genomic annotation consisting of blocks
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Orientation for features not associated with a DNA strand</p>
     </li></ol>
             </div>
 
@@ -377,7 +387,11 @@ A genomic annotation consisting of blocks
         </div>
 
         <div id="inheritedMembers">
-        
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
         
         </div>
 
