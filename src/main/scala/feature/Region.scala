@@ -16,7 +16,7 @@ sealed abstract class Region extends Ordered[Region] {
     * [[Orientation]]s, and have some pair of respective [[Block]]s with overlapping spans.
     *
     * @param o Other [[Region]]
-    * @return Boolean value representing whether this [[Region]] overlaps the other
+    * @return True if the [[Region]]s overlap, false otherwise
     */
   def overlaps(o: Region): Boolean
 
@@ -27,7 +27,7 @@ sealed abstract class Region extends Ordered[Region] {
     * the span of a block of this [[Region]].
     *
     * @param o Other [[Region]]
-    * @return Boolean value representing whether this [[Region]] contains the other
+    * @return True if this [[Region]] contains the other, false otherwise
     */
   def contains(o: Region): Boolean
 
@@ -204,6 +204,7 @@ sealed abstract class Region extends Ordered[Region] {
 
 private object Region {
 
+  // Static function to get union between two blocks
   def union(b1: Block, b2: Block): Region = {
     if(!Orientation.isCompatible(b1, b2)) throw new IllegalArgumentException("Orientations must be compatible")
     if(b1.chr != b2.chr) throw new IllegalArgumentException("Blocks must have same chromosome")
@@ -226,6 +227,7 @@ private object Region {
     }
   }
 
+  // Static function to get intersection between two blocks
   def intersection(b1: Block, b2: Block): Region = {
     if(b1.overlaps(b2)) {
       Block(b1.chr, scala.math.max(b1.start, b2.start), scala.math.min(b1.end, b2.end),
@@ -233,6 +235,7 @@ private object Region {
     } else Empty
   }
 
+  // Static function to get union between a block and block set
   def union(b: Block, bs: BlockSet): Region = {
 
     // Check for compatible orientations and chromosomes, then save consensus
@@ -280,6 +283,7 @@ private object Region {
     else BlockSet(rtrnBlks.toList)
   }
 
+  // Static function to get intersection between a block and block set
   def intersection(b: Block, bs: BlockSet): Region = {
     val it: Iterator[Block] = bs.blocks.iterator
     val rtrnBlks: collection.mutable.MutableList[Block] = collection.mutable.MutableList.empty // Blocks of the returned region
@@ -297,6 +301,7 @@ private object Region {
     else BlockSet(rtrnBlks.toList)
   }
 
+  // Static function to subtract a block from another
   def minus(b1: Block, b2: Block): Region = {
     if(!Orientation.isCompatible(b1, b2)) b1
     else if(!b1.overlaps(b2)) b1
@@ -322,12 +327,13 @@ private object Region {
     }
   }
 
+  // Static function to determine whether two blocks are adjacent but not overlapping
   def adjacent(b1: Block, b2: Block): Boolean = {
     if(b1.chr != b2.chr) false
     else b1.start == b2.end || b1.end == b2.start
   }
 
-
+  // Static block compare function
   def compare(b1: Block, b2: Block): Int = {
     // First compare chromosomes
     val cc = scala.math.Ordering.String.compare(b1.chr, b2.chr)
@@ -346,6 +352,7 @@ private object Region {
     }
   }
 
+  // Static compare function for block and block set
   def compare(b: Block, bs: BlockSet): Int = {
     // First compare span
     val cb = compare(b, Block(bs.chr, bs.start, bs.end, bs.orientation))
@@ -353,8 +360,10 @@ private object Region {
     else -1 // If same span, block is less than block set
   }
 
+  // Static compare function for block set and block
   def compare(bs: BlockSet, b: Block): Int = -1 * compare(b, bs)
 
+  // Static block set compare function
   def compare(bs1: BlockSet, bs2: BlockSet): Int = {
     // First compare on span only
     val cb: Int = compare(Block(bs1.chr, bs1.start, bs1.end, bs1.orientation),
@@ -378,59 +387,61 @@ private object Region {
 /** An empty region. [[Empty]] has no chromosome, [[Block]]s, or [[Orientation]]. */
 case object Empty extends Region {
 
-  /** Returns false */
+  /** Returns false. */
   override def overlaps(feat: Region): Boolean = false
 
-  /** Returns the other [[Region]] */
+  /** Returns the other [[Region]]. */
   override def union(feat: Region): Region = feat
 
-  /** Returns [[Empty]] */
+  /** Returns [[Empty]]. */
   override def intersection(feat: Region): Region = Empty
 
-  /** Returns [[Empty]] */
+  /** Returns [[Empty]]. */
   override def minus(feat: Region): Region = Empty
 
-  /** Returns true */
+  /** Returns true. */
   override def isEmpty: Boolean = true
 
-  /** Throws an IllegalStateException */
+  /** Throws an IllegalStateException. */
   override def chr: String = throw new IllegalStateException("Empty region")
 
-  /** Throws an IllegalStateException */
+  /** Throws an IllegalStateException. */
   override def start: Int = throw new IllegalStateException("Empty region")
 
-  /** Throws an IllegalStateException */
+  /** Throws an IllegalStateException. */
   override def end: Int = throw new IllegalStateException("Empty region")
 
-  /** Throws an IllegalStateException */
+  /** Throws an IllegalStateException. */
   override def orientation: Orientation = throw new IllegalStateException("Empty region")
 
-  /** Returns Nil */
+  /** Returns Nil. */
   override def blocks: List[Block] = Nil
 
-  /** Returns the [[Block]] */
+  /** Returns the [[Block]]. */
   override def addBlock(block: Block): Region = block
 
-  /** Returns false */
+  /** Returns false. */
   override def contains(feat: Region): Boolean = false
 
-  /** Returns zero */
+  /** Returns zero. */
   override val numBlocks: Int = 0
 
-  /** Returns [[Empty]] */
+  /** Returns [[Empty]]. */
   override def trim(newStart: Int, newEnd: Int): Region = Empty
 
+  /** Returns "Empty". */
   override def toString: String = "Empty"
 
+  /** Returns zero if other [[Region]] is [[Empty]]; a positive integer otherwise. */
   override def compare(that: Region): Int = that match {
     case Empty => 0
     case _ => 1
   }
 
-  /** Returns None */
+  /** Returns None. */
   override def relativePos(chrPos: Int): Option[Int] = None
 
-  /** Throws an IllegalStateException */
+  /** Throws an IllegalStateException. */
   override def chrPos(relativePos: Int): Int = throw new IllegalStateException("Empty region")
 }
 
@@ -497,6 +508,7 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
 
   override def numBlocks: Int = 1
 
+  /** Returns a string representation of this [[Block]]. */
   override def toString: String = {
     val sb = new StringBuilder
     sb.append('[')
@@ -511,6 +523,19 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
     sb.toString()
   }
 
+  /** Returns the result of comparing this with another [[Region]].
+    *
+    * If other [[Region]] is [[Empty]], returns a negative integer.
+    *
+    * If other [[Region]] is a [[Block]], first compare chromosome, then start position, then end position, then [[Orientation]]
+    * according to [[Orientation.ArbitraryOrdering]]. Return the first non-zero comparison. If all are equal, return zero.
+    *
+    * If other [[Region]] is a [[BlockSet]], first compare spans ignoring introns, as if both were [[Block]]s. If they have the same
+    * span, return a negative integer.
+    *
+    * @param that Other [[Region]]
+    * @return Negative integer if this is less than other, zero if neither is greater, positive integer if this is greater than other
+    */
   override def compare(that: Region): Int = that match {
     case Empty => -1 * (Empty compare this)
     case b: Block => Region.compare(this, b)
@@ -616,6 +641,7 @@ final case class BlockSet(blocks: List[Block]) extends Region {
 
   override def numBlocks: Int = blocks.length
 
+  /** Returns a string representation of this [[BlockSet]]. */
   override def toString: String = {
     val sb = new StringBuilder
     sb.append('[')
@@ -624,6 +650,19 @@ final case class BlockSet(blocks: List[Block]) extends Region {
     sb.toString()
   }
 
+  /** Returns the result of comparing this with another [[Region]].
+    *
+    * If other [[Region]] is [[Empty]], return a negative integer.
+    *
+    * If other [[Region]] is a [[Block]], return -1 times the reverse comparison as in [[Block.compare]].
+    *
+    * If other [[Region]] is a [[BlockSet]], first compare spans as if they were single blocks as in [[Block.compare]]. Next compare number
+    * of blocks. If the [[Region]]s have the same number of blocks, compare first respective pair of different [[Block]]s starting from the
+    * left as in [[Block.compare]]. Return the first non-zero comparison, or zero if all of these comparisons are zero.
+    *
+    * @param that Other [[Region]]
+    * @return Negative integer if this is less than other, zero if neither is greater, positive integer if this is greater than other
+    */
   override def compare(that: Region): Int = that match {
     case Empty => -1 * (Empty compare this)
     case b: Block => Region.compare(this, b)

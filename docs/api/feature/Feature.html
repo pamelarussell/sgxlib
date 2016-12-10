@@ -49,7 +49,8 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A genomic feature.</p><p>Includes a non-empty underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> and an optional feature name.
+</p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.math.Ordered">Ordered</span>[<a href="" class="extype" name="feature.Feature">Feature</a>], <span class="extype" name="java.lang.Comparable">Comparable</span>[<a href="" class="extype" name="feature.Feature">Feature</a>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
@@ -95,7 +96,7 @@
 
         <div id="values" class="values members">
               <h3>Abstract Value Members</h3>
-              <ol><li name="feature.Feature#addBlock" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+              <ol><li name="feature.Feature#addBlock" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="addBlock(block:feature.Block):feature.Feature"></a>
       <a id="addBlock(Block):Feature"></a>
       <h4 class="signature">
@@ -111,9 +112,10 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="feature.Feature#compare" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="compare(that:feature.Feature):Int"></a>
+      <p class="shortcomment cmt">Returns a <a href="" class="extype" name="feature.Feature">Feature</a> representing this with an additional <a href="Block.html" class="extype" name="feature.Block">Block</a> merged in.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a <a href="" class="extype" name="feature.Feature">Feature</a> representing this with an additional <a href="Block.html" class="extype" name="feature.Block">Block</a> merged in.</p><p>See subclass documentation for class-specific details.
+</p></div><dl class="paramcmts block"><dt class="param">block</dt><dd class="cmt"><p><a href="Block.html" class="extype" name="feature.Block">Block</a> to add</p></dd><dt>returns</dt><dd class="cmt"><p>New <a href="" class="extype" name="feature.Feature">Feature</a> with the new <a href="Block.html" class="extype" name="feature.Block">Block</a> merged in</p></dd></dl></div>
+    </li><li name="scala.math.Ordered#compare" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="compare(that:A):Int"></a>
       <a id="compare(Feature):Int"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -124,12 +126,12 @@
         <span class="name">compare</span><span class="params">(<span name="that">that: <a href="" class="extype" name="feature.Feature">Feature</a></span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.Feature@compare(that:feature.Feature):Int" title="Permalink" target="_top">
+      <a href="../index.html#feature.Feature@compare(that:A):Int" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Feature">Feature</a> → Ordered</dd></dl></div>
-    </li><li name="feature.Feature#intersection" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Ordered</dd></dl></div>
+    </li><li name="feature.Feature#intersection" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="intersection(other:feature.Feature):Option[feature.Feature]"></a>
       <a id="intersection(Feature):Option[Feature]"></a>
       <h4 class="signature">
@@ -145,8 +147,9 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="feature.Feature#minus" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">Returns a <a href="" class="extype" name="feature.Feature">Feature</a> representing the intersection of this with another <a href="" class="extype" name="feature.Feature">Feature</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a <a href="" class="extype" name="feature.Feature">Feature</a> representing the intersection of this with another <a href="" class="extype" name="feature.Feature">Feature</a>.</p><p>See subclass documentation for class-specific details.
+</p></div><dl class="paramcmts block"><dt class="param">other</dt><dd class="cmt"><p>Other <a href="" class="extype" name="feature.Feature">Feature</a></p></dd><dt>returns</dt><dd class="cmt"><p><a href="" class="extype" name="feature.Feature">Feature</a> representing the intersection of the two <a href="" class="extype" name="feature.Feature">Feature</a>s, or <span class="extype" name="None">None</span> if they do not overlap</p></dd></dl></div>
+    </li><li name="feature.Feature#minus" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="minus(other:feature.Feature):Option[feature.Feature]"></a>
       <a id="minus(Feature):Option[Feature]"></a>
       <h4 class="signature">
@@ -162,8 +165,9 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="feature.Feature#union" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">Returns a <a href="" class="extype" name="feature.Feature">Feature</a> representing this minus the overlap with another <a href="" class="extype" name="feature.Feature">Feature</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a <a href="" class="extype" name="feature.Feature">Feature</a> representing this minus the overlap with another <a href="" class="extype" name="feature.Feature">Feature</a>.</p><p>See subclass documentation for class-specific details.
+</p></div><dl class="paramcmts block"><dt class="param">other</dt><dd class="cmt"><p>Other <a href="" class="extype" name="feature.Feature">Feature</a></p></dd><dt>returns</dt><dd class="cmt"><p><a href="" class="extype" name="feature.Feature">Feature</a> representing this minus the other, or <span class="extype" name="None">None</span> if the remaining region is empty</p></dd></dl></div>
+    </li><li name="feature.Feature#union" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="union(other:feature.Feature):feature.Feature"></a>
       <a id="union(Feature):Feature"></a>
       <h4 class="signature">
@@ -179,7 +183,8 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Returns a <a href="" class="extype" name="feature.Feature">Feature</a> representing the union of this with another <a href="" class="extype" name="feature.Feature">Feature</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a <a href="" class="extype" name="feature.Feature">Feature</a> representing the union of this with another <a href="" class="extype" name="feature.Feature">Feature</a>.</p><p>See subclass documentation for class-specific details.
+</p></div><dl class="paramcmts block"><dt class="param">other</dt><dd class="cmt"><p>Other <a href="" class="extype" name="feature.Feature">Feature</a></p></dd><dt>returns</dt><dd class="cmt"><p><a href="" class="extype" name="feature.Feature">Feature</a> representing the union of the two <a href="" class="extype" name="feature.Feature">Feature</a>s</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -337,7 +342,7 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Non-empty underlying <a href="Region.html" class="extype" name="feature.Region">Region</a></p>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -378,7 +383,7 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Ordered → Comparable</dd></dl></div>
-    </li><li name="feature.Feature#contains" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="feature.Feature#contains" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="contains(other:feature.Feature):Boolean"></a>
       <a id="contains(Feature):Boolean"></a>
       <h4 class="signature">
@@ -394,7 +399,8 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Returns a boolean value representing whether this <a href="" class="extype" name="feature.Feature">Feature</a> contains another <a href="" class="extype" name="feature.Feature">Feature</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a boolean value representing whether this <a href="" class="extype" name="feature.Feature">Feature</a> contains another <a href="" class="extype" name="feature.Feature">Feature</a>.</p><p>Ignores feature name and calls <a href="Region.html#contains(o:feature.Region):Boolean" class="extmbr" name="feature.Region#contains">Region.contains</a> on the two underlying <a href="Region.html" class="extype" name="feature.Region">Region</a>s.
+</p></div><dl class="paramcmts block"><dt class="param">other</dt><dd class="cmt"><p>Other <a href="" class="extype" name="feature.Feature">Feature</a></p></dd><dt>returns</dt><dd class="cmt"><p>True if this <a href="" class="extype" name="feature.Feature">Feature</a> contains the other, false otherwise</p></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -468,7 +474,7 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Returns the list of <a href="Block.html" class="extype" name="feature.Block">Block</a>s of the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> as in <a href="Region.html#blocks:List[feature.Block]" class="extmbr" name="feature.Region#blocks">Region.blocks</a>.</p>
     </li><li name="feature.Feature#getChr" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="getChr:String"></a>
       <a id="getChr:String"></a>
@@ -485,7 +491,7 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Returns the chromosome name.</p>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -519,7 +525,7 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Returns the end position of the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> as in <a href="Region.html#end:Int" class="extmbr" name="feature.Region#end">Region.end</a>.</p>
     </li><li name="feature.Feature#getOrientation" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="getOrientation:feature.Orientation"></a>
       <a id="getOrientation:Orientation"></a>
@@ -536,7 +542,7 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Returns the orientation of the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> as in <a href="Region.html#orientation:feature.Orientation" class="extmbr" name="feature.Region#orientation">Region.orientation</a>.</p>
     </li><li name="feature.Feature#getStart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="getStart:Int"></a>
       <a id="getStart:Int"></a>
@@ -553,7 +559,7 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Returns the start position of the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> as in <a href="Region.html#start:Int" class="extmbr" name="feature.Region#start">Region.start</a>.</p>
     </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
@@ -604,7 +610,7 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Optional feature name</p>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -672,8 +678,8 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="feature.Feature#overlaps" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">Returns the number of <a href="Block.html" class="extype" name="feature.Block">Block</a>s in the underlying region.</p>
+    </li><li name="feature.Feature#overlaps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="overlaps(other:feature.Feature):Boolean"></a>
       <a id="overlaps(Feature):Boolean"></a>
       <h4 class="signature">
@@ -689,7 +695,8 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Returns a boolean value representing whether this <a href="" class="extype" name="feature.Feature">Feature</a> overlaps another <a href="" class="extype" name="feature.Feature">Feature</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a boolean value representing whether this <a href="" class="extype" name="feature.Feature">Feature</a> overlaps another <a href="" class="extype" name="feature.Feature">Feature</a>.</p><p>Ignores feature name and calls <a href="Region.html#overlaps(o:feature.Region):Boolean" class="extmbr" name="feature.Region#overlaps">Region.overlaps</a> on the two underlying <a href="Region.html" class="extype" name="feature.Region">Region</a>s.
+</p></div><dl class="paramcmts block"><dt class="param">other</dt><dd class="cmt"><p>Other <a href="" class="extype" name="feature.Feature">Feature</a></p></dd><dt>returns</dt><dd class="cmt"><p>True if the <a href="" class="extype" name="feature.Feature">Feature</a>s overlap, false otherwise</p></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>

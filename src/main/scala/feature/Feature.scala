@@ -1,35 +1,88 @@
 package feature
 
+/** A genomic feature.
+  *
+  * Includes a non-empty underlying [[Region]] and an optional feature name.
+  *
+  * @param blocks Non-empty underlying [[Region]]
+  * @param name Optional feature name
+  */
 sealed abstract class Feature(val blocks: Region, val name: Option[String]) extends Ordered[Feature] {
 
   // Require that region be nonempty
   if(blocks.isEmpty) throw new IllegalArgumentException("Region must be nonempty")
 
+  /** Returns the chromosome name. */
   def getChr: String = blocks.chr
 
+  /** Returns the start position of the underlying [[Region]] as in [[Region.start]]. */
   def getStart: Int = blocks.start
 
+  /** Returns the end position of the underlying [[Region]] as in [[Region.end]]. */
   def getEnd: Int = blocks.end
 
+  /** Returns the orientation of the underlying [[Region]] as in [[Region.orientation]]. */
   def getOrientation: Orientation = blocks.orientation
 
+  /** Returns the list of [[Block]]s of the underlying [[Region]] as in [[Region.blocks]]. */
   def getBlocks: List[Block] = blocks.blocks
 
+  /** Returns a boolean value representing whether this [[Feature]] overlaps another [[Feature]].
+    *
+    * Ignores feature name and calls [[Region.overlaps]] on the two underlying [[Region]]s.
+    *
+    * @param other Other [[Feature]]
+    * @return True if the [[Feature]]s overlap, false otherwise
+    */
   def overlaps(other: Feature): Boolean = blocks.overlaps(other.blocks)
 
+  /** Returns a boolean value representing whether this [[Feature]] contains another [[Feature]].
+    *
+    * Ignores feature name and calls [[Region.contains]] on the two underlying [[Region]]s.
+    *
+    * @param other Other [[Feature]]
+    * @return True if this [[Feature]] contains the other, false otherwise
+    */
   def contains(other: Feature): Boolean = blocks.contains(other.blocks)
 
+  /** Returns a [[Feature]] representing the union of this with another [[Feature]].
+    *
+    * See subclass documentation for class-specific details.
+    *
+    * @param other Other [[Feature]]
+    * @return [[Feature]] representing the union of the two [[Feature]]s
+    */
   def union(other: Feature): Feature
 
+  /** Returns a [[Feature]] representing the intersection of this with another [[Feature]].
+    *
+    * See subclass documentation for class-specific details.
+    *
+    * @param other Other [[Feature]]
+    * @return [[Feature]] representing the intersection of the two [[Feature]]s, or [[None]] if they do not overlap
+    */
   def intersection(other: Feature): Option[Feature]
 
+  /** Returns a [[Feature]] representing this minus the overlap with another [[Feature]].
+    *
+    * See subclass documentation for class-specific details.
+    *
+    * @param other Other [[Feature]]
+    * @return [[Feature]] representing this minus the other, or [[None]] if the remaining region is empty
+    */
   def minus(other: Feature): Option[Feature]
 
+  /** Returns a [[Feature]] representing this with an additional [[Block]] merged in.
+    *
+    * See subclass documentation for class-specific details.
+    *
+    * @param block [[Block]] to add
+    * @return New [[Feature]] with the new [[Block]] merged in
+    */
   def addBlock(block: Block): Feature
 
+  /** Returns the number of [[Block]]s in the underlying region. */
   def numBlocks: Int = blocks.numBlocks
-
-  override def compare(that: Feature): Int
 
 }
 
@@ -56,27 +109,80 @@ private object Feature {
 
 }
 
+/** A [[Feature]] consisting of an underlying [[Region]] and an optional name.
+  *
+  * @param blocks Non-empty underlying [[Region]]
+  * @param name Optional feature name. Do not pass Some(""); use None in that case.
+  */
 sealed class GenericFeature(override val blocks: Region, override val name: Option[String]) extends Feature(blocks, name) {
 
   if(name == Some("")) throw new IllegalArgumentException("Name cannot be empty string. Use None instead.")
 
+  /** Returns a [[GenericFeature]] representing the union of this with another [[Feature]].
+    *
+    * The returned feature has underlying [[Region]] equal to the union of the two underlying [[Region]]s
+    * as computed by [[Region.union]]. The returned feature has name None.
+    *
+    * @param other Other [[Feature]]
+    * @return [[GenericFeature]] calculated as the union of the underlying [[Region]]s, with name None
+    */
   final override def union(other: Feature): Feature = new GenericFeature(blocks.union(other.blocks), None)
 
+  /** Returns a [[GenericFeature]] representing the intersection of this with another [[Feature]].
+    *
+    * If the underlying [[Region]]s do not overlap according to [[Region.overlaps]], returns None.
+    *
+    * Otherwise, the returned feature has underlying [[Region]] equal to the intersection of the two underlying [[Region]]s
+    * as computed by [[Region.intersection]]. The returned feature has name None.
+    *
+    * @param other Other [[Feature]]
+    * @return [[GenericFeature]] calculated as the intersection of the underlying [[Region]]s with name None,
+    *        or None if the underlying [[Region]]s do not overlap
+    */
   final override def intersection(other: Feature): Option[Feature] = {
     val in = blocks.intersection(other.blocks)
     if(in.isEmpty) None else Some(new GenericFeature(in, None))
 
   }
 
+  /** Returns a [[GenericFeature]] representing this minus the overlap with another [[Feature]].
+    *
+    * If the underlying [[Region]] of this [[Feature]] is contained in the underlying [[Region]] of the other,
+    * returns None.
+    *
+    * Otherwise, the returned [[Feature]] has underlying [[Region]] equal to the result of [[Region.minus]] on the
+    * two underlying [[Region]]s. The returned [[Feature]] has name None.
+    *
+    * @param other Other [[Feature]]
+    * @return [[GenericFeature]] calculated as the subtraction of the underlying [[Region]]s with name None,
+    *        or None if that subtraction is empty
+    */
   final override def minus(other: Feature): Option[Feature] = {
     val mn = blocks.minus(other.blocks)
     if(mn.isEmpty) None else Some(new GenericFeature(mn, None))
   }
 
+  /** Returns a [[GenericFeature]] representing this with a new [[Block]] merged in.
+    *
+    * The underlying [[Region]] of the returned [[Feature]] is the result of calling [[Region.addBlock]] on the
+    * underlying [[Region]] of this [[Feature]]. The name of the returned [[Feature]] is None.
+    *
+    * @param block [[Block]] to add
+    * @return [[GenericFeature]] whose underlying [[Region]] has the new [[Block]] merged in, with name None
+    */
   final override def addBlock(block: Block): Feature = new GenericFeature(blocks.addBlock(block), None)
 
+  /** Returns true if other is an instance of [[GenericFeature]], false otherwise. */
   def canEqual(other: Any): Boolean = other.isInstanceOf[GenericFeature]
 
+  /** Returns an equality comparison of this with another object.
+    *
+    * Returns true if other is a [[GenericFeature]] that can equal this according to [[GenericFeature.canEqual]],
+    * the underlying [[Region]]s are equal, and the names are equal. Returns false otherwise.
+    *
+    * @param other Other object
+    * @return True if this equals other, false otherwise
+    */
   override def equals(other: Any): Boolean = {
     other match {
       case that: GenericFeature => that.canEqual(this) && that.blocks == this.blocks && that.name == this.name
@@ -87,9 +193,22 @@ sealed class GenericFeature(override val blocks: Region, override val name: Opti
   // Calculate a hashCode
   protected def hc: Int = (blocks, name).##
 
-  // Cache the hashCode
+  /** Calculates a hashCode based on the underlying [[Region]] and the name. */
   override lazy val hashCode: Int = hc
 
+  /** Returns the result of comparing this [[GenericFeature]] to another [[Feature]].
+    *
+    * First compare the underlying [[Region]]s with [[Region.compare]]. If that result is non-zero, return it.
+    *
+    * Next, compare the names.
+    * If both names are defined, use regular ordering on Strings. Otherwise, compare according to an ordering where name defined comes before name not defined.
+    * If the name comparison is non-zero, return it.
+    *
+    * Next, compare the classes. The ordering used is [[GenericFeature]] < [[Transcript]] < [[MessengerRNA]].
+    *
+    * @param that Other [[Feature]] to compare
+    * @return Negative integer if this is less than other, zero if neither is greater, positive integer if this is greater than other
+    */
   override def compare(that: Feature): Int = {
     val c = Feature.compare(this, that)
     if(c != 0) c
@@ -102,6 +221,7 @@ sealed class GenericFeature(override val blocks: Region, override val name: Opti
     }
   }
 
+  /** Returns a string representation of this [[GenericFeature]]. */
   override def toString: String = {
     val sb: StringBuilder = new StringBuilder
     sb append "("
