@@ -193,7 +193,7 @@ sealed class GenericFeature(override val blocks: Region, override val name: Opti
   // Calculate a hashCode
   protected def hc: Int = (blocks, name).##
 
-  /** Calculates a hashCode based on the underlying [[Region]] and the name. */
+  /** A hashCode based on the underlying [[Region]] and [[name]]. */
   override lazy val hashCode: Int = hc
 
   /** Returns the result of comparing this [[GenericFeature]] to another [[Feature]].
@@ -236,6 +236,15 @@ sealed class GenericFeature(override val blocks: Region, override val name: Opti
 
 }
 
+/** A representation of a spliced transcript.
+  *
+  * A [[Transcript]] has an underlying [[Region]] that specifies the chromosome, [[Block]]s, and [[Orientation]].
+  * In addition, a [[Transcript]] has an optional name and parent gene name.
+  *
+  * @param blocks Non-empty underlying [[Region]]
+  * @param name Optional feature name. Do not pass Some(""); use None in that case.
+  * @param geneId Optional parent gene name. Do not pass Some(""); use None in that case.
+  */
 sealed class Transcript(override val blocks: Region, name: Option[String], val geneId: Option[String]) extends GenericFeature(blocks, name) {
 
   validateParams()
@@ -249,6 +258,19 @@ sealed class Transcript(override val blocks: Region, name: Option[String], val g
     if(or != Plus && or != Minus) throw new IllegalArgumentException(s"Invalid orientation: $getOrientation. Options: ${Plus.toString}, ${Minus.toString}")
   }
 
+  /** Returns a list of [[Block]]s representing the introns of this [[Transcript]].
+    *
+    * The returned list is in order from left to right. Each [[Block]] in the returned list is the span of a gap
+    * between two [[Block]]s of this [[Transcript]]. The returned [[Block]]s have the same [[Orientation]]
+    * as this [[Transcript]]. The start position of each returned [[Block]] is equal to the end position (exclusive)
+    * of the previous adjacent [[Block]] in this [[Transcript]]. The end position of each returned [[Block]] (exclusive)
+    * is equal to the start position of the following adjacent [[Block]] in this [[Transcript]].
+    *
+    * If this [[Transcript]] has only one [[Block]], Nil is returned.
+    *
+    * @return A list of [[Block]]s representing the gaps between the [[Block]]s of this [[Transcript]], or Nil if this
+    *         [[Transcript]] has only one [[Block]].
+    */
   def getIntrons: List[Block] = {
     if(numBlocks < 2) Nil
     else {
@@ -258,8 +280,17 @@ sealed class Transcript(override val blocks: Region, name: Option[String], val g
     }
   }
 
+  /** Returns true if other is an instance of [[Transcript]], false otherwise. */
   override def canEqual(other: Any): Boolean = other.isInstanceOf[Transcript]
 
+  /** Returns an equality comparison of this with another object.
+    *
+    * Returns true if other is a [[Transcript]] that can equal this according to [[Transcript.canEqual]],
+    * the underlying [[Region]]s are equal, the names are equal, and the gene IDs are equal. Returns false otherwise.
+    *
+    * @param other Other object
+    * @return True if this equals other, false otherwise
+    */
   override def equals(other: Any): Boolean = {
     other match {
       case that: Transcript => super.equals(that) && geneId == that.geneId
@@ -267,8 +298,10 @@ sealed class Transcript(override val blocks: Region, name: Option[String], val g
     }
   }
 
+  /** A hashCode based on the underlying [[Region]], [[name]], and [[geneId]]. */
   override lazy val hashCode: Int = (super.hc, geneId).##
 
+  /** Returns a string representation of this [[Transcript]]. */
   override def toString: String = {
     val sb: StringBuilder = new StringBuilder
     sb append "("
@@ -282,6 +315,25 @@ sealed class Transcript(override val blocks: Region, name: Option[String], val g
     sb.toString()
   }
 
+  /** Returns the result of comparing this [[Transcript]] to another [[Feature]].
+    *
+    * First compare the underlying [[Region]]s with [[Region.compare]]. If that result is non-zero, return it.
+    *
+    * Next, compare the names.
+    * If both names are defined, use regular ordering on Strings. Otherwise, compare according to an ordering where name defined comes before name not defined.
+    * If the name comparison is non-zero, return it.
+    *
+    * Next, if the other is a [[GenericFeature]], return a positive integer.
+    *
+    * Otherwise, compare the gene IDs.
+    * If both gene IDs are defined, use regular ordering on Strings. Otherwise, compare according to an ordering where gene ID defined comes before gene ID not defined.
+    * If the gene IDs comparison is non-zero, return it.
+    *
+    * If the gene ID comparison was zero, compare the classes. The ordering used is [[GenericFeature]] < [[Transcript]] < [[MessengerRNA]].
+    *
+    * @param that Other [[Feature]] to compare
+    * @return Negative integer if this is less than other, zero if neither is greater, positive integer if this is greater than other
+    */
   override def compare(that: Feature): Int = {
     val c = Feature.compare(this, that)
     if(c != 0) c
@@ -299,10 +351,39 @@ sealed class Transcript(override val blocks: Region, name: Option[String], val g
 
 }
 
+/** A representation of a spliced messenger RNA.
+  *
+  * A [[MessengerRNA]] has an underlying [[Region]] that specifies the chromosome, [[Block]]s, and [[Orientation]].
+  * In addition, a [[MessengerRNA]] has an optional name and parent gene name.
+  * Finally, it also has CDS start and end positions.
+  *
+  * @param blocks Non-empty underlying [[Region]]
+  * @param cdsStart Zero-based CDS start position (inclusive).
+  *                 The CDS start is the smallest (leftmost) position of the CDS, regardless of transcript [[Orientation]].
+  *                 In other words, if [[Orientation]] is [[Plus]], the CDS start is the first position of the start codon.
+  *                 If [[Orientation]] is [[Minus]], the CDS start is the 3'-most position of the stop codon.
+  *                 The CDS start must lie within one of the [[Block]]s.
+  *                 The CDS must be at least 6 nucleotides in length (after splicing) and its length must be a multiple of 3.
+  *                 Otherwise, an IllegalArgumentException is thrown.
+  * @param cdsEnd Zero-based CDS end position (exclusive).
+  *               The CDS end is one plus the largest (rightmost) position of the CDS, regardless of transcript [[Orientation]].
+  *               In other words, if [[Orientation]] is [[Plus]], the CDS end is one plus the last position of the stop codon.
+  *               If [[Orientation]] is [[Minus]], the CDS end is the 5'-most position of the start codon.
+  *               The CDS end must lie within one of the [[Block]]s or be equal to one plus a [[Block]] end position.
+  *               The CDS must be at least 6 nucleotides in length (after splicing) and its length must be a multiple of 3.
+  *               Otherwise, an IllegalArgumentException is thrown.
+  * @param name Optional feature name. Do not pass Some(""); use None in that case.
+  * @param geneId Optional parent gene name. Do not pass Some(""); use None in that case.
+  */
 final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd: Int, override val name: Option[String],
                               override val geneId: Option[String])
   extends Transcript(blocks, name, geneId) {
 
+  /** A [[Region]] representing the coding region of this [[MessengerRNA]].
+    *
+    * The CDS includes the start and stop codons. It is equal to the value of calling [[Region.trim]]([[cdsStart]], [[cdsEnd]])
+    * on the underlying [[Region]] of this [[MessengerRNA]].
+    */
   lazy val getCDS: Region = blocks.trim(cdsStart, cdsEnd)
 
   validateParams()
@@ -347,6 +428,20 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
 
   }
 
+  /** Returns a [[Region]] representing the 3'-UTR of this [[MessengerRNA]].
+    *
+    * If the [[Orientation]] is [[Plus]], the 3'-UTR has start position [[cdsEnd]] and end position equal
+    * to [[getEnd]]. In other words, the 3'-UTR is equal to the value of calling [[Region.trim]]([[cdsEnd]], [[getEnd]])
+    * on the underlying [[Region]] of this [[MessengerRNA]].
+    *
+    * If the [[Orientation]] is [[Minus]], the 3'-UTR has start position [[getStart]] and end position equal to
+    * [[cdsStart]]. In other words, the 3'-UTR is equal to the value of calling [[Region.trim]]([[getStart]], [[cdsStart]])
+    * on the underlying [[Region]] of this [[MessengerRNA]].
+    *
+    * If the stop codon is at one end of the [[MessengerRNA]], returns None.
+    *
+    * @return A [[Region]] representing the 3'-UTR, or None if the stop codon is at one end of the [[MessengerRNA]].
+    */
   def get3UTR: Option[Region] = {
     getOrientation match {
       case Plus =>
@@ -359,6 +454,20 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
     }
   }
 
+  /** Returns a [[Region]] representing the 5'-UTR of this [[MessengerRNA]].
+    *
+    * If the [[Orientation]] is [[Plus]], the 5'-UTR has start position [[getStart]] and end position [[cdsStart]].
+    * In other words, the 5'-UTR is equal to the value of calling [[Region.trim]]([[getStart]], [[cdsStart]])
+    * on the underlying [[Region]] of this [[MessengerRNA]].
+    *
+    * If the [[Orientation]] is [[Minus]], the 5'-UTR has start position [[cdsEnd]] and end position
+    * [[getEnd]]. In other words, the 5'-UTR is equal to the value of calling [[Region.trim]]([[cdsEnd]], [[getEnd]])
+    * on the underlying [[Region]] of this [[MessengerRNA]].
+    *
+    * If the start codon is at one end of the [[MessengerRNA]], returns None.
+    *
+    * @return A [[Region]] representing the 5'-UTR, or None if the start codon is at one end of the [[MessengerRNA]].
+    */
   def get5UTR: Option[Region] = {
     getOrientation match {
       case Plus =>
@@ -378,6 +487,16 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
     blocks.chrPos(origRel + relShift)
   }
 
+  /** Returns a [[Region]] representing the start codon of this [[MessengerRNA]].
+    *
+    * If the [[Orientation]] is [[Plus]], the start codon has start position [[cdsStart]]
+    * and size 3. If the orientation is [[Minus]], the start codon has end position [[cdsEnd]]
+    * and size 3.
+    *
+    * The start codon may include multiple [[Block]]s if the CDS boundary lies near a [[Block]] boundary.
+    *
+    * @return A [[Region]] of size 3, possibly spliced, representing the start codon of this [[MessengerRNA]].
+    */
   def getStartCodon: Region = {
     getOrientation match {
       case Plus => blocks.trim(cdsStart, shiftChrPos(cdsStart, 3))
@@ -386,6 +505,16 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
     }
   }
 
+  /** Returns a [[Region]] representing the stop codon of this [[MessengerRNA]].
+    *
+    * If the [[Orientation]] is [[Plus]], the stop codon has end position [[cdsEnd]]
+    * and size 3. If the [[Orientation]] is [[Minus]], the stop codon has start position [[cdsStart]]
+    * and size 3.
+    *
+    * The stop codon may include multiple [[Block]]s if the CDS boundary lies near a [[Block]] boundary.
+    *
+    * @return A [[Region]] of size 3, possibly spliced, representing the stop codon of this [[MessengerRNA]].
+    */
   def getStopCodon: Region = {
     getOrientation match {
       case Plus => blocks.trim(shiftChrPos(cdsEnd - 1, -2), cdsEnd)
@@ -394,10 +523,21 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
     }
   }
 
+  /** Returns true if other is an instance of [[MessengerRNA]], false otherwise. */
   override def canEqual(other: Any): Boolean = other.isInstanceOf[MessengerRNA]
 
+  /** A hashCode based on the underlying [[Region]], [[name]], [[geneId]], [[cdsStart]], and [[cdsEnd]]. */
   override lazy val hashCode: Int = (super.hc, cdsStart, cdsEnd).##
 
+  /** Returns an equality comparison of this with another object.
+    *
+    * Returns true if other is a [[MessengerRNA]] that can equal this according to [[MessengerRNA.canEqual]],
+    * the underlying [[Region]]s are equal, the names are equal, the gene IDs are equal, the CDS starts are equal,
+    * and the CDS ends are equal. Returns false otherwise.
+    *
+    * @param other Other object
+    * @return True if this equals other, false otherwise
+    */
   override def equals(other: Any): Boolean = {
     other match {
       case that: MessengerRNA => super.equals(that) && cdsStart == that.cdsStart && cdsEnd == that.cdsEnd
@@ -405,7 +545,7 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
     }
   }
 
-
+  /** Returns a string representation of this [[MessengerRNA]]. */
   override def toString: String = {
     val sb: StringBuilder = new StringBuilder
     sb append "("
@@ -423,6 +563,27 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
     sb.toString()
   }
 
+  /** Returns the result of comparing this [[MessengerRNA]] to another [[Feature]].
+    *
+    * First compare the underlying [[Region]]s with [[Region.compare]]. If that result is non-zero, return it.
+    *
+    * Next, compare the names.
+    * If both names are defined, use regular ordering on Strings. Otherwise, compare according to an ordering where name defined comes before name not defined.
+    * If the name comparison is non-zero, return it.
+    *
+    * Next, if the other is a [[GenericFeature]], return a positive integer.
+    *
+    * Otherwise, compare the gene IDs.
+    * If both gene IDs are defined, use regular ordering on Strings. Otherwise, compare according to an ordering where gene ID defined comes before gene ID not defined.
+    * If the gene IDs comparison is non-zero, return it.
+    *
+    * If the gene ID comparison was zero and other is a [[Transcript]], return a positive integer.
+    *
+    * If the gene ID comparison was zero and other is a [[MessengerRNA]], compare the CDS start position, then finally the CDS end position.
+    *
+    * @param that Other [[Feature]] to compare
+    * @return Negative integer if this is less than other, zero if neither is greater, positive integer if this is greater than other
+    */
   override def compare(that: Feature): Int = {
     val c = Feature.compare(this, that)
     if(c != 0) c
@@ -445,4 +606,9 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
 
 }
 
+/** A gene giving rise to one or more [[Transcript]]s.
+  *
+  * @param transcripts Non-empty List of [[Transcript]]s
+  * @param name Gene name
+  */
 final case class Gene(transcripts: List[Transcript], name: String)

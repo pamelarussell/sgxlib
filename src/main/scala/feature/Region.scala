@@ -560,6 +560,18 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
   }
 }
 
+/** Companion functions for [[Block]] */
+object Block {
+
+  /** An implicit ordering on [[Block]]s. Forwards to [[Region.compare]]. */
+  implicit val ord = new Ordering[Block] {
+    def compare(b1: Block, b2: Block): Int = {
+      b1.compare(b2)
+    }
+  }
+}
+
+
 /** A collection of non-overlapping [[Block]]s on the same chromosome with the same [[Orientation]]
   *
   * A [[BlockSet]] can represent the structure of, e.g., a spliced RNA transcript.
