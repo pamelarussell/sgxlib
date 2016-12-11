@@ -49,7 +49,22 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A representation of a spliced messenger RNA.</p><p>A <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> has an underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> that specifies the chromosome, <a href="Block.html" class="extype" name="feature.Block">Block</a>s, and <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.
+In addition, a <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> has an optional name and parent gene name.
+Finally, it also has CDS start and end positions.
+</p></div><dl class="paramcmts block"><dt class="param">blocks</dt><dd class="cmt"><p>Non-empty underlying <a href="Region.html" class="extype" name="feature.Region">Region</a></p></dd><dt class="param">cdsStart</dt><dd class="cmt"><p>Zero-based CDS start position (inclusive).
+                The CDS start is the smallest (leftmost) position of the CDS, regardless of transcript <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.
+                In other words, if <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a>, the CDS start is the first position of the start codon.
+                If <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>, the CDS start is the 3'-most position of the stop codon.
+                The CDS start must lie within one of the <a href="Block.html" class="extype" name="feature.Block">Block</a>s.
+                The CDS must be at least 6 nucleotides in length (after splicing) and its length must be a multiple of 3.
+                Otherwise, an IllegalArgumentException is thrown.</p></dd><dt class="param">cdsEnd</dt><dd class="cmt"><p>Zero-based CDS end position (exclusive).
+              The CDS end is one plus the largest (rightmost) position of the CDS, regardless of transcript <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.
+              In other words, if <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a>, the CDS end is one plus the last position of the stop codon.
+              If <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>, the CDS end is the 5'-most position of the start codon.
+              The CDS end must lie within one of the <a href="Block.html" class="extype" name="feature.Block">Block</a>s or be equal to one plus a <a href="Block.html" class="extype" name="feature.Block">Block</a> end position.
+              The CDS must be at least 6 nucleotides in length (after splicing) and its length must be a multiple of 3.
+              Otherwise, an IllegalArgumentException is thrown.</p></dd><dt class="param">name</dt><dd class="cmt"><p>Optional feature name. Do not pass Some(&quot;&quot;); use None in that case.</p></dd><dt class="param">geneId</dt><dd class="cmt"><p>Optional parent gene name. Do not pass Some(&quot;&quot;); use None in that case.</p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>, <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a>, <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>, <span class="extype" name="scala.math.Ordered">Ordered</span>[<a href="Feature.html" class="extype" name="feature.Feature">Feature</a>], <span class="extype" name="java.lang.Comparable">Comparable</span>[<a href="Feature.html" class="extype" name="feature.Feature">Feature</a>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -88,7 +103,7 @@
         <div id="allMembers">
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
-              <ol><li name="feature.MessengerRNA#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="feature.MessengerRNA#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="&lt;init&gt;(blocks:feature.Region,cdsStart:Int,cdsEnd:Int,name:Option[String],geneId:Option[String]):feature.MessengerRNA"></a>
       <a id="&lt;init&gt;:MessengerRNA"></a>
       <h4 class="signature">
@@ -104,7 +119,19 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">blocks</dt><dd class="cmt"><p>Non-empty underlying <a href="Region.html" class="extype" name="feature.Region">Region</a></p></dd><dt class="param">cdsStart</dt><dd class="cmt"><p>Zero-based CDS start position (inclusive).
+                The CDS start is the smallest (leftmost) position of the CDS, regardless of transcript <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.
+                In other words, if <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a>, the CDS start is the first position of the start codon.
+                If <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>, the CDS start is the 3'-most position of the stop codon.
+                The CDS start must lie within one of the <a href="Block.html" class="extype" name="feature.Block">Block</a>s.
+                The CDS must be at least 6 nucleotides in length (after splicing) and its length must be a multiple of 3.
+                Otherwise, an IllegalArgumentException is thrown.</p></dd><dt class="param">cdsEnd</dt><dd class="cmt"><p>Zero-based CDS end position (exclusive).
+              The CDS end is one plus the largest (rightmost) position of the CDS, regardless of transcript <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.
+              In other words, if <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a>, the CDS end is one plus the last position of the stop codon.
+              If <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>, the CDS end is the 5'-most position of the start codon.
+              The CDS end must lie within one of the <a href="Block.html" class="extype" name="feature.Block">Block</a>s or be equal to one plus a <a href="Block.html" class="extype" name="feature.Block">Block</a> end position.
+              The CDS must be at least 6 nucleotides in length (after splicing) and its length must be a multiple of 3.
+              Otherwise, an IllegalArgumentException is thrown.</p></dd><dt class="param">name</dt><dd class="cmt"><p>Optional feature name. Do not pass Some(&quot;&quot;); use None in that case.</p></dd><dt class="param">geneId</dt><dd class="cmt"><p>Optional parent gene name. Do not pass Some(&quot;&quot;); use None in that case.</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -285,7 +312,7 @@ underlying <a href="Region.html" class="extype" name="feature.Region">Region</a>
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> → <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> → <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a> → <a href="Feature.html" class="extype" name="feature.Feature">Feature</a></dd></dl></div>
+      <p class="shortcomment cmt">Non-empty underlying <a href="Region.html" class="extype" name="feature.Region">Region</a></p><div class="fullcomment"><div class="comment cmt"><p>Non-empty underlying <a href="Region.html" class="extype" name="feature.Region">Region</a></p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> → <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> → <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a> → <a href="Feature.html" class="extype" name="feature.Feature">Feature</a></dd></dl></div>
     </li><li name="feature.MessengerRNA#canEqual" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="canEqual(other:Any):Boolean"></a>
       <a id="canEqual(Any):Boolean"></a>
@@ -302,8 +329,8 @@ underlying <a href="Region.html" class="extype" name="feature.Region">Region</a>
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Returns true if other is an instance of <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a>, false otherwise.</p><div class="fullcomment"><div class="comment cmt"><p>Returns true if other is an instance of <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a>, false otherwise.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> → Equals → <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> → <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a></dd></dl></div>
-    </li><li name="feature.MessengerRNA#cdsEnd" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">Returns true if other is an instance of <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>, false otherwise.</p><div class="fullcomment"><div class="comment cmt"><p>Returns true if other is an instance of <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>, false otherwise.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> → Equals → <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> → <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a></dd></dl></div>
+    </li><li name="feature.MessengerRNA#cdsEnd" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="cdsEnd:Int"></a>
       <a id="cdsEnd:Int"></a>
       <h4 class="signature">
@@ -319,8 +346,14 @@ underlying <a href="Region.html" class="extype" name="feature.Region">Region</a>
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="feature.MessengerRNA#cdsStart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">Zero-based CDS end position (exclusive).</p><div class="fullcomment"><div class="comment cmt"><p>Zero-based CDS end position (exclusive).
+              The CDS end is one plus the largest (rightmost) position of the CDS, regardless of transcript <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.
+              In other words, if <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a>, the CDS end is one plus the last position of the stop codon.
+              If <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>, the CDS end is the 5'-most position of the start codon.
+              The CDS end must lie within one of the <a href="Block.html" class="extype" name="feature.Block">Block</a>s or be equal to one plus a <a href="Block.html" class="extype" name="feature.Block">Block</a> end position.
+              The CDS must be at least 6 nucleotides in length (after splicing) and its length must be a multiple of 3.
+              Otherwise, an IllegalArgumentException is thrown.</p></div></div>
+    </li><li name="feature.MessengerRNA#cdsStart" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="cdsStart:Int"></a>
       <a id="cdsStart:Int"></a>
       <h4 class="signature">
@@ -336,7 +369,13 @@ underlying <a href="Region.html" class="extype" name="feature.Region">Region</a>
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Zero-based CDS start position (inclusive).</p><div class="fullcomment"><div class="comment cmt"><p>Zero-based CDS start position (inclusive).
+                The CDS start is the smallest (leftmost) position of the CDS, regardless of transcript <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.
+                In other words, if <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a>, the CDS start is the first position of the start codon.
+                If <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>, the CDS start is the 3'-most position of the stop codon.
+                The CDS start must lie within one of the <a href="Block.html" class="extype" name="feature.Block">Block</a>s.
+                The CDS must be at least 6 nucleotides in length (after splicing) and its length must be a multiple of 3.
+                Otherwise, an IllegalArgumentException is thrown.</p></div></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -376,9 +415,11 @@ underlying <a href="Region.html" class="extype" name="feature.Region">Region</a>
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Returns the result of comparing this <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a> to another <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the result of comparing this <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a> to another <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>.</p><p>First compare the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a>s with <a href="Region.html#compare(that:A):Int" class="extmbr" name="feature.Region#compare">Region.compare</a>. If that result is non-zero, return it.</p><p>Next, compare the names.
+      <p class="shortcomment cmt">Returns the result of comparing this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> to another <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the result of comparing this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> to another <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>.</p><p>First compare the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a>s with <a href="Region.html#compare(that:A):Int" class="extmbr" name="feature.Region#compare">Region.compare</a>. If that result is non-zero, return it.</p><p>Next, compare the names.
 If both names are defined, use regular ordering on Strings. Otherwise, compare according to an ordering where name defined comes before name not defined.
-If the name comparison is non-zero, return it.</p><p>Next, compare the classes. The ordering used is <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a> &lt; <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> &lt; <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.
+If the name comparison is non-zero, return it.</p><p>Next, if the other is a <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a>, return a positive integer.</p><p>Otherwise, compare the gene IDs.
+If both gene IDs are defined, use regular ordering on Strings. Otherwise, compare according to an ordering where gene ID defined comes before gene ID not defined.
+If the gene IDs comparison is non-zero, return it.</p><p>If the gene ID comparison was zero and other is a <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>, return a positive integer.</p><p>If the gene ID comparison was zero and other is a <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>, compare the CDS start position, then finally the CDS end position.
 </p></div><dl class="paramcmts block"><dt class="param">that</dt><dd class="cmt"><p>Other <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> to compare</p></dd><dt>returns</dt><dd class="cmt"><p>Negative integer if this is less than other, zero if neither is greater, positive integer if this is greater than other</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> → <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> → <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a> → Ordered</dd></dl></div>
     </li><li name="scala.math.Ordered#compareTo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="compareTo(that:A):Int"></a>
@@ -448,8 +489,9 @@ If the name comparison is non-zero, return it.</p><p>Next, compare the classes. 
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Returns an equality comparison of this with another object.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an equality comparison of this with another object.</p><p>Returns true if other is a <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a> that can equal this according to <a href="GenericFeature.html#canEqual(other:Any):Boolean" class="extmbr" name="feature.GenericFeature#canEqual">GenericFeature.canEqual</a>,
-the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a>s are equal, and the names are equal. Returns false otherwise.
+      <p class="shortcomment cmt">Returns an equality comparison of this with another object.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an equality comparison of this with another object.</p><p>Returns true if other is a <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> that can equal this according to <a href="#canEqual(other:Any):Boolean" class="extmbr" name="feature.MessengerRNA#canEqual">MessengerRNA.canEqual</a>,
+the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a>s are equal, the names are equal, the gene IDs are equal, the CDS starts are equal,
+and the CDS ends are equal. Returns false otherwise.
 </p></div><dl class="paramcmts block"><dt class="param">other</dt><dd class="cmt"><p>Other object</p></dd><dt>returns</dt><dd class="cmt"><p>True if this equals other, false otherwise</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> → Equals → <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> → <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a> → AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
@@ -490,8 +532,8 @@ the underlying <a href="Region.html" class="extype" name="feature.Region">Region
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> → <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a></dd></dl></div>
-    </li><li name="feature.MessengerRNA#get3UTR" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">Optional parent gene name.</p><div class="fullcomment"><div class="comment cmt"><p>Optional parent gene name. Do not pass Some(&quot;&quot;); use None in that case.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> → <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a></dd></dl></div>
+    </li><li name="feature.MessengerRNA#get3UTR" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="get3UTR:Option[feature.Region]"></a>
       <a id="get3UTR:Option[Region]"></a>
       <h4 class="signature">
@@ -507,8 +549,13 @@ the underlying <a href="Region.html" class="extype" name="feature.Region">Region
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="feature.MessengerRNA#get5UTR" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">Returns a <a href="Region.html" class="extype" name="feature.Region">Region</a> representing the 3'-UTR of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a <a href="Region.html" class="extype" name="feature.Region">Region</a> representing the 3'-UTR of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p><p>If the <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a>, the 3'-UTR has start position <a href="#cdsEnd:Int" class="extmbr" name="feature.MessengerRNA#cdsEnd">cdsEnd</a> and end position equal
+to <a href="#getEnd:Int" class="extmbr" name="feature.MessengerRNA#getEnd">getEnd</a>. In other words, the 3'-UTR is equal to the value of calling <a href="Region.html#trim(newStart:Int,newEnd:Int):feature.Region" class="extmbr" name="feature.Region#trim">Region.trim</a>(<a href="#cdsEnd:Int" class="extmbr" name="feature.MessengerRNA#cdsEnd">cdsEnd</a>, <a href="#getEnd:Int" class="extmbr" name="feature.MessengerRNA#getEnd">getEnd</a>)
+on the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p><p>If the <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>, the 3'-UTR has start position <a href="#getStart:Int" class="extmbr" name="feature.MessengerRNA#getStart">getStart</a> and end position equal to
+<a href="#cdsStart:Int" class="extmbr" name="feature.MessengerRNA#cdsStart">cdsStart</a>. In other words, the 3'-UTR is equal to the value of calling <a href="Region.html#trim(newStart:Int,newEnd:Int):feature.Region" class="extmbr" name="feature.Region#trim">Region.trim</a>(<a href="#getStart:Int" class="extmbr" name="feature.MessengerRNA#getStart">getStart</a>, <a href="#cdsStart:Int" class="extmbr" name="feature.MessengerRNA#cdsStart">cdsStart</a>)
+on the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p><p>If the stop codon is at one end of the <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>, returns None.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>A <a href="Region.html" class="extype" name="feature.Region">Region</a> representing the 3'-UTR, or None if the stop codon is at one end of the <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p></dd></dl></div>
+    </li><li name="feature.MessengerRNA#get5UTR" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="get5UTR:Option[feature.Region]"></a>
       <a id="get5UTR:Option[Region]"></a>
       <h4 class="signature">
@@ -524,7 +571,12 @@ the underlying <a href="Region.html" class="extype" name="feature.Region">Region
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Returns a <a href="Region.html" class="extype" name="feature.Region">Region</a> representing the 5'-UTR of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a <a href="Region.html" class="extype" name="feature.Region">Region</a> representing the 5'-UTR of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p><p>If the <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a>, the 5'-UTR has start position <a href="#getStart:Int" class="extmbr" name="feature.MessengerRNA#getStart">getStart</a> and end position <a href="#cdsStart:Int" class="extmbr" name="feature.MessengerRNA#cdsStart">cdsStart</a>.
+In other words, the 5'-UTR is equal to the value of calling <a href="Region.html#trim(newStart:Int,newEnd:Int):feature.Region" class="extmbr" name="feature.Region#trim">Region.trim</a>(<a href="#getStart:Int" class="extmbr" name="feature.MessengerRNA#getStart">getStart</a>, <a href="#cdsStart:Int" class="extmbr" name="feature.MessengerRNA#cdsStart">cdsStart</a>)
+on the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p><p>If the <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>, the 5'-UTR has start position <a href="#cdsEnd:Int" class="extmbr" name="feature.MessengerRNA#cdsEnd">cdsEnd</a> and end position
+<a href="#getEnd:Int" class="extmbr" name="feature.MessengerRNA#getEnd">getEnd</a>. In other words, the 5'-UTR is equal to the value of calling <a href="Region.html#trim(newStart:Int,newEnd:Int):feature.Region" class="extmbr" name="feature.Region#trim">Region.trim</a>(<a href="#cdsEnd:Int" class="extmbr" name="feature.MessengerRNA#cdsEnd">cdsEnd</a>, <a href="#getEnd:Int" class="extmbr" name="feature.MessengerRNA#getEnd">getEnd</a>)
+on the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p><p>If the start codon is at one end of the <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>, returns None.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>A <a href="Region.html" class="extype" name="feature.Region">Region</a> representing the 5'-UTR, or None if the start codon is at one end of the <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p></dd></dl></div>
     </li><li name="feature.Feature#getBlocks" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getBlocks:List[feature.Block]"></a>
       <a id="getBlocks:List[Block]"></a>
@@ -542,7 +594,7 @@ the underlying <a href="Region.html" class="extype" name="feature.Region">Region
       </a>
     </span>
       <p class="shortcomment cmt">Returns the list of <a href="Block.html" class="extype" name="feature.Block">Block</a>s of the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> as in <a href="Region.html#blocks:List[feature.Block]" class="extmbr" name="feature.Region#blocks">Region.blocks</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the list of <a href="Block.html" class="extype" name="feature.Block">Block</a>s of the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> as in <a href="Region.html#blocks:List[feature.Block]" class="extmbr" name="feature.Region#blocks">Region.blocks</a>.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Feature.html" class="extype" name="feature.Feature">Feature</a></dd></dl></div>
-    </li><li name="feature.MessengerRNA#getCDS" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="feature.MessengerRNA#getCDS" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getCDS:feature.Region"></a>
       <a id="getCDS:Region"></a>
       <h4 class="signature">
@@ -558,7 +610,9 @@ the underlying <a href="Region.html" class="extype" name="feature.Region">Region
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">A <a href="Region.html" class="extype" name="feature.Region">Region</a> representing the coding region of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p><div class="fullcomment"><div class="comment cmt"><p>A <a href="Region.html" class="extype" name="feature.Region">Region</a> representing the coding region of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p><p>The CDS includes the start and stop codons. It is equal to the value of calling <a href="Region.html#trim(newStart:Int,newEnd:Int):feature.Region" class="extmbr" name="feature.Region#trim">Region.trim</a>(<a href="#cdsStart:Int" class="extmbr" name="feature.MessengerRNA#cdsStart">cdsStart</a>, <a href="#cdsEnd:Int" class="extmbr" name="feature.MessengerRNA#cdsEnd">cdsEnd</a>)
+on the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.
+</p></div></div>
     </li><li name="feature.Feature#getChr" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getChr:String"></a>
       <a id="getChr:String"></a>
@@ -626,7 +680,13 @@ the underlying <a href="Region.html" class="extype" name="feature.Region">Region
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a></dd></dl></div>
+      <p class="shortcomment cmt">Returns a list of <a href="Block.html" class="extype" name="feature.Block">Block</a>s representing the introns of this <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a list of <a href="Block.html" class="extype" name="feature.Block">Block</a>s representing the introns of this <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>.</p><p>The returned list is in order from left to right. Each <a href="Block.html" class="extype" name="feature.Block">Block</a> in the returned list is the span of a gap
+between two <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>. The returned <a href="Block.html" class="extype" name="feature.Block">Block</a>s have the same <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>
+as this <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>. The start position of each returned <a href="Block.html" class="extype" name="feature.Block">Block</a> is equal to the end position (exclusive)
+of the previous adjacent <a href="Block.html" class="extype" name="feature.Block">Block</a> in this <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>. The end position of each returned <a href="Block.html" class="extype" name="feature.Block">Block</a> (exclusive)
+is equal to the start position of the following adjacent <a href="Block.html" class="extype" name="feature.Block">Block</a> in this <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>.</p><p>If this <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> has only one <a href="Block.html" class="extype" name="feature.Block">Block</a>, Nil is returned.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>A list of <a href="Block.html" class="extype" name="feature.Block">Block</a>s representing the gaps between the <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>, or Nil if this
+        <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> has only one <a href="Block.html" class="extype" name="feature.Block">Block</a>.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a></dd></dl></div>
     </li><li name="feature.Feature#getOrientation" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getOrientation:feature.Orientation"></a>
       <a id="getOrientation:Orientation"></a>
@@ -661,7 +721,7 @@ the underlying <a href="Region.html" class="extype" name="feature.Region">Region
       </a>
     </span>
       <p class="shortcomment cmt">Returns the start position of the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> as in <a href="Region.html#start:Int" class="extmbr" name="feature.Region#start">Region.start</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the start position of the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> as in <a href="Region.html#start:Int" class="extmbr" name="feature.Region#start">Region.start</a>.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Feature.html" class="extype" name="feature.Feature">Feature</a></dd></dl></div>
-    </li><li name="feature.MessengerRNA#getStartCodon" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="feature.MessengerRNA#getStartCodon" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getStartCodon:feature.Region"></a>
       <a id="getStartCodon:Region"></a>
       <h4 class="signature">
@@ -677,8 +737,11 @@ the underlying <a href="Region.html" class="extype" name="feature.Region">Region
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="feature.MessengerRNA#getStopCodon" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">Returns a <a href="Region.html" class="extype" name="feature.Region">Region</a> representing the start codon of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a <a href="Region.html" class="extype" name="feature.Region">Region</a> representing the start codon of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p><p>If the <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a>, the start codon has start position <a href="#cdsStart:Int" class="extmbr" name="feature.MessengerRNA#cdsStart">cdsStart</a>
+and size 3. If the orientation is <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>, the start codon has end position <a href="#cdsEnd:Int" class="extmbr" name="feature.MessengerRNA#cdsEnd">cdsEnd</a>
+and size 3.</p><p>The start codon may include multiple <a href="Block.html" class="extype" name="feature.Block">Block</a>s if the CDS boundary lies near a <a href="Block.html" class="extype" name="feature.Block">Block</a> boundary.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>A <a href="Region.html" class="extype" name="feature.Region">Region</a> of size 3, possibly spliced, representing the start codon of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p></dd></dl></div>
+    </li><li name="feature.MessengerRNA#getStopCodon" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getStopCodon:feature.Region"></a>
       <a id="getStopCodon:Region"></a>
       <h4 class="signature">
@@ -694,7 +757,10 @@ the underlying <a href="Region.html" class="extype" name="feature.Region">Region
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Returns a <a href="Region.html" class="extype" name="feature.Region">Region</a> representing the stop codon of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a <a href="Region.html" class="extype" name="feature.Region">Region</a> representing the stop codon of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p><p>If the <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a>, the stop codon has end position <a href="#cdsEnd:Int" class="extmbr" name="feature.MessengerRNA#cdsEnd">cdsEnd</a>
+and size 3. If the <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>, the stop codon has start position <a href="#cdsStart:Int" class="extmbr" name="feature.MessengerRNA#cdsStart">cdsStart</a>
+and size 3.</p><p>The stop codon may include multiple <a href="Block.html" class="extype" name="feature.Block">Block</a>s if the CDS boundary lies near a <a href="Block.html" class="extype" name="feature.Block">Block</a> boundary.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>A <a href="Region.html" class="extype" name="feature.Region">Region</a> of size 3, possibly spliced, representing the stop codon of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p></dd></dl></div>
     </li><li name="feature.MessengerRNA#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode:Int"></a>
       <a id="hashCode:Int"></a>
@@ -711,7 +777,7 @@ the underlying <a href="Region.html" class="extype" name="feature.Region">Region
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Calculates a hashCode based on the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> and the name.</p><div class="fullcomment"><div class="comment cmt"><p>Calculates a hashCode based on the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> and the name.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> → <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> → <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a> → AnyRef → Any</dd></dl></div>
+      <p class="shortcomment cmt">A hashCode based on the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a>, <a href="#name:Option[String]" class="extmbr" name="feature.MessengerRNA#name">name</a>, <a href="#geneId:Option[String]" class="extmbr" name="feature.MessengerRNA#geneId">geneId</a>, <a href="#cdsStart:Int" class="extmbr" name="feature.MessengerRNA#cdsStart">cdsStart</a>, and <a href="#cdsEnd:Int" class="extmbr" name="feature.MessengerRNA#cdsEnd">cdsEnd</a>.</p><div class="fullcomment"><div class="comment cmt"><p>A hashCode based on the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a>, <a href="#name:Option[String]" class="extmbr" name="feature.MessengerRNA#name">name</a>, <a href="#geneId:Option[String]" class="extmbr" name="feature.MessengerRNA#geneId">geneId</a>, <a href="#cdsStart:Int" class="extmbr" name="feature.MessengerRNA#cdsStart">cdsStart</a>, and <a href="#cdsEnd:Int" class="extmbr" name="feature.MessengerRNA#cdsEnd">cdsEnd</a>.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> → <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> → <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a> → AnyRef → Any</dd></dl></div>
     </li><li name="feature.GenericFeature#hc" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hc:Int"></a>
       <a id="hc:Int"></a>
@@ -803,7 +869,7 @@ two underlying <a href="Region.html" class="extype" name="feature.Region">Region
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> → <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a> → <a href="Feature.html" class="extype" name="feature.Feature">Feature</a></dd></dl></div>
+      <p class="shortcomment cmt">Optional feature name.</p><div class="fullcomment"><div class="comment cmt"><p>Optional feature name. Do not pass Some(&quot;&quot;); use None in that case.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> → <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a> → <a href="Feature.html" class="extype" name="feature.Feature">Feature</a></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -923,7 +989,7 @@ two underlying <a href="Region.html" class="extype" name="feature.Region">Region
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Returns a string representation of this <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a string representation of this <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a>.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> → <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> → <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a> → AnyRef → Any</dd></dl></div>
+      <p class="shortcomment cmt">Returns a string representation of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a string representation of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> → <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> → <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a> → AnyRef → Any</dd></dl></div>
     </li><li name="feature.GenericFeature#union" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="union(other:feature.Feature):feature.Feature"></a>
       <a id="union(Feature):Feature"></a>

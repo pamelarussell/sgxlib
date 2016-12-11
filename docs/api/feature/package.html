@@ -148,7 +148,7 @@ have the same <a href="Orientation.html" class="extype" name="feature.Orientatio
     </span>
       <p class="shortcomment cmt">A genomic feature.</p><div class="fullcomment"><div class="comment cmt"><p>A genomic feature.</p><p>Includes a non-empty underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> and an optional feature name.
 </p></div></div>
-    </li><li name="feature.FeatureBuilder" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="feature.FeatureBuilder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="FeatureBuilderextendsAnyRef"></a>
       <a id="FeatureBuilder:FeatureBuilder"></a>
       <h4 class="signature">
@@ -164,8 +164,9 @@ have the same <a href="Orientation.html" class="extype" name="feature.Orientatio
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="feature.Gene" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">A builder for <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s.</p><div class="fullcomment"><div class="comment cmt"><p>A builder for <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s.</p><p><a href="Feature.html" class="extype" name="feature.Feature">Feature</a> properties such as <a href="Block.html" class="extype" name="feature.Block">Block</a>s, name, gene name, and CDS start and end can be added one by one.
+The appropriate type in the <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> hierarchy is determined automatically based on the properties that have been added.</p><p>The <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> is obtained by calling <a href="FeatureBuilder.html#get():feature.Feature" class="extmbr" name="feature.FeatureBuilder#get">get</a>.</p><p>The following are the valid combinations of provided properties and the types they give rise to.</p><p>One or more blocks, optional feature name, no gene name, no CDS start, no CDS end -&gt; <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a></p><p>One or more blocks, optional feature name, a gene name, no CDS start, no CDS end -&gt; <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a></p><p>One or more blocks, optional feature name, optional gene name, a CDS start, a CDS end -&gt; <a href="MessengerRNA.html" class="extype" name="feature.MessengerRNA">MessengerRNA</a></p><p>Any other combination of properties results in an IllegalArgumentException when calling <a href="FeatureBuilder.html#get():feature.Feature" class="extmbr" name="feature.FeatureBuilder#get">get</a>.</p></div></div>
+    </li><li name="feature.Gene" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="GeneextendsProductwithSerializable"></a>
       <a id="Gene:Gene"></a>
       <h4 class="signature">
@@ -181,7 +182,8 @@ have the same <a href="Orientation.html" class="extype" name="feature.Orientatio
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">A gene giving rise to one or more <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>s.</p><div class="fullcomment"><div class="comment cmt"><p>A gene giving rise to one or more <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>s.
+</p></div><dl class="paramcmts block"><dt class="param">transcripts</dt><dd class="cmt"><p>Non-empty List of <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>s</p></dd><dt class="param">name</dt><dd class="cmt"><p>Gene name</p></dd></dl></div>
     </li><li name="feature.GenericFeature" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="GenericFeatureextendsFeature"></a>
       <a id="GenericFeature:GenericFeature"></a>
@@ -199,7 +201,7 @@ have the same <a href="Orientation.html" class="extype" name="feature.Orientatio
       </a>
     </span>
       <p class="shortcomment cmt">A <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> consisting of an underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> and an optional name.</p>
-    </li><li name="feature.MessengerRNA" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="feature.MessengerRNA" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="MessengerRNAextendsTranscriptwithProductwithSerializable"></a>
       <a id="MessengerRNA:MessengerRNA"></a>
       <h4 class="signature">
@@ -215,7 +217,22 @@ have the same <a href="Orientation.html" class="extype" name="feature.Orientatio
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">A representation of a spliced messenger RNA.</p><div class="fullcomment"><div class="comment cmt"><p>A representation of a spliced messenger RNA.</p><p>A <a href="MessengerRNA.html" class="extype" name="feature.MessengerRNA">MessengerRNA</a> has an underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> that specifies the chromosome, <a href="Block.html" class="extype" name="feature.Block">Block</a>s, and <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.
+In addition, a <a href="MessengerRNA.html" class="extype" name="feature.MessengerRNA">MessengerRNA</a> has an optional name and parent gene name.
+Finally, it also has CDS start and end positions.
+</p></div><dl class="paramcmts block"><dt class="param">blocks</dt><dd class="cmt"><p>Non-empty underlying <a href="Region.html" class="extype" name="feature.Region">Region</a></p></dd><dt class="param">cdsStart</dt><dd class="cmt"><p>Zero-based CDS start position (inclusive).
+                The CDS start is the smallest (leftmost) position of the CDS, regardless of transcript <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.
+                In other words, if <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a>, the CDS start is the first position of the start codon.
+                If <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>, the CDS start is the 3'-most position of the stop codon.
+                The CDS start must lie within one of the <a href="Block.html" class="extype" name="feature.Block">Block</a>s.
+                The CDS must be at least 6 nucleotides in length (after splicing) and its length must be a multiple of 3.
+                Otherwise, an IllegalArgumentException is thrown.</p></dd><dt class="param">cdsEnd</dt><dd class="cmt"><p>Zero-based CDS end position (exclusive).
+              The CDS end is one plus the largest (rightmost) position of the CDS, regardless of transcript <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.
+              In other words, if <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Plus$.html" class="extype" name="feature.Plus">Plus</a>, the CDS end is one plus the last position of the stop codon.
+              If <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a> is <a href="Minus$.html" class="extype" name="feature.Minus">Minus</a>, the CDS end is the 5'-most position of the start codon.
+              The CDS end must lie within one of the <a href="Block.html" class="extype" name="feature.Block">Block</a>s or be equal to one plus a <a href="Block.html" class="extype" name="feature.Block">Block</a> end position.
+              The CDS must be at least 6 nucleotides in length (after splicing) and its length must be a multiple of 3.
+              Otherwise, an IllegalArgumentException is thrown.</p></dd><dt class="param">name</dt><dd class="cmt"><p>Optional feature name. Do not pass Some(&quot;&quot;); use None in that case.</p></dd><dt class="param">geneId</dt><dd class="cmt"><p>Optional parent gene name. Do not pass Some(&quot;&quot;); use None in that case.</p></dd></dl></div>
     </li><li name="feature.Orientation" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="OrientationextendsAnyRef"></a>
       <a id="Orientation:Orientation"></a>
@@ -253,7 +270,7 @@ a strand, or alternatives if not.
     </span>
       <p class="shortcomment cmt">A genomic region.</p><div class="fullcomment"><div class="comment cmt"><p>A genomic region.</p><p>Can include zero, one, or multiple blocks on a chromosome. Includes an orientation.
 Does not include any further information.</p></div></div>
-    </li><li name="feature.Transcript" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="feature.Transcript" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="TranscriptextendsGenericFeature"></a>
       <a id="Transcript:Transcript"></a>
       <h4 class="signature">
@@ -269,7 +286,9 @@ Does not include any further information.</p></div></div>
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">A representation of a spliced transcript.</p><div class="fullcomment"><div class="comment cmt"><p>A representation of a spliced transcript.</p><p>A <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> has an underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> that specifies the chromosome, <a href="Block.html" class="extype" name="feature.Block">Block</a>s, and <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.
+In addition, a <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> has an optional name and parent gene name.
+</p></div></div>
     </li></ol>
             </div>
 
@@ -277,7 +296,24 @@ Does not include any further information.</p></div></div>
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="feature.Both" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="feature.Block" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Block"></a>
+      <a id="Block:Block"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Block$.html"><span class="name">Block</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#feature.package@Block" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Companion functions for <a href="Block.html" class="extype" name="feature.Block">Block</a></p>
+    </li><li name="feature.Both" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Both"></a>
       <a id="Both:Both"></a>
       <h4 class="signature">
