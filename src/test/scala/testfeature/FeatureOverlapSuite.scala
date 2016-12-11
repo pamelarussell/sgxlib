@@ -1,5 +1,6 @@
-package feature
+package testfeature
 
+import feature.{GenericFeature, MessengerRNA, Transcript}
 import org.scalatest.FunSuite
 
 /**

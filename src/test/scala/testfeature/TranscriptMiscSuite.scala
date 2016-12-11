@@ -1,5 +1,6 @@
-package feature
+package testfeature
 
+import feature.{Block, Minus, Plus, Transcript}
 import org.scalatest.FunSuite
 
 /**

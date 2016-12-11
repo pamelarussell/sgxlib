@@ -1,5 +1,7 @@
-package feature
+package testfeature
 
+import feature._
+import feature.{MessengerRNA, Minus, Plus}
 import org.scalatest.FunSuite
 
 /**

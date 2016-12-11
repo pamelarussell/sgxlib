@@ -1,7 +1,8 @@
-package feature
+package testfeature
 
+import feature._
+import feature.Orientation._
 import org.scalatest.FunSuite
-import Orientation._
 
 /**
   * Created by prussell on 8/30/16.

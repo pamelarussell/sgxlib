@@ -1,5 +1,6 @@
-package feature
+package testfeature
 
+import feature._
 import org.scalatest.FunSuite
 
 /**
@@ -8,7 +9,6 @@ import org.scalatest.FunSuite
 class RegionMiscSuite extends FunSuite {
 
   // Run all tests
-  adjacencyBlockBlock()
   regionEmptiness()
   regionChr()
   regionStart()
@@ -50,19 +50,6 @@ class RegionMiscSuite extends FunSuite {
       assert(!chr1_100_200_300_400_plus.isEmpty, "Block set should not be empty")
     }
   }
-
-
-  def adjacencyBlockBlock(): Unit = {
-    test("Block adjacency with block") {
-      assert(Region.adjacent(Block("chr1", 1, 5, Plus), Block("chr1", 5, 10, Minus)))
-      assert(!Region.adjacent(Block("chr1", 1, 5, Plus), Block("chr1", 6, 10, Plus)))
-      assert(!Region.adjacent(Block("chr1", 1, 5, Plus), Block("chr1", 4, 10, Plus)))
-      assert(!Region.adjacent(Block("chr1", 1, 5, Plus), Block("chr2", 5, 10, Plus)))
-      assert(Region.adjacent(Block("chr1", 10, 12, Plus), Block("chr1", 6, 10, Minus)))
-      assert(Region.adjacent(Block("chr1", 10, 11, Plus), Block("chr1", 9, 10, Minus)))
-    }
-  }
-
 
   def regionChr(): Unit = {
     test("Region chr") {

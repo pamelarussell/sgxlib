@@ -1,4 +1,4 @@
-package feature
+package testfeature
 
 import org.scalatest.FunSuite
 

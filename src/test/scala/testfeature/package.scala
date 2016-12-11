@@ -1,9 +1,9 @@
-import org.scalatest.FunSuite
+import feature._
 
 /**
   * Created by prussell on 10/1/16.
   */
-package object feature extends FunSuite {
+package object testfeature {
 
   // Single blocks
     val chr1_500_600_plus = Block("chr1", 500, 600, Plus)

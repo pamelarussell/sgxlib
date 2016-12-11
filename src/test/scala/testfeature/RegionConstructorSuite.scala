@@ -1,5 +1,6 @@
-package feature
+package testfeature
 
+import feature.{Block, BlockSet, Plus}
 import org.scalatest.FunSuite
 
 /**
