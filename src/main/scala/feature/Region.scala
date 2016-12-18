@@ -308,11 +308,8 @@ private object Region {
     else if(b2.contains(b1)) Empty
     else if(b1.contains(b2)) { // b1 contains b2
       if(b1.start == b2.start) { // b1 contains b2 and they have equal start positions
-        if(b1.end == b2.end) { // b1 == b2
-          Empty
-        } else { // b1 contains b2, equal start positions, different end positions
-          Block(b1.chr, b2.end, b1.end, b1.orientation)
-        }
+        // b1 contains b2, equal start positions, different end positions
+        Block(b1.chr, b2.end, b1.end, b1.orientation)
       } else { // b1 contains b2 and they have different start positions
         if(b1.end == b2.end) { // b1 contains b2, different start positions, same end position
           Block(b1.chr, b1.start, b2.start, b1.orientation)
@@ -328,10 +325,7 @@ private object Region {
   }
 
   // Static function to determine whether two blocks are adjacent but not overlapping
-  def adjacent(b1: Block, b2: Block): Boolean = {
-    if(b1.chr != b2.chr) false
-    else b1.start == b2.end || b1.end == b2.start
-  }
+  def adjacent(b1: Block, b2: Block): Boolean = b1.chr == b2.chr && (b1.start == b2.end || b1.end == b2.start)
 
   // Static block compare function
   def compare(b1: Block, b2: Block): Int = {
@@ -565,9 +559,7 @@ object Block {
 
   /** An implicit ordering on [[Block]]s. Forwards to [[Region.compare]]. */
   implicit val ord = new Ordering[Block] {
-    def compare(b1: Block, b2: Block): Int = {
-      b1.compare(b2)
-    }
+    def compare(b1: Block, b2: Block): Int = b1.compare(b2)
   }
 }
 

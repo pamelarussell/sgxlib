@@ -27,8 +27,7 @@ object Orientation {
       case (Both, os._2) => os._2
       case (os._1, Both) => os._1
       case (Unstranded, os._2) => Unstranded
-      case (os._1, Unstranded) => Unstranded
-      case _ => throw new UnsupportedOperationException("Not implemented: " + os.toString())
+      case (os._1, Unstranded) => Unstranded; case _ => throw new UnsupportedOperationException("Not implemented: " + os.toString())
     }
   }
 
@@ -50,8 +49,7 @@ object Orientation {
       case (Unstranded, os._2) => false
       case (os._1, Unstranded) => false
       case (Both, os._2) => true
-      case (os._1, Both) => true
-      case _ => throw new UnsupportedOperationException("Not implemented: " + os.toString())
+      case (os._1, Both) => true; case _ => throw new UnsupportedOperationException("Not implemented: " + os.toString())
     }
   }
 
@@ -98,8 +96,7 @@ object Orientation {
         case (Unstranded, _) => 1
         case (Minus, _) => -1
         case (Both, Minus) => 1
-        case (Both, _) => -1
-        case _ => throw new UnsupportedOperationException("Not implemented: " + o1 + " " + o2)
+        case (Both, _) => -1; case _ => throw new UnsupportedOperationException("Not implemented: " + o1 + " " + o2)
       }
     }
   }

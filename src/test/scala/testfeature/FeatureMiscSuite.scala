@@ -22,6 +22,8 @@ class FeatureMiscSuite extends FunSuite {
     assert(new GenericFeature(chr1_1000_2000_plus_1, None) equals new GenericFeature(chr1_1000_2000_plus_1, None))
     assert(!(new GenericFeature(chr1_1000_2000_plus_1, None) equals new GenericFeature(chr1_1000_2000_plus_1, Some("name"))))
     assert(!(new GenericFeature(chr1_1000_2000_plus_1, Some("name")) equals new GenericFeature(chr1_1500_2500_minus, Some("name"))))
+    assert(!(new GenericFeature(chr1_1000_2000_plus_1, Some("name")) equals new Transcript(chr1_1000_2000_plus_1, Some("name"), Some("gene"))))
+    assert(!(new GenericFeature(chr1_1000_2000_plus_1, Some("name")) equals MessengerRNA(chr1_1000_2000_plus_1, 1200, 1212, Some("name"), Some("gene"))))
     // Hash code
     assert(new GenericFeature(chr1_1000_2000_plus_1, Some("name")).hashCode === new GenericFeature(chr1_1000_2000_plus_2, Some("name")).hashCode)
     assert(new GenericFeature(chr1_1000_2000_plus_1, None).hashCode === new GenericFeature(chr1_1000_2000_plus_2, None).hashCode)

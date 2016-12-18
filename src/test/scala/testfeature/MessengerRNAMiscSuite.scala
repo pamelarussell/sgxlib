@@ -14,6 +14,10 @@ class MessengerRNAMiscSuite extends FunSuite {
     intercept[IllegalArgumentException](MessengerRNA(chr1_1000_2000_unstranded, 1000, 1012, Some("name"), Some("gene")))
   }
 
+  test("Illegal names") {
+    intercept[IllegalArgumentException](MessengerRNA(chr1_1000_2000_plus_1, 1000, 1012, Some(""), Some("gene")))
+    intercept[IllegalArgumentException](MessengerRNA(chr1_1000_2000_plus_1, 1000, 1012, Some("name"), Some("")))
+  }
 
   test("Illegal CDS") {
 
