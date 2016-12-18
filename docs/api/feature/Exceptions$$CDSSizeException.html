@@ -1,9 +1,9 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>FeatureBuilder - feature.FeatureBuilder</title>
-          <meta name="description" content="FeatureBuilder - feature.FeatureBuilder" />
-          <meta name="keywords" content="FeatureBuilder feature.FeatureBuilder" />
+          <title>CDSSizeException - feature.Exceptions.CDSSizeException</title>
+          <meta name="description" content="CDSSizeException - feature.Exceptions.CDSSizeException" />
+          <meta name="keywords" content="CDSSizeException feature.Exceptions.CDSSizeException" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -16,7 +16,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../index.html';
-            var hash = 'feature.FeatureBuilder';
+            var hash = 'feature.Exceptions$$CDSSizeException';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -29,11 +29,11 @@
         <body class="type">
       <div id="definition">
         <img alt="Class" src="../lib/class_big.png" />
-        <p id="owner"><a href="package.html" class="extype" name="feature">feature</a></p>
-        <h1>FeatureBuilder</h1><h3><span class="morelinks"><div>Related Doc:
-            <a href="package.html" class="extype" name="feature">package feature</a>
+        <p id="owner"><a href="package.html" class="extype" name="feature">feature</a>.<a href="Exceptions$.html" class="extype" name="feature.Exceptions">Exceptions</a></p>
+        <h1>CDSSizeException</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="Exceptions$.html" class="extype" name="feature.Exceptions">package Exceptions</a>
           </div></span></h3><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -41,18 +41,17 @@
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier">final </span>
+        <span class="modifier"></span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">FeatureBuilder</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <span class="name">CDSSizeException</span><span class="result"> extends <span class="extype" name="scala.IllegalArgumentException">IllegalArgumentException</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A builder for <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s.</p><p><a href="Feature.html" class="extype" name="feature.Feature">Feature</a> properties such as <a href="Block.html" class="extype" name="feature.Block">Block</a>s, name, gene name, and CDS start and end can be added one by one.
-The appropriate type in the <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> hierarchy is determined automatically based on the properties that have been added.</p><p>The <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> is obtained by calling <a href="#get():feature.Feature" class="extmbr" name="feature.FeatureBuilder#get">get</a>.</p><p>The following are the valid combinations of provided properties and the types they give rise to.</p><p>One or more blocks, optional feature name, no gene name, no CDS start, no CDS end -&gt; <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a></p><p>One or more blocks, optional feature name, a gene name, no CDS start, no CDS end -&gt; <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a></p><p>One or more blocks, optional feature name, optional gene name, a CDS start, a CDS end -&gt; <a href="MessengerRNA.html" class="extype" name="feature.MessengerRNA">MessengerRNA</a></p><p>Any other combination of properties results in an IllegalArgumentException when calling <a href="#get():feature.Feature" class="extmbr" name="feature.FeatureBuilder#get">get</a>.</p></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="java.lang.IllegalArgumentException">IllegalArgumentException</span>, <span class="extype" name="java.lang.RuntimeException">RuntimeException</span>, <span class="extype" name="java.lang.Exception">Exception</span>, <span class="extype" name="java.lang.Throwable">Throwable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -70,7 +69,7 @@ The appropriate type in the <a href="Feature.html" class="extype" name="feature.
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="feature.FeatureBuilder"><span>FeatureBuilder</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="feature.Exceptions.CDSSizeException"><span>CDSSizeException</span></li><li class="in" name="java.lang.IllegalArgumentException"><span>IllegalArgumentException</span></li><li class="in" name="java.lang.RuntimeException"><span>RuntimeException</span></li><li class="in" name="java.lang.Exception"><span>Exception</span></li><li class="in" name="java.lang.Throwable"><span>Throwable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -89,19 +88,19 @@ The appropriate type in the <a href="Feature.html" class="extype" name="feature.
         <div id="allMembers">
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
-              <ol><li name="feature.FeatureBuilder#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(blocks:List[feature.Block],cdsStart:Option[Int],cdsEnd:Option[Int],featureId:Option[String],geneId:Option[String]):feature.FeatureBuilder"></a>
-      <a id="&lt;init&gt;:FeatureBuilder"></a>
+              <ol><li name="feature.Exceptions.CDSSizeException#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;(message:String):feature.Exceptions.CDSSizeException"></a>
+      <a id="&lt;init&gt;:CDSSizeException"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">FeatureBuilder</span><span class="params">(<span name="blocks">blocks: <span class="extype" name="scala.List">List</span>[<a href="Block.html" class="extype" name="feature.Block">Block</a>] = <span class="symbol">Nil</span></span>, <span name="cdsStart">cdsStart: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>] = <span class="symbol">None</span></span>, <span name="cdsEnd">cdsEnd: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>] = <span class="symbol">None</span></span>, <span name="featureId">featureId: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>, <span name="geneId">geneId: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span>
+        <span class="name">CDSSizeException</span><span class="params">(<span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>)</span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@&lt;init&gt;(blocks:List[feature.Block],cdsStart:Option[Int],cdsEnd:Option[Int],featureId:Option[String],geneId:Option[String]):feature.FeatureBuilder" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@&lt;init&gt;(message:String):feature.Exceptions.CDSSizeException" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -127,7 +126,7 @@ The appropriate type in the <a href="Feature.html" class="extype" name="feature.
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@!=(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -144,7 +143,7 @@ The appropriate type in the <a href="Feature.html" class="extype" name="feature.
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@##():Int" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@##():Int" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -161,30 +160,28 @@ The appropriate type in the <a href="Feature.html" class="extype" name="feature.
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@==(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@==(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="feature.FeatureBuilder#addBlock" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="addBlock(b:feature.Block):feature.FeatureBuilder"></a>
-      <a id="addBlock(Block):FeatureBuilder"></a>
+    </li><li name="java.lang.Throwable#addSuppressed" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addSuppressed(x$1:Throwable):Unit"></a>
+      <a id="addSuppressed(Throwable):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
+        <span class="modifier">final </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">addBlock</span><span class="params">(<span name="b">b: <a href="Block.html" class="extype" name="feature.Block">Block</a></span>)</span><span class="result">: <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a></span>
+        <span class="name">addSuppressed</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.lang.Throwable">Throwable</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@addBlock(b:feature.Block):feature.FeatureBuilder" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@addSuppressed(x$1:Throwable):Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Returns a new FeatureBuilder with an additional <a href="Block.html" class="extype" name="feature.Block">Block</a> added.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a new FeatureBuilder with an additional <a href="Block.html" class="extype" name="feature.Block">Block</a> added.</p><p>The new <a href="Block.html" class="extype" name="feature.Block">Block</a> must be on the same chromosome as any existing <a href="Block.html" class="extype" name="feature.Block">Block</a>s in this <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a>,
-have the same <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>, and not overlap any existing <a href="Block.html" class="extype" name="feature.Block">Block</a>s.
-</p></div><dl class="paramcmts block"><dt class="param">b</dt><dd class="cmt"><p>New <a href="Block.html" class="extype" name="feature.Block">Block</a> to add</p></dd><dt>returns</dt><dd class="cmt"><p>New <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> with the same properties as this plus the new <a href="Block.html" class="extype" name="feature.Block">Block</a> added</p></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Throwable</dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -197,62 +194,11 @@ have the same <a href="Orientation.html" class="extype" name="feature.Orientatio
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@asInstanceOf[T0]:T0" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="feature.FeatureBuilder#blocks" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="blocks:List[feature.Block]"></a>
-      <a id="blocks:List[Block]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">blocks</span><span class="result">: <span class="extype" name="scala.List">List</span>[<a href="Block.html" class="extype" name="feature.Block">Block</a>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@blocks:List[feature.Block]" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="feature.FeatureBuilder#cdsEnd" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="cdsEnd:Option[Int]"></a>
-      <a id="cdsEnd:Option[Int]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">cdsEnd</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@cdsEnd:Option[Int]" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="feature.FeatureBuilder#cdsStart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="cdsStart:Option[Int]"></a>
-      <a id="cdsStart:Option[Int]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">cdsStart</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@cdsStart:Option[Int]" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -265,7 +211,7 @@ have the same <a href="Orientation.html" class="extype" name="feature.Orientatio
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@clone():Object" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@clone():Object" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -288,7 +234,7 @@ have the same <a href="Orientation.html" class="extype" name="feature.Orientatio
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -305,28 +251,28 @@ have the same <a href="Orientation.html" class="extype" name="feature.Orientatio
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@equals(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@equals(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="feature.FeatureBuilder#featureId" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="featureId:Option[String]"></a>
-      <a id="featureId:Option[String]"></a>
+    </li><li name="java.lang.Throwable#fillInStackTrace" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fillInStackTrace():Throwable"></a>
+      <a id="fillInStackTrace():Throwable"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">val</span>
+        <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">featureId</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
+        <span class="name">fillInStackTrace</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Throwable">Throwable</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@featureId:Option[String]" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@fillInStackTrace():Throwable" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Throwable</dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -339,7 +285,7 @@ have the same <a href="Orientation.html" class="extype" name="feature.Orientatio
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@finalize():Unit" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@finalize():Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -350,43 +296,23 @@ have the same <a href="Orientation.html" class="extype" name="feature.Orientatio
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="feature.FeatureBuilder#geneId" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="geneId:Option[String]"></a>
-      <a id="geneId:Option[String]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="name">geneId</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@geneId:Option[String]" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="feature.FeatureBuilder#get" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="get():feature.Feature"></a>
-      <a id="get():Feature"></a>
+    </li><li name="java.lang.Throwable#getCause" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getCause():Throwable"></a>
+      <a id="getCause():Throwable"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">get</span><span class="params">()</span><span class="result">: <a href="Feature.html" class="extype" name="feature.Feature">Feature</a></span>
+        <span class="name">getCause</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Throwable">Throwable</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@get():feature.Feature" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@getCause():Throwable" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Returns a <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> built from the provided properties.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> built from the provided properties.</p><p>The type of the returned object depends on which properties have been provided.
-Certain combinations of provided properties are invalid.
-See <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> documentation for details.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>The specified <a href="Feature.html" class="extype" name="feature.Feature">Feature</a></p></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Throwable</dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -399,11 +325,79 @@ See <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> d
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@getClass():Class[_]" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@getClass():Class[_]" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="java.lang.Throwable#getLocalizedMessage" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getLocalizedMessage():String"></a>
+      <a id="getLocalizedMessage():String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getLocalizedMessage</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@getLocalizedMessage():String" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Throwable</dd></dl></div>
+    </li><li name="java.lang.Throwable#getMessage" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getMessage():String"></a>
+      <a id="getMessage():String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getMessage</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@getMessage():String" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Throwable</dd></dl></div>
+    </li><li name="java.lang.Throwable#getStackTrace" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getStackTrace():Array[StackTraceElement]"></a>
+      <a id="getStackTrace():Array[StackTraceElement]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getStackTrace</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="java.lang.StackTraceElement">StackTraceElement</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@getStackTrace():Array[StackTraceElement]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Throwable</dd></dl></div>
+    </li><li name="java.lang.Throwable#getSuppressed" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getSuppressed():Array[Throwable]"></a>
+      <a id="getSuppressed():Array[Throwable]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getSuppressed</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="java.lang.Throwable">Throwable</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@getSuppressed():Array[Throwable]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Throwable</dd></dl></div>
     </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
@@ -416,11 +410,28 @@ See <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> d
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@hashCode():Int" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@hashCode():Int" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="java.lang.Throwable#initCause" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="initCause(x$1:Throwable):Throwable"></a>
+      <a id="initCause(Throwable):Throwable"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">initCause</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.lang.Throwable">Throwable</span></span>)</span><span class="result">: <span class="extype" name="java.lang.Throwable">Throwable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@initCause(x$1:Throwable):Throwable" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Throwable</dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -433,7 +444,7 @@ See <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> d
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -450,7 +461,7 @@ See <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> d
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -467,7 +478,7 @@ See <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> d
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@notify():Unit" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@notify():Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -484,87 +495,79 @@ See <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> d
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@notifyAll():Unit" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@notifyAll():Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="feature.FeatureBuilder#setCdsEnd" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="setCdsEnd(e:Int):feature.FeatureBuilder"></a>
-      <a id="setCdsEnd(Int):FeatureBuilder"></a>
+    </li><li name="java.lang.Throwable#printStackTrace" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="printStackTrace(x$1:java.io.PrintWriter):Unit"></a>
+      <a id="printStackTrace(PrintWriter):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">setCdsEnd</span><span class="params">(<span name="e">e: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a></span>
+        <span class="name">printStackTrace</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.io.PrintWriter">PrintWriter</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@setCdsEnd(e:Int):feature.FeatureBuilder" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@printStackTrace(x$1:java.io.PrintWriter):Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Returns a new <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> with the specified CDS end.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a new <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> with the specified CDS end.</p><p>If this <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> already has a CDS end specified, the returned object will have the
-new CDS end and will have no memory of the previous CDS end.
-</p></div><dl class="paramcmts block"><dt class="param">e</dt><dd class="cmt"><p>New zero-based CDS end position as in <a href="MessengerRNA.html#cdsEnd:Int" class="extmbr" name="feature.MessengerRNA#cdsEnd">MessengerRNA.cdsEnd</a></p></dd><dt>returns</dt><dd class="cmt"><p>New <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> with the same properties as this but the new CDS end</p></dd></dl></div>
-    </li><li name="feature.FeatureBuilder#setCdsStart" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="setCdsStart(s:Int):feature.FeatureBuilder"></a>
-      <a id="setCdsStart(Int):FeatureBuilder"></a>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Throwable</dd></dl></div>
+    </li><li name="java.lang.Throwable#printStackTrace" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="printStackTrace(x$1:java.io.PrintStream):Unit"></a>
+      <a id="printStackTrace(PrintStream):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">setCdsStart</span><span class="params">(<span name="s">s: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a></span>
+        <span class="name">printStackTrace</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.io.PrintStream">PrintStream</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@setCdsStart(s:Int):feature.FeatureBuilder" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@printStackTrace(x$1:java.io.PrintStream):Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Returns a new <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> with the specified CDS start.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a new <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> with the specified CDS start.</p><p>If this <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> already has a CDS start specified, the returned object will have the
-new CDS start and will have no memory of the previous CDS start.
-</p></div><dl class="paramcmts block"><dt class="param">s</dt><dd class="cmt"><p>New zero-based CDS start position as in <a href="MessengerRNA.html#cdsStart:Int" class="extmbr" name="feature.MessengerRNA#cdsStart">MessengerRNA.cdsStart</a></p></dd><dt>returns</dt><dd class="cmt"><p>New <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> with the same properties as this but the new CDS start</p></dd></dl></div>
-    </li><li name="feature.FeatureBuilder#setFeatureId" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="setFeatureId(t:String):feature.FeatureBuilder"></a>
-      <a id="setFeatureId(String):FeatureBuilder"></a>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Throwable</dd></dl></div>
+    </li><li name="java.lang.Throwable#printStackTrace" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="printStackTrace():Unit"></a>
+      <a id="printStackTrace():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">setFeatureId</span><span class="params">(<span name="t">t: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a></span>
+        <span class="name">printStackTrace</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@setFeatureId(t:String):feature.FeatureBuilder" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@printStackTrace():Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Returns a new <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> with the specified feature name.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a new <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> with the specified feature name.</p><p>If this <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> already has a feature name specified, the returned object will have the
-new feature name and will have no memory of the previous feature name.
-</p></div><dl class="paramcmts block"><dt class="param">t</dt><dd class="cmt"><p>New feature name</p></dd><dt>returns</dt><dd class="cmt"><p>New <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> with the same properties as this but the new feature name</p></dd></dl></div>
-    </li><li name="feature.FeatureBuilder#setGeneId" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="setGeneId(g:String):feature.FeatureBuilder"></a>
-      <a id="setGeneId(String):FeatureBuilder"></a>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Throwable</dd></dl></div>
+    </li><li name="java.lang.Throwable#setStackTrace" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="setStackTrace(x$1:Array[StackTraceElement]):Unit"></a>
+      <a id="setStackTrace(Array[StackTraceElement]):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">setGeneId</span><span class="params">(<span name="g">g: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a></span>
+        <span class="name">setStackTrace</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="java.lang.StackTraceElement">StackTraceElement</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@setGeneId(g:String):feature.FeatureBuilder" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@setStackTrace(x$1:Array[StackTraceElement]):Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Returns a new <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> with the specified gene name.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a new <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> with the specified gene name.</p><p>If this <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> already has a gene name specified, the returned object will have the
-new gene name and will have no memory of the previous gene name.
-</p></div><dl class="paramcmts block"><dt class="param">g</dt><dd class="cmt"><p>New gene name</p></dd><dt>returns</dt><dd class="cmt"><p>New <a href="" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> with the same properties as this but the new gene name</p></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Throwable</dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -577,12 +580,12 @@ new gene name and will have no memory of the previous gene name.
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="java.lang.Throwable#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <a id="toString():String"></a>
       <h4 class="signature">
@@ -594,11 +597,11 @@ new gene name and will have no memory of the previous gene name.
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@toString():String" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@toString():String" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Throwable → AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -611,7 +614,7 @@ new gene name and will have no memory of the previous gene name.
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@wait():Unit" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@wait():Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -634,7 +637,7 @@ new gene name and will have no memory of the previous gene name.
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -657,7 +660,7 @@ new gene name and will have no memory of the previous gene name.
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#feature.FeatureBuilder@wait(x$1:Long):Unit" title="Permalink" target="_top">
+      <a href="../index.html#feature.Exceptions$$CDSSizeException@wait(x$1:Long):Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -677,7 +680,17 @@ new gene name and will have no memory of the previous gene name.
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="java.lang.IllegalArgumentException">
+              <h3>Inherited from <span class="extype" name="java.lang.IllegalArgumentException">IllegalArgumentException</span></h3>
+            </div><div class="parent" name="java.lang.RuntimeException">
+              <h3>Inherited from <span class="extype" name="java.lang.RuntimeException">RuntimeException</span></h3>
+            </div><div class="parent" name="java.lang.Exception">
+              <h3>Inherited from <span class="extype" name="java.lang.Exception">Exception</span></h3>
+            </div><div class="parent" name="java.lang.Throwable">
+              <h3>Inherited from <span class="extype" name="java.lang.Throwable">Throwable</span></h3>
+            </div><div class="parent" name="java.io.Serializable">
+              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>

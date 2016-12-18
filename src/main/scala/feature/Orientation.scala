@@ -5,7 +5,7 @@ package feature
   * Can refer to a particular DNA strand if the feature is associated with
   * a strand, or alternatives if not.
   */
-sealed abstract class Orientation
+sealed trait Orientation
 
 /** The plus strand of DNA */
 object Plus extends Orientation {override def toString: String = "+"}

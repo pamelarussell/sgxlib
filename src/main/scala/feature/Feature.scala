@@ -1,5 +1,7 @@
 package feature
 
+import feature.Exceptions.CDSSizeException
+
 /** A genomic feature.
   *
   * Includes a non-empty underlying [[Region]] and an optional feature name.
@@ -422,9 +424,9 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
     // Validate CDS length
     val cdsSize = getCDS.size
     // CDS size must be at least 6
-    if(cdsSize < 6) throw new IllegalArgumentException("CDS size must be at least 6")
+    if(cdsSize < 6) throw new CDSSizeException("CDS size must be at least 6")
     // CDS size must be divisible by 3
-    if(cdsSize % 3 != 0) throw new IllegalArgumentException("CDS size must be divisible by 3")
+    if(cdsSize % 3 != 0) throw new CDSSizeException(s"CDS size must be divisible by 3 (CDS size: $cdsSize)")
 
   }
 

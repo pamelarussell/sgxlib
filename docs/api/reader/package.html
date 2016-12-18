@@ -1,0 +1,393 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>reader - reader</title>
+          <meta name="description" content="reader - reader" />
+          <meta name="keywords" content="reader reader" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../lib/template.js"></script>
+      <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../index.html';
+            var hash = 'reader.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img alt="Package" src="../lib/package_big.png" />
+        
+        <h1>reader</h1><span class="permalink">
+      <a href="../index.html#reader.package" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">reader</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        
+        
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="reader.AnnotFileReader" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="AnnotFileReaderextendsAnyRef"></a>
+      <a id="AnnotFileReader:AnnotFileReader"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="AnnotFileReader.html"><span class="name">AnnotFileReader</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@AnnotFileReaderextendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="reader.FeatureType" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="FeatureTypeextendsAnyRef"></a>
+      <a id="FeatureType:FeatureType"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="FeatureType.html"><span class="name">FeatureType</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@FeatureTypeextendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="reader.GTF2Record" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GTF2RecordextendsFeatureBuilderModifier"></a>
+      <a id="GTF2Record:GTF2Record"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="GTF2Record.html"><span class="name">GTF2Record</span></a><span class="result"> extends <a href="../feature/FeatureBuilderModifier.html" class="extype" name="feature.FeatureBuilderModifier">FeatureBuilderModifier</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@GTF2RecordextendsFeatureBuilderModifier" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="reader.CDS" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CDS"></a>
+      <a id="CDS:CDS"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="CDS$.html"><span class="name">CDS</span></a><span class="result"> extends <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@CDS" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="reader.Exon" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Exon"></a>
+      <a id="Exon:Exon"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Exon$.html"><span class="name">Exon</span></a><span class="result"> extends <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@Exon" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="reader.FeatureType" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="FeatureType"></a>
+      <a id="FeatureType:FeatureType"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="FeatureType$.html"><span class="name">FeatureType</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@FeatureType" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="reader.GTF2Reader" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GTF2Reader"></a>
+      <a id="GTF2Reader:GTF2Reader"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="GTF2Reader$.html"><span class="name">GTF2Reader</span></a><span class="result"> extends <a href="AnnotFileReader.html" class="extype" name="reader.AnnotFileReader">AnnotFileReader</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@GTF2Reader" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="reader.GTF2Record" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GTF2Record"></a>
+      <a id="GTF2Record:GTF2Record"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="GTF2Record$.html"><span class="name">GTF2Record</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@GTF2Record" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="reader.Ignore" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Ignore"></a>
+      <a id="Ignore:Ignore"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Ignore$.html"><span class="name">Ignore</span></a><span class="result"> extends <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@Ignore" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="reader.Intergenic" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Intergenic"></a>
+      <a id="Intergenic:Intergenic"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Intergenic$.html"><span class="name">Intergenic</span></a><span class="result"> extends <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@Intergenic" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="reader.IntergenicCNS" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IntergenicCNS"></a>
+      <a id="IntergenicCNS:IntergenicCNS"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="IntergenicCNS$.html"><span class="name">IntergenicCNS</span></a><span class="result"> extends <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@IntergenicCNS" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="reader.IntronicCNS" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IntronicCNS"></a>
+      <a id="IntronicCNS:IntronicCNS"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="IntronicCNS$.html"><span class="name">IntronicCNS</span></a><span class="result"> extends <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@IntronicCNS" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="reader.ReaderTest" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ReaderTest"></a>
+      <a id="ReaderTest:ReaderTest"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ReaderTest$.html"><span class="name">ReaderTest</span></a><span class="result"> extends <span class="extype" name="scala.App">App</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@ReaderTest" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Created by prussell on 12/15/16.</p>
+    </li><li name="reader.StartCodon" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="StartCodon"></a>
+      <a id="StartCodon:StartCodon"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="StartCodon$.html"><span class="name">StartCodon</span></a><span class="result"> extends <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@StartCodon" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="reader.StopCodon" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="StopCodon"></a>
+      <a id="StopCodon:StopCodon"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="StopCodon$.html"><span class="name">StopCodon</span></a><span class="result"> extends <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@StopCodon" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="reader.UTR3" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UTR3"></a>
+      <a id="UTR3:UTR3"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="UTR3$.html"><span class="name">UTR3</span></a><span class="result"> extends <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@UTR3" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="reader.UTR5" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="UTR5"></a>
+      <a id="UTR5:UTR5"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="UTR5$.html"><span class="name">UTR5</span></a><span class="result"> extends <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@UTR5" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

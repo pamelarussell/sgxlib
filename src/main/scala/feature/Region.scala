@@ -455,7 +455,7 @@ case object Empty extends Region {
 final case class Block(chr: String, start: Int, end: Int, orientation: Orientation) extends Region {
 
   if(start < 0) throw new IllegalArgumentException("Start must be nonnegative")
-  if(end <= start) throw new IllegalArgumentException("End must be greater than start. Otherwise use empty region")
+  if(end <= start) throw new IllegalArgumentException(s"End ($end) must be greater than start ($start). Otherwise use empty region.")
   if(chr.isEmpty) throw new IllegalArgumentException("Chromosome name must not be empty")
 
   override def overlaps(feat: Region): Boolean = feat match {
@@ -592,8 +592,8 @@ final case class BlockSet(blocks: List[Block]) extends Region {
     for(blk <- blocks) {
       if(blk.chr != chr) throw new IllegalArgumentException("All blocks must have same chromosome")
       if(blk.orientation != orientation) throw new IllegalArgumentException("All blocks must have same orientation")
-      if(blk.start <= lastEnd) throw new IllegalArgumentException("Blocks must be non-overlapping and in order:" +
-        blocks.mkString(", "))
+      if(blk.start <= lastEnd) throw new IllegalArgumentException("Blocks must be non-overlapping and in order:\n" +
+        blocks.mkString("\n"))
       lastEnd = blk.end
     }
     if(lastEnd < 0) throw new IllegalArgumentException("Block list must be nonempty")

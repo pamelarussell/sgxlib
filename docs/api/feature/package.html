@@ -166,6 +166,24 @@ have the same <a href="Orientation.html" class="extype" name="feature.Orientatio
     </span>
       <p class="shortcomment cmt">A builder for <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s.</p><div class="fullcomment"><div class="comment cmt"><p>A builder for <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s.</p><p><a href="Feature.html" class="extype" name="feature.Feature">Feature</a> properties such as <a href="Block.html" class="extype" name="feature.Block">Block</a>s, name, gene name, and CDS start and end can be added one by one.
 The appropriate type in the <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> hierarchy is determined automatically based on the properties that have been added.</p><p>The <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> is obtained by calling <a href="FeatureBuilder.html#get():feature.Feature" class="extmbr" name="feature.FeatureBuilder#get">get</a>.</p><p>The following are the valid combinations of provided properties and the types they give rise to.</p><p>One or more blocks, optional feature name, no gene name, no CDS start, no CDS end -&gt; <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a></p><p>One or more blocks, optional feature name, a gene name, no CDS start, no CDS end -&gt; <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a></p><p>One or more blocks, optional feature name, optional gene name, a CDS start, a CDS end -&gt; <a href="MessengerRNA.html" class="extype" name="feature.MessengerRNA">MessengerRNA</a></p><p>Any other combination of properties results in an IllegalArgumentException when calling <a href="FeatureBuilder.html#get():feature.Feature" class="extmbr" name="feature.FeatureBuilder#get">get</a>.</p></div></div>
+    </li><li name="feature.FeatureBuilderModifier" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="FeatureBuilderModifierextendsAnyRef"></a>
+      <a id="FeatureBuilderModifier:FeatureBuilderModifier"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="FeatureBuilderModifier.html"><span class="name">FeatureBuilderModifier</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#feature.package@FeatureBuilderModifierextendsAnyRef" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A way to encapsulate arbitrary operations on a <a href="FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a>.</p><div class="fullcomment"><div class="comment cmt"><p>A way to encapsulate arbitrary operations on a <a href="FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a>.</p><p>The <a href="FeatureBuilderModifier.html#op(fb:feature.FeatureBuilder):feature.FeatureBuilder" class="extmbr" name="feature.FeatureBuilderModifier#op">op</a> function performs the operations on a specified <a href="FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a>
+and returns a new modified <a href="FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a>.</p><p>Classes that mix in this trait include <a href="../reader/GTF2Record.html" class="extype" name="reader.GTF2Record">reader.GTF2Record</a>.</p></div></div>
     </li><li name="feature.Gene" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="GeneextendsProductwithSerializable"></a>
       <a id="Gene:Gene"></a>
@@ -238,8 +256,8 @@ Finally, it also has CDS start and end positions.
       <a id="Orientation:Orientation"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">sealed abstract </span>
-        <span class="kind">class</span>
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
       </span>
       <span class="symbol">
         <a href="Orientation.html"><span class="name">Orientation</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
@@ -347,6 +365,23 @@ In addition, a <a href="Transcript.html" class="extype" name="feature.Transcript
       </a>
     </span>
       <p class="shortcomment cmt">An empty region.</p><div class="fullcomment"><div class="comment cmt"><p>An empty region. <a href="Empty$.html" class="extype" name="feature.Empty">Empty</a> has no chromosome, <a href="Block.html" class="extype" name="feature.Block">Block</a>s, or <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.</p></div></div>
+    </li><li name="feature.Exceptions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Exceptions"></a>
+      <a id="Exceptions:Exceptions"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Exceptions$.html"><span class="name">Exceptions</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#feature.package@Exceptions" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="feature.Minus" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Minus"></a>
       <a id="Minus:Minus"></a>

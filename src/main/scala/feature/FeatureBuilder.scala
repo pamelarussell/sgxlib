@@ -1,7 +1,5 @@
 package feature
 
-import scala.collection.immutable.TreeSet
-
 
 /** A builder for [[Feature]]s.
   *
@@ -21,11 +19,11 @@ import scala.collection.immutable.TreeSet
   * Any other combination of properties results in an IllegalArgumentException when calling [[get]].
   *
   */
-final class FeatureBuilder(private val blocks: TreeSet[Block] = new TreeSet[Block],
-                           private val cdsStart: Option[Int] = None,
-                           private val cdsEnd: Option[Int] = None,
-                           private val featureId: Option[String] = None,
-                           private val geneId: Option[String] = None) {
+final class FeatureBuilder(val blocks: List[Block] = Nil,
+                           val cdsStart: Option[Int] = None,
+                           val cdsEnd: Option[Int] = None,
+                           val featureId: Option[String] = None,
+                           val geneId: Option[String] = None) {
 
   /** Returns a new FeatureBuilder with an additional [[Block]] added.
     *
@@ -36,7 +34,7 @@ final class FeatureBuilder(private val blocks: TreeSet[Block] = new TreeSet[Bloc
     * @return New [[FeatureBuilder]] with the same properties as this plus the new [[Block]] added
     */
   def addBlock(b: Block): FeatureBuilder = {
-    new FeatureBuilder(blocks = this.blocks + b,
+    new FeatureBuilder(blocks = b :: blocks,
       cdsStart = this.cdsStart,
       cdsEnd = this.cdsEnd,
       featureId = this.featureId,
@@ -117,24 +115,19 @@ final class FeatureBuilder(private val blocks: TreeSet[Block] = new TreeSet[Bloc
     */
   def get(): Feature = {
 
-    val blkList = blocks.toList
+    // Make a region by combining the blocks. Overlapping blocks are merged.
+    val region = blocks.foldLeft[Region](Empty)((r, b) => r.addBlock(b))
 
-    (blkList, cdsStart, cdsEnd, featureId, geneId) match {
-      // mRNA with one block
-      case (blk :: Nil, Some(cs), Some(ce), f, g) => MessengerRNA(blk, cs, ce, f, g)
-      // mRNA with multiple blocks
-      case (blk1 :: blk2 :: tail, Some(cs), Some(ce), f, g) => MessengerRNA(BlockSet(blkList), cs, ce, f, g)
-      // Transcript with one block
-      case (blk :: Nil, None, None, f, Some(g)) => new Transcript(blk, f, Some(g))
-      // Transcript with multiple blocks
-      case (blk1 :: blk2 :: tail, None, None, f, Some(g)) => new Transcript(BlockSet(blkList), f, Some(g))
-      // Generic block
-      case (blk :: Nil, None, None, f, None) => new GenericFeature(blk, f)
-      // Generic block set
-      case (blk1 :: blk2 :: tail, None, None, f, None) => new GenericFeature(BlockSet(blkList), f)
+    (cdsStart, cdsEnd, featureId, geneId) match {
+      // mRNA
+      case (Some(cs), Some(ce), f, g) => MessengerRNA(region, cs, ce, f, g)
+      // Transcript
+      case (None, None, f, Some(g)) => new Transcript(region, f, Some(g))
+      // Generic feature
+      case (None, None, f, None) => new GenericFeature(region, f)
       // None of the above
       case _ => throw new IllegalArgumentException(s"Invalid feature builder:\n" +
-        s"Blocks:\t${blkList.toString()}\n" +
+        s"Blocks:\t${region.toString}\n" +
         s"CDS start:\t${cdsStart.toString}\n" +
         s"CDS end:\t${cdsEnd.toString}\n" +
         s"Transcript ID:\t${featureId.toString}\n" +
@@ -142,5 +135,25 @@ final class FeatureBuilder(private val blocks: TreeSet[Block] = new TreeSet[Bloc
     }
 
   }
+
+}
+
+/**
+  * A way to encapsulate arbitrary operations on a [[FeatureBuilder]].
+  *
+  * The [[op]] function performs the operations on a specified [[FeatureBuilder]]
+  * and returns a new modified [[FeatureBuilder]].
+  *
+  * Classes that mix in this trait include [[reader.GTF2Record]].
+  *
+  */
+trait FeatureBuilderModifier {
+
+  /** Returns a new, possibly modified [[FeatureBuilder]].
+    *
+    * @param fb Original [[FeatureBuilder]]
+    * @return New [[FeatureBuilder]] resulting from applying the function to the original
+    */
+  def op(fb: FeatureBuilder): FeatureBuilder
 
 }

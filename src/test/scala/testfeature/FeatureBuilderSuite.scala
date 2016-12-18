@@ -10,12 +10,6 @@ import org.scalatest.FunSuite
 class FeatureBuilderSuite extends FunSuite {
 
   test("Illegal constructions") {
-    // Overlapping blocks
-    val fb1 = new FeatureBuilder()
-    .addBlock(chr1_1000_2000_plus_1)
-    .addBlock(chr1_1500_2500_plus)
-    .setFeatureId("Name")
-    intercept[IllegalArgumentException](fb1.get())
     // CDS start but no end or the reverse
     val fb2 = new FeatureBuilder()
     .addBlock(chr1_1000_2000_plus_1)
