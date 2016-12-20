@@ -1,17 +1,17 @@
 package testreader
 
-import feature.{BlockSet, Feature, MessengerRNA}
+import feature.Feature
 import org.scalatest.FunSuite
-import reader.GTF2Reader
+import reader._
 
 /**
   * Created by prussell on 12/18/16.
   */
 class AnnotFileReaderSuite extends FunSuite {
 
-  val features: Set[Feature] = GTF2Reader.load(gtfFiveGenes.split("\n").iterator)
+  val features: Set[Feature] = GTF2Reader.load(gtfLines.split("\n").iterator)
 
-  test("Five genes") {
+  test("Five genes and four CNS's") {
     assert(features.contains(ENST00000338591))
     assert(features.contains(ENST00000412115))
     assert(features.contains(ENST00000427857))
@@ -43,7 +43,11 @@ class AnnotFileReaderSuite extends FunSuite {
     assert(features.contains(ENST00000623083))
     assert(features.contains(ENST00000623834))
     assert(features.contains(ENST00000624735))
-    assert(features.size === 31)
+    assert(features.contains(inter_140_5140_8522_Minus))
+    assert(features.contains(inter_CNS_140_8522_9711_Minus))
+    assert(features.contains(inter_140_9711_13182_Minus))
+    assert(features.contains(intron_CNS_140_70102_70151_Minus))
+    assert(features.size === 35)
   }
 
 }

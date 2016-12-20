@@ -31,7 +31,7 @@ TBA
 As with all Scala libraries, sgxlib can be used from within Java code. For example:
 
 ```java
-/* This is Java code */
+/* This is Java */
 
 package examples;
 

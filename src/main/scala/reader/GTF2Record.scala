@@ -4,20 +4,44 @@ import feature._
 
 class GTF2Record(private val line: String) extends FeatureBuilderModifier {
 
-  private val tokens: Array[String] = line.split("\t")
+  // Remove trailing comment, then trailing whitespace, then final semicolon
+  private val trimmed: String = line.split("#")(0).replaceAll("""\s+$""", "").replaceAll(";$", "")
+
+  // Fields are tab-separated
+  private val tokens: Array[String] = trimmed.split("\t")
+
   validate()
 
   private def validate(): Unit = {
-    if(!ignore) {
-      if(tokens.length < 9)
+    if (!isComment) {
+      // Can't have two tabs in a row
+      if (tokens.contains(""))
+        throw new IllegalArgumentException(s"Malformed GTF2 line. Empty field.\n$line")
+      // Must have at least 9 tab-separated fields
+      if (tokens.length < 9)
         throw new IllegalArgumentException(s"Invalid GTF2 line. Must have at least 9 tab-separated fields.\n$line")
-      val attr = tokens(8).split("; ")
-      if(attr.length < 2)
-        throw new IllegalArgumentException(s"Invalid GTF2 line. Must have at least 2 semicolon-separated attributes.\n$line")
-      if(!attr.exists(_.startsWith("gene_id")))
-        throw new IllegalArgumentException(s"Invalid GTF2 line. Must have gene_id attribute.\n$line")
-      if(!attr.exists(_.startsWith("transcript_id")))
-        throw new IllegalArgumentException(s"Invalid GTF2 line. Must have transcript_id attribute.\n$line")
+      if (start >= end)
+        throw new IllegalArgumentException(s"Invalid GTF2 line. Invalid start and end.\n$line")
+      if (start < 0)
+        throw new IllegalArgumentException(s"Invalid GTF2 line. Invalid start position.\n$line")
+      if (frame.isDefined && (frame.get < 0 || frame.get > 2))
+        throw new IllegalArgumentException(s"Invalid GTF2 line. Invalid frame.\n$line")
+      // Compute lazy orientation and score so they get validated
+      val o = orientation
+      val s = score
+      if (!ignore) {
+        featureType match {
+          case _: Transcribed =>
+            // Check for required attributes gene_id and transcript_id
+            if (attributes.size < 2)
+              throw new IllegalArgumentException(s"Invalid GTF2 line. Must have at least 2 semicolon-separated attributes.\n$line")
+            if (!attributes.contains("gene_id"))
+              throw new IllegalArgumentException(s"Invalid GTF2 line. Must have gene_id attribute.\n$line")
+            if (!attributes.contains("transcript_id"))
+              throw new IllegalArgumentException(s"Invalid GTF2 line. Must have transcript_id attribute.\n$line")
+          case _ => Unit
+        }
+      }
     }
   }
 
@@ -35,18 +59,30 @@ class GTF2Record(private val line: String) extends FeatureBuilderModifier {
 
   lazy val end: Int = GTF2Record.zeroBasedExclusiveEnd(tokens(4).toInt)
 
+  // Score can be '.' or float
   lazy val score: Option[Float] = tokens(5) match {
     case "." => None
-    case s: String => Some(s.toFloat)
+    case s: String => {
+      try {
+        Some(s.toFloat)
+      } catch {
+        case n: NumberFormatException => throw new IllegalArgumentException(s"Invalid GTF2 line. Invalid score.\n$line")
+      }
+    }
   }
 
   lazy val orientation: Orientation = tokens(6) match {
     case "+" => Plus
     case "-" => Minus
-    case _ => throw new IllegalArgumentException(s"Invalid GTF2 orientation: ${tokens(6)}")
+    case "." => Unstranded
+    case _ => throw new IllegalArgumentException(s"Invalid GTF2 orientation.\n$line")
   }
 
-  lazy val frame: Int = tokens(7).toInt
+  // Frame can be '.', 0, 1, or 2
+  lazy val frame: Option[Int] = tokens(7) match {
+    case "." => None
+    case s: String => Some(s.toInt)
+  }
 
   lazy val attributes: Map[String, String] = {
     // Map of attribute name to attribute value
@@ -57,8 +93,12 @@ class GTF2Record(private val line: String) extends FeatureBuilderModifier {
       val ss: Array[String] = s.split(" ")
       if(ss.length < 2) throw new IllegalArgumentException(s"Invalid GTF2 attribute: $s\n$line")
       val k: String = ss.head
+      // There can only be one value between double quotes
+      if(ss.tail.mkString(" ").split("\"").length > 2)
+        throw new IllegalArgumentException(s"Invalid GTF2 attribute spacing:\n$line")
       val v: String = ss.tail.mkString(" ").replace("\"", "") // String values are between double quotes
-      if(k == "") throw new IllegalArgumentException(s"Invalid GTF2 attribute: $s\n$line")
+      if(k == "" || k.startsWith(" ")) throw new IllegalArgumentException(s"Invalid GTF2 attribute spacing: $s\n$line")
+      if(v.startsWith(" ")) throw new IllegalArgumentException(s"Invalid GTF2 attribute spacing:\n$line")
       // Skip empty string attribute values
       if(v != "") as.put(k, v)
     })
@@ -125,15 +165,16 @@ private object Utils {
 }
 
 sealed trait FeatureType
-case object CDS extends FeatureType
-case object StartCodon extends FeatureType
-case object StopCodon extends FeatureType
-case object UTR5 extends FeatureType
-case object UTR3 extends FeatureType
+sealed trait Transcribed extends FeatureType
+case object CDS extends Transcribed
+case object StartCodon extends Transcribed
+case object StopCodon extends Transcribed
+case object UTR5 extends Transcribed
+case object UTR3 extends Transcribed
 case object Intergenic extends FeatureType
 case object IntergenicCNS extends FeatureType
 case object IntronicCNS extends FeatureType
-case object Exon extends FeatureType
+case object Exon extends Transcribed
 case object Ignore extends FeatureType
 
 object FeatureType {
