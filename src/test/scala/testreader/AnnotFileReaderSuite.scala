@@ -9,9 +9,9 @@ import reader._
   */
 class AnnotFileReaderSuite extends FunSuite {
 
-  val features: Set[Feature] = GTF2Reader.load(gtfLines.split("\n").iterator)
+  val features: Set[Feature] = GTF22Reader.load(gtfLines.split("\n").iterator)
 
-  test("Five genes and four CNS's") {
+  test("RNAs and CNSs") {
     assert(features.contains(ENST00000338591))
     assert(features.contains(ENST00000412115))
     assert(features.contains(ENST00000427857))
@@ -47,7 +47,8 @@ class AnnotFileReaderSuite extends FunSuite {
     assert(features.contains(inter_CNS_140_8522_9711_Minus))
     assert(features.contains(inter_140_9711_13182_Minus))
     assert(features.contains(intron_CNS_140_70102_70151_Minus))
-    assert(features.size === 35)
+    assert(features.contains(transcript1400001))
+    assert(features.size === 36)
   }
 
 }

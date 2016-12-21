@@ -66,7 +66,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="reader.AnnotFileReader" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+              <ol><li name="reader.AnnotFileReader" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="AnnotFileReaderextendsAnyRef"></a>
       <a id="AnnotFileReader:AnnotFileReader"></a>
       <h4 class="signature">
@@ -82,7 +82,8 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">A reader that loads an annotation file and constructs the corresponding set of <span class="extype" name="Feature">Feature</span>s</p><div class="fullcomment"><div class="comment cmt"><p>A reader that loads an annotation file and constructs the corresponding set of <span class="extype" name="Feature">Feature</span>s</p><p>Implementations include <a href="GTF22Reader$.html" class="extype" name="reader.GTF22Reader">GTF22Reader</a> for GTF2.2 format.
+</p></div></div>
     </li><li name="reader.FeatureType" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="FeatureTypeextendsAnyRef"></a>
       <a id="FeatureType:FeatureType"></a>
@@ -99,24 +100,43 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="reader.GTF2Record" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="GTF2RecordextendsFeatureBuilderModifier"></a>
-      <a id="GTF2Record:GTF2Record"></a>
+      <p class="shortcomment cmt">A GTF2.2 feature type</p>
+    </li><li name="reader.GTF22Record" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GTF22RecordextendsFeatureBuilderModifier"></a>
+      <a id="GTF22Record:GTF22Record"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="GTF2Record.html"><span class="name">GTF2Record</span></a><span class="result"> extends <a href="../feature/FeatureBuilderModifier.html" class="extype" name="feature.FeatureBuilderModifier">FeatureBuilderModifier</a></span>
+        <a href="GTF22Record.html"><span class="name">GTF22Record</span></a><span class="result"> extends <a href="../feature/FeatureBuilderModifier.html" class="extype" name="feature.FeatureBuilderModifier">FeatureBuilderModifier</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.package@GTF2RecordextendsFeatureBuilderModifier" title="Permalink" target="_top">
+      <a href="../index.html#reader.package@GTF22RecordextendsFeatureBuilderModifier" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">A record representing the information contained in one line of a file in GTF2.2 format
+(<a href="http://mblab.wustl.edu/GTF22.html" target="_blank">format specification</a>)
+</p>
+    </li><li name="reader.MatureRNA" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="MatureRNAextendsFeatureType"></a>
+      <a id="MatureRNA:MatureRNA"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">sealed </span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="MatureRNA.html"><span class="name">MatureRNA</span></a><span class="result"> extends <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.package@MatureRNAextendsFeatureType" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A GTF2.2 feature type that represents part of a mature RNA transcript</p>
     </li></ol>
             </div>
 
@@ -133,14 +153,14 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="CDS$.html"><span class="name">CDS</span></a><span class="result"> extends <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="CDS$.html"><span class="name">CDS</span></a><span class="result"> extends <a href="MatureRNA.html" class="extype" name="reader.MatureRNA">MatureRNA</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../index.html#reader.package@CDS" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">GTF2.2 CDS feature type</p>
     </li><li name="reader.Exon" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Exon"></a>
       <a id="Exon:Exon"></a>
@@ -150,14 +170,14 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Exon$.html"><span class="name">Exon</span></a><span class="result"> extends <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="Exon$.html"><span class="name">Exon</span></a><span class="result"> extends <a href="MatureRNA.html" class="extype" name="reader.MatureRNA">MatureRNA</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../index.html#reader.package@Exon" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">GTF2.2 exon feature type</p>
     </li><li name="reader.FeatureType" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="FeatureType"></a>
       <a id="FeatureType:FeatureType"></a>
@@ -174,42 +194,30 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="reader.GTF2Reader" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="GTF2Reader"></a>
-      <a id="GTF2Reader:GTF2Reader"></a>
+      <p class="shortcomment cmt">Utilities for GTF2.2 <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a>s</p>
+    </li><li name="reader.GTF22Reader" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="GTF22Reader"></a>
+      <a id="GTF22Reader:GTF22Reader"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="GTF2Reader$.html"><span class="name">GTF2Reader</span></a><span class="result"> extends <a href="AnnotFileReader.html" class="extype" name="reader.AnnotFileReader">AnnotFileReader</a></span>
+        <a href="GTF22Reader$.html"><span class="name">GTF22Reader</span></a><span class="result"> extends <a href="AnnotFileReader.html" class="extype" name="reader.AnnotFileReader">AnnotFileReader</a></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.package@GTF2Reader" title="Permalink" target="_top">
+      <a href="../index.html#reader.package@GTF22Reader" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
-    </li><li name="reader.GTF2Record" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="GTF2Record"></a>
-      <a id="GTF2Record:GTF2Record"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="GTF2Record$.html"><span class="name">GTF2Record</span></a>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#reader.package@GTF2Record" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      
-    </li><li name="reader.Ignore" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <p class="shortcomment cmt">A reader for annotation files in GTF2.2 format (<a href="http://mblab.wustl.edu/GTF22.html" target="_blank">Format specification</a>)</p><div class="fullcomment"><div class="comment cmt"><p>A reader for annotation files in GTF2.2 format (<a href="http://mblab.wustl.edu/GTF22.html" target="_blank">Format specification</a>)</p><p>GTF2.2 format uses multiple lines to specify the attributes of a complex feature such as a transcript
+or messenger RNA. The <span class="extype" name="Feature">Feature</span>s constructed by this reader are the full complex features including
+multiple exons, a CDS, etc. In other words, the number of <span class="extype" name="Feature">Feature</span>s returned is likely to be much smaller
+than the number of lines in the GTF2.2 file. Mature RNAs are included as <span class="extype" name="Transcript">Transcript</span>s or <span class="extype" name="MessengerRNA">MessengerRNA</span>s.</p><p>Records that do not specify part of a mature RNA (such as CNS types) are included as single <span class="extype" name="GenericFeature">GenericFeature</span>s.
+These <span class="extype" name="GenericFeature">GenericFeature</span>s are given a name constructed from the location and associated transcript ID if there
+is one, as with the intron_CNS feature type.</p></div></div>
+    </li><li name="reader.Ignore" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="Ignore"></a>
       <a id="Ignore:Ignore"></a>
       <h4 class="signature">
@@ -225,7 +233,7 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Nonstandard feature type.</p><div class="fullcomment"><div class="comment cmt"><p>Nonstandard feature type. See <a href="http://mblab.wustl.edu/GTF22.html" target="_blank">format specification</a> for details.</p></div></div>
     </li><li name="reader.Intergenic" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="Intergenic"></a>
       <a id="Intergenic:Intergenic"></a>
@@ -242,7 +250,7 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">GTF2.2 intergenic feature type</p>
     </li><li name="reader.IntergenicCNS" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="IntergenicCNS"></a>
       <a id="IntergenicCNS:IntergenicCNS"></a>
@@ -259,7 +267,7 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">GTF2.2 intergenic CNS feature type</p>
     </li><li name="reader.IntronicCNS" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="IntronicCNS"></a>
       <a id="IntronicCNS:IntronicCNS"></a>
@@ -276,7 +284,7 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">GTF2.2 intronic CNS feature type</p>
     </li><li name="reader.ReaderTest" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ReaderTest"></a>
       <a id="ReaderTest:ReaderTest"></a>
@@ -303,14 +311,14 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="StartCodon$.html"><span class="name">StartCodon</span></a><span class="result"> extends <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="StartCodon$.html"><span class="name">StartCodon</span></a><span class="result"> extends <a href="MatureRNA.html" class="extype" name="reader.MatureRNA">MatureRNA</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../index.html#reader.package@StartCodon" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">GTF2.2 start codon feature type</p>
     </li><li name="reader.StopCodon" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="StopCodon"></a>
       <a id="StopCodon:StopCodon"></a>
@@ -320,14 +328,14 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="StopCodon$.html"><span class="name">StopCodon</span></a><span class="result"> extends <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="StopCodon$.html"><span class="name">StopCodon</span></a><span class="result"> extends <a href="MatureRNA.html" class="extype" name="reader.MatureRNA">MatureRNA</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../index.html#reader.package@StopCodon" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">GTF2.2 stop codon feature type</p>
     </li><li name="reader.UTR3" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="UTR3"></a>
       <a id="UTR3:UTR3"></a>
@@ -337,14 +345,14 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="UTR3$.html"><span class="name">UTR3</span></a><span class="result"> extends <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="UTR3$.html"><span class="name">UTR3</span></a><span class="result"> extends <a href="MatureRNA.html" class="extype" name="reader.MatureRNA">MatureRNA</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../index.html#reader.package@UTR3" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">GTF2.2 3'-UTR feature type</p>
     </li><li name="reader.UTR5" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="UTR5"></a>
       <a id="UTR5:UTR5"></a>
@@ -354,14 +362,14 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="UTR5$.html"><span class="name">UTR5</span></a><span class="result"> extends <a href="FeatureType.html" class="extype" name="reader.FeatureType">FeatureType</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="UTR5$.html"><span class="name">UTR5</span></a><span class="result"> extends <a href="MatureRNA.html" class="extype" name="reader.MatureRNA">MatureRNA</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../index.html#reader.package@UTR5" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">GTF2.2 5'-UTR feature type</p>
     </li></ol>
             </div>
 

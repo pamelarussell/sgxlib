@@ -49,12 +49,13 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A reader that loads an annotation file and constructs the corresponding set of <span class="extype" name="Feature">Feature</span>s</p><p>Implementations include <a href="GTF22Reader$.html" class="extype" name="reader.GTF22Reader">GTF22Reader</a> for GTF2.2 format.
+</p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
             <span class="toggle">Known Subclasses</span>
-            <div class="subClasses hiddenContent"><a href="GTF2Reader$.html" class="extype" name="reader.GTF2Reader">GTF2Reader</a></div>
+            <div class="subClasses hiddenContent"><a href="GTF22Reader$.html" class="extype" name="reader.GTF22Reader">GTF22Reader</a></div>
           </div></div>
         
 
@@ -95,23 +96,25 @@
 
         <div id="values" class="values members">
               <h3>Abstract Value Members</h3>
-              <ol><li name="reader.AnnotFileReader#load" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="load(file:String):Set[feature.Feature]"></a>
-      <a id="load(String):Set[Feature]"></a>
+              <ol><li name="reader.AnnotFileReader#load" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="load(lines:Iterator[String]):Set[feature.Feature]"></a>
+      <a id="load(Iterator[String]):Set[Feature]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">abstract </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">load</span><span class="params">(<span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.Set">Set</span>[<a href="../feature/Feature.html" class="extype" name="feature.Feature">Feature</a>]</span>
+        <span class="name">load</span><span class="params">(<span name="lines">lines: <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Predef.Set">Set</span>[<a href="../feature/Feature.html" class="extype" name="feature.Feature">Feature</a>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.AnnotFileReader@load(file:String):Set[feature.Feature]" title="Permalink" target="_top">
+      <a href="../index.html#reader.AnnotFileReader@load(lines:Iterator[String]):Set[feature.Feature]" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">Returns the set of <span class="extype" name="Feature">Feature</span>s specified in a sequence of strings.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the set of <span class="extype" name="Feature">Feature</span>s specified in a sequence of strings. The strings are interpreted
+as the lines of an annotation file in the order of the iterator.
+</p></div><dl class="paramcmts block"><dt class="param">lines</dt><dd class="cmt"><p>Iterator over a sequence of lines in an annotation file format</p></dd><dt>returns</dt><dd class="cmt"><p>The set of <span class="extype" name="Feature">Feature</span>s specified in the lines. No particular ordering is guaranteed.</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -316,6 +319,24 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="reader.AnnotFileReader#load" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="load(file:String):Set[feature.Feature]"></a>
+      <a id="load(String):Set[Feature]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">load</span><span class="params">(<span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.Set">Set</span>[<a href="../feature/Feature.html" class="extype" name="feature.Feature">Feature</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#reader.AnnotFileReader@load(file:String):Set[feature.Feature]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns the set of <span class="extype" name="Feature">Feature</span>s specified in an annotation file.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the set of <span class="extype" name="Feature">Feature</span>s specified in an annotation file.
+</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>File path</p></dd><dt>returns</dt><dd class="cmt"><p>The set of <span class="extype" name="Feature">Feature</span>s specified in the file. No particular ordering is guaranteed.</p></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>

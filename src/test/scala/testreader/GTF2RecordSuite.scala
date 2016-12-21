@@ -2,16 +2,16 @@ package testreader
 
 import feature.Plus
 import org.scalatest.FunSuite
-import reader.{Exon, GTF2Record}
+import reader.{Exon, GTF22Record}
 
 /**
   * Created by prussell on 12/18/16.
   */
 class GTF2RecordSuite extends FunSuite {
 
-  val line1 = "1\thavana\texon\t12179\t12227\t.\t+\t.\tgene_id \"ENSG00000223972\"; gene_version \"5\"; transcript_id \"ENST00000450305\"; transcript_version \"2\"; exon_number \"2\"; gene_name \"DDX11L1\"; gene_source \"havana\"; gene_biotype \"transcribed_unprocessed_pseudogene\"; havana_gene \"OTTHUMG00000000961\"; havana_gene_version \"2\"; transcript_name \"DDX11L1-001\"; transcript_source \"havana\"; transcript_biotype \"transcribed_unprocessed_pseudogene\"; havana_transcript \"OTTHUMT00000002844\"; havana_transcript_version \"2\"; exon_id \"ENSE00001671638\"; exon_version \"2\"; tag \"basic\"; transcript_support_level \"NA\";"
+  val line1 = "1\thavana\texon\t12179\t12227\t.\t+\t.\tgene_id \"ENSG00000223972\"; gene_version \"5\"; transcript_id \"ENST00000450305\"; transcript_version \"2\"; exon_number \"2\"; gene_name \"DDX11L1\"; gene_source \"havana\"; gene_biotype \"transcribed_unprocessed_pseudogene\"; havana_gene \"OTTHUMG00000000961\"; havana_gene_version \"2\"; transcript_name \"DDX11L1-001\"; transcript_source \"havana\"; transcript_biotype \"transcribed_unprocessed_pseudogene\"; havana_transcript \"OTTHUMT00000002844\"; havana_transcript_version \"2\"; exon_id \"ENSE00001671638\"; exon_version \"2\"; tag \"basic\"; transcript_support_level \"NA\";\n\n\n"
   val line2 = "1\thavana\texon\t12179\t12227\t.\t+\t.\tgene_id \"ENSG00000223972\"; gene_version \"5\"; transcript_id \"ENST00000450305\"; transcript_version \"2\"; exon_number \"2\"; gene_name \"DDX11L1\"; gene_source \"havana\"; gene_biotype \"transcribed_unprocessed_pseudogene\"; havana_gene \"OTTHUMG00000000961\"; havana_gene_version \"2\"; transcript_name \"DDX11L1-001\"; transcript_source \"havana\"; transcript_biotype \"transcribed_unprocessed_pseudogene\"; havana_transcript \"OTTHUMT00000002844\"; havana_transcript_version \"2\"; exon_id \"ENSE00001671638\"; exon_version \"2\"; tag \"basic\"; transcript_support_level \"NA\";#comment"
-  val line3 = "1\thavana\texon\t12179\t12227\t500\t+\t2\tgene_id \"ENSG00000223972\"; gene_version \"5\"; transcript_id \"ENST00000450305\"; transcript_version \"2\"; exon_number \"2\"; gene_name \"DDX11L1\"; gene_source \"havana\"; gene_biotype \"transcribed_unprocessed_pseudogene\"; havana_gene \"OTTHUMG00000000961\"; havana_gene_version \"2\"; transcript_name \"DDX11L1-001\"; transcript_source \"havana\"; transcript_biotype \"transcribed_unprocessed_pseudogene\"; havana_transcript \"OTTHUMT00000002844\"; havana_transcript_version \"2\"; exon_id \"ENSE00001671638\"; exon_version \"2\"; tag \"basic\"; transcript_support_level \"NA\";#comment"
+  val line3 = "1\thavana\texon\t12179\t12227\t500\t+\t2\tgene_id \"ENSG00000223972\"; gene_version \"5\"; transcript_id \"ENST00000450305\"; transcript_version \"2\"; exon_number \"2\"; gene_name \"DDX11L1\"; gene_source \"havana\"; gene_biotype \"transcribed_unprocessed_pseudogene\"; havana_gene \"OTTHUMG00000000961\"; havana_gene_version \"2\"; transcript_name \"DDX11L1-001\"; transcript_source \"havana\"; transcript_biotype \"transcribed_unprocessed_pseudogene\"; havana_transcript \"OTTHUMT00000002844\"; havana_transcript_version \"2\"; exon_id \"ENSE00001671638\"; exon_version \"2\"; tag \"basic\"; transcript_support_level \"NA\";#comment\n"
   val line4 = "1\thavana\texon\t12179\t12227\t.\t+\t.\tgene_id \"ENSG00000223972\"; gene_version \"5\"; transcript_id \"ENST00000450305\"; transcript_version \"2\"; exon_number \"2\"; gene_name \"DDX11L1\"; gene_source \"havana\"; gene_biotype \"transcribed_unprocessed_pseudogene\"; havana_gene \"OTTHUMG00000000961\"; havana_gene_version \"2\"; transcript_name \"DDX11L1-001\"; transcript_source \"havana\"; transcript_biotype \"transcribed_unprocessed_pseudogene\"; havana_transcript \"OTTHUMT00000002844\"; havana_transcript_version \"2\"; exon_id \"ENSE00001671638\"; exon_version \"2\"; tag \"basic\"; transcript_support_level \"NA\"; #comment"
 
   val missingField1 = "1\thavana\texon\t12179\t12227\t\t+\t.\tgene_id \"ENSG00000223972\"; gene_version \"5\"; transcript_id \"ENST00000450305\"; transcript_version \"2\"; exon_number \"2\"; gene_name \"DDX11L1\"; gene_source \"havana\"; gene_biotype \"transcribed_unprocessed_pseudogene\"; havana_gene \"OTTHUMG00000000961\"; havana_gene_version \"2\"; transcript_name \"DDX11L1-001\"; transcript_source \"havana\"; transcript_biotype \"transcribed_unprocessed_pseudogene\"; havana_transcript \"OTTHUMT00000002844\"; havana_transcript_version \"2\"; exon_id \"ENSE00001671638\"; exon_version \"2\"; tag \"basic\"; transcript_support_level \"NA\";"
@@ -42,36 +42,36 @@ class GTF2RecordSuite extends FunSuite {
   val extraField10 = "1\thavana\texon\t12179\t12227\t.\t+\t.\tgene_id \"ENSG00000223972\"; gene_version \"5\"; transcript_id \"ENST00000450305\"; transcript_version \"2\"; exon_number \"2\"; gene_name \"DDX11L1\"; gene_source \"havana\"; gene_biotype \"transcribed_unprocessed_pseudogene\"; havana_gene \"OTTHUMG00000000961\"; havana_gene_version \"2\"; transcript_name \"DDX11L1-001\"; transcript_source \"havana\"; transcript_biotype \"transcribed_unprocessed_pseudogene\"; havana_transcript \"OTTHUMT00000002844\"; havana_transcript_version \"2\"; exon_id \"ENSE00001671638\"; exon_version \"2\"; tag \"basic\"; transcript_support_level \"NA\";\tx"
 
   test("Invalid lines") {
-    intercept[IllegalArgumentException](new GTF2Record(missingField1))
-    intercept[IllegalArgumentException](new GTF2Record(missingField2))
-    intercept[IllegalArgumentException](new GTF2Record(noGeneId))
-    intercept[IllegalArgumentException](new GTF2Record(noTranscriptId))
-    intercept[IllegalArgumentException](new GTF2Record(invalidStartStop1))
-    intercept[IllegalArgumentException](new GTF2Record(invalidStartStop2))
-    intercept[IllegalArgumentException](new GTF2Record(invalidStartStop3))
-    intercept[IllegalArgumentException](new GTF2Record(invalidStartStop4))
-    intercept[IllegalArgumentException](new GTF2Record(invalidFrame1))
-    intercept[IllegalArgumentException](new GTF2Record(invalidFrame2))
-    intercept[IllegalArgumentException](new GTF2Record(invalidScore))
-    intercept[IllegalArgumentException](new GTF2Record(invalidSpacing1))
-    intercept[IllegalArgumentException](new GTF2Record(invalidSpacing2))
-    intercept[IllegalArgumentException](new GTF2Record(invalidSpacing3))
-    intercept[IllegalArgumentException](new GTF2Record(invalidSpacing4))
-    intercept[IllegalArgumentException](new GTF2Record(invalidAttribute1))
-    intercept[IllegalArgumentException](new GTF2Record(extraField1))
-    intercept[IllegalArgumentException](new GTF2Record(extraField2))
-    intercept[IllegalArgumentException](new GTF2Record(extraField3))
-    intercept[IllegalArgumentException](new GTF2Record(extraField4))
-    intercept[IllegalArgumentException](new GTF2Record(extraField5))
-    intercept[IllegalArgumentException](new GTF2Record(extraField6))
-    intercept[IllegalArgumentException](new GTF2Record(extraField7))
-    intercept[IllegalArgumentException](new GTF2Record(extraField8))
-    intercept[IllegalArgumentException](new GTF2Record(extraField9))
-    intercept[IllegalArgumentException](new GTF2Record(extraField10))
+    intercept[IllegalArgumentException](new GTF22Record(missingField1))
+    intercept[IllegalArgumentException](new GTF22Record(missingField2))
+    intercept[IllegalArgumentException](new GTF22Record(noGeneId))
+    intercept[IllegalArgumentException](new GTF22Record(noTranscriptId))
+    intercept[IllegalArgumentException](new GTF22Record(invalidStartStop1))
+    intercept[IllegalArgumentException](new GTF22Record(invalidStartStop2))
+    intercept[IllegalArgumentException](new GTF22Record(invalidStartStop3))
+    intercept[IllegalArgumentException](new GTF22Record(invalidStartStop4))
+    intercept[IllegalArgumentException](new GTF22Record(invalidFrame1))
+    intercept[IllegalArgumentException](new GTF22Record(invalidFrame2))
+    intercept[IllegalArgumentException](new GTF22Record(invalidScore))
+    intercept[IllegalArgumentException](new GTF22Record(invalidSpacing1))
+    intercept[IllegalArgumentException](new GTF22Record(invalidSpacing2))
+    intercept[IllegalArgumentException](new GTF22Record(invalidSpacing3))
+    intercept[IllegalArgumentException](new GTF22Record(invalidSpacing4))
+    intercept[IllegalArgumentException](new GTF22Record(invalidAttribute1))
+    intercept[IllegalArgumentException](new GTF22Record(extraField1))
+    intercept[IllegalArgumentException](new GTF22Record(extraField2))
+    intercept[IllegalArgumentException](new GTF22Record(extraField3))
+    intercept[IllegalArgumentException](new GTF22Record(extraField4))
+    intercept[IllegalArgumentException](new GTF22Record(extraField5))
+    intercept[IllegalArgumentException](new GTF22Record(extraField6))
+    intercept[IllegalArgumentException](new GTF22Record(extraField7))
+    intercept[IllegalArgumentException](new GTF22Record(extraField8))
+    intercept[IllegalArgumentException](new GTF22Record(extraField9))
+    intercept[IllegalArgumentException](new GTF22Record(extraField10))
   }
 
   def checkFieldValues(line: String): Unit = {
-    val rec = new GTF2Record(line)
+    val rec = new GTF22Record(line)
     assert(rec.chr === "1")
     assert(rec.source === "havana")
     assert(rec.featureType === Exon)
@@ -108,7 +108,7 @@ class GTF2RecordSuite extends FunSuite {
   }
 
   test("Score and frame") {
-    val rec = new GTF2Record(line3)
+    val rec = new GTF22Record(line3)
     assert(rec.score === Some(500))
     assert(rec.frame === Some(2))
   }
