@@ -365,6 +365,17 @@ package object testreader {
     chr1_200049_200322_Minus
   )), 184926, 200086, Some("ENST00000624735"), Some("ENSG00000279457"))
 
+  val ENST00000466300 = new Transcript(BlockSet(List(
+    chr1_962726_962917_Plus,
+    chr1_963031_963253_Plus,
+    chr1_963336_963504_Plus,
+    chr1_963919_964008_Plus,
+    chr1_964106_964167_Plus,
+    chr1_964348_964530_Plus
+  )),
+    Some("ENST00000466300"),
+    Some("ENSG00000187961"))
+
   val transcript1400001 = MessengerRNA(BlockSet(List(
     Block("140", 65148, 65487, Minus),
     Block("140", 66822, 66999, Minus),

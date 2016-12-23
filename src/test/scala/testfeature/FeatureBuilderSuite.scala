@@ -59,14 +59,16 @@ class FeatureBuilderSuite extends FunSuite {
     .setGeneId("Gene")
     .setCdsStart(1200)
     .setCdsEnd(1300)
-    intercept[IllegalArgumentException](fb9.get())
+    // Should be a Transcript because CDS is invalid
+    assert(fb9.get() === new Transcript(chr1_1000_2000_plus_1, Some("Name"), Some("Gene")))
     val fb10 = new FeatureBuilder()
     .addBlock(chr1_1000_2000_plus_1)
     .setFeatureId("Name")
     .setGeneId("Gene")
     .setCdsStart(1200)
     .setCdsEnd(1203)
-    intercept[IllegalArgumentException](fb10.get())
+    // Should be a Transcript because CDS is invalid
+    assert(fb10.get() === new Transcript(chr1_1000_2000_plus_1, Some("Name"), Some("Gene")))
     // Blocks on different chromosomes
     val fb11 = new FeatureBuilder()
     .addBlock(chr1_1000_2000_plus_1)

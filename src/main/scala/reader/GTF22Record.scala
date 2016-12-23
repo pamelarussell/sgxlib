@@ -38,8 +38,6 @@ class GTF22Record(private val line: String) extends FeatureBuilderModifier {
         featureType match {
           case _: MatureRNA =>
             // Check for required attributes gene_id and transcript_id
-            if (attributes.size < 2)
-              throw new IllegalArgumentException(s"Invalid GTF2.2 line. Must have at least 2 semicolon-separated attributes.\n$line")
             if (!attributes.contains("gene_id"))
               throw new IllegalArgumentException(s"Invalid GTF2.2 line. Must have gene_id attribute.\n$line")
             if (!attributes.contains("transcript_id"))
@@ -101,14 +99,13 @@ class GTF22Record(private val line: String) extends FeatureBuilderModifier {
 
   /** The [[Orientation]].
     *
-    * This value is equal to [[Plus]] if '+' is specified in the file, [[Minus]] if
-    * '-' is specified, and [[Unstranded]] if '.' is specified.
+    * This value is equal to [[Plus]] if '+' is specified in the file or [[Minus]] if
+    * '-' is specified.
     *
     */
   lazy val orientation: Orientation = tokens(6) match {
     case "+" => Plus
     case "-" => Minus
-    case "." => Unstranded
     case _ => throw new IllegalArgumentException(s"Invalid GTF2 orientation.\n$line")
   }
 

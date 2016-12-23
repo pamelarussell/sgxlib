@@ -1,5 +1,8 @@
 package feature
 
+import feature.Exceptions.CDSSizeException
+import org.slf4j.LoggerFactory
+
 
 /** A builder for [[Feature]]s.
   *
@@ -24,6 +27,8 @@ final class FeatureBuilder(val blocks: List[Block] = Nil,
                            val cdsEnd: Option[Int] = None,
                            val featureId: Option[String] = None,
                            val geneId: Option[String] = None) {
+
+  private val logger = LoggerFactory.getLogger(getClass)
 
   /** Returns a new FeatureBuilder with an additional [[Block]] added.
     *
@@ -120,7 +125,21 @@ final class FeatureBuilder(val blocks: List[Block] = Nil,
 
     (cdsStart, cdsEnd, featureId, geneId) match {
       // mRNA
-      case (Some(cs), Some(ce), f, g) => MessengerRNA(region, cs, ce, f, g)
+      case (Some(cs), Some(ce), f, g) =>
+        // Try to construct a messenger RNA
+        try {
+          MessengerRNA(region, cs, ce, f, g)
+        } catch {
+          // If CDS size is invalid, return a transcript instead
+          case c: CDSSizeException =>
+            logger.warn(s"Returning ${classOf[feature.Transcript].toString.replaceAll("^class ", "")} " +
+              s"instead of ${feature.MessengerRNA.getClass.toString.replaceAll("^class ", "")} for ${
+              if(featureId.isDefined) featureId.get
+              else "feature"
+            }. Caught ${c.getClass.toString.replaceAll("^class ", "")}: ${c.getMessage}")
+            new Transcript(region, f, g)
+          case e: Exception => throw e
+        }
       // Transcript
       case (None, None, f, Some(g)) => new Transcript(region, f, Some(g))
       // Generic feature

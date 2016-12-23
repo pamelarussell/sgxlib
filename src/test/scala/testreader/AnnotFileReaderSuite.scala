@@ -43,12 +43,13 @@ class AnnotFileReaderSuite extends FunSuite {
     assert(features.contains(ENST00000623083))
     assert(features.contains(ENST00000623834))
     assert(features.contains(ENST00000624735))
+    assert(features.contains(ENST00000466300))
     assert(features.contains(inter_140_5140_8522_Minus))
     assert(features.contains(inter_CNS_140_8522_9711_Minus))
     assert(features.contains(inter_140_9711_13182_Minus))
     assert(features.contains(intron_CNS_140_70102_70151_Minus))
     assert(features.contains(transcript1400001))
-    assert(features.size === 36)
+    assert(features.size === 37)
   }
 
 }
