@@ -116,7 +116,7 @@ private object Feature {
   * @param blocks Non-empty underlying [[Region]]
   * @param name Optional feature name. Do not pass Some(""); use None in that case.
   */
-sealed class GenericFeature(override val blocks: Region, override val name: Option[String]) extends Feature(blocks, name) {
+class GenericFeature(override val blocks: Region, override val name: Option[String]) extends Feature(blocks, name) {
 
   if(name == Some("")) throw new IllegalArgumentException("Name cannot be empty string. Use None instead.")
 

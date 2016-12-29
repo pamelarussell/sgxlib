@@ -17,7 +17,8 @@ import org.slf4j.LoggerFactory
   *
   * One or more blocks, optional feature name, a gene name, no CDS start, no CDS end -> [[Transcript]]
   *
-  * One or more blocks, optional feature name, optional gene name, a CDS start, a CDS end -> [[MessengerRNA]]
+  * One or more blocks, optional feature name, optional gene name, a CDS start, a CDS end -> [[MessengerRNA]]. If the CDS is invalid
+  * (length < 6 or length not divisible by 3) a [[Transcript]] is returned instead.
   *
   * Any other combination of properties results in an IllegalArgumentException when calling [[get]].
   *
@@ -131,13 +132,7 @@ final class FeatureBuilder(val blocks: List[Block] = Nil,
           MessengerRNA(region, cs, ce, f, g)
         } catch {
           // If CDS size is invalid, return a transcript instead
-          case c: CDSSizeException =>
-            logger.warn(s"Returning ${classOf[feature.Transcript].toString.replaceAll("^class ", "")} " +
-              s"instead of ${feature.MessengerRNA.getClass.toString.replaceAll("^class ", "")} for ${
-              if(featureId.isDefined) featureId.get
-              else "feature"
-            }. Caught ${c.getClass.toString.replaceAll("^class ", "")}: ${c.getMessage}")
-            new Transcript(region, f, g)
+          case c: CDSSizeException => new Transcript(region, f, g)
           case e: Exception => throw e
         }
       // Transcript

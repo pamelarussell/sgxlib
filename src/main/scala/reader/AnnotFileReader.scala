@@ -18,15 +18,7 @@ trait AnnotFileReader {
     * @param file File path
     * @return The set of [[Feature]]s specified in the file. No particular ordering is guaranteed.
     */
-  def load(file: String): Set[Feature] = load(Source.fromFile(file).getLines())
-
-  /** Returns the set of [[Feature]]s specified in a sequence of strings. The strings are interpreted
-    * as the lines of an annotation file in the order of the iterator.
-    *
-    * @param lines Iterator over a sequence of lines in an annotation file format
-    * @return The set of [[Feature]]s specified in the lines. No particular ordering is guaranteed.
-    */
-  def load(lines: Iterator[String]): Set[Feature]
+  def load(file: String): Set[Feature]
 
 }
 
@@ -46,17 +38,17 @@ object GTF22Reader extends AnnotFileReader {
 
   private val logger = LoggerFactory.getLogger(getClass)
 
-  /** Returns the set of [[Feature]]s specified in a sequence of strings representing lines
-    * of a file in GTF2.2 format.
+  /** Returns the set of [[Feature]]s specified in a file in GTF2.2 format.
     *
     * The number of [[Feature]]s returned is likely to be much smaller than the number of
-    * GTF2.2-formatted lines (see object documentation).
+    * GTF2.2-formatted lines in the file (see object documentation).
     *
-    * @param lines Iterator over a sequence of lines in GTF2.2 format
-    * @return The set of [[Feature]]s specified in the lines. No particular ordering is guaranteed.
+    * @param file Path to file in GTF2.2 format
+    * @return The set of [[Feature]]s specified in the file. No particular ordering is guaranteed.
     */
-  def load(lines: Iterator[String]): Set[Feature] = {
+  override def load(file: String): Set[Feature] = {
 
+    val lines: Iterator[String] = Source.fromFile(file).getLines()
     // Map of feature ID to FeatureBuilder
     val builders = new scala.collection.mutable.HashMap[String, FeatureBuilder]
     // Set of GenericFeatures that don't need a FeatureBuilder because they have no transcript ID

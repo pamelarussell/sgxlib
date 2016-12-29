@@ -1,17 +1,17 @@
-package testreader
+package testcollection
 
+import collection.{FeatureSet, GTF22FeatureSet}
 import feature.Feature
 import org.scalatest.FunSuite
-import reader._
 import shared.GTF22Data._
 
 /**
-  * Created by prussell on 12/18/16.
+  * Created by prussell on 12/28/16.
   */
-class AnnotFileReaderSuite extends FunSuite {
+class FeatureSetSuite extends FunSuite {
 
-  val fewFeatures: Set[Feature] = GTF22Reader.load("resources/sample_genes.gtf")
-  val threeChrs: Set[Feature] = GTF22Reader.load("resources/Homo_sapiens.GRCh38.86.chr_20_21_22.gtf")
+  val fewFeatures: FeatureSet[Feature] = new GTF22FeatureSet("resources/sample_genes.gtf")
+  val threeChrs: FeatureSet[Feature] = new GTF22FeatureSet("resources/Homo_sapiens.GRCh38.86.chr_20_21_22.gtf")
 
   test("Three chromosomes") {
     assert(threeChrs.size === 11127)
