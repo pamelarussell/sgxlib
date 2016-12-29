@@ -1,5 +1,6 @@
 package feature
 
+import scala.collection
 import scala.collection.mutable.ListBuffer
 
 /** A genomic region.
