@@ -165,7 +165,8 @@ have the same <a href="Orientation.html" class="extype" name="feature.Orientatio
       </a>
     </span>
       <p class="shortcomment cmt">A builder for <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s.</p><div class="fullcomment"><div class="comment cmt"><p>A builder for <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s.</p><p><a href="Feature.html" class="extype" name="feature.Feature">Feature</a> properties such as <a href="Block.html" class="extype" name="feature.Block">Block</a>s, name, gene name, and CDS start and end can be added one by one.
-The appropriate type in the <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> hierarchy is determined automatically based on the properties that have been added.</p><p>The <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> is obtained by calling <a href="FeatureBuilder.html#get():feature.Feature" class="extmbr" name="feature.FeatureBuilder#get">get</a>.</p><p>The following are the valid combinations of provided properties and the types they give rise to.</p><p>One or more blocks, optional feature name, no gene name, no CDS start, no CDS end -&gt; <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a></p><p>One or more blocks, optional feature name, a gene name, no CDS start, no CDS end -&gt; <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a></p><p>One or more blocks, optional feature name, optional gene name, a CDS start, a CDS end -&gt; <a href="MessengerRNA.html" class="extype" name="feature.MessengerRNA">MessengerRNA</a></p><p>Any other combination of properties results in an IllegalArgumentException when calling <a href="FeatureBuilder.html#get():feature.Feature" class="extmbr" name="feature.FeatureBuilder#get">get</a>.</p></div></div>
+The appropriate type in the <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> hierarchy is determined automatically based on the properties that have been added.</p><p>The <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> is obtained by calling <a href="FeatureBuilder.html#get():feature.Feature" class="extmbr" name="feature.FeatureBuilder#get">get</a>.</p><p>The following are the valid combinations of provided properties and the types they give rise to.</p><p>One or more blocks, optional feature name, no gene name, no CDS start, no CDS end -&gt; <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a></p><p>One or more blocks, optional feature name, a gene name, no CDS start, no CDS end -&gt; <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a></p><p>One or more blocks, optional feature name, optional gene name, a CDS start, a CDS end -&gt; <a href="MessengerRNA.html" class="extype" name="feature.MessengerRNA">MessengerRNA</a>. If the CDS is invalid
+(length &lt; 6 or length not divisible by 3) a <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> is returned instead.</p><p>Any other combination of properties results in an IllegalArgumentException when calling <a href="FeatureBuilder.html#get():feature.Feature" class="extmbr" name="feature.FeatureBuilder#get">get</a>.</p></div></div>
     </li><li name="feature.FeatureBuilderModifier" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="FeatureBuilderModifierextendsAnyRef"></a>
       <a id="FeatureBuilderModifier:FeatureBuilderModifier"></a>
@@ -183,7 +184,7 @@ The appropriate type in the <a href="Feature.html" class="extype" name="feature.
       </a>
     </span>
       <p class="shortcomment cmt">A way to encapsulate arbitrary operations on a <a href="FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a>.</p><div class="fullcomment"><div class="comment cmt"><p>A way to encapsulate arbitrary operations on a <a href="FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a>.</p><p>The <a href="FeatureBuilderModifier.html#op(fb:feature.FeatureBuilder):feature.FeatureBuilder" class="extmbr" name="feature.FeatureBuilderModifier#op">op</a> function performs the operations on a specified <a href="FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a>
-and returns a new modified <a href="FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a>.</p><p>Classes that mix in this trait include <a href="../reader/GTF22Record.html" class="extype" name="reader.GTF22Record">reader.GTF22Record</a>.</p></div></div>
+and returns a new modified <a href="FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a>.</p><p>Classes that mix in this trait include <a href="../format/GTF22Record.html" class="extype" name="format.GTF22Record">format.GTF22Record</a>.</p></div></div>
     </li><li name="feature.Gene" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="GeneextendsProductwithSerializable"></a>
       <a id="Gene:Gene"></a>
@@ -207,7 +208,7 @@ and returns a new modified <a href="FeatureBuilder.html" class="extype" name="fe
       <a id="GenericFeature:GenericFeature"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">sealed </span>
+        <span class="modifier"></span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">

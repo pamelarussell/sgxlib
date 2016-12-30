@@ -1,9 +1,9 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>FeatureType - reader.FeatureType</title>
-          <meta name="description" content="FeatureType - reader.FeatureType" />
-          <meta name="keywords" content="FeatureType reader.FeatureType" />
+          <title>FeatureSet - collection.FeatureSet</title>
+          <meta name="description" content="FeatureSet - collection.FeatureSet" />
+          <meta name="keywords" content="FeatureSet collection.FeatureSet" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -16,7 +16,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../index.html';
-            var hash = 'reader.FeatureType';
+            var hash = 'collection.FeatureSet';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -28,14 +28,12 @@
         </head>
         <body class="type">
       <div id="definition">
-        <a href="FeatureType$.html" title="See companion object"><img alt="Trait/Object" src="../lib/trait_to_object_big.png" /></a>
-        <p id="owner"><a href="package.html" class="extype" name="reader">reader</a></p>
-        <h1><a href="FeatureType$.html" title="See companion object">FeatureType</a></h1><h3><span class="morelinks"><div>
-            Related Docs:
-            <a href="FeatureType$.html" title="See companion object">object FeatureType</a>
-            | <a href="package.html" class="extype" name="reader">package reader</a>
+        <img alt="Trait" src="../lib/trait_big.png" />
+        <p id="owner"><a href="package.html" class="extype" name="collection">collection</a></p>
+        <h1>FeatureSet</h1><h3><span class="morelinks"><div>Related Doc:
+            <a href="package.html" class="extype" name="collection">package collection</a>
           </div></span></h3><span class="permalink">
-      <a href="../index.html#reader.FeatureType" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -43,20 +41,22 @@
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier">sealed </span>
+        <span class="modifier"></span>
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <span class="name">FeatureType</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <span class="name">FeatureSet</span><span class="tparams">[<span name="T">T &lt;: <a href="../feature/Feature.html" class="extype" name="feature.Feature">Feature</a></span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A GTF2.2 feature type</p></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A data structure storing a set of <span class="extype" name="Feature">Feature</span>s.</p><p>Supports common operations on collections of genomic features, such as extracting overlappers
+of a given locus, and some common collection operations such as contains.
+</p></div><dl class="paramcmts block"><dt class="tparam">T</dt><dd class="cmt"><p>The type of <span class="extype" name="Feature">Feature</span>s contained in the set</p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
             <span class="toggle">Known Subclasses</span>
-            <div class="subClasses hiddenContent"><a href="CDS$.html" class="extype" name="reader.CDS">CDS</a>, <a href="Exon$.html" class="extype" name="reader.Exon">Exon</a>, <a href="Ignore$.html" class="extype" name="reader.Ignore">Ignore</a>, <a href="Intergenic$.html" class="extype" name="reader.Intergenic">Intergenic</a>, <a href="IntergenicCNS$.html" class="extype" name="reader.IntergenicCNS">IntergenicCNS</a>, <a href="IntronicCNS$.html" class="extype" name="reader.IntronicCNS">IntronicCNS</a>, <a href="MatureRNA.html" class="extype" name="reader.MatureRNA">MatureRNA</a>, <a href="StartCodon$.html" class="extype" name="reader.StartCodon">StartCodon</a>, <a href="StopCodon$.html" class="extype" name="reader.StopCodon">StopCodon</a>, <a href="UTR3$.html" class="extype" name="reader.UTR3">UTR3</a>, <a href="UTR5$.html" class="extype" name="reader.UTR5">UTR5</a></div>
+            <div class="subClasses hiddenContent"><a href="GTF22FeatureSet.html" class="extype" name="collection.GTF22FeatureSet">GTF22FeatureSet</a></div>
           </div></div>
         
 
@@ -74,7 +74,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="reader.FeatureType"><span>FeatureType</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="collection.FeatureSet"><span>FeatureSet</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -97,23 +97,83 @@
 
         <div id="values" class="values members">
               <h3>Abstract Value Members</h3>
-              <ol><li name="reader.FeatureType#name" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="name:String"></a>
-      <a id="name:String"></a>
+              <ol><li name="collection.FeatureSet#contains" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="contains(t:T):Boolean"></a>
+      <a id="contains(T):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">contains</span><span class="params">(<span name="t">t: <span class="extype" name="collection.FeatureSet.T">T</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#collection.FeatureSet@contains(t:T):Boolean" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a boolean value representing whether this set contains the given <span class="extype" name="Feature">Feature</span>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a boolean value representing whether this set contains the given <span class="extype" name="Feature">Feature</span>.
+</p></div><dl class="paramcmts block"><dt class="param">t</dt><dd class="cmt"><p><span class="extype" name="Feature">Feature</span> to look for</p></dd></dl></div>
+    </li><li name="collection.FeatureSet#overlappers" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="overlappers(feat:feature.Feature):Iterator[T]"></a>
+      <a id="overlappers(Feature):Iterator[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">overlappers</span><span class="params">(<span name="feat">feat: <a href="../feature/Feature.html" class="extype" name="feature.Feature">Feature</a></span>)</span><span class="result">: <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="collection.FeatureSet.T">T</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#collection.FeatureSet@overlappers(feat:feature.Feature):Iterator[T]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns an iterator over overlappers of a given <span class="extype" name="Feature">Feature</span>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an iterator over overlappers of a given <span class="extype" name="Feature">Feature</span>.</p><p>Overlappers are the <span class="extype" name="Feature">Feature</span>s contained in this set that overlap the given
+<span class="extype" name="Feature">Feature</span> as defined by <span class="extype" name="Feature.overlaps">Feature.overlaps</span>.</p><p>The returned iterator is not guaranteed to conform to any particular ordering.
+</p></div><dl class="paramcmts block"><dt class="param">feat</dt><dd class="cmt"><p>Query <span class="extype" name="Feature">Feature</span></p></dd><dt>returns</dt><dd class="cmt"><p>Iterator over overlappers of the given <span class="extype" name="Feature">Feature</span> in no particular order,
+        or <span class="extype" name="Iterator.empty">Iterator.empty</span> if there are no overlappers</p></dd></dl></div>
+    </li><li name="collection.FeatureSet#overlappers" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="overlappers(chr:String,start:Int,end:Int,orientation:feature.Orientation):Iterator[T]"></a>
+      <a id="overlappers(String,Int,Int,Orientation):Iterator[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">overlappers</span><span class="params">(<span name="chr">chr: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="start">start: <span class="extype" name="scala.Int">Int</span></span>, <span name="end">end: <span class="extype" name="scala.Int">Int</span></span>, <span name="orientation">orientation: <a href="../feature/Orientation.html" class="extype" name="feature.Orientation">Orientation</a></span>)</span><span class="result">: <span class="extype" name="scala.Iterator">Iterator</span>[<span class="extype" name="collection.FeatureSet.T">T</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#collection.FeatureSet@overlappers(chr:String,start:Int,end:Int,orientation:feature.Orientation):Iterator[T]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns an iterator over overlappers of a genomic interval.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an iterator over overlappers of a genomic interval.</p><p>Overlappers are the <span class="extype" name="Feature">Feature</span>s contained in this set that overlap the interval
+accounting for <span class="extype" name="Orientation">Orientation</span>, as defined by <span class="extype" name="Feature.overlaps">Feature.overlaps</span>.</p><p>The returned iterator is not guaranteed to conform to any particular ordering.
+</p></div><dl class="paramcmts block"><dt class="param">chr</dt><dd class="cmt"><p>Chromosome name of query interval</p></dd><dt class="param">start</dt><dd class="cmt"><p>Zero-based inclusive start position of query interval</p></dd><dt class="param">end</dt><dd class="cmt"><p>Zero-based exclusive end position of query interval</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>Orientation of query interval. Only overlappers with a compatible
+                   <span class="extype" name="Orientation">Orientation</span> (as defined by <span class="extype" name="Orientation.isCompatible">Orientation.isCompatible</span>) will
+                   be returned.</p></dd><dt>returns</dt><dd class="cmt"><p>Iterator over overlappers in no particular order, or <span class="extype" name="Iterator.empty">Iterator.empty</span> if
+        there are no overlappers</p></dd></dl></div>
+    </li><li name="collection.FeatureSet#size" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="size:Long"></a>
+      <a id="size:Long"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">abstract </span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">name</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+        <span class="name">size</span><span class="result">: <span class="extype" name="scala.Long">Long</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@name:String" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@size:Long" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">The number of features contained in this set.</p>
     </li></ol>
             </div>
 
@@ -131,7 +191,7 @@
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@!=(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -148,7 +208,7 @@
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@##():Int" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@##():Int" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -165,7 +225,7 @@
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@==(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@==(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -182,7 +242,7 @@
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@asInstanceOf[T0]:T0" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -199,7 +259,7 @@
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@clone():Object" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@clone():Object" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -222,7 +282,7 @@
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -239,7 +299,7 @@
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@equals(x$1:Any):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@equals(x$1:Any):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -256,7 +316,7 @@
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@finalize():Unit" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@finalize():Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -279,7 +339,7 @@
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@getClass():Class[_]" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@getClass():Class[_]" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -296,7 +356,7 @@
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@hashCode():Int" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@hashCode():Int" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -313,7 +373,7 @@
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -330,7 +390,7 @@
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -347,7 +407,7 @@
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@notify():Unit" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@notify():Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -364,7 +424,7 @@
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@notifyAll():Unit" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@notifyAll():Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -381,7 +441,7 @@
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -398,7 +458,7 @@
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@toString():String" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@toString():String" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -415,7 +475,7 @@
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@wait():Unit" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@wait():Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -438,7 +498,7 @@
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -461,7 +521,7 @@
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4><span class="permalink">
-      <a href="../index.html#reader.FeatureType@wait(x$1:Long):Unit" title="Permalink" target="_top">
+      <a href="../index.html#collection.FeatureSet@wait(x$1:Long):Unit" title="Permalink" target="_top">
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
