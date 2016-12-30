@@ -1,8 +1,8 @@
-package testreader
+package testformat
 
 import feature.Plus
 import org.scalatest.FunSuite
-import reader.{Exon, GTF22Record}
+import format.{Exon, GTF22Record}
 
 /**
   * Created by prussell on 12/18/16.

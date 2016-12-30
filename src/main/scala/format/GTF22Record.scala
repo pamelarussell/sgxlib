@@ -1,4 +1,4 @@
-package reader
+package format
 
 import feature._
 

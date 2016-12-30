@@ -158,7 +158,7 @@ final class FeatureBuilder(val blocks: List[Block] = Nil,
   * The [[op]] function performs the operations on a specified [[FeatureBuilder]]
   * and returns a new modified [[FeatureBuilder]].
   *
-  * Classes that mix in this trait include [[reader.GTF22Record]].
+  * Classes that mix in this trait include [[format.GTF22Record]].
   *
   */
 trait FeatureBuilderModifier {

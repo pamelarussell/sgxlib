@@ -1,7 +1,7 @@
 package testcollection
 
 import collection.{FeatureSet, GTF22FeatureSet}
-import feature.Feature
+import feature._
 import org.scalatest.FunSuite
 import shared.GTF22Data._
 
@@ -18,6 +18,10 @@ class FeatureSetSuite extends FunSuite {
   }
 
   test("Few features") {
+    assert(!fewFeatures.contains(new GenericFeature(Block("chr2", 100, 200, Plus), None)))
+    assert(!fewFeatures.contains(new GenericFeature(Block("1", 963551, 964164, Plus), None)))
+    assert(!fewFeatures.contains(new GenericFeature(Block("1", 963551, 1000000, Plus), None)))
+    assert(!fewFeatures.contains(new GenericFeature(Block("1", 963551, 964164, Minus), None)))
     assert(fewFeatures.contains(ENST00000338591))
     assert(fewFeatures.contains(ENST00000412115))
     assert(fewFeatures.contains(ENST00000427857))
