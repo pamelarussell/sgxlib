@@ -9,9 +9,9 @@ import org.scalatest.FunSuite
 class FeatureMinusSuite extends FunSuite {
 
   val bs = BlockSet(List(
-    Block("chr1", 900, 1000, Plus),
-    Block("chr1", 2000, 2100, Plus),
-    Block("chr1", 3000, 4000, Plus)
+    Block("1", 900, 1000, Plus),
+    Block("1", 2000, 2100, Plus),
+    Block("1", 3000, 4000, Plus)
   ))
 
   test("Generic feature minus generic feature") {

@@ -109,7 +109,11 @@ a single contiguous block, and <a href="BlockSet.html" class="extype" name="feat
       </a>
     </span>
       <p class="shortcomment cmt">A single contiguous block on a chromosome with an <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.</p><div class="fullcomment"><div class="comment cmt"><p>A single contiguous block on a chromosome with an <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.
-</p></div><dl class="paramcmts block"><dt class="param">chr</dt><dd class="cmt"><p>Chromosome name</p></dd><dt class="param">start</dt><dd class="cmt"><p>Zero-based start position (inclusive)</p></dd><dt class="param">end</dt><dd class="cmt"><p>Zero-based end position (exclusive)</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>Block orientation</p></dd></dl></div>
+</p></div><dl class="paramcmts block"><dt class="param">chr</dt><dd class="cmt"><p>Chromosome name. Cannot start with &quot;chr&quot; (otherwise an <span class="extype" name="IllegalArgumentException">IllegalArgumentException</span> is thrown.
+           All code in this library automatically strips &quot;chr&quot; from feature chromosome names before
+           instantiating <a href="Block.html" class="extype" name="feature.Block">Block</a>s. For example, <a href="../format/GTF22Record.html" class="extype" name="format.GTF22Record">format.GTF22Record</a> strips &quot;chr&quot; from GTF2.2 lines
+           before creating <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s. Client code that implements new ways to create features will need
+           to do this as well.</p></dd><dt class="param">start</dt><dd class="cmt"><p>Zero-based start position (inclusive)</p></dd><dt class="param">end</dt><dd class="cmt"><p>Zero-based end position (exclusive)</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>Block orientation</p></dd></dl></div>
     </li><li name="feature.BlockSet" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="BlockSetextendsRegionwithProductwithSerializable"></a>
       <a id="BlockSet:BlockSet"></a>

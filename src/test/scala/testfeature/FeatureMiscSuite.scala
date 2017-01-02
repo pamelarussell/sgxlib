@@ -96,13 +96,25 @@ class FeatureMiscSuite extends FunSuite {
     assert(mr2 != tr)
     assert(mr != mr2)
     assert(mr2 != mr)
+    assert(!gf.equals(tr))
+    assert(!gf.equals(mr))
+    assert(!gf.equals(mr2))
+    assert(!tr.equals(gf))
+    assert(!tr.equals(mr))
+    assert(!tr.equals(mr2))
+    assert(!mr.equals(gf))
+    assert(!mr2.equals(gf))
+    assert(!mr.equals(tr))
+    assert(!mr2.equals(tr))
+    assert(!mr.equals(mr2))
+    assert(!mr2.equals(mr))
   }
 
   test("Transcript and mRNA valid orientation") {
-    val b1 = Block("chr1", 1000, 2000, Unstranded)
-    val b2 = Block("chr1", 3000, 4000, Unstranded)
-    val b3 = Block("chr1", 1000, 2000, Both)
-    val b4 = Block("chr1", 3000, 4000, Both)
+    val b1 = Block("1", 1000, 2000, Unstranded)
+    val b2 = Block("1", 3000, 4000, Unstranded)
+    val b3 = Block("1", 1000, 2000, Both)
+    val b4 = Block("1", 3000, 4000, Both)
     val bs1 = BlockSet(List(b1, b2))
     val bs2 = BlockSet(List(b3, b4))
     intercept[IllegalArgumentException]{ new Transcript(b1, Some("name"), Some("gene")) }
@@ -116,15 +128,15 @@ class FeatureMiscSuite extends FunSuite {
   }
 
   test("Num blocks") {
-    assert(new GenericFeature(Block("chr1", 1000, 2000, Plus), Some("name")).numBlocks === 1)
+    assert(new GenericFeature(Block("1", 1000, 2000, Plus), Some("name")).numBlocks === 1)
     assert(new GenericFeature(chr1_100_200_300_400_plus, Some("name")).numBlocks === 2)
     assert(new GenericFeature(chr1_100_200_300_400_minus, Some("name")).numBlocks === 2)
     assert(new GenericFeature(chr1_1000_1100_1200_1300_1900_2000_plus, Some("name")).numBlocks === 3)
-    assert(new Transcript(Block("chr1", 1000, 2000, Plus), Some("name"), Some("gene")).numBlocks === 1)
+    assert(new Transcript(Block("1", 1000, 2000, Plus), Some("name"), Some("gene")).numBlocks === 1)
     assert(new Transcript(chr1_100_200_300_400_plus, Some("name"), Some("gene")).numBlocks === 2)
     assert(new Transcript(chr1_100_200_300_400_minus, Some("name"), Some("gene")).numBlocks === 2)
     assert(new Transcript(chr1_1000_1100_1200_1300_1900_2000_plus, Some("name"), Some("gene")).numBlocks === 3)
-    assert(MessengerRNA(Block("chr1", 1000, 2000, Plus), 1000, 1099, Some("name"), Some("gene")).numBlocks === 1)
+    assert(MessengerRNA(Block("1", 1000, 2000, Plus), 1000, 1099, Some("name"), Some("gene")).numBlocks === 1)
     assert(MessengerRNA(chr1_100_200_300_400_plus, 150, 180, Some("name"), Some("gene")).numBlocks === 2)
     assert(MessengerRNA(chr1_100_200_300_400_minus, 150, 180, Some("name"), Some("gene")).numBlocks === 2)
     assert(MessengerRNA(chr1_1000_1100_1200_1300_1900_2000_plus, 1000, 1220, Some("name"), Some("gene")).numBlocks === 3)
@@ -146,11 +158,11 @@ class FeatureMiscSuite extends FunSuite {
 
   test("toString") {
     assert(new GenericFeature(chr1_1900_2000_3000_4000_plus, Some("name")).toString ===
-      "(feature.GenericFeature[[chr1:1900-2000:+], [chr1:3000-4000:+]],Some(name))")
+      "(feature.GenericFeature[[1:1900-2000:+], [1:3000-4000:+]],Some(name))")
     assert(new Transcript(chr1_1900_2000_3000_4000_plus, Some("name"), Some("gene")).toString ===
-      "(feature.Transcript[[chr1:1900-2000:+], [chr1:3000-4000:+]],Some(name),Some(gene))")
+      "(feature.Transcript[[1:1900-2000:+], [1:3000-4000:+]],Some(name),Some(gene))")
     assert(MessengerRNA(chr1_1900_2000_3000_4000_plus, 1900, 1906, Some("name"), Some("gene")).toString ===
-      "(feature.MessengerRNA[[chr1:1900-2000:+], [chr1:3000-4000:+]],Some(name),Some(gene),CDS:1900-1906)")
+      "(feature.MessengerRNA[[1:1900-2000:+], [1:3000-4000:+]],Some(name),Some(gene),CDS:1900-1906)")
   }
 
 }

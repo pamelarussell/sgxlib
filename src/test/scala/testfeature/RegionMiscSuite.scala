@@ -53,8 +53,8 @@ class RegionMiscSuite extends FunSuite {
 
   def regionChr(): Unit = {
     test("Region chr") {
-      assert(chr1_1000_2000_both.chr === "chr1")
-      assert(chr1_100_200_300_400_plus.chr === "chr1")
+      assert(chr1_1000_2000_both.chr === "1")
+      assert(chr1_100_200_300_400_plus.chr === "1")
       intercept[IllegalStateException](Empty.chr)
     }
   }
@@ -86,10 +86,10 @@ class RegionMiscSuite extends FunSuite {
 
   def regionGetBlocks(): Unit = {
     test("Region get blocks") {
-      assert(chr1_1000_2000_minus.blocks === List(Block("chr1", 1000, 2000, Minus)))
+      assert(chr1_1000_2000_minus.blocks === List(Block("1", 1000, 2000, Minus)))
       assert(chr1_100_200_300_400_plus.blocks === List(
-        Block("chr1", 100, 200, Plus),
-        Block("chr1", 300, 400, Plus)
+        Block("1", 100, 200, Plus),
+        Block("1", 300, 400, Plus)
       ))
       assert(Empty.blocks === Nil)
     }

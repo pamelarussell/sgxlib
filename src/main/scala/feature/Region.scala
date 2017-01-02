@@ -442,7 +442,11 @@ case object Empty extends Region {
 
 /** A single contiguous block on a chromosome with an [[Orientation]].
   *
-  * @param chr Chromosome name
+  * @param chr Chromosome name. Cannot start with "chr" (otherwise an [[IllegalArgumentException]] is thrown).
+  *            All code in this library automatically strips "chr" from feature chromosome names before
+  *            instantiating [[Block]]s. For example, [[format.GTF22Record]] strips "chr" from GTF2.2 lines
+  *            before creating [[Feature]]s. Client code that implements new ways to create features will need
+  *            to do this as well.
   * @param start Zero-based start position (inclusive)
   * @param end Zero-based end position (exclusive)
   * @param orientation Block orientation
@@ -452,6 +456,7 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
   if(start < 0) throw new IllegalArgumentException("Start must be nonnegative")
   if(end <= start) throw new IllegalArgumentException(s"End ($end) must be greater than start ($start). Otherwise use empty region.")
   if(chr.isEmpty) throw new IllegalArgumentException("Chromosome name must not be empty")
+  if(chr.startsWith("chr")) throw new IllegalArgumentException("Chromosome name must not start with \"chr\"")
 
   override def overlaps(feat: Region): Boolean = feat match {
     case Empty => false
@@ -706,8 +711,7 @@ final case class BlockSet(blocks: List[Block]) extends Region {
 
   override def chrPos(relativePos: Int): Int = {
     if(relativePos < 0 || relativePos >= size) throw new IllegalArgumentException("Relative position must be between 0 and region size")
-    if(blocks.size < 2) throw new IllegalStateException("There are less than 2 blocks")
-    else orientation match {
+    orientation match {
       case Plus =>
         val firstBlockSize = blocks.head.size
         if(firstBlockSize > relativePos) start + relativePos // The relative position is within the first block

@@ -17,7 +17,7 @@ class RegionConstructorSuite extends FunSuite {
     test("Block constructor") {
       intercept[IllegalArgumentException](Block("", -1, 20, Plus))
       intercept[IllegalArgumentException](Block("", 10, 20, Plus))
-      intercept[IllegalArgumentException](Block("chr1", 20, 10, Plus))
+      intercept[IllegalArgumentException](Block("1", 20, 10, Plus))
     }
   }
 
@@ -41,7 +41,8 @@ class RegionConstructorSuite extends FunSuite {
   def illegalBlock(): Unit = {
     test("Illegal blocks") {
       intercept[IllegalArgumentException](Block("", 100, 200, Plus))
-      intercept[IllegalArgumentException](Block("chr1", 100, 100, Plus))
+      intercept[IllegalArgumentException](Block("1", 100, 100, Plus))
+      intercept[IllegalArgumentException](Block("1", 100, 100, Plus))
       intercept[IllegalArgumentException](Block("chr1", 100, 99, Plus))
     }
   }

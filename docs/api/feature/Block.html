@@ -52,7 +52,11 @@
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A single contiguous block on a chromosome with an <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.
-</p></div><dl class="paramcmts block"><dt class="param">chr</dt><dd class="cmt"><p>Chromosome name</p></dd><dt class="param">start</dt><dd class="cmt"><p>Zero-based start position (inclusive)</p></dd><dt class="param">end</dt><dd class="cmt"><p>Zero-based end position (exclusive)</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>Block orientation</p></dd></dl><div class="toggleContainer block">
+</p></div><dl class="paramcmts block"><dt class="param">chr</dt><dd class="cmt"><p>Chromosome name. Cannot start with &quot;chr&quot; (otherwise an <span class="extype" name="IllegalArgumentException">IllegalArgumentException</span> is thrown.
+           All code in this library automatically strips &quot;chr&quot; from feature chromosome names before
+           instantiating <a href="" class="extype" name="feature.Block">Block</a>s. For example, <a href="../format/GTF22Record.html" class="extype" name="format.GTF22Record">format.GTF22Record</a> strips &quot;chr&quot; from GTF2.2 lines
+           before creating <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s. Client code that implements new ways to create features will need
+           to do this as well.</p></dd><dt class="param">start</dt><dd class="cmt"><p>Zero-based start position (inclusive)</p></dd><dt class="param">end</dt><dd class="cmt"><p>Zero-based end position (exclusive)</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>Block orientation</p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="Region.html" class="extype" name="feature.Region">Region</a>, <span class="extype" name="scala.math.Ordered">Ordered</span>[<a href="Region.html" class="extype" name="feature.Region">Region</a>], <span class="extype" name="java.lang.Comparable">Comparable</span>[<a href="Region.html" class="extype" name="feature.Region">Region</a>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -107,7 +111,11 @@
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">chr</dt><dd class="cmt"><p>Chromosome name</p></dd><dt class="param">start</dt><dd class="cmt"><p>Zero-based start position (inclusive)</p></dd><dt class="param">end</dt><dd class="cmt"><p>Zero-based end position (exclusive)</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>Block orientation</p></dd></dl></div>
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">chr</dt><dd class="cmt"><p>Chromosome name. Cannot start with &quot;chr&quot; (otherwise an <span class="extype" name="IllegalArgumentException">IllegalArgumentException</span> is thrown.
+           All code in this library automatically strips &quot;chr&quot; from feature chromosome names before
+           instantiating <a href="" class="extype" name="feature.Block">Block</a>s. For example, <a href="../format/GTF22Record.html" class="extype" name="format.GTF22Record">format.GTF22Record</a> strips &quot;chr&quot; from GTF2.2 lines
+           before creating <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s. Client code that implements new ways to create features will need
+           to do this as well.</p></dd><dt class="param">start</dt><dd class="cmt"><p>Zero-based start position (inclusive)</p></dd><dt class="param">end</dt><dd class="cmt"><p>Zero-based end position (exclusive)</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>Block orientation</p></dd></dl></div>
     </li></ol>
             </div>
 
@@ -306,7 +314,11 @@ chromosomes, an exception is thrown.
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Chromosome name</p><div class="fullcomment"><div class="comment cmt"><p>Chromosome name</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Block">Block</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+      <p class="shortcomment cmt">Chromosome name.</p><div class="fullcomment"><div class="comment cmt"><p>Chromosome name. Cannot start with &quot;chr&quot; (otherwise an <span class="extype" name="IllegalArgumentException">IllegalArgumentException</span> is thrown.
+           All code in this library automatically strips &quot;chr&quot; from feature chromosome names before
+           instantiating <a href="" class="extype" name="feature.Block">Block</a>s. For example, <a href="../format/GTF22Record.html" class="extype" name="format.GTF22Record">format.GTF22Record</a> strips &quot;chr&quot; from GTF2.2 lines
+           before creating <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s. Client code that implements new ways to create features will need
+           to do this as well.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Block">Block</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
     </li><li name="feature.Block#chrPos" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="chrPos(relativePos:Int):Int"></a>
       <a id="chrPos(Int):Int"></a>

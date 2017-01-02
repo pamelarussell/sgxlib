@@ -253,8 +253,8 @@ sealed class Transcript(override val blocks: Region, name: Option[String], val g
 
   // Function to validate the parameters
   private def validateParams(): Unit = {
-    if(name == Some("")) throw new IllegalArgumentException("Name cannot be empty string. Use None instead.")
-    if(geneId == Some("")) throw new IllegalArgumentException("geneId cannot be empty string. Use None instead.")
+    if(name.contains("")) throw new IllegalArgumentException("Name cannot be empty string. Use None instead.")
+    if(geneId.contains("")) throw new IllegalArgumentException("geneId cannot be empty string. Use None instead.")
     val or = getOrientation
     // Require that orientation be positive or negative
     if(or != Plus && or != Minus) throw new IllegalArgumentException(s"Invalid orientation: $getOrientation. Options: ${Plus.toString}, ${Minus.toString}")
@@ -393,40 +393,48 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
   // Function to validate the constructor parameters
   private def validateParams(): Unit = {
 
-    if(name == Some("")) throw new IllegalArgumentException("Name cannot be empty string. Use None instead.")
-    if(geneId == Some("")) throw new IllegalArgumentException("geneId cannot be empty string. Use None instead.")
+    if(name.contains("")) throw new IllegalArgumentException("Name cannot be empty string. Use None instead.")
+    if(geneId.contains("")) throw new IllegalArgumentException("geneId cannot be empty string. Use None instead.")
 
     // Require that CDS start be at least feature start
-    if(cdsStart < getStart) throw new IllegalArgumentException(s"CDS start ($cdsStart) must be >= feature start ($getStart)")
+    if(cdsStart < getStart) throw new IllegalArgumentException(
+      s"CDS start ($cdsStart) must be >= feature start ($getStart) (name: ${name.toString})")
     // Require that CDS end be at most feature end
-    if(cdsEnd > getEnd) throw new IllegalArgumentException(s"CDS end ($cdsEnd) must be <= feature end ($getEnd)")
+    if(cdsEnd > getEnd) throw new IllegalArgumentException(
+      s"CDS end ($cdsEnd) must be <= feature end ($getEnd) (name: ${name.toString})")
     // Require that CDS start be less than CDS end
-    if(cdsStart >= cdsEnd) throw new IllegalArgumentException(s"CDS start must be < CDS end ($cdsStart, $cdsEnd)")
+    if(cdsStart >= cdsEnd) throw new IllegalArgumentException(
+      s"CDS start must be < CDS end ($cdsStart, $cdsEnd) (name: ${name.toString})")
     val chr = getChr
     val or = getOrientation
 
     // Validate CDS start
     val st = Block(chr, cdsStart, cdsStart + 1, or) // Start position
     // Require that CDS start overlap feature
-    if(!st.overlaps(blocks)) throw new IllegalArgumentException(s"CDS start ($cdsStart) must overlap blocks (${blocks.toString})")
+    if(!st.overlaps(blocks)) throw new IllegalArgumentException(
+      s"CDS start ($cdsStart) must overlap blocks (${blocks.toString}) (name: ${name.toString})")
 
     // Validate CDS end
     val en = Block(chr, cdsEnd, cdsEnd + 1, or) // End position
     // CDS end cannot be a block start
-    if(blocks.blocks.exists(blk => cdsEnd == blk.start)) throw new IllegalArgumentException(s"CDS end ($cdsStart) can't be a block start (${blocks.toString})")
+    if(blocks.blocks.exists(blk => cdsEnd == blk.start)) throw new IllegalArgumentException(
+      s"CDS end ($cdsStart) can't be a block start (${blocks.toString}) (name: ${name.toString})")
     // CDS end must either overlap a block or be a block end
     if(!en.overlaps(blocks)) {
       if(!blocks.blocks.exists(blk => cdsEnd == blk.end)) {
-        throw new IllegalArgumentException(s"CDS end ($cdsStart) must overlap blocks (${blocks.toString}) or equal end of a block")
+        throw new IllegalArgumentException(s"CDS end ($cdsStart) must overlap blocks " +
+          s"(${blocks.toString}) or equal end of a block (name: ${name.toString})")
       }
     }
 
     // Validate CDS length
     val cdsSize = getCDS.size
     // CDS size must be at least 6
-    if(cdsSize < 6) throw new CDSSizeException("CDS size must be at least 6")
+    if(cdsSize < 6) throw new CDSSizeException(s"CDS size must be at least 6 " +
+      s"(CDS size: $cdsSize, name: ${name.toString})")
     // CDS size must be divisible by 3
-    if(cdsSize % 3 != 0) throw new CDSSizeException(s"CDS size must be divisible by 3 (CDS size: $cdsSize)")
+    if(cdsSize % 3 != 0) throw new CDSSizeException(
+      s"CDS size must be divisible by 3 (CDS size: $cdsSize, name: ${name.toString})")
 
   }
 

@@ -9,8 +9,8 @@ import org.scalatest.FunSuite
 class FeatureUnionSuite extends FunSuite {
 
   val bs = BlockSet(List(
-    Block("chr1", 900, 2100, Plus),
-    Block("chr1", 3000, 4000, Plus)
+    Block("1", 900, 2100, Plus),
+    Block("1", 3000, 4000, Plus)
   ))
 
   test("Generic feature union generic feature") {

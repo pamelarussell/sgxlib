@@ -57,7 +57,7 @@ class GTF22Record(private val line: String) extends FeatureBuilderModifier {
   lazy val ignore: Boolean = isComment || featureType == Ignore
 
   /** The chromosome or reference sequence name. */
-  lazy val chr: String = tokens(0)
+  lazy val chr: String = tokens(0).replaceFirst("^chr", "")
 
   /** The annotation source (see [[http://mblab.wustl.edu/GTF22.html format specification]]). */
   lazy val source: String = tokens(1)

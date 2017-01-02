@@ -211,7 +211,12 @@ final class GTF22FeatureSet(file: String) extends FeatureSet[Feature] {
     *         there are no overlappers
     */
   override def overlappers(chr: String, start: Int, end: Int, orientation: Orientation): Iterator[Feature] =
-    overlappers(new GenericFeature(Block(chr, start, end, orientation), None))
+    if(tree.contains(chr)) overlappers(new GenericFeature(Block(chr, start, end, orientation), None))
+    else {
+      val c = chr.replaceFirst("^chr", "")
+      if(tree.contains(c)) overlappers(new GenericFeature(Block(c, start, end, orientation), None))
+      else Iterator.empty
+    }
 
   /** Returns an iterator over overlappers of a given [[Feature]].
     *

@@ -16,35 +16,35 @@ class RegionContainsSuite extends FunSuite {
   test("Block contains") {
     assert(!chr2_1000_2000_plus.contains(Empty), "Block should not contain empty")
     assert(chr2_1000_2000_plus.contains(chr2_1000_2000_plus), "Block should contain itself")
-    assert(!chr2_1000_2000_plus.contains(Block("chr2", 1100, 1200, Minus)), "Incompatible orientations")
-    assert(!chr2_1000_2000_plus.contains(Block("chr2", 1100, 1200, Unstranded)), "Incompatible orientations")
-    assert(chr2_1000_2000_plus.contains(Block("chr2", 1100, 1200, Plus)), "Block contains block")
-    assert(chr2_1000_2000_plus.contains(Block("chr2", 1100, 1200, Both)), "Block contains block")
-    assert(!chr2_1000_2000_plus.contains(Block("chr2", 1100, 2001, Plus)), "Overlapping not contained")
-    assert(!chr2_1000_2000_plus.contains(Block("chr2", 999, 1500, Plus)), "Overlapping not contained")
-    assert(Block("chr1", 500, 6500, Plus).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
+    assert(!chr2_1000_2000_plus.contains(Block("2", 1100, 1200, Minus)), "Incompatible orientations")
+    assert(!chr2_1000_2000_plus.contains(Block("2", 1100, 1200, Unstranded)), "Incompatible orientations")
+    assert(chr2_1000_2000_plus.contains(Block("2", 1100, 1200, Plus)), "Block contains block")
+    assert(chr2_1000_2000_plus.contains(Block("2", 1100, 1200, Both)), "Block contains block")
+    assert(!chr2_1000_2000_plus.contains(Block("2", 1100, 2001, Plus)), "Overlapping not contained")
+    assert(!chr2_1000_2000_plus.contains(Block("2", 999, 1500, Plus)), "Overlapping not contained")
+    assert(Block("1", 500, 6500, Plus).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
       "Block contains block set")
-    assert(!Block("chr2", 500, 6500, Plus).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
+    assert(!Block("2", 500, 6500, Plus).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
       "Different chromosomes")
-    assert(Block("chr1", 500, 6500, Both).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
+    assert(Block("1", 500, 6500, Both).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
       "Block contains block set")
-    assert(!Block("chr1", 500, 600, Plus).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
+    assert(!Block("1", 500, 600, Plus).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
       "Different spans")
-    assert(!Block("chr1", 7000, 8000, Plus).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
+    assert(!Block("1", 7000, 8000, Plus).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
       "Different spans")
-    assert(!Block("chr1", 2500, 2600, Plus).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
+    assert(!Block("1", 2500, 2600, Plus).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
       "Block in intron of BlockSet")
-    assert(!Block("chr1", 500, 6500, Unstranded).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
+    assert(!Block("1", 500, 6500, Unstranded).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
       "Incompatible orientations")
-    assert(!Block("chr1", 1500, 6500, Unstranded).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
+    assert(!Block("1", 1500, 6500, Unstranded).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
       "Overlapping not contained")
-    assert(!Block("chr1", 500, 5500, Unstranded).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
+    assert(!Block("1", 500, 5500, Unstranded).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
       "Overlapping not contained")
-    assert(!Block("chr1", 3000, 4000, Unstranded).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
+    assert(!Block("1", 3000, 4000, Unstranded).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
       "Overlapping not contained")
-    assert(!Block("chr1", 100, 200, Plus).contains(Block("chr2", 100, 200, Plus)), "Different chromosomes")
-    assert(!Block("chr1", 100, 200, Plus).contains(Block("chr1", 200, 300, Plus)), "Different spans")
-    assert(!Block("chr1", 100, 200, Plus).contains(Block("chr1", 50, 60, Plus)), "Different spans")
+    assert(!Block("1", 100, 200, Plus).contains(Block("2", 100, 200, Plus)), "Different chromosomes")
+    assert(!Block("1", 100, 200, Plus).contains(Block("1", 200, 300, Plus)), "Different spans")
+    assert(!Block("1", 100, 200, Plus).contains(Block("1", 50, 60, Plus)), "Different spans")
   }
 
   test("BlockSet contains") {
@@ -64,49 +64,49 @@ class RegionContainsSuite extends FunSuite {
     // Block set nested inside block sharing one endpoint
     assert(!chr1_1000_1100_1200_1300_plus.contains(chr1_1000_2000_both), "Block completely contains block set, sharing one endpoint")
     // Block nested inside block set sharing one endpoint
-    assert(chr1_1000_1100_1200_1300_1900_2000_plus.contains(Block("chr1", 1250, 1300, Plus)), "Block nested inside block set sharing one endpoint")
+    assert(chr1_1000_1100_1200_1300_1900_2000_plus.contains(Block("1", 1250, 1300, Plus)), "Block nested inside block set sharing one endpoint")
     // Overlapping one block off end
     assert(!chr1_1900_2100_3000_4000_plus.contains(chr1_1000_2000_both), "Overlapping one block off end")
-    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("chr1", 2000, 2150, Plus)), "Overlapping one block off end")
+    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("1", 2000, 2150, Plus)), "Overlapping one block off end")
     // Overlapping two blocks off end
-    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("chr1", 1550, 1850, Plus)), "Overlapping two blocks off end")
+    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("1", 1550, 1850, Plus)), "Overlapping two blocks off end")
     // Overlapping one block and intron
     assert(!chr1_1500_1600_2100_2300_plus.contains(chr1_1000_2000_both), "Overlapping one block and an intron")
     // Overlapping two blocks and intron
     assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(chr1_1000_2000_both), "Overlapping two blocks and an intron")
     // Overlapping three blocks and intron
-    assert(!chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus.contains(Block("chr1", 500, 6500, Plus)), "Overlapping three blocks and an intron")
+    assert(!chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus.contains(Block("1", 500, 6500, Plus)), "Overlapping three blocks and an intron")
     // Same span as one block
     assert(chr1_1000_2000_3000_4000_plus.contains(chr1_1000_2000_both), "Same span as one block")
-    assert(chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("chr1", 1700, 1800, Plus)), "Same span as one block")
+    assert(chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("1", 1700, 1800, Plus)), "Same span as one block")
     // Contains one block sharing an endpoint
-    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("chr1", 1650, 1800, Plus)), "Contains one block sharing an endpoint")
+    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("1", 1650, 1800, Plus)), "Contains one block sharing an endpoint")
     // Non-overlapping because different spans
     assert(!chr1_100_200_300_400_plus.contains(chr1_1000_2000_plus_1), "Non-overlapping because different spans")
-    assert(!chr1_100_200_300_400_plus.contains(Block("chr1", 500, 600, Both)), "Non-overlapping because different spans")
-    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("chr1", 1000, 1100, Both)), "Non-overlapping because different spans")
-    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("chr1", 2400, 2500, Both)), "Non-overlapping because different spans")
+    assert(!chr1_100_200_300_400_plus.contains(Block("1", 500, 600, Both)), "Non-overlapping because different spans")
+    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("1", 1000, 1100, Both)), "Non-overlapping because different spans")
+    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("1", 2400, 2500, Both)), "Non-overlapping because different spans")
     // Non-overlapping because different orientations
     assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(chr1_1000_2000_minus), "Non-overlapping because different orientations")
     // Different chromosomes
     assert(!chr1_1000_2000_3000_4000_5000_6000_7000_8000_minus.contains(chr2_1000_2000_plus), "Different chromosomes")
     // Same span as an intron
     // Two blocks
-    assert(!chr1_100_200_300_400_plus.contains(Block("chr1", 200, 300, Plus)), "Same span as an intron")
+    assert(!chr1_100_200_300_400_plus.contains(Block("1", 200, 300, Plus)), "Same span as an intron")
     // Three blocks
-    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("chr1", 1800, 2100, Plus)), "Same span as an intron")
+    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("1", 1800, 2100, Plus)), "Same span as an intron")
     // Adjacent to span
     // Two blocks
-    assert(!chr1_100_200_300_400_plus.contains(Block("chr1", 400, 500, Plus)), "Adjacent to span")
+    assert(!chr1_100_200_300_400_plus.contains(Block("1", 400, 500, Plus)), "Adjacent to span")
     // Three blocks
-    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("chr1", 1400, 1500, Plus)), "Same span as an intron")
+    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("1", 1400, 1500, Plus)), "Same span as an intron")
     // 1bp gap between blocks
     // In intron
-    assert(!chr1_100_200_300_400_plus.contains(Block("chr1", 201, 299, Plus)), "1bp gap between blocks")
-    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("chr1", 1601, 1700, Plus)), "1bp gap between blocks")
+    assert(!chr1_100_200_300_400_plus.contains(Block("1", 201, 299, Plus)), "1bp gap between blocks")
+    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("1", 1601, 1700, Plus)), "1bp gap between blocks")
     // Outside span
-    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("chr1", 1400, 1499, Plus)), "1bp gap between blocks")
-    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("chr1", 2300, 2400, Plus)), "1bp gap between blocks")
+    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("1", 1400, 1499, Plus)), "1bp gap between blocks")
+    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("1", 2300, 2400, Plus)), "1bp gap between blocks")
 
     /*
     Block set contains block set
