@@ -10,8 +10,8 @@ import shared.GTF22Data._
   */
 class FeatureSetSuite extends FunSuite {
 
-  val fewFeatures: FeatureSet[Feature] = new GTF22FeatureSet("resources/sample_genes.gtf")
-  val threeChrs: FeatureSet[Feature] = new GTF22FeatureSet("resources/Homo_sapiens.GRCh38.86.chr_20_21_22.gtf")
+  val fewFeatures: FeatureSet[Feature] = new GTF22FeatureSet(getClass.getResource("/sample_genes.gtf").getPath)
+  val threeChrs: FeatureSet[Feature] = new GTF22FeatureSet(getClass.getResource("/Homo_sapiens.GRCh38.86.chr_20_21_22.gtf").getPath)
 
   test("Three chromosomes") {
     assert(threeChrs.contains(ENST00000411780))
