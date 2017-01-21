@@ -19,6 +19,22 @@ object Unstranded extends Orientation {override def toString: String = "unstrand
 /** Utility methods for calculations on [[Orientation]]s */
 object Orientation {
 
+  /** Returns the reverse of the specified [[Orientation]].
+    *
+    * [[Plus]] and [[Minus]] are swapped by this function. [[Both]] and [[Unstranded]] are unchanged.
+    *
+    * @param o [[Orientation]] to get the reverse of
+    * @return The reverse of the specified [[Orientation]]
+    */
+  def invert(o: Orientation): Orientation = {
+    o match {
+      case Plus => Minus
+      case Minus => Plus
+      case Both => Both
+      case Unstranded => Unstranded
+    }
+  }
+
   private def consensus(os: (Orientation, Orientation)): Orientation = {
     os match {
       case (os._1, os._1) => os._1

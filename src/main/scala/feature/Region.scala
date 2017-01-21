@@ -21,6 +21,18 @@ sealed abstract class Region extends Ordered[Region] {
     */
   def overlaps(o: Region): Boolean
 
+  /** Returns a boolean value representing whether this [[Region]] overlaps another [[Region]]
+    * and their introns are compatible.
+    *
+    * That is, no INTERNAL block boundary for one of the [[Region]]s can fall strictly within a
+    * [[Block]] of the other [[Region]].
+    *
+    * @param o Other [[Region]]
+    * @return True if the [[Region]]s overlap and their introns are compatible,
+    *         false otherwise
+    */
+  def overlapsCompatibleIntrons(o: Region): Boolean
+
   /** Returns a boolean value representing whether this [[Region]] contains another [[Region]].
     *
     * In order to contain the other, the two [[Region]]s must be on the same chromosome, have
@@ -127,6 +139,29 @@ sealed abstract class Region extends Ordered[Region] {
     * @return [[Region]] representing this with the additional [[Block]] merged in
     */
   def addBlock(block: Block): Region
+
+  /** Returns a list of [[Block]]s representing the introns of this [[Region]].
+    *
+    * The returned list is in order from left to right. Each [[Block]] in the returned list is the span of a gap
+    * between two [[Block]]s of this [[Region]]. The returned [[Block]]s have the same [[Orientation]]
+    * as this [[Region]]. The start position of each returned [[Block]] is equal to the end position (exclusive)
+    * of the previous adjacent [[Block]] in this [[Region]]. The end position of each returned [[Block]] (exclusive)
+    * is equal to the start position of the following adjacent [[Block]] in this [[Region]].
+    *
+    * If this [[Region]] is empty or has only one [[Block]], Nil is returned.
+    *
+    * @return A list of [[Block]]s representing the gaps between the [[Block]]s of this [[Region]], or Nil if this
+    *         [[Region]] has less than two [[Block]]s.
+    */
+  def getIntrons: List[Block] = {
+    if(numBlocks < 2) Nil
+    else {
+      val blockStarts: List[Int] = blocks.map(b => b.start)
+      val blockEnds: List[Int] = blocks.map(b => b.end)
+      blockEnds.zip(blockStarts.tail).map(p => Block(chr, p._1, p._2, orientation))
+    }
+  }
+
 
   /** Returns a [[Region]] resulting from trimming back the start and end positions of this [[Region]].
     *
@@ -385,6 +420,9 @@ case object Empty extends Region {
   /** Returns false. */
   override def overlaps(feat: Region): Boolean = false
 
+  /** Returns false. */
+  override def overlapsCompatibleIntrons(o: Region): Boolean = false
+
   /** Returns the other [[Region]]. */
   override def union(feat: Region): Region = feat
 
@@ -438,6 +476,7 @@ case object Empty extends Region {
 
   /** Throws an IllegalStateException. */
   override def chrPos(relativePos: Int): Int = throw new IllegalStateException("Empty region")
+
 }
 
 /** A single contiguous block on a chromosome with an [[Orientation]].
@@ -464,11 +503,14 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
       if(chr != c) false
       else if(!Orientation.isCompatible(orientation, o)) false
       else (start < e && e <= end) || (s < end && end <= e)
-    case BlockSet(bs) =>
-      if(chr != feat.chr) false
-      else if(!Orientation.isCompatible(orientation, feat.orientation)) false
-      else bs.foldLeft(false)((c: Boolean, b: Block) => c || b.overlaps(this)) // Check for overlap of any block
+    case bs: BlockSet => bs.overlaps(this)
   }
+
+  override def overlapsCompatibleIntrons(o: Region): Boolean = o match {
+      case Empty => false
+      case b: Block => overlaps(b)
+      case bs: BlockSet => bs.overlapsCompatibleIntrons(this)
+    }
 
   override def union(feat: Region): Region = feat match {
     case Empty => this
@@ -582,7 +624,7 @@ object Block {
   */
 final case class BlockSet(blocks: List[Block]) extends Region {
 
-  override val end = validateAndGetEnd()
+  override val end: Int = validateAndGetEnd()
 
   private def validateAndGetEnd(): Int = {
     if(blocks.length < 2) throw new IllegalArgumentException(s"Block set must have at least two blocks: ${blocks.mkString(", ")}")
@@ -602,6 +644,20 @@ final case class BlockSet(blocks: List[Block]) extends Region {
     case Empty => false
     case b: Block => blocks.foldLeft(false)((bool, blk) => bool || b.overlaps(blk))
     case BlockSet(bs) => bs.foldLeft(false)((bool, blk) => bool || blk.overlaps(this))
+  }
+
+  override def overlapsCompatibleIntrons(o: Region): Boolean = o match {
+    case Empty => false
+    case b: Block => overlaps(b) && !getIntrons.foldLeft(false)((bool, blk) => bool || b.overlaps(blk))
+    case bs: BlockSet =>
+      def fromList(blks: List[Block]): Region = {
+        blks match {
+          case Nil => Empty
+          case blk :: Nil => blk
+          case blk1 :: blk2 :: tail => BlockSet(blks)
+        }
+      }
+      overlaps(bs) && !overlaps(fromList(bs.getIntrons)) && !fromList(getIntrons).overlaps(bs)
   }
 
   override def union(feat: Region): Region = feat match {

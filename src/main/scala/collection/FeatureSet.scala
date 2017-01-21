@@ -63,7 +63,7 @@ trait FeatureSet[T <: Feature] {
 
 /** A [[FeatureSet]] constructed from annotations specified in a GTF2.2 file.
   *
-  * GTF2.2 [[http://mblab.wustl.edu/GTF22.html format specification]]. See [[GTF22Record]] for details
+  * GTF2.2 [[http://mblab.wustl.edu/GTF22.html feature.format specification]]. See [[GTF22Record]] for details
   * on how GTF2.2 records are interpreted and incorporated into [[Feature]]s.
   *
   * @param file Path of GTF2.2 file

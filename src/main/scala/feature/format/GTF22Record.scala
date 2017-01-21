@@ -1,9 +1,9 @@
-package format
+package feature.format
 
 import feature._
 
-/** A record representing the information contained in one line of a file in GTF2.2 format
-  * ([[http://mblab.wustl.edu/GTF22.html format specification]])
+/** A record representing the information contained in one line of a file in GTF2.2 feature.format
+  * ([[http://mblab.wustl.edu/GTF22.html feature.format specification]])
   *
   * @param line String containing one valid GTF2.2 line with or without trailing newline character
   */
@@ -52,22 +52,22 @@ class GTF22Record(private val line: String) extends FeatureBuilderModifier {
   lazy val isComment: Boolean = line.startsWith("#")
 
   /** True if the line is to be ignored, either because it is a comment or because
-    * the feature type is not supported (see [[http://mblab.wustl.edu/GTF22.html format specification]]).
+    * the feature type is not supported (see [[http://mblab.wustl.edu/GTF22.html feature.format specification]]).
     */
   lazy val ignore: Boolean = isComment || featureType == Ignore
 
   /** The chromosome or reference sequence name. */
   lazy val chr: String = tokens(0).replaceFirst("^chr", "")
 
-  /** The annotation source (see [[http://mblab.wustl.edu/GTF22.html format specification]]). */
+  /** The annotation source (see [[http://mblab.wustl.edu/GTF22.html feature.format specification]]). */
   lazy val source: String = tokens(1)
 
-  /** The feature type. For valid values see [[http://mblab.wustl.edu/GTF22.html format specification]]. */
+  /** The feature type. For valid values see [[http://mblab.wustl.edu/GTF22.html feature.format specification]]. */
   lazy val featureType: FeatureType = FeatureType.forLabel(tokens(2))
 
   /** Zero-based start position in reference coordinates, inclusive.
     *
-    * GTF2.2 format uses 1-based positions. This library uses 0-based positions.
+    * GTF2.2 feature.format uses 1-based positions. This library uses 0-based positions.
     * Therefore, this value has been converted to a 0-based position. The start position
     * is the first position that is included in the feature.
     */
@@ -75,7 +75,7 @@ class GTF22Record(private val line: String) extends FeatureBuilderModifier {
 
   /** Zero-based end position in reference coordinates, exclusive.
     *
-    * GTF2.2 format uses 1-based positions, and furthermore, uses fully closed
+    * GTF2.2 feature.format uses 1-based positions, and furthermore, uses fully closed
     * intervals so the end position is the last position included in the feature.
     * This library uses 0-based positions and half open intervals, so the end
     * position is the position after the last position included in the feature.
@@ -119,7 +119,7 @@ class GTF22Record(private val line: String) extends FeatureBuilderModifier {
     *
     * Empty attributes (having value "") are not included in this map.
     *
-    * See [[http://mblab.wustl.edu/GTF22.html format specification]] for details on GTF2.2 attributes.
+    * See [[http://mblab.wustl.edu/GTF22.html feature.format specification]] for details on GTF2.2 attributes.
     *
     */
   lazy val attributes: Map[String, String] = {
@@ -153,7 +153,7 @@ class GTF22Record(private val line: String) extends FeatureBuilderModifier {
   /** Returns a new [[FeatureBuilder]] consisting of the passed [[FeatureBuilder]] with
     * the information in this [[GTF22Record]] added to it.
     *
-    * The feature type must not be one of the CNS types (see [[http://mblab.wustl.edu/GTF22.html format specification]])
+    * The feature type must not be one of the CNS types (see [[http://mblab.wustl.edu/GTF22.html feature.format specification]])
     * as these features are specified on a single GTF2.2 line and should not be incorporated into an existing
     * [[FeatureBuilder]]. The feature type must also not be an ignored type.
     *
@@ -252,7 +252,7 @@ case object IntronicCNS extends FeatureType {val name = "intron_CNS"}
 /** GTF2.2 exon feature type */
 case object Exon extends MatureRNA {val name = "exon"}
 
-/** Nonstandard feature type. See [[http://mblab.wustl.edu/GTF22.html format specification]] for details. */
+/** Nonstandard feature type. See [[http://mblab.wustl.edu/GTF22.html feature.format specification]] for details. */
 case object Ignore extends FeatureType {val name = "ignore"}
 
 /** Utilities for GTF2.2 [[FeatureType]]s */

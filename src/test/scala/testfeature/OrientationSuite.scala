@@ -1,6 +1,6 @@
 package testfeature
 
-import feature._
+import feature.{Both, _}
 import feature.Orientation._
 import org.scalatest.FunSuite
 
@@ -14,6 +14,13 @@ class OrientationSuite extends FunSuite {
     assert(Minus === Minus)
     assert(Both === Both)
     assert(Unstranded === Unstranded)
+  }
+
+  test("Invert orientation") {
+    assert(Orientation.invert(Plus) === Minus)
+    assert(Orientation.invert(Minus) === Plus)
+    assert(Orientation.invert(Unstranded) === Unstranded)
+    assert(Orientation.invert(Both) === Both)
   }
 
   test("Consensus orientation") {

@@ -38,6 +38,18 @@ sealed abstract class Feature(val blocks: Region, val name: Option[String]) exte
     */
   def overlaps(other: Feature): Boolean = blocks.overlaps(other.blocks)
 
+  /** Returns a boolean value representing whether this [[Feature]] overlaps another [[Feature]]
+    * and their introns are compatible.
+    *
+    * That is, no INTERNAL block boundary for one of the [[Feature]]s can fall strictly within a
+    * [[Block]] of the other [[Feature]].
+    *
+    * @param other Other [[Feature]]
+    * @return True if the [[Feature]]s overlap and their introns are compatible,
+    *         false otherwise
+    */
+  def overlapsCompatibleIntrons(other: Feature): Boolean = blocks.overlapsCompatibleIntrons(other.blocks)
+
   /** Returns a boolean value representing whether this [[Feature]] contains another [[Feature]].
     *
     * Ignores feature name and calls [[Region.contains]] on the two underlying [[Region]]s.
@@ -118,7 +130,7 @@ private object Feature {
   */
 class GenericFeature(override val blocks: Region, override val name: Option[String]) extends Feature(blocks, name) {
 
-  if(name == Some("")) throw new IllegalArgumentException("Name cannot be empty string. Use None instead.")
+  if(name.contains("")) throw new IllegalArgumentException("Name cannot be empty string. Use None instead.")
 
   /** Returns a [[GenericFeature]] representing the union of this with another [[Feature]].
     *
@@ -235,7 +247,6 @@ class GenericFeature(override val blocks: Region, override val name: Option[Stri
     sb.toString()
   }
 
-
 }
 
 /** A representation of a spliced transcript.
@@ -258,28 +269,6 @@ sealed class Transcript(override val blocks: Region, name: Option[String], val g
     val or = getOrientation
     // Require that orientation be positive or negative
     if(or != Plus && or != Minus) throw new IllegalArgumentException(s"Invalid orientation: $getOrientation. Options: ${Plus.toString}, ${Minus.toString}")
-  }
-
-  /** Returns a list of [[Block]]s representing the introns of this [[Transcript]].
-    *
-    * The returned list is in order from left to right. Each [[Block]] in the returned list is the span of a gap
-    * between two [[Block]]s of this [[Transcript]]. The returned [[Block]]s have the same [[Orientation]]
-    * as this [[Transcript]]. The start position of each returned [[Block]] is equal to the end position (exclusive)
-    * of the previous adjacent [[Block]] in this [[Transcript]]. The end position of each returned [[Block]] (exclusive)
-    * is equal to the start position of the following adjacent [[Block]] in this [[Transcript]].
-    *
-    * If this [[Transcript]] has only one [[Block]], Nil is returned.
-    *
-    * @return A list of [[Block]]s representing the gaps between the [[Block]]s of this [[Transcript]], or Nil if this
-    *         [[Transcript]] has only one [[Block]].
-    */
-  def getIntrons: List[Block] = {
-    if(numBlocks < 2) Nil
-    else {
-      val blockStarts: List[Int] = blocks.blocks.map(b => b.start)
-      val blockEnds: List[Int] = blocks.blocks.map(b => b.end)
-      blockEnds.zip(blockStarts.tail).map(p => Block(getChr, p._1, p._2, getOrientation))
-    }
   }
 
   /** Returns true if other is an instance of [[Transcript]], false otherwise. */

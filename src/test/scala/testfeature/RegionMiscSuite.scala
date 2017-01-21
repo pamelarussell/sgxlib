@@ -19,6 +19,29 @@ class RegionMiscSuite extends FunSuite {
   regionRelativePos()
   regionChrPos()
   regionToString()
+  regionGetIntrons()
+
+  def regionGetIntrons(): Unit = {
+    test("Get introns") {
+      assert(chr1_1000_2000_minus
+        .getIntrons === Nil)
+      assert(chr1_100_200_300_400_plus
+        .getIntrons === List(Block("1", 200, 300, Plus)))
+      assert(chr1_100_200_300_400_minus
+        .getIntrons === List(Block("1", 200, 300, Minus)))
+      assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus
+        .getIntrons === List(
+        Block("1", 2000, 3000, Plus),
+        Block("1", 4000, 5000, Plus),
+        Block("1", 6000, 7000, Plus)))
+      assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_minus
+        .getIntrons === List(
+        Block("1", 2000, 3000, Minus),
+        Block("1", 4000, 5000, Minus),
+        Block("1", 6000, 7000, Minus)))
+    }
+  }
+
 
   def regionToString(): Unit = {
     test("Region toString") {
