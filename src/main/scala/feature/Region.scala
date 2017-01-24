@@ -33,6 +33,19 @@ sealed abstract class Region extends Ordered[Region] {
     */
   def overlapsCompatibleIntrons(o: Region): Boolean
 
+  /** Returns a boolean value representing whether this [[Region]] contains another [[Region]]
+    * and their introns are compatible.
+    *
+    * That is, no INTERNAL block boundary for one of the [[Region]]s can fall strictly within a
+    * [[Block]] of the other [[Region]].
+    *
+    * @param o Other [[Region]]
+    * @return True if this [[Region]] contains the other and their introns are compatible,
+    *         false otherwise
+    */
+  def containsCompatibleIntrons(o: Region): Boolean =
+    overlapsCompatibleIntrons(o) && o.start >= start && o.end <= end
+
   /** Returns a boolean value representing whether this [[Region]] contains another [[Region]].
     *
     * In order to contain the other, the two [[Region]]s must be on the same chromosome, have

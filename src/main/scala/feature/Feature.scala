@@ -50,6 +50,18 @@ sealed abstract class Feature(val blocks: Region, val name: Option[String]) exte
     */
   def overlapsCompatibleIntrons(other: Feature): Boolean = blocks.overlapsCompatibleIntrons(other.blocks)
 
+  /** Returns a boolean value representing whether this [[Feature]] contains another [[Feature]]
+    * and their introns are compatible.
+    *
+    * That is, no INTERNAL block boundary for one of the [[Feature]]s can fall strictly within a
+    * [[Block]] of the other [[Feature]].
+    *
+    * @param other Other [[Feature]]
+    * @return True if this [[Feature]] contains the other and their introns are compatible,
+    *         false otherwise
+    */
+  def containsCompatibleIntrons(other: Feature): Boolean = blocks.containsCompatibleIntrons(other.blocks)
+
   /** Returns a boolean value representing whether this [[Feature]] contains another [[Feature]].
     *
     * Ignores feature name and calls [[Region.contains]] on the two underlying [[Region]]s.
