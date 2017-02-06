@@ -29,6 +29,8 @@ class OrientationSuite extends FunSuite {
     assert(consensus(Unstranded, Plus) === Plus)
     assert(consensus(Unstranded, Minus) === Minus)
     assert(consensus(Unstranded, Unstranded) === Unstranded)
+    assert(consensus(Plus, Unstranded) === Plus)
+    assert(consensus(Minus, Unstranded) === Minus)
   }
 
   test("Can overlap") {

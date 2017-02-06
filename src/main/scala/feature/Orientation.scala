@@ -100,9 +100,8 @@ object Orientation {
         case (x, y) if x == y => 0
         case (Plus, _) => -1
         case (_, Plus) => 1
-        case (Minus, _) => -1
-        case (Unstranded, Minus) => 1
-        case (Unstranded, _) => -1; case _ => throw new UnsupportedOperationException("Not implemented: " + o1 + " " + o2)
+        case (Unstranded, _) => 1
+        case (_, Unstranded) => -1; case _ => throw new UnsupportedOperationException("Not implemented: " + o1 + " " + o2)
       }
     }
   }
