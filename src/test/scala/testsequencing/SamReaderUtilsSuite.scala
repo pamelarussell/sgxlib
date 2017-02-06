@@ -91,6 +91,30 @@ class SamReaderUtilsSuite extends FunSuite {
     assert(iter21.contains(DRR0237529822998))
     iter21.close()
 
+    // Constructed features for testing off by one errors
+    val iter22 = makeIter(DRR0237527248016_contained1, Plus)
+    assert(iter22.contains(DRR0237527248016))
+    iter22.close()
+    val iter23 = makeIter(DRR0237527248016_contained2, Plus)
+    assert(iter23.contains(DRR0237527248016))
+    iter23.close()
+    val iter24 = makeIter(DRR0237527248016_contained3, Plus)
+    assert(iter24.contains(DRR0237527248016))
+    iter24.close()
+    val iter25 = makeIter(DRR0237527248016_notContained1, Plus)
+    assert(!iter25.contains(DRR0237527248016))
+    iter25.close()
+    val iter26 = makeIter(DRR0237527248016_notContained2, Plus)
+    assert(!iter26.contains(DRR0237527248016))
+    iter26.close()
+    val iter27 = makeIter(DRR0237527248016_notContained3, Plus)
+    assert(!iter27.contains(DRR0237527248016))
+    iter27.close()
+    val iter28 = makeIter(DRR0237527248016_notContained4, Plus)
+    assert(!iter28.contains(DRR0237527248016))
+    iter28.close()
+
+
   }
 
 }
