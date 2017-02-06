@@ -14,7 +14,7 @@ class RegionAddBlockSuite extends FunSuite {
 
   def addBlockEmpty(): Unit = {
     test("Empty add block") {
-      assert(Empty.addBlock(chr1_1000_2000_unstranded) === Block("1", 1000, 2000, Unstranded),
+      assert(Empty.addBlock(chr1_1000_2000_both) === Block("1", 1000, 2000, Unstranded),
         "Empty add block should be block renamed")
     }
   }
@@ -246,18 +246,18 @@ class RegionAddBlockSuite extends FunSuite {
         Block("1", 300, 400, Plus),
         Block("1", 1000, 2000, Plus)
       )), "Non-overlapping because different spans")
-      assert(chr1_100_200_300_400_plus.addBlock(Block("1", 500, 600, Both)) === BlockSet(List(
+      assert(chr1_100_200_300_400_plus.addBlock(Block("1", 500, 600, Unstranded)) === BlockSet(List(
         Block("1", 100, 200, Plus),
         Block("1", 300, 400, Plus),
         Block("1", 500, 600, Plus)
       )), "Non-overlapping because different spans")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.addBlock(Block("1", 1000, 1100, Both)) === BlockSet(List(
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.addBlock(Block("1", 1000, 1100, Unstranded)) === BlockSet(List(
         Block("1", 1000, 1100, Plus),
         Block("1", 1500, 1600, Plus),
         Block("1", 1700, 1800, Plus),
         Block("1", 2100, 2300, Plus)
       )), "Non-overlapping because different spans")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.addBlock(Block("1", 2400, 2500, Both)) === BlockSet(List(
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.addBlock(Block("1", 2400, 2500, Unstranded)) === BlockSet(List(
         Block("1", 1500, 1600, Plus),
         Block("1", 1700, 1800, Plus),
         Block("1", 2100, 2300, Plus),

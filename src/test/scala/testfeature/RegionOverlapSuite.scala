@@ -51,7 +51,7 @@ class RegionOverlapSuite extends FunSuite {
       assert(chr1_1000_2000_both.overlaps(chr1_1000_2000_both), "Block should overlap itself")
       assert(chr1_1500_2500_plus.overlaps(chr1_1500_2500_plus), "Block should overlap itself")
       assert(chr1_1000_2000_minus.overlaps(chr1_1000_2000_minus), "Block should overlap itself")
-      assert(chr1_1000_2000_unstranded.overlaps(chr1_1000_2000_unstranded), "Block should overlap itself")
+      assert(chr1_1000_2000_both.overlaps(chr1_1000_2000_both), "Block should overlap itself")
 
       // Overlapping blocks with compatible orientations
       assert(chr1_1000_2000_plus_1.overlaps(chr1_1500_2500_plus), "Overlapping plus blocks should overlap")
@@ -60,8 +60,8 @@ class RegionOverlapSuite extends FunSuite {
       assert(chr1_1500_2500_minus.overlaps(chr1_1000_2000_minus), "Overlapping minus blocks should overlap")
       assert(chr1_1000_2000_both.overlaps(chr1_1500_2500_both), "Overlapping both blocks should overlap")
       assert(chr1_1500_2500_both.overlaps(chr1_1000_2000_both), "Overlapping both blocks should overlap")
-      assert(chr1_1000_2000_unstranded.overlaps(chr1_1500_2500_unstranded), "Overlapping unstranded blocks should overlap")
-      assert(chr1_1500_2500_unstranded.overlaps(chr1_1000_2000_unstranded), "Overlapping unstranded blocks should overlap")
+      assert(chr1_1000_2000_both.overlaps(chr1_1500_2500_both), "Overlapping unstranded blocks should overlap")
+      assert(chr1_1500_2500_both.overlaps(chr1_1000_2000_both), "Overlapping unstranded blocks should overlap")
       assert(chr1_1000_2000_plus_1.overlaps(chr1_1500_2500_both), "Plus and both block should overlap")
       assert(chr1_1500_2500_both.overlaps(chr1_1000_2000_plus_1), "Plus and both block should overlap")
       assert(chr1_1000_2000_minus.overlaps(chr1_1500_2500_both), "Minus and both block should overlap")
@@ -70,12 +70,6 @@ class RegionOverlapSuite extends FunSuite {
       // Overlapping blocks with non-compatible orientations
       assert(!chr1_1000_2000_plus_1.overlaps(chr1_1000_2000_minus), "Plus and minus blocks should not overlap")
       assert(!chr1_1000_2000_minus.overlaps(chr1_1000_2000_plus_1), "Plus and minus blocks should not overlap")
-      assert(!chr1_1000_2000_plus_1.overlaps(chr1_1000_2000_unstranded), "Plus and unstranded blocks should not overlap")
-      assert(!chr1_1000_2000_unstranded.overlaps(chr1_1000_2000_plus_1), "Plus and unstranded blocks should not overlap")
-      assert(!chr1_1000_2000_minus.overlaps(chr1_1000_2000_unstranded), "Minus and unstranded blocks should not overlap")
-      assert(!chr1_1000_2000_unstranded.overlaps(chr1_1000_2000_minus), "Minus and unstranded blocks should not overlap")
-      assert(!chr1_1000_2000_both.overlaps(chr1_1000_2000_unstranded), "Both and unstranded blocks should not overlap")
-      assert(!chr1_1000_2000_unstranded.overlaps(chr1_1000_2000_both), "Both and unstranded blocks should not overlap")
 
       // Non-overlapping blocks
       assert(!chr1_1000_2000_plus_1.overlaps(chr1_2000_3000_plus), "Adjacent blocks should not overlap")
@@ -93,7 +87,7 @@ class RegionOverlapSuite extends FunSuite {
 
       // Self overlap
       assert(chr1_1000_2000_both.overlapsCompatibleIntrons(chr1_1000_2000_both), "Block should overlap itself")
-      assert(chr1_1000_2000_unstranded.overlapsCompatibleIntrons(chr1_1000_2000_unstranded), "Block should overlap itself")
+      assert(chr1_1000_2000_both.overlapsCompatibleIntrons(chr1_1000_2000_both), "Block should overlap itself")
 
       // Overlapping blocks with compatible orientations
       assert(chr1_1000_2000_plus_1.overlapsCompatibleIntrons(chr1_1500_2500_plus), "Overlapping plus blocks should overlap")
@@ -102,7 +96,6 @@ class RegionOverlapSuite extends FunSuite {
 
       // Overlapping blocks with non-compatible orientations
       assert(!chr1_1000_2000_plus_1.overlapsCompatibleIntrons(chr1_1000_2000_minus), "Plus and minus blocks should not overlap")
-      assert(!chr1_1000_2000_unstranded.overlapsCompatibleIntrons(chr1_1000_2000_both), "Both and unstranded blocks should not overlap")
 
       // Non-overlapping blocks
       assert(!chr1_1000_2000_plus_1.overlapsCompatibleIntrons(chr1_2000_3000_plus), "Adjacent blocks should not overlap")
@@ -180,9 +173,9 @@ class RegionOverlapSuite extends FunSuite {
       assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("1", 2100, 2400, Plus)), "Contains one block sharing an endpoint")
       // Non-overlapping because different spans
       assert(!chr1_100_200_300_400_plus.overlaps(chr1_1000_2000_plus_1), "Non-overlapping because different spans")
-      assert(!chr1_100_200_300_400_plus.overlaps(Block("1", 500, 600, Both)), "Non-overlapping because different spans")
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("1", 1000, 1100, Both)), "Non-overlapping because different spans")
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("1", 2400, 2500, Both)), "Non-overlapping because different spans")
+      assert(!chr1_100_200_300_400_plus.overlaps(Block("1", 500, 600, Unstranded)), "Non-overlapping because different spans")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("1", 1000, 1100, Unstranded)), "Non-overlapping because different spans")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(Block("1", 2400, 2500, Unstranded)), "Non-overlapping because different spans")
       // Non-overlapping because different orientations
       assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlaps(chr1_1000_2000_minus), "Non-overlapping because different orientations")
       // Different chromosomes
@@ -280,9 +273,9 @@ class RegionOverlapSuite extends FunSuite {
       assert(Block("1", 2100, 2400, Plus).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Contains one block sharing an endpoint")
       // Non-overlapping because different spans
       assert(!chr1_1000_2000_plus_1.overlaps(chr1_100_200_300_400_plus), "Non-overlapping because different spans")
-      assert(!Block("1", 500, 600, Both).overlaps(chr1_100_200_300_400_plus), "Non-overlapping because different spans")
-      assert(!Block("1", 1000, 1100, Both).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different spans")
-      assert(!Block("1", 2400, 2500, Both).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different spans")
+      assert(!Block("1", 500, 600, Unstranded).overlaps(chr1_100_200_300_400_plus), "Non-overlapping because different spans")
+      assert(!Block("1", 1000, 1100, Unstranded).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different spans")
+      assert(!Block("1", 2400, 2500, Unstranded).overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different spans")
       // Non-overlapping because different orientations
       assert(!chr1_1000_2000_minus.overlaps(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different orientations")
       // Different chromosomes
@@ -385,9 +378,9 @@ class RegionOverlapSuite extends FunSuite {
       assert(chr1_1500_1600_1700_1800_2100_2300_plus.overlapsCompatibleIntrons(Block("1", 2100, 2400, Plus)), "Contains one block sharing an endpoint")
       // Non-overlapping because different spans
       assert(!chr1_100_200_300_400_plus.overlapsCompatibleIntrons(chr1_1000_2000_plus_1), "Non-overlapping because different spans")
-      assert(!chr1_100_200_300_400_plus.overlapsCompatibleIntrons(Block("1", 500, 600, Both)), "Non-overlapping because different spans")
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlapsCompatibleIntrons(Block("1", 1000, 1100, Both)), "Non-overlapping because different spans")
-      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlapsCompatibleIntrons(Block("1", 2400, 2500, Both)), "Non-overlapping because different spans")
+      assert(!chr1_100_200_300_400_plus.overlapsCompatibleIntrons(Block("1", 500, 600, Unstranded)), "Non-overlapping because different spans")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlapsCompatibleIntrons(Block("1", 1000, 1100, Unstranded)), "Non-overlapping because different spans")
+      assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlapsCompatibleIntrons(Block("1", 2400, 2500, Unstranded)), "Non-overlapping because different spans")
       // Non-overlapping because different orientations
       assert(!chr1_1500_1600_1700_1800_2100_2300_plus.overlapsCompatibleIntrons(chr1_1000_2000_minus), "Non-overlapping because different orientations")
       // Different chromosomes
@@ -485,9 +478,9 @@ class RegionOverlapSuite extends FunSuite {
       assert(Block("1", 2100, 2400, Plus).overlapsCompatibleIntrons(chr1_1500_1600_1700_1800_2100_2300_plus), "Contains one block sharing an endpoint")
       // Non-overlapping because different spans
       assert(!chr1_1000_2000_plus_1.overlapsCompatibleIntrons(chr1_100_200_300_400_plus), "Non-overlapping because different spans")
-      assert(!Block("1", 500, 600, Both).overlapsCompatibleIntrons(chr1_100_200_300_400_plus), "Non-overlapping because different spans")
-      assert(!Block("1", 1000, 1100, Both).overlapsCompatibleIntrons(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different spans")
-      assert(!Block("1", 2400, 2500, Both).overlapsCompatibleIntrons(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different spans")
+      assert(!Block("1", 500, 600, Unstranded).overlapsCompatibleIntrons(chr1_100_200_300_400_plus), "Non-overlapping because different spans")
+      assert(!Block("1", 1000, 1100, Unstranded).overlapsCompatibleIntrons(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different spans")
+      assert(!Block("1", 2400, 2500, Unstranded).overlapsCompatibleIntrons(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different spans")
       // Non-overlapping because different orientations
       assert(!chr1_1000_2000_minus.overlapsCompatibleIntrons(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different orientations")
       // Different chromosomes
@@ -533,35 +526,35 @@ class RegionOverlapSuite extends FunSuite {
         Block("1", 5000, 6000, Plus),
         Block("1", 7000, 8000, Plus)))))
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus.overlapsCompatibleIntrons(BlockSet(List(
-        Block("1", 1500, 2000, Both),
-        Block("1", 3000, 4000, Both),
-        Block("1", 5000, 6000, Both),
-        Block("1", 7000, 8000, Both)))))
+        Block("1", 1500, 2000, Unstranded),
+        Block("1", 3000, 4000, Unstranded),
+        Block("1", 5000, 6000, Unstranded),
+        Block("1", 7000, 8000, Unstranded)))))
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus.overlapsCompatibleIntrons(BlockSet(List(
         Block("1", 3500, 4000, Plus),
         Block("1", 5000, 6000, Plus),
         Block("1", 7000, 7500, Plus)))))
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus.overlapsCompatibleIntrons(BlockSet(List(
-        Block("1", 3500, 4000, Both),
-        Block("1", 5000, 5001, Both)))))
+        Block("1", 3500, 4000, Unstranded),
+        Block("1", 5000, 5001, Unstranded)))))
       assert(BlockSet(List(
         Block("1", 3000, 4000, Plus),
         Block("1", 5000, 6000, Plus),
         Block("1", 7000, 8500, Plus),
         Block("1", 9000, 10000, Plus))).overlapsCompatibleIntrons(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus))
       assert(BlockSet(List(
-        Block("1", 3000, 4000, Both),
-        Block("1", 5000, 6000, Both))).overlapsCompatibleIntrons(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus))
+        Block("1", 3000, 4000, Unstranded),
+        Block("1", 5000, 6000, Unstranded))).overlapsCompatibleIntrons(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus))
       assert(BlockSet(List(
         Block("1", 5500, 6000, Plus),
         Block("1", 7000, 8500, Plus),
         Block("1", 9000, 10000, Plus),
         Block("1", 11000, 12000, Plus))).overlapsCompatibleIntrons(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus))
       assert(BlockSet(List(
-        Block("1", 500, 600, Both),
-        Block("1", 700, 800, Both),
-        Block("1", 900, 2000, Both),
-        Block("1", 3000, 3500, Both))).overlapsCompatibleIntrons(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus))
+        Block("1", 500, 600, Unstranded),
+        Block("1", 700, 800, Unstranded),
+        Block("1", 900, 2000, Unstranded),
+        Block("1", 3000, 3500, Unstranded))).overlapsCompatibleIntrons(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus))
       assert(!chr1_1000_2000_3000_4000_5000_6000_both.overlapsCompatibleIntrons(chr1_500_600_1500_1600_plus), "One block nested, others non-overlapping")
       assert(!chr1_1000_2000_3000_4000_5000_6000_both.overlapsCompatibleIntrons(chr1_500_600_2500_2600_5500_5600_plus), "One block nested, others non-overlapping")
       assert(!chr1_1000_2000_3000_4000_5000_6000_both.overlapsCompatibleIntrons(chr1_2500_2600_3500_3600_4500_4600_plus), "One block nested, others non-overlapping")

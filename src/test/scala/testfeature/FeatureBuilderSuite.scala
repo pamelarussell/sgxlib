@@ -80,9 +80,9 @@ class FeatureBuilderSuite extends FunSuite {
   test("Build single-block generic feature") {
     // Has name
     val fb1 = new FeatureBuilder()
-    .addBlock(chr1_1000_2000_unstranded)
+    .addBlock(chr1_1000_2000_both)
     .setFeatureId("Name")
-    assert(fb1.get() === new GenericFeature(chr1_1000_2000_unstranded, Some("Name")))
+    assert(fb1.get() === new GenericFeature(chr1_1000_2000_both, Some("Name")))
     // No name
     val fb2 = new FeatureBuilder()
     .addBlock(chr1_1500_2500_minus)

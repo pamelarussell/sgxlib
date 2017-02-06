@@ -1,11 +1,30 @@
 package shared
 
+import collection.{FeatureSet, GTF22FeatureSet}
 import feature._
 
 /**
   * Created by prussell on 12/28/16.
   */
 object GTF22Data {
+
+  val chr20_21_22: FeatureSet[Feature] =
+    new GTF22FeatureSet(getClass.getResource("/Homo_sapiens.GRCh38.86.chr_20_21_22.gtf").getPath)
+
+  // chr20:36996349-37095995
+  val ENST00000373664: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000373664")).toList.head
+
+  // chr20:37003574-37095989
+  val ENST00000344359: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000344359")).toList.head
+
+  // chr20:37056160-37068055
+  val ENST00000525052: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000525052")).toList.head
+
+  // chr20:37289638-37317260
+  val ENST00000373606: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000373606")).toList.head
+
+  // chr20:37289663-37317260
+  val ENST00000397152: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000397152")).toList.head
 
   val chr1_184922_185350_Minus = Block("1", 184922, 185350, Minus)	 // ENSG00000279457
   val chr1_184924_185350_Minus = Block("1", 184924, 185350, Minus)	 // ENSG00000279457

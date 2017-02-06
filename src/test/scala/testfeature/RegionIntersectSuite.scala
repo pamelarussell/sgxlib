@@ -16,7 +16,7 @@ class RegionIntersectSuite extends FunSuite {
   def intersectionEmpty(): Unit = {
     test("Empty intersection") {
       assert(Empty.intersection(chr1_1000_2000_both) === Empty, "Intersection with Empty should be Empty")
-      assert(chr1_1000_2000_unstranded.intersection(Empty) === Empty, "Intersection with Empty should be Empty")
+      assert(chr1_1000_2000_both.intersection(Empty) === Empty, "Intersection with Empty should be Empty")
       assert(Empty.intersection(chr1_100_200_300_400_plus) === Empty, "Intersection with Empty should be Empty")
       assert(chr1_100_200_300_400_plus.intersection(Empty) === Empty, "Intersection with Empty should be Empty")
       assert(Empty.intersection(Empty) === Empty, "Empty intersection with Empty should be Empty")
@@ -203,9 +203,9 @@ class RegionIntersectSuite extends FunSuite {
         Block("1", 2100, 2300, Plus), "Contains one block sharing an endpoint")
       // Non-overlapping because different spans
       assert(chr1_100_200_300_400_plus.intersection(chr1_1000_2000_plus_1) === Empty, "Non-overlapping because different spans")
-      assert(chr1_100_200_300_400_plus.intersection(Block("1", 500, 600, Both)) === Empty, "Non-overlapping because different spans")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.intersection(Block("1", 1000, 1100, Both)) === Empty, "Non-overlapping because different spans")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.intersection(Block("1", 2400, 2500, Both)) === Empty, "Non-overlapping because different spans")
+      assert(chr1_100_200_300_400_plus.intersection(Block("1", 500, 600, Unstranded)) === Empty, "Non-overlapping because different spans")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.intersection(Block("1", 1000, 1100, Unstranded)) === Empty, "Non-overlapping because different spans")
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.intersection(Block("1", 2400, 2500, Unstranded)) === Empty, "Non-overlapping because different spans")
       // Non-overlapping because different orientations
       assert(chr1_1500_1600_1700_1800_2100_2300_plus.intersection(chr1_1000_2000_minus) === Empty, "Non-overlapping because different orientations")
       // Different chromosomes
@@ -378,9 +378,9 @@ class RegionIntersectSuite extends FunSuite {
         Block("1", 2100, 2300, Plus), "Contains one block sharing an endpoint")
       // Non-overlapping because different spans
       assert(chr1_1000_2000_plus_1.intersection(chr1_100_200_300_400_plus) === Empty, "Non-overlapping because different spans")
-      assert(Block("1", 500, 600, Both).intersection(chr1_100_200_300_400_plus) === Empty, "Non-overlapping because different spans")
-      assert(Block("1", 1000, 1100, Both).intersection(chr1_1500_1600_1700_1800_2100_2300_plus) === Empty, "Non-overlapping because different spans")
-      assert(Block("1", 2400, 2500, Both).intersection(chr1_1500_1600_1700_1800_2100_2300_plus) === Empty, "Non-overlapping because different spans")
+      assert(Block("1", 500, 600, Unstranded).intersection(chr1_100_200_300_400_plus) === Empty, "Non-overlapping because different spans")
+      assert(Block("1", 1000, 1100, Unstranded).intersection(chr1_1500_1600_1700_1800_2100_2300_plus) === Empty, "Non-overlapping because different spans")
+      assert(Block("1", 2400, 2500, Unstranded).intersection(chr1_1500_1600_1700_1800_2100_2300_plus) === Empty, "Non-overlapping because different spans")
       // Non-overlapping because different orientations
       assert(chr1_1000_2000_minus.intersection(chr1_1500_1600_1700_1800_2100_2300_plus) === Empty, "Non-overlapping because different orientations")
       // Different chromosomes
@@ -474,11 +474,11 @@ class RegionIntersectSuite extends FunSuite {
       assert(chr1_1000_2000_3000_4000_plus.intersection(chr1_2000_3000_3500_3600_both) ===
         Block("1", 3500, 3600, Plus), "One block nested, others non-overlapping")
       assert(chr1_1000_2000_3000_4000_5000_6000_both.intersection(chr1_500_600_700_800_900_1100_both) ===
-        Block("1", 1000, 1100, Both), "One block overlapping off end of span")
+        Block("1", 1000, 1100, Unstranded), "One block overlapping off end of span")
       assert(chr1_1000_2000_3000_4000_5000_6000_both.intersection(chr1_500_600_700_800_1000_2000_both) ===
-        Block("1", 1000, 2000, Both), "One block overlapping off end of span")
+        Block("1", 1000, 2000, Unstranded), "One block overlapping off end of span")
       assert(chr1_1000_2000_3000_4000_5000_6000_both.intersection(chr1_500_600_700_800_900_2000_both) ===
-        Block("1", 1000, 2000, Both), "One block overlapping off end of span")
+        Block("1", 1000, 2000, Unstranded), "One block overlapping off end of span")
       assert(chr1_1000_2000_3000_4000_plus.intersection(chr1_500_600_900_1100_both) ===
         Block("1", 1000, 1100, Plus), "One block overlapping off end of span")
       assert(chr1_1000_2000_3000_4000_plus.intersection(chr1_500_600_1000_2000_both) ===

@@ -8,21 +8,19 @@ package object testfeature {
   // Single blocks
     val chr1_500_600_plus = Block("1", 500, 600, Plus)
     val chr1_1000_2000_minus = Block("1", 1000, 2000, Minus)
-    val chr1_1000_2000_both = Block("1", 1000, 2000, Both)
-    val chr1_1000_2000_unstranded = Block("1", 1000, 2000, Unstranded)
+    val chr1_1000_2000_both = Block("1", 1000, 2000, Unstranded)
     val chr1_1000_2000_plus_1 = Block("1", 1000, 2000, Plus)
     val chr1_1000_2000_plus_2 = Block("1", 1000, 2000, Plus)
     val chr1_1000_2000_plus_3 = Block("1", 1000, 2000, Plus)
     val chr1_1200_1300_plus = Block("1", 1200, 1300, Plus)
     val chr1_1500_2500_plus = Block("1", 1500, 2500, Plus)
     val chr1_1500_2500_minus = Block("1", 1500, 2500, Minus)
-    val chr1_1500_2500_both = Block("1", 1500, 2500, Both)
-    val chr1_1500_2500_unstranded = Block("1", 1500, 2500, Unstranded)
+    val chr1_1500_2500_both = Block("1", 1500, 2500, Unstranded)
     val chr1_2000_3000_plus = Block("1", 2000, 3000, Plus)
     val chr2_1000_2000_plus = Block("2", 1000, 2000, Plus)
     val chr2_3000_4000_plus = Block("2", 3000, 4000, Plus)
     val chr1_3000_4000_plus = Block("1", 3000, 4000, Plus)
-    val chr2_3000_4000_both = Block("2", 3000, 4000, Both)
+    val chr2_3000_4000_both = Block("2", 3000, 4000, Unstranded)
     val chr1_3000_4000_minus = Block("1", 3000, 4000, Minus)
     val chr1_5_6_minus = Block("1", 5, 6, Minus)
     val chr1_4_6_minus = Block("1", 4, 6, Minus)
@@ -160,22 +158,16 @@ package object testfeature {
       Block("1", 2500, 6500, Plus),
       Block("1", 7000, 8000, Plus)
     ))
-    val chr1_1000_2000_3000_4000_5000_6000_7000_8000_both = BlockSet(List(
-      Block("1", 1000, 2000, Both),
-      Block("1", 3000, 4000, Both),
-      Block("1", 5000, 6000, Both),
-      Block("1", 7000, 8000, Both)
-    ))
-  val chr1_1000_2000_3000_4000_5000_6000_7000_8000_unstranded = BlockSet(List(
+  val chr1_1000_2000_3000_4000_5000_6000_7000_8000_both = BlockSet(List(
       Block("1", 1000, 2000, Unstranded),
       Block("1", 3000, 4000, Unstranded),
       Block("1", 5000, 6000, Unstranded),
       Block("1", 7000, 8000, Unstranded)
     ))
     val chr1_1000_2000_3000_4000_5000_6000_both = BlockSet(List(
-      Block("1", 1000, 2000, Both),
-      Block("1", 3000, 4000, Both),
-      Block("1", 5000, 6000, Both)
+      Block("1", 1000, 2000, Unstranded),
+      Block("1", 3000, 4000, Unstranded),
+      Block("1", 5000, 6000, Unstranded)
     ))
     val chr1_1000_2000_3000_4000_5000_6000_plus = BlockSet(List(
       Block("1", 1000, 2000, Plus),
@@ -222,12 +214,12 @@ package object testfeature {
       Block("1", 3500, 3600, Plus)
     ))
     val chr1_1100_1200_2500_3000_both = BlockSet(List(
-      Block("1", 1100, 1200, Both),
-      Block("1", 2500, 3000, Both)
+      Block("1", 1100, 1200, Unstranded),
+      Block("1", 2500, 3000, Unstranded)
     ))
     val chr1_1100_1200_4000_4600_both = BlockSet(List(
-      Block("1", 1100, 1200, Both),
-      Block("1", 4000, 4600, Both)
+      Block("1", 1100, 1200, Unstranded),
+      Block("1", 4000, 4600, Unstranded)
     ))
     val chr1_1500_1600_2000_6500_7500_7600_7700_7800_plus = BlockSet(List(
       Block("1", 1500, 1600, Plus),
@@ -321,8 +313,8 @@ package object testfeature {
       Block("1", 8500, 9500, Plus)
     ))
     val chr1_2000_3000_3500_3600_both = BlockSet(List(
-      Block("1", 2000, 3000, Both),
-      Block("1", 3500, 3600, Both)
+      Block("1", 2000, 3000, Unstranded),
+      Block("1", 3500, 3600, Unstranded)
     ))
     val chr1_2000_3000_4000_5000_5500_5600_plus = BlockSet(List(
       Block("1", 2000, 3000, Plus),
@@ -330,22 +322,22 @@ package object testfeature {
       Block("1", 5500, 5600, Plus)
     ))
     val chr1_2000_3000_4000_5000_6000_7000_both = BlockSet(List(
-      Block("1", 2000, 3000, Both),
-      Block("1", 4000, 5000, Both),
-      Block("1", 6000, 7000, Both)
+      Block("1", 2000, 3000, Unstranded),
+      Block("1", 4000, 5000, Unstranded),
+      Block("1", 6000, 7000, Unstranded)
     ))
     val chr1_2000_3000_4000_5000_8000_9000_both = BlockSet(List(
-      Block("1", 2000, 3000, Both),
-      Block("1", 4000, 5000, Both),
-      Block("1", 8000, 9000, Both)
+      Block("1", 2000, 3000, Unstranded),
+      Block("1", 4000, 5000, Unstranded),
+      Block("1", 8000, 9000, Unstranded)
     ))
     val chr1_2000_3000_4000_5000_plus = BlockSet(List(
       Block("1", 2000, 3000, Plus),
       Block("1", 4000, 5000, Plus)
     ))
     val chr1_2000_3000_8000_9000_both = BlockSet(List(
-      Block("1", 2000, 3000, Both),
-      Block("1", 8000, 9000, Both)
+      Block("1", 2000, 3000, Unstranded),
+      Block("1", 8000, 9000, Unstranded)
     ))
     val chr1_2000_4500_5000_5100_5900_6000_plus = BlockSet(List(
       Block("1", 2000, 4500, Plus),
@@ -414,9 +406,9 @@ package object testfeature {
       Block("1", 5000, 6000, Plus)
     ))
     val chr1_2500_2600_4500_4600_6500_6600_both = BlockSet(List(
-      Block("1", 2500, 2600, Both),
-      Block("1", 4500, 4600, Both),
-      Block("1", 6500, 6600, Both)
+      Block("1", 2500, 2600, Unstranded),
+      Block("1", 4500, 4600, Unstranded),
+      Block("1", 6500, 6600, Unstranded)
     ))
     val chr1_2500_2600_5500_5600_6500_6600_plus = BlockSet(List(
       Block("1", 2500, 2600, Plus),
@@ -447,8 +439,8 @@ package object testfeature {
       Block("1", 7000, 8000, Plus)
     ))
     val chr1_2500_3000_8000_9000_both = BlockSet(List(
-      Block("1", 2500, 3000, Both),
-      Block("1", 8000, 9000, Both)
+      Block("1", 2500, 3000, Unstranded),
+      Block("1", 8000, 9000, Unstranded)
     ))
     val chr1_2500_4500_6500_8500_plus = BlockSet(List(
       Block("1", 2500, 4500, Plus),
@@ -557,13 +549,13 @@ package object testfeature {
       Block("1", 7000, 8000, Plus)
     ))
     val chr1_4500_4600_6500_6600_8500_8600_both = BlockSet(List(
-      Block("1", 4500, 4600, Both),
-      Block("1", 6500, 6600, Both),
-      Block("1", 8500, 8600, Both)
+      Block("1", 4500, 4600, Unstranded),
+      Block("1", 6500, 6600, Unstranded),
+      Block("1", 8500, 8600, Unstranded)
     ))
     val chr1_4500_5000_6500_6600_both = BlockSet(List(
-      Block("1", 4500, 5000, Both),
-      Block("1", 6500, 6600, Both)
+      Block("1", 4500, 5000, Unstranded),
+      Block("1", 6500, 6600, Unstranded)
     ))
     val chr1_4500_5500_6500_7500_plus = BlockSet(List(
       Block("1", 4500, 5500, Plus),
@@ -603,10 +595,10 @@ package object testfeature {
       Block("1", 1500, 7000, Plus)
     ))
     val chr1_500_1000_2500_2600_6000_6500_8000_9000_both = BlockSet(List(
-      Block("1", 500, 1000, Both),
-      Block("1", 2500, 2600, Both),
-      Block("1", 6000, 6500, Both),
-      Block("1", 8000, 9000, Both)
+      Block("1", 500, 1000, Unstranded),
+      Block("1", 2500, 2600, Unstranded),
+      Block("1", 6000, 6500, Unstranded),
+      Block("1", 8000, 9000, Unstranded)
     ))
     val chr1_500_1000_3500_3600_5100_5200_5300_5400_6500_6600_8500_8600_plus = BlockSet(List(
       Block("1", 500, 1000, Plus),
@@ -699,8 +691,8 @@ package object testfeature {
       Block("1", 6500, 7000, Plus)
     ))
     val chr1_500_600_1000_2000_both = BlockSet(List(
-      Block("1", 500, 600, Both),
-      Block("1", 1000, 2000, Both)
+      Block("1", 500, 600, Unstranded),
+      Block("1", 1000, 2000, Unstranded)
     ))
     val chr1_500_600_1000_2000_plus = BlockSet(List(
       Block("1", 500, 600, Plus),
@@ -767,8 +759,8 @@ package object testfeature {
       Block("1", 7000, 8000, Plus)
     ))
     val chr1_500_600_3500_3600_both = BlockSet(List(
-      Block("1", 500, 600, Both),
-      Block("1", 3500, 3600, Both)
+      Block("1", 500, 600, Unstranded),
+      Block("1", 3500, 3600, Unstranded)
     ))
     val chr1_500_600_3500_4000_7000_8000_plus = BlockSet(List(
       Block("1", 500, 600, Plus),
@@ -800,9 +792,9 @@ package object testfeature {
       Block("1", 5500, 5600, Plus)
     ))
     val chr1_500_600_700_800_1000_2000_both = BlockSet(List(
-      Block("1", 500, 600, Both),
-      Block("1", 700, 800, Both),
-      Block("1", 1000, 2000, Both)
+      Block("1", 500, 600, Unstranded),
+      Block("1", 700, 800, Unstranded),
+      Block("1", 1000, 2000, Unstranded)
     ))
     val chr1_500_600_700_800_1500_1600_plus = BlockSet(List(
       Block("1", 500, 600, Plus),
@@ -820,14 +812,14 @@ package object testfeature {
       Block("1", 5500, 5600, Plus)
     ))
     val chr1_500_600_700_800_900_1100_both = BlockSet(List(
-      Block("1", 500, 600, Both),
-      Block("1", 700, 800, Both),
-      Block("1", 900, 1100, Both)
+      Block("1", 500, 600, Unstranded),
+      Block("1", 700, 800, Unstranded),
+      Block("1", 900, 1100, Unstranded)
     ))
     val chr1_500_600_700_800_900_2000_both = BlockSet(List(
-      Block("1", 500, 600, Both),
-      Block("1", 700, 800, Both),
-      Block("1", 900, 2000, Both)
+      Block("1", 500, 600, Unstranded),
+      Block("1", 700, 800, Unstranded),
+      Block("1", 900, 2000, Unstranded)
     ))
     val chr1_500_600_900_1100_2500_2600_3500_4000_6500_6600_7500_8500_plus = BlockSet(List(
       Block("1", 500, 600, Plus),
@@ -846,12 +838,12 @@ package object testfeature {
       Block("1", 7500, 8500, Plus)
     ))
     val chr1_500_600_900_1100_both = BlockSet(List(
-      Block("1", 500, 600, Both),
-      Block("1", 900, 1100, Both)
+      Block("1", 500, 600, Unstranded),
+      Block("1", 900, 1100, Unstranded)
     ))
     val chr1_500_600_900_2000_both = BlockSet(List(
-      Block("1", 500, 600, Both),
-      Block("1", 900, 2000, Both)
+      Block("1", 500, 600, Unstranded),
+      Block("1", 900, 2000, Unstranded)
     ))
     val chr1_500_6500_7000_8000_plus = BlockSet(List(
       Block("1", 500, 6500, Plus),
@@ -884,10 +876,10 @@ package object testfeature {
       Block("1", 9000, 10000, Plus)
     ))
     val chr1_900_1000_4000_5000_6000_7000_8000_9000_both = BlockSet(List(
-      Block("1", 900, 1000, Both),
-      Block("1", 4000, 5000, Both),
-      Block("1", 6000, 7000, Both),
-      Block("1", 8000, 9000, Both)
+      Block("1", 900, 1000, Unstranded),
+      Block("1", 4000, 5000, Unstranded),
+      Block("1", 6000, 7000, Unstranded),
+      Block("1", 8000, 9000, Unstranded)
     ))
     val chr1_900_1100_1900_2100_2900_4100_plus = BlockSet(List(
       Block("1", 900, 1100, Plus),

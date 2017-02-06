@@ -11,9 +11,7 @@ sealed trait Orientation
 object Plus extends Orientation {override def toString: String = "+"}
 /** The minus strand of DNA */
 object Minus extends Orientation {override def toString: String = "-"}
-/** Both strands of DNA */
-object Both extends Orientation {override def toString: String = "both"}
-/** Orientation for features not associated with a DNA strand */
+/** Unstranded - not associated with a strand or strand unknown */
 object Unstranded extends Orientation {override def toString: String = "unstranded"}
 
 /** Utility methods for calculations on [[Orientation]]s */
@@ -21,7 +19,7 @@ object Orientation {
 
   /** Returns the reverse of the specified [[Orientation]].
     *
-    * [[Plus]] and [[Minus]] are swapped by this function. [[Both]] and [[Unstranded]] are unchanged.
+    * [[Plus]] and [[Minus]] are swapped by this function. [[Unstranded]] is unchanged.
     *
     * @param o [[Orientation]] to get the reverse of
     * @return The reverse of the specified [[Orientation]]
@@ -30,7 +28,6 @@ object Orientation {
     o match {
       case Plus => Minus
       case Minus => Plus
-      case Both => Both
       case Unstranded => Unstranded
     }
   }
@@ -40,10 +37,8 @@ object Orientation {
       case (os._1, os._1) => os._1
       case (Plus, Minus) => Unstranded
       case (Minus, Plus) => Unstranded
-      case (Both, os._2) => os._2
-      case (os._1, Both) => os._1
-      case (Unstranded, os._2) => Unstranded
-      case (os._1, Unstranded) => Unstranded; case _ => throw new UnsupportedOperationException("Not implemented: " + os.toString())
+      case (Unstranded, os._2) => os._2
+      case (os._1, Unstranded) => os._1; case _ => throw new UnsupportedOperationException("Not implemented: " + os.toString())
     }
   }
 
@@ -62,10 +57,8 @@ object Orientation {
       case (os._1, os._1) => true
       case (Plus, Minus) => false
       case (Minus, Plus) => false
-      case (Unstranded, os._2) => false
-      case (os._1, Unstranded) => false
-      case (Both, os._2) => true
-      case (os._1, Both) => true; case _ => throw new UnsupportedOperationException("Not implemented: " + os.toString())
+      case (Unstranded, os._2) => true
+      case (os._1, Unstranded) => true; case _ => throw new UnsupportedOperationException("Not implemented: " + os.toString())
     }
   }
 
@@ -75,8 +68,7 @@ object Orientation {
     *
     * Every [[Orientation]] is compatible with itself.
     * [[Plus]] and [[Minus]] are incompatible with each other.
-    * [[Unstranded]] is incompatible with every other orientation.
-    * [[Both]] is compatible with [[Plus]] and [[Minus]].
+    * [[Unstranded]] is compatible with [[Plus]] and [[Minus]].
     *
     * @param o1 [[Orientation]] 1
     * @param o2 [[Orientation]] 2
@@ -90,8 +82,7 @@ object Orientation {
     *
     * Every [[Orientation]] is compatible with itself.
     * [[Plus]] and [[Minus]] are incompatible with each other.
-    * [[Unstranded]] is incompatible with every other orientation.
-    * [[Both]] is compatible with [[Plus]] and [[Minus]].
+    * [[Unstranded]] is compatible with [[Plus]] and [[Minus]].
     *
     * @param f1 [[Region]] 1
     * @param f2 [[Region]] 2
@@ -109,10 +100,9 @@ object Orientation {
         case (x, y) if x == y => 0
         case (Plus, _) => -1
         case (_, Plus) => 1
-        case (Unstranded, _) => 1
         case (Minus, _) => -1
-        case (Both, Minus) => 1
-        case (Both, _) => -1; case _ => throw new UnsupportedOperationException("Not implemented: " + o1 + " " + o2)
+        case (Unstranded, Minus) => 1
+        case (Unstranded, _) => -1; case _ => throw new UnsupportedOperationException("Not implemented: " + o1 + " " + o2)
       }
     }
   }

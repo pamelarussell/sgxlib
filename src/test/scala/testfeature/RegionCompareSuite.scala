@@ -19,13 +19,13 @@ class RegionCompareSuite extends FunSuite {
     test("Empty compare") {
       assert(Empty.compare(Empty) === 0)
       assert(Empty.compare(chr1_100_200_300_400_plus) > 0)
-      assert(Empty.compare(chr1_1000_2000_unstranded) > 0)
+      assert(Empty.compare(chr1_1000_2000_both) > 0)
     }
   }
 
   def compareBlockEmpty(): Unit = {
     test("Block compare Empty") {
-      assert(chr1_1000_2000_unstranded.compare(Empty) < 0)
+      assert(chr1_1000_2000_both.compare(Empty) < 0)
     }
   }
 
@@ -113,11 +113,11 @@ class RegionCompareSuite extends FunSuite {
       // Non-overlapping because different spans
       assert(chr1_1000_2000_plus_1.compare(chr1_100_200_300_400_plus) > 0,
         "Non-overlapping because different spans")
-      assert(Block("1", 500, 600, Both).compare(chr1_100_200_300_400_plus) > 0,
+      assert(Block("1", 500, 600, Unstranded).compare(chr1_100_200_300_400_plus) > 0,
         "Non-overlapping because different spans")
-      assert(Block("1", 1000, 1100, Both).compare(chr1_1500_1600_1700_1800_2100_2300_plus) < 0,
+      assert(Block("1", 1000, 1100, Unstranded).compare(chr1_1500_1600_1700_1800_2100_2300_plus) < 0,
         "Non-overlapping because different spans")
-      assert(Block("1", 2400, 2500, Both).compare(chr1_1500_1600_1700_1800_2100_2300_plus) > 0,
+      assert(Block("1", 2400, 2500, Unstranded).compare(chr1_1500_1600_1700_1800_2100_2300_plus) > 0,
         "Non-overlapping because different spans")
       // Non-overlapping because different orientations
       assert(chr1_1000_2000_minus.compare(chr1_1500_1600_1700_1800_2100_2300_plus) < 0,
@@ -216,11 +216,11 @@ class RegionCompareSuite extends FunSuite {
       // Non-overlapping because different spans
       assert(chr1_1000_2000_plus_1.compare(chr1_100_200_300_400_plus) > 0,
         "Non-overlapping because different spans")
-      assert(Block("1", 500, 600, Both).compare(chr1_100_200_300_400_plus) > 0,
+      assert(Block("1", 500, 600, Unstranded).compare(chr1_100_200_300_400_plus) > 0,
         "Non-overlapping because different spans")
-      assert(Block("1", 1000, 1100, Both).compare(chr1_1500_1600_1700_1800_2100_2300_plus) < 0,
+      assert(Block("1", 1000, 1100, Unstranded).compare(chr1_1500_1600_1700_1800_2100_2300_plus) < 0,
         "Non-overlapping because different spans")
-      assert(Block("1", 2400, 2500, Both).compare(chr1_1500_1600_1700_1800_2100_2300_plus) > 0,
+      assert(Block("1", 2400, 2500, Unstranded).compare(chr1_1500_1600_1700_1800_2100_2300_plus) > 0,
         "Non-overlapping because different spans")
       // Non-overlapping because different orientations
       assert(chr1_1000_2000_minus.compare(chr1_1500_1600_1700_1800_2100_2300_plus) < 0,
@@ -319,11 +319,11 @@ class RegionCompareSuite extends FunSuite {
       // Non-overlapping because different spans
       assert(chr1_100_200_300_400_plus.compare(chr1_1000_2000_plus_1) < 0,
         "Non-overlapping because different spans")
-      assert(chr1_100_200_300_400_plus.compare(Block("1", 500, 600, Both)) < 0,
+      assert(chr1_100_200_300_400_plus.compare(Block("1", 500, 600, Unstranded)) < 0,
         "Non-overlapping because different spans")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.compare(Block("1", 1000, 1100, Both)) > 0,
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.compare(Block("1", 1000, 1100, Unstranded)) > 0,
         "Non-overlapping because different spans")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.compare(Block("1", 2400, 2500, Both)) < 0,
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.compare(Block("1", 2400, 2500, Unstranded)) < 0,
         "Non-overlapping because different spans")
       // Non-overlapping because different orientations
       assert(chr1_1500_1600_1700_1800_2100_2300_plus.compare(chr1_1000_2000_minus) > 0,
@@ -363,7 +363,7 @@ class RegionCompareSuite extends FunSuite {
       assert(chr1_1500_1600_1700_1800_2100_2300_plus.compare(Block("1", 1500, 2300, Plus)) > 0,
         "Same span different chromosome")
       // Same span, different chromosome, different orientation
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.compare(Block("2", 1500, 2300, Both)) < 0,
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.compare(Block("2", 1500, 2300, Unstranded)) < 0,
         "Same span different chromosome different orientation")
     }
   }

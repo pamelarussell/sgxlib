@@ -101,7 +101,7 @@ class RegionMiscSuite extends FunSuite {
   def regionOrientation(): Unit = {
     test("Region orientation") {
       assert(chr2_1000_2000_plus.orientation === Plus)
-      assert(chr1_1000_2000_unstranded.orientation === Unstranded)
+      assert(chr1_1000_2000_both.orientation === Unstranded)
       assert(chr1_100_200_300_400_plus.orientation === Plus)
       intercept[IllegalStateException](Empty.orientation)
     }
@@ -122,9 +122,7 @@ class RegionMiscSuite extends FunSuite {
     test("Region relative position") {
       assert(Empty.relativePos(10) === None)
       intercept[IllegalArgumentException](chr1_1000_2000_both.relativePos(10))
-      intercept[IllegalArgumentException](chr1_1500_2500_unstranded.relativePos(10))
       intercept[IllegalArgumentException](chr1_1000_2000_3000_4000_5000_6000_7000_8000_both.relativePos(10))
-      intercept[IllegalArgumentException](chr1_1000_2000_3000_4000_5000_6000_7000_8000_unstranded.relativePos(10))
       assert(chr1_1500_2500_plus.relativePos(1499) === None)
       assert(chr1_1500_2500_plus.relativePos(1500) === Some(0))
       assert(chr1_1500_2500_plus.relativePos(2000) === Some(500))
@@ -182,9 +180,7 @@ class RegionMiscSuite extends FunSuite {
     test("Region chr position") {
       intercept[IllegalStateException](Empty.chrPos(10))
       intercept[IllegalArgumentException](chr1_1000_2000_both.chrPos(10))
-      intercept[IllegalArgumentException](chr1_1500_2500_unstranded.chrPos(10))
       intercept[IllegalArgumentException](chr1_1000_2000_3000_4000_5000_6000_7000_8000_both.chrPos(10))
-      intercept[IllegalArgumentException](chr1_1000_2000_3000_4000_5000_6000_7000_8000_unstranded.chrPos(10))
       intercept[IllegalArgumentException](chr1_1500_2500_plus.chrPos(-1))
       intercept[IllegalArgumentException](chr1_1500_2500_minus.chrPos(-1))
       intercept[IllegalArgumentException](chr1_1500_2500_plus.chrPos(1000))

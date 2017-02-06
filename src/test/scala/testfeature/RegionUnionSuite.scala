@@ -15,12 +15,12 @@ class RegionUnionSuite extends FunSuite {
 
   def unionEmpty(): Unit = {
     test("Empty union") {
-      assert(Empty.union(chr1_1500_2500_both) === Block("1", 1500, 2500, Both), "Union with empty should be self renamed")
+      assert(Empty.union(chr1_1500_2500_both) === Block("1", 1500, 2500, Unstranded), "Union with empty should be self renamed")
       assert(Empty.union(chr1_100_200_300_400_plus) === BlockSet(List(
         Block("1", 100, 200, Plus),
         Block("1", 300, 400, Plus)
       )), "Union with empty should be self renamed")
-      assert(chr1_1500_2500_both.union(Empty) === Block("1", 1500, 2500, Both), "Union with empty should be self renamed")
+      assert(chr1_1500_2500_both.union(Empty) === Block("1", 1500, 2500, Unstranded), "Union with empty should be self renamed")
       assert(chr1_100_200_300_400_plus.union(Empty) === BlockSet(List(
         Block("1", 100, 200, Plus),
         Block("1", 300, 400, Plus)
@@ -300,13 +300,13 @@ class RegionUnionSuite extends FunSuite {
         Block("1", 300, 400, Plus),
         Block("1", 1000, 2000, Plus)
       )), "Non-overlapping because different spans")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.union(Block("1", 1000, 1100, Both)) === BlockSet(List(
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.union(Block("1", 1000, 1100, Unstranded)) === BlockSet(List(
         Block("1", 1000, 1100, Plus),
         Block("1", 1500, 1600, Plus),
         Block("1", 1700, 1800, Plus),
         Block("1", 2100, 2300, Plus)
       )), "Non-overlapping because different spans")
-      assert(chr1_1500_1600_1700_1800_2100_2300_plus.union(Block("1", 2400, 2500, Both)) === BlockSet(List(
+      assert(chr1_1500_1600_1700_1800_2100_2300_plus.union(Block("1", 2400, 2500, Unstranded)) === BlockSet(List(
         Block("1", 1500, 1600, Plus),
         Block("1", 1700, 1800, Plus),
         Block("1", 2100, 2300, Plus),
@@ -583,25 +583,25 @@ class RegionUnionSuite extends FunSuite {
       assert(chr1_1000_2000_3000_4000_plus.union(chr1_2000_3000_3500_3600_both) ===
         Block("1", 1000, 4000, Plus), "One block nested, others non-overlapping")
       assert(chr1_1000_2000_3000_4000_5000_6000_both.union(chr1_500_600_700_800_900_1100_both) === BlockSet(List(
-        Block("1", 500, 600, Both),
-        Block("1", 700, 800, Both),
-        Block("1", 900, 2000, Both),
-        Block("1", 3000, 4000, Both),
-        Block("1", 5000, 6000, Both)
+        Block("1", 500, 600, Unstranded),
+        Block("1", 700, 800, Unstranded),
+        Block("1", 900, 2000, Unstranded),
+        Block("1", 3000, 4000, Unstranded),
+        Block("1", 5000, 6000, Unstranded)
       )), "One block overlapping off end of span")
       assert(chr1_1000_2000_3000_4000_5000_6000_both.union(chr1_500_600_700_800_1000_2000_both) === BlockSet(List(
-        Block("1", 500, 600, Both),
-        Block("1", 700, 800, Both),
-        Block("1", 1000, 2000, Both),
-        Block("1", 3000, 4000, Both),
-        Block("1", 5000, 6000, Both)
+        Block("1", 500, 600, Unstranded),
+        Block("1", 700, 800, Unstranded),
+        Block("1", 1000, 2000, Unstranded),
+        Block("1", 3000, 4000, Unstranded),
+        Block("1", 5000, 6000, Unstranded)
       )), "One block overlapping off end of span")
       assert(chr1_1000_2000_3000_4000_5000_6000_both.union(chr1_500_600_700_800_900_2000_both) === BlockSet(List(
-        Block("1", 500, 600, Both),
-        Block("1", 700, 800, Both),
-        Block("1", 900, 2000, Both),
-        Block("1", 3000, 4000, Both),
-        Block("1", 5000, 6000, Both)
+        Block("1", 500, 600, Unstranded),
+        Block("1", 700, 800, Unstranded),
+        Block("1", 900, 2000, Unstranded),
+        Block("1", 3000, 4000, Unstranded),
+        Block("1", 5000, 6000, Unstranded)
       )), "One block overlapping off end of span")
       assert(chr1_1000_2000_3000_4000_plus.union(chr1_500_600_900_1100_both) === BlockSet(List(
         Block("1", 500, 600, Plus),
@@ -988,57 +988,57 @@ class RegionUnionSuite extends FunSuite {
       assert(chr1_1000_2000_3000_4000_5000_6000_plus.union(chr1_2000_3000_4000_5000_plus) ===
         Block("1", 1000, 6000, Plus), "Same chromosome, same orientation, interleaved exons completely filling span")
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_both.union(chr1_2000_3000_4000_5000_6000_7000_both) ===
-        Block("1", 1000, 8000, Both), "Same chromosome, same orientation, interleaved exons completely filling span")
+        Block("1", 1000, 8000, Unstranded), "Same chromosome, same orientation, interleaved exons completely filling span")
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_both.union(chr1_2000_3000_8000_9000_both) === BlockSet(List(
-        Block("1", 1000, 4000, Both),
-        Block("1", 5000, 6000, Both),
-        Block("1", 7000, 9000, Both)
+        Block("1", 1000, 4000, Unstranded),
+        Block("1", 5000, 6000, Unstranded),
+        Block("1", 7000, 9000, Unstranded)
       )), "Same chromosome, same orientation, interleaved exons filling some introns not all")
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_both.union(chr1_2000_3000_4000_5000_8000_9000_both) === BlockSet(List(
-        Block("1", 1000, 6000, Both),
-        Block("1", 7000, 9000, Both)
+        Block("1", 1000, 6000, Unstranded),
+        Block("1", 7000, 9000, Unstranded)
       )), "Same chromosome, same orientation, interleaved exons filling some introns not all")
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_both.union(chr1_900_1000_4000_5000_6000_7000_8000_9000_both) === BlockSet(List(
-        Block("1", 900, 2000, Both),
-        Block("1", 3000, 9000, Both)
+        Block("1", 900, 2000, Unstranded),
+        Block("1", 3000, 9000, Unstranded)
       )), "Same chromosome, same orientation, interleaved exons filling some introns not all")
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_both.union(chr1_2500_2600_4500_4600_6500_6600_both) === BlockSet(List(
-        Block("1", 1000, 2000, Both),
-        Block("1", 2500, 2600, Both),
-        Block("1", 3000, 4000, Both),
-        Block("1", 4500, 4600, Both),
-        Block("1", 5000, 6000, Both),
-        Block("1", 6500, 6600, Both),
-        Block("1", 7000, 8000, Both)
+        Block("1", 1000, 2000, Unstranded),
+        Block("1", 2500, 2600, Unstranded),
+        Block("1", 3000, 4000, Unstranded),
+        Block("1", 4500, 4600, Unstranded),
+        Block("1", 5000, 6000, Unstranded),
+        Block("1", 6500, 6600, Unstranded),
+        Block("1", 7000, 8000, Unstranded)
       )), "Same chromosome, same orientation, interleaved exons none adjacent")
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_both.union(chr1_4500_4600_6500_6600_8500_8600_both) === BlockSet(List(
-        Block("1", 1000, 2000, Both),
-        Block("1", 3000, 4000, Both),
-        Block("1", 4500, 4600, Both),
-        Block("1", 5000, 6000, Both),
-        Block("1", 6500, 6600, Both),
-        Block("1", 7000, 8000, Both),
-        Block("1", 8500, 8600, Both)
+        Block("1", 1000, 2000, Unstranded),
+        Block("1", 3000, 4000, Unstranded),
+        Block("1", 4500, 4600, Unstranded),
+        Block("1", 5000, 6000, Unstranded),
+        Block("1", 6500, 6600, Unstranded),
+        Block("1", 7000, 8000, Unstranded),
+        Block("1", 8500, 8600, Unstranded)
       )), "Same chromosome, same orientation, interleaved exons none adjacent")
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_both.union(chr1_500_1000_2500_2600_6000_6500_8000_9000_both) === BlockSet(List(
-        Block("1", 500, 2000, Both),
-        Block("1", 2500, 2600, Both),
-        Block("1", 3000, 4000, Both),
-        Block("1", 5000, 6500, Both),
-        Block("1", 7000, 9000, Both)
+        Block("1", 500, 2000, Unstranded),
+        Block("1", 2500, 2600, Unstranded),
+        Block("1", 3000, 4000, Unstranded),
+        Block("1", 5000, 6500, Unstranded),
+        Block("1", 7000, 9000, Unstranded)
       )), "Same chromosome, same orientation, interleaved exons some adjacent")
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_both.union(chr1_2500_3000_8000_9000_both) === BlockSet(List(
-        Block("1", 1000, 2000, Both),
-        Block("1", 2500, 4000, Both),
-        Block("1", 5000, 6000, Both),
-        Block("1", 7000, 9000, Both)
+        Block("1", 1000, 2000, Unstranded),
+        Block("1", 2500, 4000, Unstranded),
+        Block("1", 5000, 6000, Unstranded),
+        Block("1", 7000, 9000, Unstranded)
       )), "Same chromosome, same orientation, interleaved exons some adjacent")
       assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_both.union(chr1_4500_5000_6500_6600_both) === BlockSet(List(
-        Block("1", 1000, 2000, Both),
-        Block("1", 3000, 4000, Both),
-        Block("1", 4500, 6000, Both),
-        Block("1", 6500, 6600, Both),
-        Block("1", 7000, 8000, Both)
+        Block("1", 1000, 2000, Unstranded),
+        Block("1", 3000, 4000, Unstranded),
+        Block("1", 4500, 6000, Unstranded),
+        Block("1", 6500, 6600, Unstranded),
+        Block("1", 7000, 8000, Unstranded)
       )), "Same chromosome, same orientation, interleaved exons some adjacent")
       assert(chr1_1000_2000_3000_4000_5000_6000_plus.union(chr1_7000_8000_9000_10000_plus) === BlockSet(List(
         Block("1", 1000, 2000, Plus),

@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory
 import format.{GTF22Record, MatureRNA}
 
 import scala.collection.immutable.TreeSet
-import scala.collection.JavaConversions.asScalaIterator
+import scala.collection.JavaConversions._
 import scala.collection.mutable
 import scala.io.Source
 
@@ -27,6 +27,14 @@ trait FeatureSet[T <: Feature] {
 
   /** The number of features contained in this set. */
   val size: Long
+
+  /** Returns an iterator over the entire set.
+    *
+    * The returned iterator is not guaranteed to conform to any particular ordering.
+    *
+    * @return Iterator over the set in no particular order
+    */
+  def iterator: Iterator[T]
 
   /** Returns an iterator over overlappers of a genomic interval.
     *
@@ -238,6 +246,19 @@ final class GTF22FeatureSet(file: String) extends FeatureSet[Feature] {
           .flatMap(ts => ts.iterator.filter(f => feat.overlaps(f)))
     }
   }
+
+  /** Returns an iterator over the entire set.
+    *
+    * The returned iterator is not guaranteed to conform to any particular ordering.
+    *
+    * @return Iterator over the set in no particular order
+    */
+  override def iterator: Iterator[Feature] =
+    tree
+      .valuesIterator
+      .flatMap(tree => tree.iterator()
+        .map(node => node.getValue)
+        .flatMap(ts => ts.iterator))
 
 }
 

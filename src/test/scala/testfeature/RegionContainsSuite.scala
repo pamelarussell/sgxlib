@@ -17,16 +17,15 @@ class RegionContainsSuite extends FunSuite {
     assert(!chr2_1000_2000_plus.contains(Empty), "Block should not contain empty")
     assert(chr2_1000_2000_plus.contains(chr2_1000_2000_plus), "Block should contain itself")
     assert(!chr2_1000_2000_plus.contains(Block("2", 1100, 1200, Minus)), "Incompatible orientations")
-    assert(!chr2_1000_2000_plus.contains(Block("2", 1100, 1200, Unstranded)), "Incompatible orientations")
     assert(chr2_1000_2000_plus.contains(Block("2", 1100, 1200, Plus)), "Block contains block")
-    assert(chr2_1000_2000_plus.contains(Block("2", 1100, 1200, Both)), "Block contains block")
+    assert(chr2_1000_2000_plus.contains(Block("2", 1100, 1200, Unstranded)), "Block contains block")
     assert(!chr2_1000_2000_plus.contains(Block("2", 1100, 2001, Plus)), "Overlapping not contained")
     assert(!chr2_1000_2000_plus.contains(Block("2", 999, 1500, Plus)), "Overlapping not contained")
     assert(Block("1", 500, 6500, Plus).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
       "Block contains block set")
     assert(!Block("2", 500, 6500, Plus).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
       "Different chromosomes")
-    assert(Block("1", 500, 6500, Both).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
+    assert(Block("1", 500, 6500, Unstranded).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
       "Block contains block set")
     assert(!Block("1", 500, 600, Plus).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
       "Different spans")
@@ -34,14 +33,6 @@ class RegionContainsSuite extends FunSuite {
       "Different spans")
     assert(!Block("1", 2500, 2600, Plus).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
       "Block in intron of BlockSet")
-    assert(!Block("1", 500, 6500, Unstranded).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
-      "Incompatible orientations")
-    assert(!Block("1", 1500, 6500, Unstranded).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
-      "Overlapping not contained")
-    assert(!Block("1", 500, 5500, Unstranded).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
-      "Overlapping not contained")
-    assert(!Block("1", 3000, 4000, Unstranded).contains(chr1_1000_2000_3000_4000_5000_6000_plus),
-      "Overlapping not contained")
     assert(!Block("1", 100, 200, Plus).contains(Block("2", 100, 200, Plus)), "Different chromosomes")
     assert(!Block("1", 100, 200, Plus).contains(Block("1", 200, 300, Plus)), "Different spans")
     assert(!Block("1", 100, 200, Plus).contains(Block("1", 50, 60, Plus)), "Different spans")
@@ -83,9 +74,9 @@ class RegionContainsSuite extends FunSuite {
     assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("1", 1650, 1800, Plus)), "Contains one block sharing an endpoint")
     // Non-overlapping because different spans
     assert(!chr1_100_200_300_400_plus.contains(chr1_1000_2000_plus_1), "Non-overlapping because different spans")
-    assert(!chr1_100_200_300_400_plus.contains(Block("1", 500, 600, Both)), "Non-overlapping because different spans")
-    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("1", 1000, 1100, Both)), "Non-overlapping because different spans")
-    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("1", 2400, 2500, Both)), "Non-overlapping because different spans")
+    assert(!chr1_100_200_300_400_plus.contains(Block("1", 500, 600, Unstranded)), "Non-overlapping because different spans")
+    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("1", 1000, 1100, Unstranded)), "Non-overlapping because different spans")
+    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(Block("1", 2400, 2500, Unstranded)), "Non-overlapping because different spans")
     // Non-overlapping because different orientations
     assert(!chr1_1500_1600_1700_1800_2100_2300_plus.contains(chr1_1000_2000_minus), "Non-overlapping because different orientations")
     // Different chromosomes
@@ -205,7 +196,7 @@ class RegionContainsSuite extends FunSuite {
   test("Contains compatible introns block block") {
     // Self overlap
     assert(chr1_1000_2000_both.containsCompatibleIntrons(chr1_1000_2000_both), "Block should overlap itself")
-    assert(chr1_1000_2000_unstranded.containsCompatibleIntrons(chr1_1000_2000_unstranded), "Block should overlap itself")
+    assert(chr1_1000_2000_both.containsCompatibleIntrons(chr1_1000_2000_both), "Block should overlap itself")
 
     // Overlapping blocks with compatible orientations
     assert(!chr1_1000_2000_plus_1.containsCompatibleIntrons(chr1_1500_2500_plus), "Overlapping plus blocks should overlap")
@@ -214,7 +205,6 @@ class RegionContainsSuite extends FunSuite {
 
     // Overlapping blocks with non-compatible orientations
     assert(!chr1_1000_2000_plus_1.containsCompatibleIntrons(chr1_1000_2000_minus), "Plus and minus blocks should not overlap")
-    assert(!chr1_1000_2000_unstranded.containsCompatibleIntrons(chr1_1000_2000_both), "Both and unstranded blocks should not overlap")
 
     // Non-overlapping blocks
     assert(!chr1_1000_2000_plus_1.containsCompatibleIntrons(chr1_2000_3000_plus), "Adjacent blocks should not overlap")
@@ -288,9 +278,9 @@ class RegionContainsSuite extends FunSuite {
     assert(!chr1_1500_1600_1700_1800_2100_2300_plus.containsCompatibleIntrons(Block("1", 2100, 2400, Plus)), "Contains one block sharing an endpoint")
     // Non-overlapping because different spans
     assert(!chr1_100_200_300_400_plus.containsCompatibleIntrons(chr1_1000_2000_plus_1), "Non-overlapping because different spans")
-    assert(!chr1_100_200_300_400_plus.containsCompatibleIntrons(Block("1", 500, 600, Both)), "Non-overlapping because different spans")
-    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.containsCompatibleIntrons(Block("1", 1000, 1100, Both)), "Non-overlapping because different spans")
-    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.containsCompatibleIntrons(Block("1", 2400, 2500, Both)), "Non-overlapping because different spans")
+    assert(!chr1_100_200_300_400_plus.containsCompatibleIntrons(Block("1", 500, 600, Unstranded)), "Non-overlapping because different spans")
+    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.containsCompatibleIntrons(Block("1", 1000, 1100, Unstranded)), "Non-overlapping because different spans")
+    assert(!chr1_1500_1600_1700_1800_2100_2300_plus.containsCompatibleIntrons(Block("1", 2400, 2500, Unstranded)), "Non-overlapping because different spans")
     // Non-overlapping because different orientations
     assert(!chr1_1500_1600_1700_1800_2100_2300_plus.containsCompatibleIntrons(chr1_1000_2000_minus), "Non-overlapping because different orientations")
     // Different chromosomes
@@ -388,9 +378,9 @@ class RegionContainsSuite extends FunSuite {
     assert(!Block("1", 2100, 2400, Plus).containsCompatibleIntrons(chr1_1500_1600_1700_1800_2100_2300_plus), "Contains one block sharing an endpoint")
     // Non-overlapping because different spans
     assert(!chr1_1000_2000_plus_1.containsCompatibleIntrons(chr1_100_200_300_400_plus), "Non-overlapping because different spans")
-    assert(!Block("1", 500, 600, Both).containsCompatibleIntrons(chr1_100_200_300_400_plus), "Non-overlapping because different spans")
-    assert(!Block("1", 1000, 1100, Both).containsCompatibleIntrons(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different spans")
-    assert(!Block("1", 2400, 2500, Both).containsCompatibleIntrons(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different spans")
+    assert(!Block("1", 500, 600, Unstranded).containsCompatibleIntrons(chr1_100_200_300_400_plus), "Non-overlapping because different spans")
+    assert(!Block("1", 1000, 1100, Unstranded).containsCompatibleIntrons(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different spans")
+    assert(!Block("1", 2400, 2500, Unstranded).containsCompatibleIntrons(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different spans")
     // Non-overlapping because different orientations
     assert(!chr1_1000_2000_minus.containsCompatibleIntrons(chr1_1500_1600_1700_1800_2100_2300_plus), "Non-overlapping because different orientations")
     // Different chromosomes
@@ -433,35 +423,35 @@ class RegionContainsSuite extends FunSuite {
       Block("1", 5000, 6000, Plus),
       Block("1", 7000, 8000, Plus)))))
     assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus.containsCompatibleIntrons(BlockSet(List(
-      Block("1", 1500, 2000, Both),
-      Block("1", 3000, 4000, Both),
-      Block("1", 5000, 6000, Both),
-      Block("1", 7000, 8000, Both)))))
+      Block("1", 1500, 2000, Unstranded),
+      Block("1", 3000, 4000, Unstranded),
+      Block("1", 5000, 6000, Unstranded),
+      Block("1", 7000, 8000, Unstranded)))))
     assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus.containsCompatibleIntrons(BlockSet(List(
       Block("1", 3500, 4000, Plus),
       Block("1", 5000, 6000, Plus),
       Block("1", 7000, 7500, Plus)))))
     assert(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus.containsCompatibleIntrons(BlockSet(List(
-      Block("1", 3500, 4000, Both),
-      Block("1", 5000, 5001, Both)))))
+      Block("1", 3500, 4000, Unstranded),
+      Block("1", 5000, 5001, Unstranded)))))
     assert(!BlockSet(List(
       Block("1", 3000, 4000, Plus),
       Block("1", 5000, 6000, Plus),
       Block("1", 7000, 8500, Plus),
       Block("1", 9000, 10000, Plus))).containsCompatibleIntrons(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus))
     assert(!BlockSet(List(
-      Block("1", 3000, 4000, Both),
-      Block("1", 5000, 6000, Both))).containsCompatibleIntrons(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus))
+      Block("1", 3000, 4000, Unstranded),
+      Block("1", 5000, 6000, Unstranded))).containsCompatibleIntrons(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus))
     assert(!BlockSet(List(
       Block("1", 5500, 6000, Plus),
       Block("1", 7000, 8500, Plus),
       Block("1", 9000, 10000, Plus),
       Block("1", 11000, 12000, Plus))).containsCompatibleIntrons(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus))
     assert(!BlockSet(List(
-      Block("1", 500, 600, Both),
-      Block("1", 700, 800, Both),
-      Block("1", 900, 2000, Both),
-      Block("1", 3000, 3500, Both))).containsCompatibleIntrons(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus))
+      Block("1", 500, 600, Unstranded),
+      Block("1", 700, 800, Unstranded),
+      Block("1", 900, 2000, Unstranded),
+      Block("1", 3000, 3500, Unstranded))).containsCompatibleIntrons(chr1_1000_2000_3000_4000_5000_6000_7000_8000_plus))
     assert(!chr1_1000_2000_3000_4000_5000_6000_both.containsCompatibleIntrons(chr1_500_600_1500_1600_plus), "One block nested, others non-overlapping")
     assert(!chr1_1000_2000_3000_4000_5000_6000_both.containsCompatibleIntrons(chr1_500_600_2500_2600_5500_5600_plus), "One block nested, others non-overlapping")
     assert(!chr1_1000_2000_3000_4000_5000_6000_both.containsCompatibleIntrons(chr1_2500_2600_3500_3600_4500_4600_plus), "One block nested, others non-overlapping")

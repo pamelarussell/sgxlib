@@ -111,19 +111,12 @@ class FeatureMiscSuite extends FunSuite {
   }
 
   test("Transcript and mRNA valid orientation") {
-    val b1 = Block("1", 1000, 2000, Unstranded)
-    val b2 = Block("1", 3000, 4000, Unstranded)
-    val b3 = Block("1", 1000, 2000, Both)
-    val b4 = Block("1", 3000, 4000, Both)
-    val bs1 = BlockSet(List(b1, b2))
+    val b3 = Block("1", 1000, 2000, Unstranded)
+    val b4 = Block("1", 3000, 4000, Unstranded)
     val bs2 = BlockSet(List(b3, b4))
-    intercept[IllegalArgumentException]{ new Transcript(b1, Some("name"), Some("gene")) }
     intercept[IllegalArgumentException]{ new Transcript(b3, Some("name"), Some("gene")) }
-    intercept[IllegalArgumentException]{ new Transcript(bs1, Some("name"), Some("gene")) }
     intercept[IllegalArgumentException]{ new Transcript(bs2, Some("name"), Some("gene")) }
-    intercept[IllegalArgumentException]{ MessengerRNA(b1, 1500, 1599, Some("name"), Some("gene")) }
     intercept[IllegalArgumentException]{ MessengerRNA(b3, 1500, 1599, Some("name"), Some("gene")) }
-    intercept[IllegalArgumentException]{ MessengerRNA(bs1, 1500, 1599, Some("name"), Some("gene")) }
     intercept[IllegalArgumentException]{ MessengerRNA(bs2, 1500, 1599, Some("name"), Some("gene")) }
   }
 
