@@ -13,24 +13,24 @@ import scala.collection.JavaConversions._
 class SamReaderUtilsSuite extends FunSuite {
 
   def makeIter(feat: Feature, firstOfPairStrandOnTranscript: Orientation): SAMRecordIterator =
-    samReader.compatibleRecords(feat, firstOfPairStrandOnTranscript)
+    samReaderPaired.compatibleRecords(feat, firstOfPairStrandOnTranscript)
 
-  test("Compatible records overlapping transcript") {
+  test("Compatible records overlapping transcript - reads paired") {
 
     // Read contains multiple blocks fully contained in exon
     val iter3 = makeIter(ENST00000373664, Plus)
-    assert(!iter3.contains(DRR02375226601209))
+    assert(!iter3.contains(DRR02375226601209_paired))
     iter3.close()
     val iter11 = makeIter(ENST00000373664, Minus)
-    assert(!iter11.contains(DRR02375226601209))
+    assert(!iter11.contains(DRR02375226601209_paired))
     iter11.close()
 
     // Mate unmapped
     val iter6 = makeIter(ENST00000525052, Plus)
-    assert(iter6.contains(DRR0237521381132))
+    assert(iter6.contains(DRR0237521381132_paired))
     iter6.close()
     val iter7 = makeIter(ENST00000525052, Minus)
-    assert(!iter7.contains(DRR0237521381132))
+    assert(!iter7.contains(DRR0237521381132_paired))
     iter7.close()
 
     // Unstranded should add up to Plus + Minus
@@ -47,74 +47,78 @@ class SamReaderUtilsSuite extends FunSuite {
 
     // Read 1 minus strand
     val iter1 = makeIter(ENST00000373664, Plus)
-    assert(iter1.contains(DRR0237521778081))
+    assert(iter1.contains(DRR0237521778081_paired))
     iter1.close()
     val iter2 = makeIter(ENST00000373664, Minus)
-    assert(!iter2.contains(DRR0237521778081))
+    assert(!iter2.contains(DRR0237521778081_paired))
     iter2.close()
 
     // Read 1 plus strand
     val iter13 = makeIter(ENST00000373664, Plus)
-    assert(!iter13.contains(DRR02375225421084))
+    assert(!iter13.contains(DRR02375225421084_paired))
     iter13.close()
     val iter12 = makeIter(ENST00000373664, Minus)
-    assert(iter12.contains(DRR02375225421084))
+    assert(iter12.contains(DRR02375225421084_paired))
     iter12.close()
 
     // Read 2 minus strand
     val iter14 = makeIter(ENST00000373664, Plus)
-    assert(!iter14.contains(DRR02375221918054))
+    assert(!iter14.contains(DRR02375221918054_paired))
     iter14.close()
     val iter15 = makeIter(ENST00000373664, Minus)
-    assert(iter15.contains(DRR02375221918054))
+    assert(iter15.contains(DRR02375221918054_paired))
     iter15.close()
 
     // Read 2 plus strand
     val iter16 = makeIter(ENST00000373664, Plus)
-    assert(iter16.contains(DRR02375228168172))
+    assert(iter16.contains(DRR02375228168172_paired))
     iter16.close()
     val iter17 = makeIter(ENST00000373664, Minus)
-    assert(!iter17.contains(DRR02375228168172))
+    assert(!iter17.contains(DRR02375228168172_paired))
     iter17.close()
 
     // Multiple isoforms
     val iter18 = makeIter(ENST00000373606, Minus)
-    assert(iter18.contains(DRR02375227278814))
+    assert(iter18.contains(DRR02375227278814_paired))
     iter18.close()
     val iter19 = makeIter(ENST00000397152, Minus)
-    assert(!iter19.contains(DRR02375227278814))
+    assert(!iter19.contains(DRR02375227278814_paired))
     iter19.close()
     val iter20 = makeIter(ENST00000373606, Minus)
-    assert(!iter20.contains(DRR0237529822998))
+    assert(!iter20.contains(DRR0237529822998_paired))
     iter20.close()
     val iter21 = makeIter(ENST00000397152, Minus)
-    assert(iter21.contains(DRR0237529822998))
+    assert(iter21.contains(DRR0237529822998_paired))
     iter21.close()
 
     // Constructed features for testing off by one errors
     val iter22 = makeIter(DRR0237527248016_contained1, Plus)
-    assert(iter22.contains(DRR0237527248016))
+    assert(iter22.contains(DRR0237527248016_paired))
     iter22.close()
     val iter23 = makeIter(DRR0237527248016_contained2, Plus)
-    assert(iter23.contains(DRR0237527248016))
+    assert(iter23.contains(DRR0237527248016_paired))
     iter23.close()
     val iter24 = makeIter(DRR0237527248016_contained3, Plus)
-    assert(iter24.contains(DRR0237527248016))
+    assert(iter24.contains(DRR0237527248016_paired))
     iter24.close()
     val iter25 = makeIter(DRR0237527248016_notContained1, Plus)
-    assert(!iter25.contains(DRR0237527248016))
+    assert(!iter25.contains(DRR0237527248016_paired))
     iter25.close()
     val iter26 = makeIter(DRR0237527248016_notContained2, Plus)
-    assert(!iter26.contains(DRR0237527248016))
+    assert(!iter26.contains(DRR0237527248016_paired))
     iter26.close()
     val iter27 = makeIter(DRR0237527248016_notContained3, Plus)
-    assert(!iter27.contains(DRR0237527248016))
+    assert(!iter27.contains(DRR0237527248016_paired))
     iter27.close()
     val iter28 = makeIter(DRR0237527248016_notContained4, Plus)
-    assert(!iter28.contains(DRR0237527248016))
+    assert(!iter28.contains(DRR0237527248016_paired))
     iter28.close()
 
 
+  }
+
+  ignore("Compatible records overlapping transcript - reads unpaired") {
+    ???
   }
 
 }
