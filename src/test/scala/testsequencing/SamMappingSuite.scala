@@ -9,6 +9,10 @@ import sequencing.SamMapping
   */
 class SamMappingSuite extends FunSuite {
 
+  ignore("Unmapped record") {
+
+  }
+
   test("SamMapping blocks and name - reads paired") {
     val smp: SamMapping = SamMapping(DRR0237527248016_paired, Plus)
     assert(smp.blocks === BlockSet(List(
@@ -20,8 +24,13 @@ class SamMappingSuite extends FunSuite {
     assert(smu.name === Some("DRR023752.7248016"))
   }
 
-  ignore("SamMapping blocks and name - reads unpaired") {
-    ???
+  test("SamMapping blocks and name - reads unpaired") {
+    val smp: SamMapping = SamMapping(DRR02375217157817_unpaired, Plus)
+    assert(smp.blocks === Block("20", 37521350, 37521389, Minus))
+    assert(smp.name === Some("DRR023752.17157817"))
+    val smu: SamMapping = SamMapping(DRR02375217157817_unpaired, Unstranded)
+    assert(smu.blocks === Block("20", 37521350, 37521389, Unstranded))
+    assert(smu.name === Some("DRR023752.17157817"))
   }
 
 }

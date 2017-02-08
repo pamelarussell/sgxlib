@@ -1,7 +1,7 @@
 import java.io.File
 
 import feature._
-import htsjdk.samtools.{SAMRecord, SamReaderFactory}
+import htsjdk.samtools.{SAMRecord, SAMRecordIterator, SamReaderFactory}
 import sequencing.SamReader
 
 import scala.collection.JavaConversions._
@@ -12,7 +12,10 @@ import scala.collection.JavaConversions._
 package object testsequencing {
 
   val samReaderPaired: SamReader = new SamReader(SamReaderFactory.makeDefault()
-    .open(new File(getClass.getResource("/DRR023752_chr20_37Mb_38Mb_plus_unmapped.bam").getPath)))
+    .open(new File(getClass.getResource("/DRR023752_chr20_37Mb_38Mb.bam").getPath)))
+
+  val samReaderUnpaired: SamReader = new SamReader(SamReaderFactory.makeDefault()
+    .open(new File(getClass.getResource("/DRR023752_read1_chr20_37Mb_38Mb.bam").getPath)))
 
   private def findSamRecord(reader: SamReader, readName: String, min: Int, max: Int): SAMRecord = {
     val it = reader.query("chr20", min, max, contained = true)
@@ -29,6 +32,10 @@ package object testsequencing {
   val DRR02375228168172_paired: SAMRecord = findSamRecord(samReaderPaired, "DRR023752.28168172", 37067063, 37067283)
   val DRR02375227278814_paired: SAMRecord = findSamRecord(samReaderPaired, "DRR023752.27278814", 37288821, 37302890)
   val DRR0237529822998_paired: SAMRecord = findSamRecord(samReaderPaired, "DRR023752.9822998", 37298531, 37301584)
+
+  val DRR02375229686457_unpaired: SAMRecord = findSamRecord(samReaderUnpaired, "DRR023752.29686457", 37521192, 37522969)
+  val DRR0237526367658_unpaired: SAMRecord = findSamRecord(samReaderUnpaired, "DRR023752.6367658", 37521192, 37522969)
+  val DRR02375217157817_unpaired: SAMRecord = findSamRecord(samReaderUnpaired, "DRR023752.17157817", 37521192, 37522969)
 
   /* For testing with constructed features
 

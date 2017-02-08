@@ -28,7 +28,15 @@ import scala.collection.JavaConversions._
   *                                      should be [[Unstranded]].
   */
 final case class SamMapping(record: SAMRecord, firstOfPairStrandOnTranscript: Orientation)
-  extends GenericFeature(SamMapping.getBlocks(record, firstOfPairStrandOnTranscript), SamMapping.getQname(record))
+  extends GenericFeature(SamMapping.getBlocks(record, firstOfPairStrandOnTranscript), SamMapping.getQname(record)) {
+
+  validate()
+
+  private def validate(): Unit = {
+    if(record.getReadUnmappedFlag) throw new IllegalArgumentException("Cannot create SamMapping from unmapped read: " + record.getSAMString)
+  }
+
+}
 
 
 object SamMapping {
@@ -46,9 +54,9 @@ object SamMapping {
         val mappedStrand: Orientation = if (record.getReadNegativeStrandFlag) Minus else Plus
         firstOfPairStrandOnTranscript match {
           case Plus =>
-            if(record.getFirstOfPairFlag || !record.getReadPairedFlag) mappedStrand else Orientation.invert(mappedStrand)
+            if(!record.getReadPairedFlag || record.getFirstOfPairFlag) mappedStrand else Orientation.invert(mappedStrand)
           case Minus =>
-            if(record.getFirstOfPairFlag || !record.getReadPairedFlag) Orientation.invert(mappedStrand) else mappedStrand
+            if(!record.getReadPairedFlag || record.getFirstOfPairFlag) Orientation.invert(mappedStrand) else mappedStrand
           case Unstranded => Unstranded
         }
       }
