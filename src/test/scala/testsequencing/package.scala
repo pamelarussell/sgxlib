@@ -30,6 +30,7 @@ package object testsequencing {
   val DRR02375228168172_paired: SAMRecord = findSamRecord(samReaderPaired, "DRR023752.28168172", 37067063, 37067283)
   val DRR02375227278814_paired: SAMRecord = findSamRecord(samReaderPaired, "DRR023752.27278814", 37288821, 37302890)
   val DRR0237529822998_paired: SAMRecord = findSamRecord(samReaderPaired, "DRR023752.9822998", 37298531, 37301584)
+  val DRR02375216305998_paired: SAMRecord = findSamRecord(samReaderPaired, "DRR023752.16305998", 37003545, 37003983)
 
   val DRR02375229686457_unpaired: SAMRecord = findSamRecord(samReaderUnpaired, "DRR023752.29686457", 37521192, 37522969)
   val DRR0237526367658_unpaired: SAMRecord = findSamRecord(samReaderUnpaired, "DRR023752.6367658", 37521192, 37522969)

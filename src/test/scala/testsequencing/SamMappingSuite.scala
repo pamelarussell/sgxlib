@@ -23,6 +23,9 @@ class SamMappingSuite extends FunSuite {
     assert(smu.blocks === BlockSet(List(
       Block("20", 37203934, 37203960, Unstranded), Block("20", 37204766, 37204779, Unstranded))))
     assert(smu.name === Some("DRR023752.7248016"))
+    val sm3: SamMapping = SamMapping(DRR02375216305998_paired, Unstranded)
+    assert(sm3.blocks === Block("20", 37003764, 37003803, Unstranded))
+    assert(sm3.name === Some("DRR023752.16305998"))
   }
 
   test("SamMapping blocks and name - reads unpaired") {

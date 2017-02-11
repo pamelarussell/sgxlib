@@ -59,7 +59,6 @@ object SamMapping {
       }
     }
 
-
     // Make the list of blocks
     val blkList: List[Block] = record.getAlignmentBlocks.map(blk => {
       val start = samToZeroBased(blk.getReferenceStart)
@@ -76,11 +75,7 @@ object SamMapping {
     blkList match {
       case blk :: Nil => blk; case Nil => Empty
       case _ =>
-        try {
-          BlockSet(blkList)
-        } catch {
-          case e: Throwable => println("Exception on record:\n" + record.getSAMString); throw e
-        }
+        try {BlockSet(blkList)} catch {case e: Throwable => println("Exception on record:\n" + record.getSAMString); throw e}
     }
 
   }
