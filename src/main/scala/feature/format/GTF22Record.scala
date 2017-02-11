@@ -162,14 +162,6 @@ class GTF22Record(private val line: String) extends FeatureBuilderModifier {
     */
   override def op(fb: FeatureBuilder): FeatureBuilder = {
 
-    // Verify valid feature type
-    featureType match {
-      case t: MatureRNA => None
-      case _ =>
-        throw new IllegalArgumentException("Only feature types representing parts of transcripts can be used" +
-        s"to update a ${classOf[FeatureBuilder].getName}. GTF2.2 line:\n$line")
-    }
-
     // Only operate on the FeatureBuilder if it has the same transcript ID and gene ID as this record
     if(transcriptId != fb.featureId)
       throw new IllegalArgumentException(s"Transcript ID ($transcriptId) must be equal to existing feature ID (${fb.featureId})")
@@ -187,11 +179,9 @@ class GTF22Record(private val line: String) extends FeatureBuilderModifier {
       case CDS | StopCodon =>
         fb.addBlock(blk).setCdsStart(Utils.updateCdsStart(fb, start)).setCdsEnd(Utils.updateCdsEnd(fb, end))
       // These feature types must have only one block
-      case Intergenic | IntergenicCNS | IntronicCNS =>
-        if(fb.blocks.nonEmpty) throw new IllegalArgumentException(
-          s"Feature builder should have no blocks when encountering record\n$line")
-        else fb.addBlock(blk)
-      case Ignore => throw new IllegalArgumentException(s"Invalid feature type: $featureType")
+      case Intergenic | IntergenicCNS | IntronicCNS | Ignore =>
+        throw new IllegalArgumentException("Only feature types representing parts of transcripts can be used" +
+          s"to update a ${classOf[FeatureBuilder].getName}. GTF2.2 line:\n$line")
     }
 
   }
