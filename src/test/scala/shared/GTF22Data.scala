@@ -32,6 +32,9 @@ object GTF22Data {
   // chr20:37518940-37527878
   val ENST00000445723: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000445723")).toList.head
 
+  // chr20:37509104-37509231
+  val ENST00000411780: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000411780")).toList.head
+
 
   val chr1_184922_185350_Minus = Block("1", 184922, 185350, Minus)	 // ENSG00000279457
   val chr1_184924_185350_Minus = Block("1", 184924, 185350, Minus)	 // ENSG00000279457

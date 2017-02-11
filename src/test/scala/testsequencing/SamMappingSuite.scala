@@ -9,8 +9,9 @@ import sequencing.SamMapping
   */
 class SamMappingSuite extends FunSuite {
 
-  ignore("Unmapped record") {
-
+  test("Unmapped record") {
+    intercept[IllegalArgumentException](SamMapping(unmapped_paired, Plus))
+    intercept[IllegalArgumentException](SamMapping(unmapped_unpaired, Plus))
   }
 
   test("SamMapping blocks and name - reads paired") {
