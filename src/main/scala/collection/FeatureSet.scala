@@ -129,9 +129,8 @@ final class GTF22FeatureSet(file: String) extends FeatureSet[Feature] {
             // If no FeatureBuilder for this transcript ID, make a new one with this transcript ID and gene ID
             if (fb.isEmpty) builders.put(fid, {
               val newFb = new FeatureBuilder().setFeatureId(fid)
-              // Add the gene ID if there is one
-              if (gr.geneId.isDefined) newFb.setGeneId(gr.geneId.get)
-              else newFb
+              // Add the gene ID
+              newFb.setGeneId(gr.geneId.get)
             })
             // Replace the FeatureBuilder for this transcript ID with one that has been operated on
             // by this GTF2Record

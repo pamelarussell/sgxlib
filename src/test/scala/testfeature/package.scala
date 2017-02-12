@@ -13,6 +13,7 @@ package object testfeature {
     val chr1_1000_2000_plus_2 = Block("1", 1000, 2000, Plus)
     val chr1_1000_2000_plus_3 = Block("1", 1000, 2000, Plus)
     val chr1_1200_1300_plus = Block("1", 1200, 1300, Plus)
+    val chr1_1200_1300_minus = Block("1", 1200, 1300, Minus)
     val chr1_1500_2500_plus = Block("1", 1500, 2500, Plus)
     val chr1_1500_2500_minus = Block("1", 1500, 2500, Minus)
     val chr1_1500_2500_both = Block("1", 1500, 2500, Unstranded)

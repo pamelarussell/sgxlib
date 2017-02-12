@@ -125,6 +125,10 @@ class FeatureSetSuite extends FunSuite {
     // No genes
     assert(chr20_21_22.overlappers("chr20", 37584686, 37586304, Plus).isEmpty)
 
+    // Nonexistent chromosome
+    assert(chr20_21_22.overlappers("fakeChr", 100, 200, Plus).isEmpty)
+    assert(chr20_21_22.overlappers(new GenericFeature(Block("fakeChr", 100, 200, Plus), None)).isEmpty)
+
   }
 
   test("Feature overlap") {

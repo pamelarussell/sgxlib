@@ -33,6 +33,8 @@ class RegionMinusSuite extends FunSuite {
 
   def minusBlockBlock(): Unit = {
     test("Block minus Block") {
+      // Incompatible orientation
+      assert(chr1_1200_1300_plus.minus(chr1_1200_1300_minus) === chr1_1200_1300_plus)
       // Nested blocks
       assert(chr1_1000_2000_both.minus(chr1_1200_1300_plus) === BlockSet(
         List(Block("1", 1000, 1200, Unstranded), Block("1", 1300, 2000, Unstranded))

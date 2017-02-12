@@ -649,7 +649,6 @@ final case class BlockSet(blocks: List[Block]) extends Region {
         blocks.mkString("\n"))
       lastEnd = blk.end
     }
-    if(lastEnd < 0) throw new IllegalArgumentException("Block list must be nonempty")
     lastEnd
   }
 
