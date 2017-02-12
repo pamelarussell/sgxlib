@@ -52,7 +52,6 @@ class SamReader(private val file: File) {
   // Convert an external chromosome name to be compatible with names in this reader
   private def convertChr(chr: String): String = {
     if(longRefNames && !chr.startsWith("chr")) "chr" + chr
-    else if(!longRefNames && chr.startsWith("chr")) chr.replaceFirst("chr", "")
     else chr
   }
 

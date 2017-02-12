@@ -43,7 +43,8 @@ class RegionConstructorSuite extends FunSuite {
       intercept[IllegalArgumentException](Block("", 100, 200, Plus))
       intercept[IllegalArgumentException](Block("1", 100, 100, Plus))
       intercept[IllegalArgumentException](Block("1", 100, 100, Plus))
-      intercept[IllegalArgumentException](Block("chr1", 100, 99, Plus))
+      intercept[IllegalArgumentException](Block("1", 100, 99, Plus))
+      intercept[IllegalArgumentException](Block("chr1", 100, 200, Plus))
     }
   }
 

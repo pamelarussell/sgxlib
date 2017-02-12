@@ -1,7 +1,10 @@
 package testsequencing
 
+import java.io.File
+
 import feature.{Minus, Plus, Unstranded}
 import org.scalatest.FunSuite
+import sequencing.SamReader
 import shared.GTF22Data._
 
 /**
@@ -33,6 +36,10 @@ class SamReaderSuite extends FunSuite {
     val iter2 = samReaderPaired.compatibleRecords(ENST00000525052, Plus)
     while(iter2.hasNext) {iter2.next()}
     intercept[NoSuchElementException]{iter2.next()}
+  }
+
+  test("Invalid header") {
+    intercept[IllegalArgumentException]{new SamReader(new File(getClass.getResource("/invalid_header.bam").getPath))}
   }
 
 

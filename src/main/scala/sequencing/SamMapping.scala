@@ -73,7 +73,8 @@ object SamMapping {
 
     // Return appropriate Region type
     blkList match {
-      case blk :: Nil => blk; case Nil => Empty
+      case blk :: Nil => blk
+      case Nil => Empty
       case _ =>
         try {BlockSet(blkList)} catch {case e: Throwable => println("Exception on record:\n" + record.getSAMString); throw e}
     }
@@ -83,7 +84,8 @@ object SamMapping {
   // Convert query name to an Option
   protected def getQname(record: SAMRecord): Option[String] = {
     record.getReadName match {
-      case MISSING => None; case s: String => Some(s)
+      case MISSING => None
+      case s: String => Some(s)
     }
   }
 

@@ -6,6 +6,8 @@ import org.scalatest.FunSuite
 import sequencing.SamReader
 import shared.GTF22Data._
 
+import scala.collection.JavaConversions.asScalaIterator
+
 /**
   * Created by prussell on 1/27/17.
   */
@@ -88,6 +90,38 @@ class SamReaderUtilsSuite extends FunSuite {
     assert(!makeIter(samReaderUnpaired, ENST00000445723, Minus).contains(DRR02375217157817_unpaired))
     assert(makeIter(samReaderUnpaired, ENST00000346199, Unstranded).contains(DRR02375217157817_unpaired))
     assert(makeIter(samReaderUnpaired, ENST00000445723, Unstranded).contains(DRR02375217157817_unpaired))
+
+  }
+
+  test("Compatible records overlapping transcript - reads unpaired, short reference names") {
+
+    // Block with illegal long reference name
+    intercept[IllegalArgumentException]{makeIter(samReaderUnpairedShortRefName,
+      new GenericFeature(Block("chr20", 37682448, 37682602, Plus), None), Plus).size === 9}
+
+    // DRR02375229686457_unpaired
+    assert(makeIter(samReaderUnpairedShortRefName, ENST00000346199, Plus).contains(DRR02375229686457_unpaired_shortRefName))
+    assert(!makeIter(samReaderUnpairedShortRefName, ENST00000445723, Plus).contains(DRR02375229686457_unpaired_shortRefName))
+    assert(!makeIter(samReaderUnpairedShortRefName, ENST00000346199, Minus).contains(DRR02375229686457_unpaired_shortRefName))
+    assert(!makeIter(samReaderUnpairedShortRefName, ENST00000445723, Minus).contains(DRR02375229686457_unpaired_shortRefName))
+    assert(makeIter(samReaderUnpairedShortRefName, ENST00000346199, Unstranded).contains(DRR02375229686457_unpaired_shortRefName))
+    assert(!makeIter(samReaderUnpairedShortRefName, ENST00000445723, Unstranded).contains(DRR02375229686457_unpaired_shortRefName))
+
+    // DRR0237526367658_unpaired
+    assert(!makeIter(samReaderUnpairedShortRefName, ENST00000346199, Plus).contains(DRR0237526367658_unpaired_shortRefName))
+    assert(!makeIter(samReaderUnpairedShortRefName, ENST00000445723, Plus).contains(DRR0237526367658_unpaired_shortRefName))
+    assert(makeIter(samReaderUnpairedShortRefName, ENST00000346199, Minus).contains(DRR0237526367658_unpaired_shortRefName))
+    assert(!makeIter(samReaderUnpairedShortRefName, ENST00000445723, Minus).contains(DRR0237526367658_unpaired_shortRefName))
+    assert(makeIter(samReaderUnpairedShortRefName, ENST00000346199, Unstranded).contains(DRR0237526367658_unpaired_shortRefName))
+    assert(!makeIter(samReaderUnpairedShortRefName, ENST00000445723, Unstranded).contains(DRR0237526367658_unpaired_shortRefName))
+
+    // DRR02375217157817_unpaired
+    assert(!makeIter(samReaderUnpairedShortRefName, ENST00000346199, Plus).contains(DRR02375217157817_unpaired_shortRefName))
+    assert(makeIter(samReaderUnpairedShortRefName, ENST00000445723, Plus).contains(DRR02375217157817_unpaired_shortRefName))
+    assert(makeIter(samReaderUnpairedShortRefName, ENST00000346199, Minus).contains(DRR02375217157817_unpaired_shortRefName))
+    assert(!makeIter(samReaderUnpairedShortRefName, ENST00000445723, Minus).contains(DRR02375217157817_unpaired_shortRefName))
+    assert(makeIter(samReaderUnpairedShortRefName, ENST00000346199, Unstranded).contains(DRR02375217157817_unpaired_shortRefName))
+    assert(makeIter(samReaderUnpairedShortRefName, ENST00000445723, Unstranded).contains(DRR02375217157817_unpaired_shortRefName))
 
   }
 
