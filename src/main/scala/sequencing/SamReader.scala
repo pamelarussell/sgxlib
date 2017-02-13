@@ -11,8 +11,10 @@ import scala.collection.JavaConversions._
 /** A wrapper around an [[htsjdk.samtools.SamReader]].
   *
   * @param file the BAM file
+  * @param isValid Filter to apply to all SAMRecords. SAMRecords are returned only if they
+  *                evaluate to true under this function.
   */
-class SamReader(private val file: File) {
+class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ => true) {
 
   /** Returns a [[htsjdk.samtools.SamReader]] reading from the same file as this object.
     *
@@ -21,6 +23,18 @@ class SamReader(private val file: File) {
     * them must be closed.
     */
   def makeReader: htsjdk.samtools.SamReader = SamReaderFactory.makeDefault().open(file)
+
+  /**
+    * True if the first record is paired; false if it is unpaired or the reader is empty
+    *
+    * This value is used to assert this status for all reads in the reader - no mixing of
+    * paired and unpaired reads is allowed.
+    */
+  val paired: Boolean = {
+    val it = makeReader.iterator()
+    if(it.hasNext) it.next().getReadPairedFlag
+    else false
+  }
 
   /**
     * True if reference names all start with "chr", false if all reference names do not start with "chr",
@@ -47,7 +61,7 @@ class SamReader(private val file: File) {
   }
 
   /** Returns an iterator over all records in the reader. */
-  def iterator: Iterator[SAMRecord] = new FilteredSamRecordIterator(makeReader.iterator(), _ => true)
+  def iterator: Iterator[SAMRecord] = new FilteredSamRecordIterator(makeReader.iterator(), isValid)
 
   // Convert an external chromosome name to be compatible with names in this reader
   private def convertChr(chr: String): String = {
@@ -83,7 +97,7 @@ class SamReader(private val file: File) {
   def compatibleRecords(feat: Feature, firstOfPairStrandOnTranscript: Orientation): Iterator[SAMRecord] = {
     val iter = query(feat.getChr, feat.getStart, feat.getEnd, contained = true)
     new FilteredSamRecordIterator(iter,
-       rec => feat.containsCompatibleIntrons(SamMapping(rec, firstOfPairStrandOnTranscript)))
+       rec => isValid(rec) && feat.containsCompatibleIntrons(SamMapping(rec, firstOfPairStrandOnTranscript)))
   }
 
   /** Returns the number of SAMRecords that are compatible with the [[Feature]].
@@ -103,42 +117,46 @@ class SamReader(private val file: File) {
     compatibleRecords(feat, firstOfPairStrandOnTranscript).size
   }
 
-}
+  /** A filtered SAMRecordIterator
+    *
+    * @param iter SAMRecordIterator to filter
+    * @param keepRecord Function that returns true for records to keep and false for records to remove
+    */
+  private class FilteredSamRecordIterator(private val iter: SAMRecordIterator, val keepRecord: (SAMRecord => Boolean))
+    extends SAMRecordIterator {
 
-/** A filtered SAMRecordIterator
-  *
-  * @param iter SAMRecordIterator to filter
-  * @param isValid Function that returns true for records to keep and false for records to remove
-  */
-private class FilteredSamRecordIterator(private val iter: SAMRecordIterator, val isValid: (SAMRecord => Boolean))
-  extends SAMRecordIterator {
-
-  private def findNxt: Option[SAMRecord] = {
-    while(iter.hasNext) {
-      val newRec = iter.next()
-      if(isValid(newRec)) return Some(newRec)
-    }
-    None
-  }
-
-  private var nxt: Option[SAMRecord] = findNxt
-
-  override def assertSorted(sortOrder: SortOrder): SAMRecordIterator = iter.assertSorted(sortOrder)
-  override def close(): Unit = iter.close()
-  override def hasNext: Boolean = nxt.isDefined
-
-  override def next(): SAMRecord = {
-    if(!hasNext) throw new NoSuchElementException("No next element")
-    val rtrn = nxt
-    while(iter.hasNext) {
-      val newRec = iter.next()
-      if(isValid(newRec)) {
-        nxt = Some(newRec)
-        return rtrn.get
+    private def findNxt: Option[SAMRecord] = {
+      while(iter.hasNext) {
+        val newRec = iter.next()
+        if(keepRecord(newRec)) return Some(newRec)
       }
+      None
     }
-    nxt = None
-    rtrn.get
+
+    private var nxt: Option[SAMRecord] = findNxt
+
+    override def assertSorted(sortOrder: SortOrder): SAMRecordIterator = iter.assertSorted(sortOrder)
+    override def close(): Unit = iter.close()
+    override def hasNext: Boolean = nxt.isDefined
+
+    override def next(): SAMRecord = {
+      if(!hasNext) throw new NoSuchElementException("No next element")
+      val rtrn = nxt
+      while(iter.hasNext) {
+        val newRec = iter.next()
+        if(newRec.getReadPairedFlag != paired)
+          throw new IllegalArgumentException("Cannot mix paired and unpaired reads")
+        if(keepRecord(newRec)) {
+          nxt = Some(newRec)
+          return rtrn.get
+        }
+      }
+      nxt = None
+      rtrn.get
+    }
+
   }
 
+
 }
+
