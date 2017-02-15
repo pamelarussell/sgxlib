@@ -11,8 +11,8 @@ import scala.collection.JavaConversions._
 /** A wrapper around an [[htsjdk.samtools.SamReader]].
   *
   * @param file the BAM file
-  * @param isValid Filter to apply to all SAMRecords. SAMRecords are returned only if they
-  *                evaluate to true under this function.
+  * @param isValid Filter to apply to all SAMRecords in this reader.
+  *                SAMRecords are returned only if they evaluate to true under this function.
   */
 class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ => true) {
 
@@ -60,7 +60,7 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
 
   }
 
-  /** Returns an iterator over all records in the reader. */
+  /** Returns an iterator over all records in the reader evaluating to true under [[isValid]]. */
   def iterator: Iterator[SAMRecord] = new FilteredSamRecordIterator(makeReader.iterator(), isValid)
 
   // Convert an external chromosome name to be compatible with names in this reader
@@ -70,6 +70,8 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
   }
 
   /** Returns an iterator over SAMRecords overlapping an interval.
+    *
+    * Only returns records evaluating to true under [[isValid]].
     *
     * @param chr Interval reference sequence name
     * @param start Zero-based inclusive interval start position
@@ -86,13 +88,15 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     * In other words, records are fully contained in the [[Feature]], originate from fragments transcribed
     * from the same strand if strand specific, and have compatible introns as defined in [[feature.Region.containsCompatibleIntrons]].
     *
+    * Only returns records evaluating to true under [[isValid]].
+    *
     * @param feat The [[Feature]]
     * @param firstOfPairStrandOnTranscript Strand relative to transcription strand of read 1 (if reads are paired) or
     *                                      all reads (if unpaired). If read 1 maps to the transcription strand, this parameter
     *                                      should be [[Plus]]. If read 1 maps to the opposite of the transcription strand,
     *                                      this parameter should be [[Minus]]. If reads are not strand-specific, this parameter
     *                                      should be [[Unstranded]].
-    * @return Closeable iterator over SAMRecords that are compatible with the [[Feature]]
+    * @return Iterator over SAMRecords that are compatible with the [[Feature]]
     */
   def compatibleRecords(feat: Feature, firstOfPairStrandOnTranscript: Orientation): Iterator[SAMRecord] = {
     val iter = query(feat.getChr, feat.getStart, feat.getEnd, contained = true)
@@ -105,16 +109,124 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     * In other words, records are fully contained in the [[Feature]], originate from fragments transcribed
     * from the same strand if strand specific, and have compatible introns as defined in [[feature.Region.containsCompatibleIntrons]].
     *
+    * Only counts records evaluating to true under [[isValid]].
+    *
     * @param feat The [[Feature]]
     * @param firstOfPairStrandOnTranscript Strand relative to transcription strand of read 1 (if reads are paired) or
     *                                      all reads (if unpaired). If read 1 maps to the transcription strand, this parameter
     *                                      should be [[Plus]]. If read 1 maps to the opposite of the transcription strand,
     *                                      this parameter should be [[Minus]]. If reads are not strand-specific, this parameter
     *                                      should be [[Unstranded]].
-    * @return Closeable iterator over SAMRecords that are compatible with the [[Feature]]
+    * @return Number of SAMRecords that are compatible with the [[Feature]]
     */
   def countCompatibleRecords(feat: Feature, firstOfPairStrandOnTranscript: Orientation): Int = {
     compatibleRecords(feat, firstOfPairStrandOnTranscript).size
+  }
+
+  /** Returns an iterator over pairs of SAMRecords that are compatible with the [[Feature]].
+    *
+    * Each returned pair is a mate pair and is in the order (first of pair, second of pair).
+    *
+    * Returned records are fully contained in the [[Feature]], originate from fragments transcribed
+    * from the same strand if strand specific, and have compatible introns as defined in [[feature.Region.containsCompatibleIntrons]].
+    *
+    * Only mate pairs with both mates compatible with the [[Feature]] and evaluating to true under [[isValid]]
+    * are returned. Only primary alignments are used.
+    *
+    * The returned iterator is in no particular order.
+    *
+    * Throws [[IllegalArgumentException]] if records are not paired.
+    *
+    * @param feat The [[Feature]]
+    * @param firstOfPairStrandOnTranscript Strand relative to transcription strand of read 1 (if reads are paired) or
+    *                                      all reads (if unpaired). If read 1 maps to the transcription strand, this parameter
+    *                                      should be [[Plus]]. If read 1 maps to the opposite of the transcription strand,
+    *                                      this parameter should be [[Minus]]. If reads are not strand-specific, this parameter
+    *                                      should be [[Unstranded]].
+    * @return
+    */
+  def compatibleFragments(feat: Feature, firstOfPairStrandOnTranscript: Orientation): Iterator[(SAMRecord, SAMRecord)] =
+    new PairedIterator(
+      new FilteredSamRecordIterator(
+        query(feat.getChr, feat.getStart, feat.getEnd, contained = true),
+        rec => isValid(rec)
+          && !rec.getNotPrimaryAlignmentFlag
+          && feat.containsCompatibleIntrons(SamMapping(rec, firstOfPairStrandOnTranscript))))
+
+
+  /** Returns the number of pairs of SAMRecords that are compatible with the [[Feature]].
+    *
+    * Included records are fully contained in the [[Feature]], originate from fragments transcribed
+    * from the same strand if strand specific, and have compatible introns as defined in [[feature.Region.containsCompatibleIntrons]].
+    *
+    * Only mate pairs with both mates compatible with the [[Feature]] and evaluating to true under [[isValid]]
+    * are included. Only primary alignments are used.
+    *
+    * Throws [[IllegalArgumentException]] if records are not paired.
+    *
+    * @param feat The [[Feature]]
+    * @param firstOfPairStrandOnTranscript Strand relative to transcription strand of read 1 (if reads are paired) or
+    *                                      all reads (if unpaired). If read 1 maps to the transcription strand, this parameter
+    *                                      should be [[Plus]]. If read 1 maps to the opposite of the transcription strand,
+    *                                      this parameter should be [[Minus]]. If reads are not strand-specific, this parameter
+    *                                      should be [[Unstranded]].
+    * @return
+    */
+  def countCompatibleFragments(feat: Feature, firstOfPairStrandOnTranscript: Orientation): Int =
+    compatibleFragments(feat, firstOfPairStrandOnTranscript).size
+
+
+  /** Iterator over mate pairs contained in the provided iterator.
+    *
+    * Pairs returned by this iterator are in the order (first of pair, second of pair).
+    *
+    * Only mates with both pairs in the iterator are included.
+    *
+    * @param iter SAMRecordIterator
+    */
+  private final class PairedIterator(private val iter: FilteredSamRecordIterator) extends Iterator[(SAMRecord, SAMRecord)] {
+
+    if(!paired) throw new IllegalArgumentException("Invalid call for unpaired reads")
+    iter.assertSorted(SortOrder.coordinate)
+
+    // Records that have been seen and mate will potentially still be seen
+    private val waitingForMate: scala.collection.mutable.HashMap[String, SAMRecord] = scala.collection.mutable.HashMap()
+
+    private var nxt: Option[(SAMRecord, SAMRecord)] = findNxt
+
+    // True if mate might still be out there
+    private def waitForMate(rec: SAMRecord): Boolean = {
+      if(rec.getMateUnmappedFlag) false
+      else if(rec.getReadNegativeStrandFlag == rec.getMateNegativeStrandFlag) false
+      else rec.getAlignmentStart <= rec.getMateAlignmentStart
+    }
+
+    private def findNxt: Option[(SAMRecord, SAMRecord)] = {
+      if(!iter.hasNext) None
+      else {
+        while(iter.hasNext) {
+          val rec = iter.next()
+          val name = rec.getReadName
+          if(waitingForMate.contains(name)) {
+            if(rec.getFirstOfPairFlag) return Some((rec, waitingForMate(name)))
+            else return Some(waitingForMate(name), rec)
+          } else if(waitForMate(rec)) {
+            waitingForMate.put(name, rec)
+          }
+        }
+      }
+      None
+    }
+
+    override def hasNext: Boolean = nxt.isDefined
+
+    override def next(): (SAMRecord, SAMRecord) = {
+      if(!hasNext) throw new NoSuchElementException("No next element")
+      val rtrn = nxt.get
+      nxt = findNxt
+      rtrn
+    }
+
   }
 
   /** A filtered SAMRecordIterator
@@ -122,12 +234,14 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     * @param iter SAMRecordIterator to filter
     * @param keepRecord Function that returns true for records to keep and false for records to remove
     */
-  private class FilteredSamRecordIterator(private val iter: SAMRecordIterator, val keepRecord: (SAMRecord => Boolean))
+  private final class FilteredSamRecordIterator(private val iter: SAMRecordIterator, val keepRecord: (SAMRecord => Boolean))
     extends SAMRecordIterator {
 
     private def findNxt: Option[SAMRecord] = {
       while(iter.hasNext) {
         val newRec = iter.next()
+        if(newRec.getReadPairedFlag != paired)
+          throw new IllegalArgumentException("Cannot mix paired and unpaired reads")
         if(keepRecord(newRec)) return Some(newRec)
       }
       None
@@ -141,18 +255,9 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
 
     override def next(): SAMRecord = {
       if(!hasNext) throw new NoSuchElementException("No next element")
-      val rtrn = nxt
-      while(iter.hasNext) {
-        val newRec = iter.next()
-        if(newRec.getReadPairedFlag != paired)
-          throw new IllegalArgumentException("Cannot mix paired and unpaired reads")
-        if(keepRecord(newRec)) {
-          nxt = Some(newRec)
-          return rtrn.get
-        }
-      }
-      nxt = None
-      rtrn.get
+      val rtrn = nxt.get
+      nxt = findNxt
+      rtrn
     }
 
   }
