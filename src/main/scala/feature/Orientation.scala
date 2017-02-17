@@ -17,6 +17,27 @@ object Unstranded extends Orientation {override def toString: String = "unstrand
 /** Utility methods for calculations on [[Orientation]]s */
 object Orientation {
 
+  /**
+    * Comma separated list of string representations of [[Orientation]]s
+    */
+  val commaSepList: String = s"${Plus.toString()}, ${Minus.toString}, ${Unstranded.toString()}"
+
+  /** Returns an [[Orientation]] from its string description.
+    *
+    * Throws [[IllegalArgumentException]] if the passed string does not correspond to an [[Orientation]].
+    *
+    * @param s String description
+    * @return The corresponding [[Orientation]]
+    */
+  def fromString(s: String): Orientation = {
+    s match {
+      case o if o == Plus.toString => Plus
+      case o if o == Minus.toString => Minus
+      case o if o == Unstranded.toString => Unstranded
+      case _ => throw new IllegalArgumentException(s"Invalid orientation: $s. Options: $commaSepList")
+    }
+  }
+
   /** Returns the reverse of the specified [[Orientation]].
     *
     * [[Plus]] and [[Minus]] are swapped by this function. [[Unstranded]] is unchanged.

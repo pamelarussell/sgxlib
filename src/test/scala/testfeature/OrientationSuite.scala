@@ -74,4 +74,11 @@ class OrientationSuite extends FunSuite {
     assert(ArbitraryOrdering.compare(Unstranded, Unstranded) === 0)
   }
 
+  test("From string") {
+    assert(Orientation.fromString("+") === Plus)
+    assert(Orientation.fromString("-") === Minus)
+    assert(Orientation.fromString("unstranded") === Unstranded)
+    intercept[IllegalArgumentException](Orientation.fromString("wrong"))
+  }
+
 }

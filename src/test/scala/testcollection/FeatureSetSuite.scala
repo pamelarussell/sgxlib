@@ -1,5 +1,7 @@
 package testcollection
 
+import java.io.File
+
 import collection.{FeatureSet, GTF22FeatureSet}
 import feature._
 import org.scalatest.FunSuite
@@ -10,7 +12,7 @@ import shared.GTF22Data._
   */
 class FeatureSetSuite extends FunSuite {
 
-  val fewFeatures: FeatureSet[Feature] = new GTF22FeatureSet(getClass.getResource("/sample_genes.gtf").getPath)
+  val fewFeatures: FeatureSet[Feature] = new GTF22FeatureSet(new File(getClass.getResource("/sample_genes.gtf").getPath))
 
   test("Iterator") {
     val iter1 = fewFeatures.iterator

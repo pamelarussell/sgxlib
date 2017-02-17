@@ -1,5 +1,7 @@
 package shared
 
+import java.io.File
+
 import collection.{FeatureSet, GTF22FeatureSet}
 import feature._
 
@@ -9,7 +11,7 @@ import feature._
 object GTF22Data {
 
   val chr20_21_22: FeatureSet[Feature] =
-    new GTF22FeatureSet(getClass.getResource("/Homo_sapiens.GRCh38.86.chr_20_21_22.gtf").getPath)
+    new GTF22FeatureSet(new File(getClass.getResource("/Homo_sapiens.GRCh38.86.chr_20_21_22.gtf").getPath))
 
   // chr20:36996349-37095995
   val ENST00000373664: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000373664")).toList.head

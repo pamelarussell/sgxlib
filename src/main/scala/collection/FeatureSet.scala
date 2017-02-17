@@ -1,5 +1,7 @@
 package collection
 
+import java.io.File
+
 import feature._
 import htsjdk.samtools.util.IntervalTree
 import org.slf4j.LoggerFactory
@@ -74,9 +76,9 @@ trait FeatureSet[T <: Feature] {
   * GTF2.2 [[http://mblab.wustl.edu/GTF22.html feature.format specification]]. See [[GTF22Record]] for details
   * on how GTF2.2 records are interpreted and incorporated into [[Feature]]s.
   *
-  * @param file Path of GTF2.2 file
+  * @param file GTF2.2 file
   */
-final class GTF22FeatureSet(file: String) extends FeatureSet[Feature] {
+final class GTF22FeatureSet(file: File) extends FeatureSet[Feature] {
 
   private val logger = LoggerFactory.getLogger(getClass)
 
