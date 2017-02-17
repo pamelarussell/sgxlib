@@ -372,6 +372,28 @@
       </a>
     </span>
       <p class="shortcomment cmt">Returns false.</p><div class="fullcomment"><div class="comment cmt"><p>Returns false.</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>True if this <a href="Region.html" class="extype" name="feature.Region">Region</a> contains the other, false otherwise</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+    </li><li name="feature.Region#containsCompatibleIntrons" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="containsCompatibleIntrons(o:feature.Region):Boolean"></a>
+      <a id="containsCompatibleIntrons(Region):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">containsCompatibleIntrons</span><span class="params">(<span name="o">o: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#feature.Empty$@containsCompatibleIntrons(o:feature.Region):Boolean" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a boolean value representing whether this <a href="Region.html" class="extype" name="feature.Region">Region</a> contains another <a href="Region.html" class="extype" name="feature.Region">Region</a>
+and their introns are compatible.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a boolean value representing whether this <a href="Region.html" class="extype" name="feature.Region">Region</a> contains another <a href="Region.html" class="extype" name="feature.Region">Region</a>
+and their introns are compatible.</p><p>That is, no INTERNAL block boundary for one of the <a href="Region.html" class="extype" name="feature.Region">Region</a>s can fall strictly within a
+<a href="Block.html" class="extype" name="feature.Block">Block</a> of the other <a href="Region.html" class="extype" name="feature.Region">Region</a>.
+</p></div><dl class="paramcmts block"><dt class="param">o</dt><dd class="cmt"><p>Other <a href="Region.html" class="extype" name="feature.Region">Region</a></p></dd><dt>returns</dt><dd class="cmt"><p>True if this <a href="Region.html" class="extype" name="feature.Region">Region</a> contains the other and their introns are compatible,
+        false otherwise</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
     </li><li name="feature.Empty#end" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="end:Int"></a>
       <a id="end:Int"></a>
@@ -463,6 +485,29 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="feature.Region#getIntrons" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getIntrons:List[feature.Block]"></a>
+      <a id="getIntrons:List[Block]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getIntrons</span><span class="result">: <span class="extype" name="scala.List">List</span>[<a href="Block.html" class="extype" name="feature.Block">Block</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#feature.Empty$@getIntrons:List[feature.Block]" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a list of <a href="Block.html" class="extype" name="feature.Block">Block</a>s representing the introns of this <a href="Region.html" class="extype" name="feature.Region">Region</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a list of <a href="Block.html" class="extype" name="feature.Block">Block</a>s representing the introns of this <a href="Region.html" class="extype" name="feature.Region">Region</a>.</p><p>The returned list is in order from left to right. Each <a href="Block.html" class="extype" name="feature.Block">Block</a> in the returned list is the span of a gap
+between two <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="Region.html" class="extype" name="feature.Region">Region</a>. The returned <a href="Block.html" class="extype" name="feature.Block">Block</a>s have the same <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>
+as this <a href="Region.html" class="extype" name="feature.Region">Region</a>. The start position of each returned <a href="Block.html" class="extype" name="feature.Block">Block</a> is equal to the end position (exclusive)
+of the previous adjacent <a href="Block.html" class="extype" name="feature.Block">Block</a> in this <a href="Region.html" class="extype" name="feature.Region">Region</a>. The end position of each returned <a href="Block.html" class="extype" name="feature.Block">Block</a> (exclusive)
+is equal to the start position of the following adjacent <a href="Block.html" class="extype" name="feature.Block">Block</a> in this <a href="Region.html" class="extype" name="feature.Region">Region</a>.</p><p>If this <a href="Region.html" class="extype" name="feature.Region">Region</a> is empty or has only one <a href="Block.html" class="extype" name="feature.Block">Block</a>, Nil is returned.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>A list of <a href="Block.html" class="extype" name="feature.Block">Block</a>s representing the gaps between the <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="Region.html" class="extype" name="feature.Region">Region</a>, or Nil if this
+        <a href="Region.html" class="extype" name="feature.Region">Region</a> has less than two <a href="Block.html" class="extype" name="feature.Block">Block</a>s.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
     </li><li name="feature.Empty#intersection" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="intersection(feat:feature.Region):feature.Region"></a>
       <a id="intersection(Region):Region"></a>
@@ -633,6 +678,24 @@
       </a>
     </span>
       <p class="shortcomment cmt">Returns false.</p><div class="fullcomment"><div class="comment cmt"><p>Returns false.</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>True if the <a href="Region.html" class="extype" name="feature.Region">Region</a>s overlap, false otherwise</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+    </li><li name="feature.Empty#overlapsCompatibleIntrons" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="overlapsCompatibleIntrons(o:feature.Region):Boolean"></a>
+      <a id="overlapsCompatibleIntrons(Region):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">overlapsCompatibleIntrons</span><span class="params">(<span name="o">o: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#feature.Empty$@overlapsCompatibleIntrons(o:feature.Region):Boolean" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns false.</p><div class="fullcomment"><div class="comment cmt"><p>Returns false.</p></div><dl class="paramcmts block"><dt class="param">o</dt><dd class="cmt"><p>Other <a href="Region.html" class="extype" name="feature.Region">Region</a></p></dd><dt>returns</dt><dd class="cmt"><p>True if the <a href="Region.html" class="extype" name="feature.Region">Region</a>s overlap and their introns are compatible,
+        false otherwise</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
     </li><li name="feature.Empty#relativePos" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="relativePos(chrPos:Int):Option[Int]"></a>
       <a id="relativePos(Int):Option[Int]"></a>

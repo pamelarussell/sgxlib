@@ -109,9 +109,9 @@ a single contiguous block, and <a href="BlockSet.html" class="extype" name="feat
       </a>
     </span>
       <p class="shortcomment cmt">A single contiguous block on a chromosome with an <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.</p><div class="fullcomment"><div class="comment cmt"><p>A single contiguous block on a chromosome with an <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.
-</p></div><dl class="paramcmts block"><dt class="param">chr</dt><dd class="cmt"><p>Chromosome name. Cannot start with &quot;chr&quot; (otherwise an <span class="extype" name="IllegalArgumentException">IllegalArgumentException</span> is thrown.
+</p></div><dl class="paramcmts block"><dt class="param">chr</dt><dd class="cmt"><p>Chromosome name. Cannot start with &quot;chr&quot; (otherwise an <span class="extype" name="IllegalArgumentException">IllegalArgumentException</span> is thrown).
            All code in this library automatically strips &quot;chr&quot; from feature chromosome names before
-           instantiating <a href="Block.html" class="extype" name="feature.Block">Block</a>s. For example, <a href="../feature.format/GTF22Record.html" class="extype" name="feature.format.GTF22Record">feature.format.GTF22Record</a> strips &quot;chr&quot; from GTF2.2 lines
+           instantiating <a href="Block.html" class="extype" name="feature.Block">Block</a>s. For example, <a href="format/GTF22Record.html" class="extype" name="feature.format.GTF22Record">format.GTF22Record</a> strips &quot;chr&quot; from GTF2.2 lines
            before creating <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s. Client code that implements new ways to create features will need
            to do this as well.</p></dd><dt class="param">start</dt><dd class="cmt"><p>Zero-based start position (inclusive)</p></dd><dt class="param">end</dt><dd class="cmt"><p>Zero-based end position (exclusive)</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>Block orientation</p></dd></dl></div>
     </li><li name="feature.BlockSet" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -188,7 +188,7 @@ The appropriate type in the <a href="Feature.html" class="extype" name="feature.
       </a>
     </span>
       <p class="shortcomment cmt">A way to encapsulate arbitrary operations on a <a href="FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a>.</p><div class="fullcomment"><div class="comment cmt"><p>A way to encapsulate arbitrary operations on a <a href="FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a>.</p><p>The <a href="FeatureBuilderModifier.html#op(fb:feature.FeatureBuilder):feature.FeatureBuilder" class="extmbr" name="feature.FeatureBuilderModifier#op">op</a> function performs the operations on a specified <a href="FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a>
-and returns a new modified <a href="FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a>.</p><p>Classes that mix in this trait include <a href="../feature.format/GTF22Record.html" class="extype" name="feature.format.GTF22Record">feature.format.GTF22Record</a>.</p></div></div>
+and returns a new modified <a href="FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a>.</p><p>Classes that mix in this trait include <a href="format/GTF22Record.html" class="extype" name="feature.format.GTF22Record">format.GTF22Record</a>.</p></div></div>
     </li><li name="feature.Gene" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="GeneextendsProductwithSerializable"></a>
       <a id="Gene:Gene"></a>
@@ -336,23 +336,6 @@ In addition, a <a href="Transcript.html" class="extype" name="feature.Transcript
       </a>
     </span>
       <p class="shortcomment cmt">Companion functions for <a href="Block.html" class="extype" name="feature.Block">Block</a></p>
-    </li><li name="feature.Unstranded" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Both"></a>
-      <a id="Both:Both"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="Both$.html"><span class="name">Both</span></a><span class="result"> extends <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.package@Both" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Both strands of DNA</p>
     </li><li name="feature.Empty" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="Empty"></a>
       <a id="Empty:Empty"></a>
@@ -454,7 +437,24 @@ In addition, a <a href="Transcript.html" class="extype" name="feature.Transcript
         <img src="../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
-      <p class="shortcomment cmt">Orientation for features not associated with a DNA strand</p>
+      <p class="shortcomment cmt">Unstranded - not associated with a strand or strand unknown</p>
+    </li><li name="feature.format" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="format"></a>
+      <a id="format:format"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="format/package.html"><span class="name">format</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#feature.package@format" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li></ol>
             </div>
 

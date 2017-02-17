@@ -456,6 +456,28 @@ If the gene IDs comparison is non-zero, return it.</p><p>If the gene ID comparis
     </span>
       <p class="shortcomment cmt">Returns a boolean value representing whether this <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> contains another <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a boolean value representing whether this <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> contains another <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>.</p><p>Ignores feature name and calls <a href="Region.html#contains(o:feature.Region):Boolean" class="extmbr" name="feature.Region#contains">Region.contains</a> on the two underlying <a href="Region.html" class="extype" name="feature.Region">Region</a>s.
 </p></div><dl class="paramcmts block"><dt class="param">other</dt><dd class="cmt"><p>Other <a href="Feature.html" class="extype" name="feature.Feature">Feature</a></p></dd><dt>returns</dt><dd class="cmt"><p>True if this <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> contains the other, false otherwise</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Feature.html" class="extype" name="feature.Feature">Feature</a></dd></dl></div>
+    </li><li name="feature.Feature#containsCompatibleIntrons" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="containsCompatibleIntrons(other:feature.Feature):Boolean"></a>
+      <a id="containsCompatibleIntrons(Feature):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">containsCompatibleIntrons</span><span class="params">(<span name="other">other: <a href="Feature.html" class="extype" name="feature.Feature">Feature</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#feature.MessengerRNA@containsCompatibleIntrons(other:feature.Feature):Boolean" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a boolean value representing whether this <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> contains another <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>
+and their introns are compatible.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a boolean value representing whether this <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> contains another <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>
+and their introns are compatible.</p><p>That is, no INTERNAL block boundary for one of the <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s can fall strictly within a
+<a href="Block.html" class="extype" name="feature.Block">Block</a> of the other <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>.
+</p></div><dl class="paramcmts block"><dt class="param">other</dt><dd class="cmt"><p>Other <a href="Feature.html" class="extype" name="feature.Feature">Feature</a></p></dd><dt>returns</dt><dd class="cmt"><p>True if this <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> contains the other and their introns are compatible,
+        false otherwise</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Feature.html" class="extype" name="feature.Feature">Feature</a></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -664,29 +686,6 @@ on the underlying <a href="Region.html" class="extype" name="feature.Region">Reg
       </a>
     </span>
       <p class="shortcomment cmt">Returns the end position of the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> as in <a href="Region.html#end:Int" class="extmbr" name="feature.Region#end">Region.end</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the end position of the underlying <a href="Region.html" class="extype" name="feature.Region">Region</a> as in <a href="Region.html#end:Int" class="extmbr" name="feature.Region#end">Region.end</a>.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Feature.html" class="extype" name="feature.Feature">Feature</a></dd></dl></div>
-    </li><li name="feature.Transcript#getIntrons" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="getIntrons:List[feature.Block]"></a>
-      <a id="getIntrons:List[Block]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">getIntrons</span><span class="result">: <span class="extype" name="scala.List">List</span>[<a href="Block.html" class="extype" name="feature.Block">Block</a>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.MessengerRNA@getIntrons:List[feature.Block]" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Returns a list of <a href="Block.html" class="extype" name="feature.Block">Block</a>s representing the introns of this <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a list of <a href="Block.html" class="extype" name="feature.Block">Block</a>s representing the introns of this <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>.</p><p>The returned list is in order from left to right. Each <a href="Block.html" class="extype" name="feature.Block">Block</a> in the returned list is the span of a gap
-between two <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>. The returned <a href="Block.html" class="extype" name="feature.Block">Block</a>s have the same <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>
-as this <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>. The start position of each returned <a href="Block.html" class="extype" name="feature.Block">Block</a> is equal to the end position (exclusive)
-of the previous adjacent <a href="Block.html" class="extype" name="feature.Block">Block</a> in this <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>. The end position of each returned <a href="Block.html" class="extype" name="feature.Block">Block</a> (exclusive)
-is equal to the start position of the following adjacent <a href="Block.html" class="extype" name="feature.Block">Block</a> in this <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>.</p><p>If this <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> has only one <a href="Block.html" class="extype" name="feature.Block">Block</a>, Nil is returned.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>A list of <a href="Block.html" class="extype" name="feature.Block">Block</a>s representing the gaps between the <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a>, or Nil if this
-        <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> has only one <a href="Block.html" class="extype" name="feature.Block">Block</a>.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a></dd></dl></div>
     </li><li name="feature.Feature#getOrientation" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getOrientation:feature.Orientation"></a>
       <a id="getOrientation:Orientation"></a>
@@ -956,6 +955,28 @@ two underlying <a href="Region.html" class="extype" name="feature.Region">Region
     </span>
       <p class="shortcomment cmt">Returns a boolean value representing whether this <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> overlaps another <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a boolean value representing whether this <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> overlaps another <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>.</p><p>Ignores feature name and calls <a href="Region.html#overlaps(o:feature.Region):Boolean" class="extmbr" name="feature.Region#overlaps">Region.overlaps</a> on the two underlying <a href="Region.html" class="extype" name="feature.Region">Region</a>s.
 </p></div><dl class="paramcmts block"><dt class="param">other</dt><dd class="cmt"><p>Other <a href="Feature.html" class="extype" name="feature.Feature">Feature</a></p></dd><dt>returns</dt><dd class="cmt"><p>True if the <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s overlap, false otherwise</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Feature.html" class="extype" name="feature.Feature">Feature</a></dd></dl></div>
+    </li><li name="feature.Feature#overlapsCompatibleIntrons" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="overlapsCompatibleIntrons(other:feature.Feature):Boolean"></a>
+      <a id="overlapsCompatibleIntrons(Feature):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">overlapsCompatibleIntrons</span><span class="params">(<span name="other">other: <a href="Feature.html" class="extype" name="feature.Feature">Feature</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../index.html#feature.MessengerRNA@overlapsCompatibleIntrons(other:feature.Feature):Boolean" title="Permalink" target="_top">
+        <img src="../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Returns a boolean value representing whether this <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> overlaps another <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>
+and their introns are compatible.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a boolean value representing whether this <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> overlaps another <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>
+and their introns are compatible.</p><p>That is, no INTERNAL block boundary for one of the <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s can fall strictly within a
+<a href="Block.html" class="extype" name="feature.Block">Block</a> of the other <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>.
+</p></div><dl class="paramcmts block"><dt class="param">other</dt><dd class="cmt"><p>Other <a href="Feature.html" class="extype" name="feature.Feature">Feature</a></p></dd><dt>returns</dt><dd class="cmt"><p>True if the <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s overlap and their introns are compatible,
+        false otherwise</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Feature.html" class="extype" name="feature.Feature">Feature</a></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
