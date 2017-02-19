@@ -18,11 +18,9 @@ Go to [latest release](https://github.com/pamelarussell/sgxlib/releases/latest) 
 
 To build a fat .jar file, [sbt](http://www.scala-sbt.org/) is required.
 
-```
-sbt assembly
-```
+`sbt assembly`
 
-generates ```target/scala-[version]/sgxlib-[release].jar```. The jar file can be imported as a library into Java or Scala projects.
+generates `target/scala-[version]/sgxlib-[release].jar`. The jar file can be imported as a library into Java or Scala projects.
 
 ## API documentation (Scaladoc)
 
