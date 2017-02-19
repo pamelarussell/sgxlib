@@ -28,11 +28,17 @@ View the [API docs](http://pamelarussell.github.io/sgxlib/docs/api/)
 
 ## Overview of packages
 
-TBA
+### Package [feature](http://pamelarussell.github.io/sgxlib/docs/api/#feature.package)
+
+### Package [feature.format](http://pamelarussell.github.io/sgxlib/docs/api/#feature.format.package)
+
+### Package [collection](http://pamelarussell.github.io/sgxlib/docs/api/#collection.package)
+
+### Package [sequencing](http://pamelarussell.github.io/sgxlib/docs/api/#sequencing.package)
 
 ## Java interoperability
 
-As with all Scala libraries, sgxlib can be used from within Java code. For example:
+sgxlib can be used from within Java code. For example:
 
 ```java
 package examples;
