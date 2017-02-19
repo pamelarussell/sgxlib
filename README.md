@@ -10,17 +10,23 @@ Genomics library for the Scala programming language
 
 TBA
 
-## Latest release
+## Download
 
-TBA
+Go to [latest release](https://github.com/pamelarussell/sgxlib/releases/latest) for precompiled .jar file and source code downloads.
 
 ## Building from source
 
-TBA
+To build a fat .jar file, [sbt](http://www.scala-sbt.org/) is required.
+
+```
+sbt assembly
+```
+
+generates ```target/scala-[version]/sgxlib-[release].jar```. The jar file can be imported as a library into Java or Scala projects.
 
 ## API documentation (Scaladoc)
 
-TBA
+View the [API docs](http://pamelarussell.github.io/sgxlib/docs/api/)
 
 ## Overview of packages
 
