@@ -80,8 +80,6 @@ trait FeatureSet[T <: Feature] {
   */
 final class GTF22FeatureSet(file: File) extends FeatureSet[Feature] {
 
-  private val logger = LoggerFactory.getLogger(getClass)
-
   /*
   Immutable map of chromosome to IntervalTree. Each IntervalTree maps intervals to an immutable TreeSet of features
   with the start and end coordinates of the interval.
@@ -158,7 +156,7 @@ final class GTF22FeatureSet(file: File) extends FeatureSet[Feature] {
                   .append(gr.transcriptId.get)
                   .toString)))
         }
-      } else logger.debug(s"Ignoring line:\t$line")
+      }
     })
 
     // Get the features from the builders and add them

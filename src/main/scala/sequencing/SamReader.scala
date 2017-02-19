@@ -19,8 +19,8 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
   /** Returns a [[htsjdk.samtools.SamReader]] reading from the same file as this object.
     *
     * Use this if you want the additional functionality provided by that class.
-    * But beware, [[htsjdk.samtools.SamReader]] objects are mutable, and iterators over
-    * them must be closed.
+    * But beware, [[htsjdk.samtools.SamReader]] objects are mutable. Also, these
+    * objects and iterators over them must be closed.
     */
   def makeReader: htsjdk.samtools.SamReader = SamReaderFactory.makeDefault().open(file)
 
@@ -30,10 +30,16 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     * This value is used to assert this status for all reads in the reader - no mixing of
     * paired and unpaired reads is allowed.
     */
-  val paired: Boolean = {
-    val it = makeReader.iterator()
-    if(it.hasNext) it.next().getReadPairedFlag
-    else false
+  private val paired: Boolean = {
+    val reader = makeReader
+    val it = reader.iterator()
+    val rtrn = {
+      if (it.hasNext) it.next().getReadPairedFlag
+      else false
+    }
+    it.close()
+    reader.close()
+    rtrn
   }
 
   /**
@@ -43,7 +49,8 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
   private val longRefNames: Boolean = {
 
     def all(b: Boolean) = {
-      makeReader
+      val reader = makeReader
+      val rtrn = reader
         .getFileHeader
         .getSequenceDictionary
         .getSequences
@@ -51,6 +58,8 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
           val nm = seq.getSequenceName
           if (b) nm.startsWith("chr") else !nm.startsWith("chr")
         })
+      reader.close()
+      rtrn
     }
 
     if(all(true)) true
@@ -61,7 +70,10 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
   }
 
   /** Returns an iterator over all records in the reader evaluating to true under [[isValid]]. */
-  def iterator: Iterator[SAMRecord] = new FilteredSamRecordIterator(makeReader.iterator(), isValid)
+  def iterator: Iterator[SAMRecord] = {
+    val reader = makeReader
+    new FilteredSamRecordIterator(reader, reader.iterator(), isValid)
+  }
 
   // Convert an external chromosome name to be compatible with names in this reader
   private def convertChr(chr: String): String = {
@@ -69,7 +81,8 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     else chr
   }
 
-  /** Returns an iterator over SAMRecords overlapping an interval.
+  /** Returns an iterator over SAMRecords overlapping an interval, along with a pointer
+    * to the [[htsjdk.samtools.SamReader]] it iterates over.
     *
     * Only returns records evaluating to true under [[isValid]].
     *
@@ -77,10 +90,13 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     * @param start Zero-based inclusive interval start position
     * @param end Zero-based exclusive interval end position
     * @param contained Fully contained records only
-    * @return Iterator over overlapping records
+    * @return Pair of the implicated [[htsjdk.samtools.SamReader]] and the iterator over overlapping records.
+    *         The reader and iterator need to be closed.
     */
-  private def query(chr: String, start: Int, end: Int, contained: Boolean): SAMRecordIterator =
-    makeReader.query(convertChr(chr), SamMapping.zeroBasedToSam(start), SamMapping.zeroBasedToSam(end), contained)
+  private def query(chr: String, start: Int, end: Int, contained: Boolean): (htsjdk.samtools.SamReader, SAMRecordIterator) = {
+    val reader = makeReader
+    (reader, reader.query(convertChr(chr), SamMapping.zeroBasedToSam(start), SamMapping.zeroBasedToSam(end), contained))
+  }
 
 
   /** Returns an iterator over SAMRecords that are compatible with the [[Feature]].
@@ -99,8 +115,8 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     * @return Iterator over SAMRecords that are compatible with the [[Feature]]
     */
   def compatibleRecords(feat: Feature, firstOfPairStrandOnTranscript: Orientation): Iterator[SAMRecord] = {
-    val iter = query(feat.getChr, feat.getStart, feat.getEnd, contained = true)
-    new FilteredSamRecordIterator(iter,
+    val q: (htsjdk.samtools.SamReader, SAMRecordIterator) = query(feat.getChr, feat.getStart, feat.getEnd, contained = true)
+    new FilteredSamRecordIterator(q._1, q._2,
        rec => isValid(rec) && feat.containsCompatibleIntrons(SamMapping(rec, firstOfPairStrandOnTranscript)))
   }
 
@@ -145,13 +161,16 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     *                                      should be [[Unstranded]].
     * @return
     */
-  def compatibleFragments(feat: Feature, firstOfPairStrandOnTranscript: Orientation): Iterator[(SAMRecord, SAMRecord)] =
+  def compatibleFragments(feat: Feature, firstOfPairStrandOnTranscript: Orientation): Iterator[(SAMRecord, SAMRecord)] = {
+    val q: (htsjdk.samtools.SamReader, SAMRecordIterator) = query(feat.getChr, feat.getStart, feat.getEnd, contained = true)
     new PairedIterator(
+      q._1,
       new FilteredSamRecordIterator(
-        query(feat.getChr, feat.getStart, feat.getEnd, contained = true),
+        q._1, q._2,
         rec => isValid(rec)
           && !rec.getNotPrimaryAlignmentFlag
           && feat.containsCompatibleIntrons(SamMapping(rec, firstOfPairStrandOnTranscript))))
+  }
 
 
   /** Returns the number of pairs of SAMRecords that are compatible with the [[Feature]].
@@ -182,9 +201,11 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     *
     * Only mates with both pairs in the iterator are included.
     *
-    * @param iter SAMRecordIterator
+    * @param reader The implicated [[htsjdk.samtools.SamReader]]
+    * @param iter SAMRecordIterator over the reader
     */
-  private final class PairedIterator(private val iter: FilteredSamRecordIterator) extends Iterator[(SAMRecord, SAMRecord)] {
+  private final class PairedIterator(private val reader: htsjdk.samtools.SamReader,
+                                     private val iter: FilteredSamRecordIterator) extends Iterator[(SAMRecord, SAMRecord)] {
 
     if(!paired) throw new IllegalArgumentException("Invalid call for unpaired reads")
     iter.assertSorted(SortOrder.coordinate)
@@ -202,8 +223,11 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     }
 
     private def findNxt: Option[(SAMRecord, SAMRecord)] = {
-      if(!iter.hasNext) None
-      else {
+      if(!iter.hasNext) {
+        iter.close()
+        reader.close()
+        None
+      } else {
         while(iter.hasNext) {
           val rec = iter.next()
           val name = rec.getReadName
@@ -214,7 +238,11 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
             waitingForMate.put(name, rec)
           }
         }
+        iter.close()
+        reader.close()
       }
+      iter.close()
+      reader.close()
       None
     }
 
@@ -231,10 +259,13 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
 
   /** A filtered SAMRecordIterator
     *
+    * @param reader The implicated [[htsjdk.samtools.SamReader]]
     * @param iter SAMRecordIterator to filter
     * @param keepRecord Function that returns true for records to keep and false for records to remove
     */
-  private final class FilteredSamRecordIterator(private val iter: SAMRecordIterator, val keepRecord: (SAMRecord => Boolean))
+  private final class FilteredSamRecordIterator(private val reader: htsjdk.samtools.SamReader,
+                                                private val iter: SAMRecordIterator,
+                                                val keepRecord: (SAMRecord => Boolean))
     extends SAMRecordIterator {
 
     private def findNxt: Option[SAMRecord] = {
@@ -244,13 +275,18 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
           throw new IllegalArgumentException("Cannot mix paired and unpaired reads")
         if(keepRecord(newRec)) return Some(newRec)
       }
+      iter.close()
+      reader.close()
       None
     }
 
     private var nxt: Option[SAMRecord] = findNxt
 
     override def assertSorted(sortOrder: SortOrder): SAMRecordIterator = iter.assertSorted(sortOrder)
-    override def close(): Unit = iter.close()
+    override def close(): Unit = {
+      iter.close()
+      reader.close()
+    }
     override def hasNext: Boolean = nxt.isDefined
 
     override def next(): SAMRecord = {
