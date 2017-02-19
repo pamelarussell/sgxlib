@@ -8,7 +8,7 @@ Genomics library for the Scala programming language
 
 ## Overview
 
-TBA
+[sgxlib](https://github.com/pamelarussell/sgxlib) provides classes and methods for genomics applications. See [Overview of packages](#overview-of-packages) and [API documentation](http://pamelarussell.github.io/sgxlib/docs/api/) for details.
 
 ## Download
 
