@@ -32,7 +32,7 @@ View the [API docs](http://pamelarussell.github.io/sgxlib/docs/api/)
 
 The `feature` package provides the concept of a genomic region with blocks and an orientation, as well as specific types of features such as transcripts and messenger RNAs. The package provides powerful feature arithmetic, with operations such as intersection, union, contains, minus, overlaps, and extraction of sub-features such as exons, introns, and sections of messenger RNAs.
 
-##### Examples
+Examples:
 
 ```scala
 import feature._
@@ -74,6 +74,27 @@ val introns: List[Block] = mrna.blocks.getIntrons // List([1:2000-3000:+], [1:40
 ### Package [collection](http://pamelarussell.github.io/sgxlib/docs/api/#collection.package)
 
 The `collection` package provides the concept of a collection of features, as well as methods to get the subcollection of features overlapping a given feature. An implementation is provided to create a feature collection from a [GTF2.2](http://mblab.wustl.edu/GTF22.html) annotation file.
+
+Examples:
+
+```scala
+import java.io.File
+import collection.{FeatureSet, GTF22FeatureSet}
+import feature._
+
+// Load a set of features from a GTF file
+val featureSet: FeatureSet[Feature] =
+  new GTF22FeatureSet(new File(getClass.getResource("/Homo_sapiens.GRCh38.86.chr_20_21_22.gtf").getPath))
+
+// Get overlappers of an interval
+val intervalOverlap: Iterator[Feature] = featureSet.overlappers("chr20", 37476591, 37645612, Plus) // ENST00000062104, ENST00000346199, ENST00000450588, ENST00000621390
+
+// Get overlappers of a feature
+val ENST00000613961: Feature = new Transcript(
+  Block("20", 37499892, 37503975, Minus),
+  Some("ENST00000613961"), Some("ENSG00000166619"))
+val featureOverlap: Iterator[Feature] = featureSet.overlappers(ENST00000613961) // ENST00000613961, ENST00000467603
+```
 
 ### Package [sequencing](http://pamelarussell.github.io/sgxlib/docs/api/#sequencing.package)
 
