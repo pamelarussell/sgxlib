@@ -1,16 +1,19 @@
 val nm = "sgxlib"
-val ver = "1.0.0"
+val ver = "1.0.1"
 
 // Basic info
 name := nm
 version := ver
-scalaVersion := "2.11.8"
+scalaVersion := "2.12.0"
 
 // sbt assembly to generate fat .jar
 assemblyJarName in assembly := nm + "-" + ver + ".jar"
 
+// Compiler options
+scalacOptions += "-feature"
+
 // Scalatest
-libraryDependencies += "org.scalatest" % "scalatest_2.11" % "2.2.4" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.1" % "test"
 testOptions in Test += Tests.Argument("-oF")
 
 // Coveralls
@@ -19,9 +22,9 @@ coverallsTokenFile := Some("src/main/resources/token.txt")
 coverageEnabled := true
 
 // htsjdk
-unmanagedJars in Compile += file("lib/htsjdk-2.4.1.jar")
+unmanagedJars in Compile += file("lib/htsjdk-2.9.0-1-g55bf01b-SNAPSHOT.jar")
 apiMappings += (
-  (unmanagedBase.value / "lib/htsjdk-2.4.1.jar") ->
+  (unmanagedBase.value / "lib/htsjdk-2.9.0-1-g55bf01b-SNAPSHOT.jar") ->
     url("http://samtools.github.io/htsjdk/javadoc/htsjdk/")
   )
 

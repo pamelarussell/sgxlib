@@ -16,7 +16,7 @@ Go to [latest release](https://github.com/pamelarussell/sgxlib/releases/latest) 
 
 ## Building from source
 
-To build a fat .jar file, [sbt](http://www.scala-sbt.org/) is required.
+To build a monolithic .jar file including all dependencies, [sbt](http://www.scala-sbt.org/) is required.
 
 ```
 sbt assembly
