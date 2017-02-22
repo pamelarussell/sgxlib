@@ -12,7 +12,7 @@ Genomics library for the Scala programming language
 
 ## Download
 
-Go to [latest release](https://github.com/pamelarussell/sgxlib/releases/latest) for precompiled .jar file and source code downloads.
+Go to [latest release](https://github.com/pamelarussell/sgxlib/releases/latest) for source code downloads.
 
 ## Building from source
 
