@@ -173,15 +173,15 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
   }
 
 
-  /** Returns the number of pairs of SAMRecords that are compatible with the [[Feature]].
+  /** Returns the number of fragments that are compatible with the [[Feature]].
+    *
+    * Fragments are pairs of SAMRecords if reads are paired, or single SAMRecords if reads are unpaired.
     *
     * Included records are fully contained in the [[Feature]], originate from fragments transcribed
     * from the same strand if strand specific, and have compatible introns as defined in [[feature.Region.containsCompatibleIntrons]].
     *
-    * Only mate pairs with both mates compatible with the [[Feature]] and evaluating to true under [[isValid]]
+    * If reads are paired, only mate pairs with both mates compatible with the [[Feature]] and evaluating to true under [[isValid]]
     * are included. Only primary alignments are used.
-    *
-    * Throws [[IllegalArgumentException]] if records are not paired.
     *
     * @param feat The [[Feature]]
     * @param firstOfPairStrandOnTranscript Strand relative to transcription strand of read 1 (if reads are paired) or
@@ -189,10 +189,12 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     *                                      should be [[Plus]]. If read 1 maps to the opposite of the transcription strand,
     *                                      this parameter should be [[Minus]]. If reads are not strand-specific, this parameter
     *                                      should be [[Unstranded]].
-    * @return
+    * @return The number of compatible fragments defined as complete pairs if paired, or single records if unpaired.
     */
-  def countCompatibleFragments(feat: Feature, firstOfPairStrandOnTranscript: Orientation): Int =
-    compatibleFragments(feat, firstOfPairStrandOnTranscript).size
+  def countCompatibleFragments(feat: Feature, firstOfPairStrandOnTranscript: Orientation): Int = {
+    if(paired) compatibleFragments(feat, firstOfPairStrandOnTranscript).size
+    else countCompatibleRecords(feat, firstOfPairStrandOnTranscript)
+  }
 
 
   /** Iterator over mate pairs contained in the provided iterator.
