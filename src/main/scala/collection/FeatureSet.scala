@@ -69,6 +69,44 @@ trait FeatureSet[T <: Feature] {
     */
   def overlappers(feat: Feature): Iterator[T]
 
+  /** Returns an iterator over the nearest [[Feature]]s to a genomic interval.
+    *
+    * If this set contains one or more [[Feature]]s whose span (including introns) overlaps the given interval,
+    * an iterator over those overlappers is returned.
+    *
+    * Otherwise, all [[Feature]]s tied for the minimum distance are returned. Distance is defined
+    * as in [[Feature.distance]].
+    *
+    * [[Orientation]] is ignored.
+    *
+    * The returned iterator is not guaranteed to conform to any particular ordering.
+    *
+    * @param chr Chromosome name of query interval
+    * @param start Zero-based inclusive start position of query interval
+    * @param end Zero-based exclusive end position of query interval
+    * @return Iterator over nearest [[Feature]]s in no particular order, or [[Iterator.empty]]
+    *         if there are no [[Feature]]s on the chromosome
+    */
+  def nearest(chr: String, start: Int, end: Int): Iterator[T]
+
+  /** Returns an iterator over the nearest [[Feature]]s to a given [[Feature]].
+    *
+    * If this set contains one or more [[Feature]]s whose span (including introns) overlaps the span
+    * (including introns) of the given [[Feature]], an iterator over those overlappers is returned.
+    *
+    * Otherwise, all [[Feature]]s tied for the minimum distance are returned. Distance is defined
+    * as in [[Feature.distance]].
+    *
+    * [[Orientation]] is ignored.
+    *
+    * The returned iterator is not guaranteed to conform to any particular ordering.
+    *
+    * @param feat Query [[Feature]]
+    * @return Iterator over nearest [[Feature]]s in no particular order, or [[Iterator.empty]]
+    *         if there are no [[Feature]]s on the chromosome
+    */
+  def nearest(feat: Feature): Iterator[T] = nearest(feat.getChr, feat.getStart, feat.getEnd)
+
 }
 
 /** A [[FeatureSet]] constructed from annotations specified in a GTF2.2 file.
@@ -258,6 +296,45 @@ final class GTF22FeatureSet(file: File) extends FeatureSet[Feature] {
       .flatMap(tree => tree.iterator()
         .map(node => node.getValue)
         .flatMap(ts => ts.iterator))
+
+  /** Returns an iterator over the nearest [[Feature]]s to a genomic interval.
+    *
+    * If this set contains one or more [[Feature]]s whose span (including introns) overlaps the given interval,
+    * an iterator over those overlappers is returned.
+    *
+    * Otherwise, all [[Feature]]s tied for the minimum distance are returned. Distance is defined
+    * as in [[Feature.distance]].
+    *
+    * [[Orientation]] is ignored.
+    *
+    * The returned iterator is not guaranteed to conform to any particular ordering.
+    *
+    * @param chr         Chromosome name of query interval
+    * @param start       Zero-based inclusive start position of query interval
+    * @param end         Zero-based exclusive end position of query interval
+    * @return Iterator over nearest [[Feature]]s in no particular order, or [[Iterator.empty]]
+    *         if there are no [[Feature]]s on the chromosome
+    */
+  override def nearest(chr: String, start: Int, end: Int): Iterator[Feature] = {
+    val shortChr = chr.replaceFirst("^chr", "")
+    if(!tree.contains(shortChr)) Iterator.empty
+    else {
+      val prevIntervalNode = tree(shortChr).max(start, end)
+      val nextIntervalNode = tree(shortChr).min(start, end)
+      if(prevIntervalNode == null && nextIntervalNode == null) Iterator.empty
+      else {
+        val nbStart = if(prevIntervalNode == null) nextIntervalNode.getStart else prevIntervalNode.getStart
+        val nbEnd = if(nextIntervalNode == null) prevIntervalNode.getEnd else nextIntervalNode.getEnd
+        val neighborhood = tree(shortChr)
+          .overlappers(nbStart, nbEnd)
+          .flatMap(_.getValue)
+        val blk = new GenericFeature(Block(shortChr, start, end, Unstranded), None)
+        val distances: Set[(Feature, Int)] = neighborhood.map(feat => (feat, feat.distance(blk))).toSet
+        val minDist = distances.foldLeft(Integer.MAX_VALUE)((x, fd) => Math.min(x, fd._2))
+        distances.filter(_._2 == minDist).map(_._1).iterator
+      }
+    }
+  }
 
 }
 

@@ -12,7 +12,8 @@ import shared.GTF22Data._
   */
 class FeatureSetSuite extends FunSuite {
 
-  val fewFeatures: FeatureSet[Feature] = new GTF22FeatureSet(new File(getClass.getResource("/sample_genes.gtf").getPath))
+  val fewFeatures: FeatureSet[Feature] =
+    new GTF22FeatureSet(new File(getClass.getResource("/sample_genes.gtf").getPath))
 
   test("Iterator") {
     val iter1 = fewFeatures.iterator
@@ -212,6 +213,72 @@ class FeatureSetSuite extends FunSuite {
     assert(fewFeatures.contains(intron_CNS_140_70102_70151_Minus))
     assert(fewFeatures.contains(transcript1400001))
     assert(fewFeatures.size === 37)
+  }
+
+  test("Nearest feature") {
+    // Overlap multiple features - single point
+    val set1 = chr20_21_22.nearest("chr20", 37306985, 37306986).toSet
+    assert(set1.size === 5)
+    assert(set1.contains(ENST00000373606))
+    assert(set1.contains(ENST00000397150))
+    assert(set1.contains(ENST00000397152))
+    assert(set1.contains(ENST00000373605))
+    assert(set1.contains(ENST00000397151))
+    // Overlap multiple features
+    val set2 = chr20_21_22.nearest("chr20", 37306985, 37307161).toSet
+    assert(set2 === set1)
+   // Overlap multiple features - no overlapping blocks
+    val feat1 = new GenericFeature(BlockSet(List(
+      Block("20", 37306985, 37306986, Plus),
+      Block("20", 37313141, 37314129, Plus))), None)
+    val set3 = chr20_21_22.nearest(feat1).toSet
+    assert(set3 === set1)
+    val feat2 = new GenericFeature(BlockSet(List(
+      Block("20", 37306985, 37306986, Plus),
+      Block("20", 37319231, 37319657, Plus))), None)
+    val set4 = chr20_21_22.nearest(feat2).toSet
+    assert(set4 === set1)
+    val feat3 = new GenericFeature(BlockSet(List(
+      Block("20", 37282313, 37285909, Plus),
+      Block("20", 37313141, 37314129, Plus))), None)
+    val set5 = chr20_21_22.nearest(feat3).toSet
+    assert(set5 === set1)
+    // Overlap some of each orientation
+    val feat4 = new GenericFeature(Block("20", 37178077, 37179086, Plus), None)
+    val set6 = chr20_21_22.nearest(feat4).toSet
+    assert(set6.size === 8)
+    assert(set6.contains(ENST00000237530))
+    assert(set6.contains(ENST00000456102))
+    assert(set6.contains(ENST00000400441))
+    // No overlap
+    val feat6 = new GenericFeature(Block("20", 37249854, 37250291, Minus), None)
+    val set8 = chr20_21_22.nearest(feat6).toSet
+    assert(set8.size === 1)
+    assert(set8.contains(ENST00000373614))
+    // No overlap, several neighbors same distance
+    val feat7 = new GenericFeature(Block("20", 38954507, 38954508, Unstranded), None)
+    val set9 = chr20_21_22.nearest(feat7).toSet
+    assert(set9.size === 3)
+    assert(set9.contains(ENST00000619304))
+    assert(set9.contains(ENST00000619850))
+    assert(set9.contains(ENST00000620080))
+    // No features on chromosome
+    val iter2 = chr20_21_22.nearest("chr200", 37306985, 37307161)
+    assert(iter2.isEmpty)
+    // Overlapping two non-overlapping features
+    val feat8 = new GenericFeature(Block("20", 38953099, 38955928, Plus), None)
+    val set10 = chr20_21_22.nearest(feat8).toSet
+    assert(set10 === set9)
+    // Before first feature on chromosome
+    val feat9 = new GenericFeature(Block("20", 1000, 2000, Minus), None)
+    val set11 = chr20_21_22.nearest(feat9).toSet
+    assert(set11.size === 1)
+    assert(set11.contains(ENST00000608838))
+    // After last feature on chromosome
+    val feat12 = new GenericFeature(Block("20", 65327972, 66327972, Plus), None)
+    val set14 = chr20_21_22.nearest(feat12).toSet
+    assert(set14.size === 1)
+    assert(set14.contains(ENST00000620521))
   }
 
 }

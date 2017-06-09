@@ -25,6 +25,15 @@ object GTF22Data {
   // chr20:37289638-37317260
   val ENST00000373606: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000373606")).toList.head
 
+  // chr20:37289649-37316639
+  val ENST00000397150: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000397150")).toList.head
+
+  // chr20:37296896-37317260
+  val ENST00000373605: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000373605")).toList.head
+
+  // chr20:37297345-37317260
+  val ENST00000397151: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000397151")).toList.head
+
   // chr20:37289663-37317260
   val ENST00000397152: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000397152")).toList.head
 
@@ -39,6 +48,49 @@ object GTF22Data {
 
   // chr20:37676910-37683234
   val ENST00000373508: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000373508")).toList.head
+
+  // chr20:37179046-37241623
+  val ENST00000237530: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000237530")).toList.head
+
+  // chr20:37178410-37210150
+  val ENST00000456102: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000456102")).toList.head
+
+  // chr20:37251082-37261835
+  val ENST00000373614: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000373614")).toList.head
+
+  // chr20:37251086-37256896
+  val ENST00000237527: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000237527")).toList.head
+
+  // chr20:37251160-37256889
+  val ENST00000373611: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000373611")).toList.head
+
+  // chr20:38926312-38953106
+  val ENST00000619304: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000619304")).toList.head
+
+  // chr20:38926426-38953106
+  val ENST00000619850: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000619850")).toList.head
+
+  // chr20:38955910-38956547
+  val ENST00000620080: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000620080")).toList.head
+
+  // chr20:37101227-37179480
+  val ENST00000400441: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000400441")).toList.head
+
+  // First plus strand on chr20
+  // chr20:87250-97094
+  val ENST00000608838: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000608838")).toList.head
+
+  // First minus strand on chr20
+  // chr20:187853-189681
+  val ENST00000334391: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000334391")).toList.head
+
+  // Last minus strand on chr20
+  // chr20:64327418-64327972
+  val ENST00000620521: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000620521")).toList.head
+
+  // Last plus strand on chr20
+  // chr20:64294941-64313132
+  val ENST00000425473: Feature = chr20_21_22.iterator.filter(_.name.contains("ENST00000425473")).toList.head
 
 
   val chr1_184922_185350_Minus = Block("1", 184922, 185350, Minus)	 // ENSG00000279457

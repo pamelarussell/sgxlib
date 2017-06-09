@@ -3,7 +3,7 @@ package feature
 /** An orientation for a genomic feature.
   *
   * Can refer to a particular DNA strand if the feature is associated with
-  * a strand, or alternatives if not.
+  * a strand, or unstranded if not.
   */
 sealed trait Orientation
 

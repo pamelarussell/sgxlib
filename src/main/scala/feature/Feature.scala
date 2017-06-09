@@ -89,6 +89,31 @@ sealed abstract class Feature(val blocks: Region, val name: Option[String]) exte
     */
   def intersection(other: Feature): Option[Feature]
 
+  /** Returns the distance between this [[Feature]] and another [[Feature]].
+    *
+    * [[Orientation]] is ignored.
+    *
+    * If the spans of the [[Feature]]s (including introns) overlap, 0 is returned.
+    * Otherwise, if the other [[Feature]] lies to the right of this [[Feature]], distance
+    * is defined as the first position of the other [[Feature]] minus the last position
+    * of this [[Feature]]. The definition is similar for the opposite direction. Therefore,
+    * the returned distance is a nonnegative number.
+    *
+    * If the [[Feature]]s are on different chromosomes, an [[IllegalArgumentException]]
+    * is thrown.
+    *
+    * @param other Other [[Feature]]
+    * @return The distance in base pairs between this [[Feature]] and the other [[Feature]]
+    */
+  def distance(other: Feature): Int = {
+    if(getChr != other.getChr) throw new IllegalArgumentException("Different chromosomes not allowed")
+    val tfMinusOl = getStart - other.getEnd + 1
+    val tlMinusOf = getEnd - 1 - other.getStart
+    if(tfMinusOl > 0) tfMinusOl
+    else if(tlMinusOf < 0) -1 * tlMinusOf
+    else 0
+  }
+
   /** Returns a [[Feature]] representing this minus the overlap with another [[Feature]].
     *
     * See subclass documentation for class-specific details.

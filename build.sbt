@@ -7,6 +7,7 @@ version := ver
 scalaVersion := "2.12.0"
 
 // sbt assembly to generate fat .jar
+excludeFilter in unmanagedSources := HiddenFileFilter || "*scoverage*"
 assemblyJarName in assembly := nm + "-" + ver + ".jar"
 
 // Compiler options
