@@ -1,42 +1,215 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>GTF22Record - feature.format.GTF22Record</title>
-          <meta name="description" content="GTF22Record - feature.format.GTF22Record" />
-          <meta name="keywords" content="GTF22Record feature.format.GTF22Record" />
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+          <title></title>
+          <meta name="description" content="" />
+          <meta name="keywords" content="" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
+      <link href="../../lib/index.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
-      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/jquery.js"></script>
+      <script type="text/javascript" src="../../lib/jquery.panzoom.min.js"></script>
+      <script type="text/javascript" src="../../lib/jquery.mousewheel.min.js"></script>
+      <script type="text/javascript" src="../../lib/index.js"></script>
+      <script type="text/javascript" src="../../index.js"></script>
+      <script type="text/javascript" src="../../lib/scheduler.js"></script>
       <script type="text/javascript" src="../../lib/template.js"></script>
       <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
       
       <script type="text/javascript">
-         if(top === self) {
-            var url = '../../index.html';
-            var hash = 'feature.format.GTF22Record';
-            var anchor = window.location.hash;
-            var anchor_opt = '';
-            if (anchor.length >= 1)
-              anchor_opt = '@' + anchor.substring(1);
-            window.location.href = url + '#' + hash + anchor_opt;
-         }
-   	  </script>
+        /* this variable can be used by the JS to determine the path to the root document */
+        var toRoot = '../../';
+      </script>
     
         </head>
-        <body class="type">
-      <div id="definition">
-        <img alt="Class" src="../../lib/class_big.png" />
-        <p id="owner"><a href="../package.html" class="extype" name="feature">feature</a>.<a href="package.html" class="extype" name="feature.format">format</a></p>
-        <h1>GTF22Record</h1><h3><span class="morelinks"><div>Related Doc:
-            <a href="package.html" class="extype" name="feature.format">package format</a>
-          </div></span></h3><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+        <body>
+      <div id="search">
+        <span id="doc-title"><span id="doc-version"></span></span>
+        <span class="close-results"><span class="left">&lt;</span> Back</span>
+        <div id="textfilter">
+          <span class="input">
+            <input autocapitalize="none" placeholder="Search" id="index-input" type="text" accesskey="/" />
+            <i class="clear material-icons"></i>
+            <i id="search-icon" class="material-icons"></i>
+          </span>
+        </div>
+    </div>
+      <div id="search-results">
+        <div id="search-progress">
+          <div id="progress-fill"></div>
+        </div>
+        <div id="results-content">
+          <div id="entity-results"></div>
+          <div id="member-results"></div>
+        </div>
+      </div>
+      <div id="content-scroll-container" style="-webkit-overflow-scrolling: touch;">
+        <div id="content-container" style="-webkit-overflow-scrolling: touch;">
+          <div id="subpackage-spacer">
+            <div id="packages">
+              <h1>Packages</h1>
+              <ul>
+                <li name="_root_.root" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_root_"></a><a id="root:_root_"></a>
+      <span class="permalink">
+      <a href="index.html#_root_" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../../index.html">
+              <span class="name">root</span>
+            </a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
+    </li><li name="_root_.feature" visbl="pub" class="indented1 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="feature"></a><a id="feature:feature"></a>
+      <span class="permalink">
+      <a href="index.html#feature" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="Provides classes to represent genomic features, i.e., annotations with block coordinates, an orientation,
+and other associated information." href="../index.html">
+              <span class="name">feature</span>
+            </a>
+      </span>
+      
+      <p class="shortcomment cmt">Provides classes to represent genomic features, i.e., annotations with block coordinates, an orientation,
+and other associated information.</p><div class="fullcomment"><div class="comment cmt"><p>Provides classes to represent genomic features, i.e., annotations with block coordinates, an orientation,
+and other associated information.</p><p>The main classes to use are <a href="../GenericFeature.html" class="extype" name="feature.GenericFeature">feature.GenericFeature</a>, <a href="../Transcript.html" class="extype" name="feature.Transcript">feature.Transcript</a>, and <a href="../MessengerRNA.html" class="extype" name="feature.MessengerRNA">feature.MessengerRNA</a>.
+These can be instantiated directly or by using a <a href="../FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">feature.FeatureBuilder</a>.</p><p>In addition, genomic annotations with no associated information can be represented with <a href="../Block.html" class="extype" name="feature.Block">feature.Block</a>,
+a single contiguous block, and <a href="../BlockSet.html" class="extype" name="feature.BlockSet">feature.BlockSet</a>, an annotation consisting of multiple blocks.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
+    </li><li name="feature.format" visbl="pub" class="indented2 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="format"></a><a id="format:format"></a>
+      <span class="permalink">
+      <a href="../feature/index.html#format" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="index.html">
+              <span class="name">format</span>
+            </a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="feature">feature</a></dd></dl></div>
+    </li><li class="current-entities indented2">
+                        <span class="separator"></span>
+                        <a class="object" href="CDS$.html" title="GTF2.2 CDS feature type"></a>
+                        <a href="CDS$.html" title="GTF2.2 CDS feature type">
+                          CDS
+                        </a>
+                      </li><li class="current-entities indented2">
+                        <span class="separator"></span>
+                        <a class="object" href="Exon$.html" title="GTF2.2 exon feature type"></a>
+                        <a href="Exon$.html" title="GTF2.2 exon feature type">
+                          Exon
+                        </a>
+                      </li><li class="current-entities indented2">
+                        <a class="object" href="FeatureType$.html" title="Utilities for GTF2.2 FeatureTypes"></a>
+                        <a class="trait" href="FeatureType.html" title="A GTF2.2 feature type"></a>
+                        <a href="FeatureType.html" title="A GTF2.2 feature type">
+                          FeatureType
+                        </a>
+                      </li><li class="current-entities indented2">
+                        <span class="separator"></span>
+                        <a class="class" href="" title="A record representing the information contained in one line of a file in GTF2.2 feature.format
+(Link(http://mblab.wustl.edu/GTF22.html,Text(feature.format specification)))
+"></a>
+                        <a href="" title="A record representing the information contained in one line of a file in GTF2.2 feature.format
+(Link(http://mblab.wustl.edu/GTF22.html,Text(feature.format specification)))
+">
+                          GTF22Record
+                        </a>
+                      </li><li class="current-entities indented2">
+                        <span class="separator"></span>
+                        <a class="object" href="Ignore$.html" title="Nonstandard feature type."></a>
+                        <a href="Ignore$.html" title="Nonstandard feature type.">
+                          Ignore
+                        </a>
+                      </li><li class="current-entities indented2">
+                        <span class="separator"></span>
+                        <a class="object" href="Intergenic$.html" title="GTF2.2 intergenic feature type"></a>
+                        <a href="Intergenic$.html" title="GTF2.2 intergenic feature type">
+                          Intergenic
+                        </a>
+                      </li><li class="current-entities indented2">
+                        <span class="separator"></span>
+                        <a class="object" href="IntergenicCNS$.html" title="GTF2.2 intergenic CNS feature type"></a>
+                        <a href="IntergenicCNS$.html" title="GTF2.2 intergenic CNS feature type">
+                          IntergenicCNS
+                        </a>
+                      </li><li class="current-entities indented2">
+                        <span class="separator"></span>
+                        <a class="object" href="IntronicCNS$.html" title="GTF2.2 intronic CNS feature type"></a>
+                        <a href="IntronicCNS$.html" title="GTF2.2 intronic CNS feature type">
+                          IntronicCNS
+                        </a>
+                      </li><li class="current-entities indented2">
+                        <span class="separator"></span>
+                        <a class="trait" href="MatureRNA.html" title="A GTF2.2 feature type that represents part of a mature RNA transcript"></a>
+                        <a href="MatureRNA.html" title="A GTF2.2 feature type that represents part of a mature RNA transcript">
+                          MatureRNA
+                        </a>
+                      </li><li class="current-entities indented2">
+                        <span class="separator"></span>
+                        <a class="object" href="StartCodon$.html" title="GTF2.2 start codon feature type"></a>
+                        <a href="StartCodon$.html" title="GTF2.2 start codon feature type">
+                          StartCodon
+                        </a>
+                      </li><li class="current-entities indented2">
+                        <span class="separator"></span>
+                        <a class="object" href="StopCodon$.html" title="GTF2.2 stop codon feature type"></a>
+                        <a href="StopCodon$.html" title="GTF2.2 stop codon feature type">
+                          StopCodon
+                        </a>
+                      </li><li class="current-entities indented2">
+                        <span class="separator"></span>
+                        <a class="object" href="UTR3$.html" title="GTF2.2 3'-UTR feature type"></a>
+                        <a href="UTR3$.html" title="GTF2.2 3'-UTR feature type">
+                          UTR3
+                        </a>
+                      </li><li class="current-entities indented2">
+                        <span class="separator"></span>
+                        <a class="object" href="UTR5$.html" title="GTF2.2 5'-UTR feature type"></a>
+                        <a href="UTR5$.html" title="GTF2.2 5'-UTR feature type">
+                          UTR5
+                        </a>
+                      </li>
+              </ul>
+            </div>
+          </div>
+          <div id="content">
+            <body class="class type">
+      <div id="definition">
+        <div class="big-circle class">c</div>
+        <p id="owner"><a href="../index.html" class="extype" name="feature">feature</a>.<a href="index.html" class="extype" name="feature.format">format</a></p>
+        <h1>GTF22Record<span class="permalink">
+      <a href="../../feature/format/GTF22Record.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span></h1>
+        <h3><span class="morelinks"></span></h3>
       </div>
 
       <h4 id="signature" class="signature">
@@ -48,52 +221,67 @@
         <span class="name">GTF22Record</span><span class="result"> extends <a href="../FeatureBuilderModifier.html" class="extype" name="feature.FeatureBuilderModifier">FeatureBuilderModifier</a></span>
       </span>
       </h4>
+
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A record representing the information contained in one line of a file in GTF2.2 feature.format
 (<a href="http://mblab.wustl.edu/GTF22.html" target="_blank">feature.format specification</a>)
 </p></div><div class="toggleContainer block">
-          <span class="toggle">Linear Supertypes</span>
+          <span class="toggle">
+            Linear Supertypes
+          </span>
           <div class="superTypes hiddenContent"><a href="../FeatureBuilderModifier.html" class="extype" name="feature.FeatureBuilderModifier">FeatureBuilderModifier</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
       <div id="mbrsel">
-        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
-        <div id="order">
-              <span class="filtertype">Ordering</span>
-              <ol>
-                
-                <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By Inheritance</span></li>
-              </ol>
-            </div>
-        <div id="ancestors">
-                <span class="filtertype">Inherited<br />
-                </span>
-                <ol id="linearization">
-                  <li class="in" name="feature.format.GTF22Record"><span>GTF22Record</span></li><li class="in" name="feature.FeatureBuilderModifier"><span>FeatureBuilderModifier</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
-                </ol>
-              </div><div id="ancestors">
-            <span class="filtertype"></span>
+        <div class="toggle"></div>
+        <div id="memberfilter">
+          <i class="material-icons arrow"></i>
+          <span class="input">
+            <input id="mbrsel-input" placeholder="Filter all members" type="text" accesskey="/" />
+          </span>
+          <i class="clear material-icons"></i>
+        </div>
+        <div id="filterby">
+          <div id="order">
+            <span class="filtertype">Ordering</span>
             <ol>
-              <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show All</span></li>
+              
+              <li class="alpha in"><span>Alphabetic</span></li>
+              <li class="inherit out"><span>By Inheritance</span></li>
             </ol>
           </div>
-        <div id="visbl">
-            <span class="filtertype">Visibility</span>
-            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
-          </div>
+          <div class="ancestors">
+                  <span class="filtertype">Inherited<br />
+                  </span>
+                  <ol id="linearization">
+                    <li class="in" name="feature.format.GTF22Record"><span>GTF22Record</span></li><li class="in" name="feature.FeatureBuilderModifier"><span>FeatureBuilderModifier</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  </ol>
+                </div><div class="ancestors">
+              <span class="filtertype"></span>
+              <ol>
+                <li class="hideall out"><span>Hide All</span></li>
+                <li class="showall in"><span>Show All</span></li>
+              </ol>
+            </div>
+          <div id="visbl">
+              <span class="filtertype">Visibility</span>
+              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+            </div>
+        </div>
       </div>
 
       <div id="template">
         <div id="allMembers">
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
-              <ol><li name="feature.format.GTF22Record#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(line:String):feature.format.GTF22Record"></a>
-      <a id="&lt;init&gt;:GTF22Record"></a>
-      <h4 class="signature">
+              <ol><li name="feature.format.GTF22Record#&lt;init&gt;" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="&lt;init&gt;(line:String):feature.format.GTF22Record"></a><a id="&lt;init&gt;:GTF22Record"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#&lt;init&gt;(line:String):feature.format.GTF22Record" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">new</span>
@@ -101,11 +289,7 @@
       <span class="symbol">
         <span class="name">GTF22Record</span><span class="params">(<span name="line">line: <span class="extype" name="scala.Predef.String">String</span></span>)</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@&lt;init&gt;(line:String):feature.format.GTF22Record" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">line</dt><dd class="cmt"><p>String containing one valid GTF2.2 line with or without trailing newline character</p></dd></dl></div>
     </li></ol>
             </div>
@@ -114,12 +298,16 @@
 
         
 
-        <div id="values" class="values members">
+        <div class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="!=(x$1:Any):Boolean"></a>
-      <a id="!=(Any):Boolean"></a>
-      <h4 class="signature">
+              <ol>
+                <li name="scala.AnyRef#!=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a><a id="!=(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#!=(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -127,16 +315,15 @@
       <span class="symbol">
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@!=(x$1:Any):Boolean" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html###():Int" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="##():Int"></a>
-      <a id="##():Int"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -144,16 +331,15 @@
       <span class="symbol">
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@##():Int" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a><a id="==(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#==(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="==(x$1:Any):Boolean"></a>
-      <a id="==(Any):Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -161,16 +347,15 @@
       <span class="symbol">
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@==(x$1:Any):Boolean" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#asInstanceOf[T0]:T0" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="asInstanceOf[T0]:T0"></a>
-      <a id="asInstanceOf[T0]:T0"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -178,16 +363,15 @@
       <span class="symbol">
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@asInstanceOf[T0]:T0" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="feature.format.GTF22Record#attributes" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="attributes:Map[String,String]"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#attributes:Map[String,String]" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="feature.format.GTF22Record#attributes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="attributes:Map[String,String]"></a>
-      <a id="attributes:Map[String,String]"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">lazy val</span>
@@ -195,16 +379,15 @@
       <span class="symbol">
         <span class="name">attributes</span><span class="result">: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@attributes:Map[String,String]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Map of attribute name to value.</p><div class="fullcomment"><div class="comment cmt"><p>Map of attribute name to value.</p><p>Empty attributes (having value &quot;&quot;) are not included in this map.</p><p>See <a href="http://mblab.wustl.edu/GTF22.html" target="_blank">feature.format specification</a> for details on GTF2.2 attributes.</p></div></div>
+    </li><li name="feature.format.GTF22Record#chr" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="chr:String"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#chr:String" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Map of attribute name to value.</p><div class="fullcomment"><div class="comment cmt"><p>Map of attribute name to value.</p><p>Empty attributes (having value &quot;&quot;) are not included in this map.</p><p>See <a href="http://mblab.wustl.edu/GTF22.html" target="_blank">feature.format specification</a> for details on GTF2.2 attributes.</p></div></div>
-    </li><li name="feature.format.GTF22Record#chr" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="chr:String"></a>
-      <a id="chr:String"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">lazy val</span>
@@ -212,16 +395,15 @@
       <span class="symbol">
         <span class="name">chr</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@chr:String" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">The chromosome or reference sequence name.</p>
+    </li><li name="scala.AnyRef#clone" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a><a id="clone():AnyRef"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#clone():Object" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">The chromosome or reference sequence name.</p>
-    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="clone():Object"></a>
-      <a id="clone():AnyRef"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -229,11 +411,7 @@
       <span class="symbol">
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@clone():Object" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -241,10 +419,13 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="feature.format.GTF22Record#end" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="feature.format.GTF22Record#end" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="end:Int"></a>
-      <a id="end:Int"></a>
-      <h4 class="signature">
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#end:Int" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">lazy val</span>
@@ -252,21 +433,20 @@
       <span class="symbol">
         <span class="name">end</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@end:Int" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Zero-based end position in reference coordinates, exclusive.</p><div class="fullcomment"><div class="comment cmt"><p>Zero-based end position in reference coordinates, exclusive.</p><p>GTF2.2 feature.format uses 1-based positions, and furthermore, uses fully closed
 intervals so the end position is the last position included in the feature.
 This library uses 0-based positions and half open intervals, so the end
 position is the position after the last position included in the feature.
 Therefore, this value is equal to the integer in the GTF2.2 file, because
 it is theoretically converted twice for these two differences.</p></div></div>
-    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="eq(x$1:AnyRef):Boolean"></a>
-      <a id="eq(AnyRef):Boolean"></a>
-      <h4 class="signature">
+    </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#eq(x$1:AnyRef):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -274,16 +454,15 @@ it is theoretically converted twice for these two differences.</p></div></div>
       <span class="symbol">
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#equals" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a><a id="equals(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#equals(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="equals(x$1:Any):Boolean"></a>
-      <a id="equals(Any):Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -291,16 +470,15 @@ it is theoretically converted twice for these two differences.</p></div></div>
       <span class="symbol">
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@equals(x$1:Any):Boolean" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="feature.format.GTF22Record#featureType" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="featureType:feature.format.FeatureType"></a><a id="featureType:FeatureType"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#featureType:feature.format.FeatureType" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="feature.format.GTF22Record#featureType" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="featureType:feature.format.FeatureType"></a>
-      <a id="featureType:FeatureType"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">lazy val</span>
@@ -308,16 +486,15 @@ it is theoretically converted twice for these two differences.</p></div></div>
       <span class="symbol">
         <span class="name">featureType</span><span class="result">: <a href="FeatureType.html" class="extype" name="feature.format.FeatureType">FeatureType</a></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@featureType:feature.format.FeatureType" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">The feature type.</p><div class="fullcomment"><div class="comment cmt"><p>The feature type. For valid values see <a href="http://mblab.wustl.edu/GTF22.html" target="_blank">feature.format specification</a>.</p></div></div>
+    </li><li name="scala.AnyRef#finalize" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#finalize():Unit" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">The feature type.</p><div class="fullcomment"><div class="comment cmt"><p>The feature type. For valid values see <a href="http://mblab.wustl.edu/GTF22.html" target="_blank">feature.format specification</a>.</p></div></div>
-    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="finalize():Unit"></a>
-      <a id="finalize():Unit"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -325,11 +502,7 @@ it is theoretically converted twice for these two differences.</p></div></div>
       <span class="symbol">
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@finalize():Unit" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -337,10 +510,13 @@ it is theoretically converted twice for these two differences.</p></div></div>
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="feature.format.GTF22Record#frame" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="feature.format.GTF22Record#frame" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="frame:Option[Int]"></a>
-      <a id="frame:Option[Int]"></a>
-      <h4 class="signature">
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#frame:Option[Int]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">lazy val</span>
@@ -348,16 +524,15 @@ it is theoretically converted twice for these two differences.</p></div></div>
       <span class="symbol">
         <span class="name">frame</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@frame:Option[Int]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">The frame, or None if '.' is specified in the file.</p>
+    </li><li name="feature.format.GTF22Record#geneId" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="geneId:Option[String]"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#geneId:Option[String]" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">The frame, or None if '.' is specified in the file.</p>
-    </li><li name="feature.format.GTF22Record#geneId" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="geneId:Option[String]"></a>
-      <a id="geneId:Option[String]"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">lazy val</span>
@@ -365,16 +540,15 @@ it is theoretically converted twice for these two differences.</p></div></div>
       <span class="symbol">
         <span class="name">geneId</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@geneId:Option[String]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Gene ID, or None if attribute value is &quot;&quot;</p>
+    </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#getClass():Class[_]" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Gene ID, or None if attribute value is &quot;&quot;</p>
-    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="getClass():Class[_]"></a>
-      <a id="getClass():Class[_]"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -382,16 +556,15 @@ it is theoretically converted twice for these two differences.</p></div></div>
       <span class="symbol">
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@getClass():Class[_]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#hashCode():Int" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="hashCode():Int"></a>
-      <a id="hashCode():Int"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -399,16 +572,15 @@ it is theoretically converted twice for these two differences.</p></div></div>
       <span class="symbol">
         <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@hashCode():Int" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="feature.format.GTF22Record#ignore" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ignore:Boolean"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#ignore:Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="feature.format.GTF22Record#ignore" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ignore:Boolean"></a>
-      <a id="ignore:Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">lazy val</span>
@@ -416,17 +588,16 @@ it is theoretically converted twice for these two differences.</p></div></div>
       <span class="symbol">
         <span class="name">ignore</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@ignore:Boolean" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">True if the line is to be ignored, either because it is a comment or because
 the feature type is not supported (see <a href="http://mblab.wustl.edu/GTF22.html" target="_blank">feature.format specification</a>).</p>
-    </li><li name="feature.format.GTF22Record#isComment" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="feature.format.GTF22Record#isComment" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="isComment:Boolean"></a>
-      <a id="isComment:Boolean"></a>
-      <h4 class="signature">
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#isComment:Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">lazy val</span>
@@ -434,16 +605,15 @@ the feature type is not supported (see <a href="http://mblab.wustl.edu/GTF22.htm
       <span class="symbol">
         <span class="name">isComment</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@isComment:Boolean" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">True if the line represents a comment (starting with '#'), false otherwise.</p>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#isInstanceOf[T0]:Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">True if the line represents a comment (starting with '#'), false otherwise.</p>
-    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="isInstanceOf[T0]:Boolean"></a>
-      <a id="isInstanceOf[T0]:Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -451,16 +621,15 @@ the feature type is not supported (see <a href="http://mblab.wustl.edu/GTF22.htm
       <span class="symbol">
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#ne(x$1:AnyRef):Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="ne(x$1:AnyRef):Boolean"></a>
-      <a id="ne(AnyRef):Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -468,16 +637,15 @@ the feature type is not supported (see <a href="http://mblab.wustl.edu/GTF22.htm
       <span class="symbol">
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#notify():Unit" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="notify():Unit"></a>
-      <a id="notify():Unit"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -485,16 +653,15 @@ the feature type is not supported (see <a href="http://mblab.wustl.edu/GTF22.htm
       <span class="symbol">
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@notify():Unit" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#notifyAll():Unit" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="notifyAll():Unit"></a>
-      <a id="notifyAll():Unit"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -502,16 +669,15 @@ the feature type is not supported (see <a href="http://mblab.wustl.edu/GTF22.htm
       <span class="symbol">
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@notifyAll():Unit" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="feature.format.GTF22Record#op" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="op(fb:feature.FeatureBuilder):feature.FeatureBuilder"></a><a id="op(FeatureBuilder):FeatureBuilder"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#op(fb:feature.FeatureBuilder):feature.FeatureBuilder" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="feature.format.GTF22Record#op" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="op(fb:feature.FeatureBuilder):feature.FeatureBuilder"></a>
-      <a id="op(FeatureBuilder):FeatureBuilder"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -519,21 +685,20 @@ the feature type is not supported (see <a href="http://mblab.wustl.edu/GTF22.htm
       <span class="symbol">
         <span class="name">op</span><span class="params">(<span name="fb">fb: <a href="../FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a></span>)</span><span class="result">: <a href="../FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@op(fb:feature.FeatureBuilder):feature.FeatureBuilder" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Returns a new <a href="../FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> consisting of the passed <a href="../FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> with
 the information in this <a href="" class="extype" name="feature.format.GTF22Record">GTF22Record</a> added to it.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a new <a href="../FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> consisting of the passed <a href="../FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> with
 the information in this <a href="" class="extype" name="feature.format.GTF22Record">GTF22Record</a> added to it.</p><p>The feature type must not be one of the CNS types (see <a href="http://mblab.wustl.edu/GTF22.html" target="_blank">feature.format specification</a>)
 as these features are specified on a single GTF2.2 line and should not be incorporated into an existing
 <a href="../FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a>. The feature type must also not be an ignored type.
 </p></div><dl class="paramcmts block"><dt class="param">fb</dt><dd class="cmt"><p>Original <a href="../FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> with the same transcript ID and gene ID as this record</p></dd><dt>returns</dt><dd class="cmt"><p>New <a href="../FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">FeatureBuilder</a> with additional information from this record incorporated</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.format.GTF22Record">GTF22Record</a> → <a href="../FeatureBuilderModifier.html" class="extype" name="feature.FeatureBuilderModifier">FeatureBuilderModifier</a></dd></dl></div>
-    </li><li name="feature.format.GTF22Record#orientation" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="orientation:feature.Orientation"></a>
-      <a id="orientation:Orientation"></a>
-      <h4 class="signature">
+    </li><li name="feature.format.GTF22Record#orientation" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="orientation:feature.Orientation"></a><a id="orientation:Orientation"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#orientation:feature.Orientation" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">lazy val</span>
@@ -541,17 +706,16 @@ as these features are specified on a single GTF2.2 line and should not be incorp
       <span class="symbol">
         <span class="name">orientation</span><span class="result">: <a href="../Orientation.html" class="extype" name="feature.Orientation">Orientation</a></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@orientation:feature.Orientation" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">The <a href="../Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.</p><div class="fullcomment"><div class="comment cmt"><p>The <a href="../Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.</p><p>This value is equal to <a href="../Plus$.html" class="extype" name="feature.Plus">Plus</a> if '+' is specified in the file or <a href="../Minus$.html" class="extype" name="feature.Minus">Minus</a> if
 '-' is specified.</p></div></div>
-    </li><li name="feature.format.GTF22Record#score" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="feature.format.GTF22Record#score" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="score:Option[Float]"></a>
-      <a id="score:Option[Float]"></a>
-      <h4 class="signature">
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#score:Option[Float]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">lazy val</span>
@@ -559,16 +723,15 @@ as these features are specified on a single GTF2.2 line and should not be incorp
       <span class="symbol">
         <span class="name">score</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Float">Float</span>]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@score:Option[Float]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">The floating point score, or None if '.' is specified in the line.</p>
+    </li><li name="feature.format.GTF22Record#source" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="source:String"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#source:String" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">The floating point score, or None if '.' is specified in the line.</p>
-    </li><li name="feature.format.GTF22Record#source" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="source:String"></a>
-      <a id="source:String"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">lazy val</span>
@@ -576,16 +739,15 @@ as these features are specified on a single GTF2.2 line and should not be incorp
       <span class="symbol">
         <span class="name">source</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@source:String" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">The annotation source (see <a href="http://mblab.wustl.edu/GTF22.html" target="_blank">feature.format specification</a>).</p>
+    </li><li name="feature.format.GTF22Record#start" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="start:Int"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#start:Int" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">The annotation source (see <a href="http://mblab.wustl.edu/GTF22.html" target="_blank">feature.format specification</a>).</p>
-    </li><li name="feature.format.GTF22Record#start" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="start:Int"></a>
-      <a id="start:Int"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">lazy val</span>
@@ -593,19 +755,18 @@ as these features are specified on a single GTF2.2 line and should not be incorp
       <span class="symbol">
         <span class="name">start</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@start:Int" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Zero-based start position in reference coordinates, inclusive.</p><div class="fullcomment"><div class="comment cmt"><p>Zero-based start position in reference coordinates, inclusive.</p><p>GTF2.2 feature.format uses 1-based positions. This library uses 0-based positions.
 Therefore, this value has been converted to a 0-based position. The start position
 is the first position that is included in the feature.
 </p></div></div>
-    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
-      <a id="synchronized[T0](⇒T0):T0"></a>
-      <h4 class="signature">
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -613,16 +774,15 @@ is the first position that is included in the feature.
       <span class="symbol">
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#toString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#toString():String" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="toString():String"></a>
-      <a id="toString():String"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -630,16 +790,15 @@ is the first position that is included in the feature.
       <span class="symbol">
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@toString():String" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="feature.format.GTF22Record#transcriptId" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="transcriptId:Option[String]"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#transcriptId:Option[String]" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="feature.format.GTF22Record#transcriptId" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="transcriptId:Option[String]"></a>
-      <a id="transcriptId:Option[String]"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">lazy val</span>
@@ -647,16 +806,15 @@ is the first position that is included in the feature.
       <span class="symbol">
         <span class="name">transcriptId</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@transcriptId:Option[String]" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Transcript ID, or None if attribute value is &quot;&quot;</p>
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#wait():Unit" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Transcript ID, or None if attribute value is &quot;&quot;</p>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="wait():Unit"></a>
-      <a id="wait():Unit"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -664,11 +822,7 @@ is the first position that is included in the feature.
       <span class="symbol">
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@wait():Unit" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -676,10 +830,13 @@ is the first position that is included in the feature.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
-      <a id="wait(Long,Int):Unit"></a>
-      <h4 class="signature">
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a><a id="wait(Long,Int):Unit"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -687,11 +844,7 @@ is the first position that is included in the feature.
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -699,10 +852,13 @@ is the first position that is included in the feature.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="wait(x$1:Long):Unit"></a>
-      <a id="wait(Long):Unit"></a>
-      <h4 class="signature">
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a><a id="wait(Long):Unit"></a>
+      <span class="permalink">
+      <a href="../../feature/format/GTF22Record.html#wait(x$1:Long):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -710,11 +866,7 @@ is the first position that is included in the feature.
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../../index.html#feature.format.GTF22Record@wait(x$1:Long):Unit" title="Permalink" target="_top">
-        <img src="../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -722,7 +874,8 @@ is the first position that is included in the feature.
     </span>)</span>
               
         </dd></dl></div>
-    </li></ol>
+    </li>
+              </ol>
             </div>
 
         
@@ -753,7 +906,9 @@ is the first position that is included in the feature.
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-
-
+    </body>
+          </div>
+        </div>
+      </div>
     </body>
       </html>

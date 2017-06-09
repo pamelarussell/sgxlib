@@ -1,42 +1,229 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>Empty - feature.Empty</title>
-          <meta name="description" content="Empty - feature.Empty" />
-          <meta name="keywords" content="Empty feature.Empty" />
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+          <title></title>
+          <meta name="description" content="" />
+          <meta name="keywords" content="" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
+      <link href="../lib/index.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../lib/jquery.js" id="jquery-js"></script>
-      <script type="text/javascript" src="../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../lib/jquery.js"></script>
+      <script type="text/javascript" src="../lib/jquery.panzoom.min.js"></script>
+      <script type="text/javascript" src="../lib/jquery.mousewheel.min.js"></script>
+      <script type="text/javascript" src="../lib/index.js"></script>
+      <script type="text/javascript" src="../index.js"></script>
+      <script type="text/javascript" src="../lib/scheduler.js"></script>
       <script type="text/javascript" src="../lib/template.js"></script>
       <script type="text/javascript" src="../lib/tools.tooltip.js"></script>
       
       <script type="text/javascript">
-         if(top === self) {
-            var url = '../index.html';
-            var hash = 'feature.Empty$';
-            var anchor = window.location.hash;
-            var anchor_opt = '';
-            if (anchor.length >= 1)
-              anchor_opt = '@' + anchor.substring(1);
-            window.location.href = url + '#' + hash + anchor_opt;
-         }
-   	  </script>
+        /* this variable can be used by the JS to determine the path to the root document */
+        var toRoot = '../';
+      </script>
     
         </head>
-        <body class="value">
-      <div id="definition">
-        <img alt="Object" src="../lib/object_big.png" />
-        <p id="owner"><a href="package.html" class="extype" name="feature">feature</a></p>
-        <h1>Empty</h1><h3><span class="morelinks"><div>Related Doc:
-            <a href="package.html" class="extype" name="feature">package feature</a>
-          </div></span></h3><span class="permalink">
-      <a href="../index.html#feature.Empty$" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+        <body>
+      <div id="search">
+        <span id="doc-title"><span id="doc-version"></span></span>
+        <span class="close-results"><span class="left">&lt;</span> Back</span>
+        <div id="textfilter">
+          <span class="input">
+            <input autocapitalize="none" placeholder="Search" id="index-input" type="text" accesskey="/" />
+            <i class="clear material-icons"></i>
+            <i id="search-icon" class="material-icons"></i>
+          </span>
+        </div>
+    </div>
+      <div id="search-results">
+        <div id="search-progress">
+          <div id="progress-fill"></div>
+        </div>
+        <div id="results-content">
+          <div id="entity-results"></div>
+          <div id="member-results"></div>
+        </div>
+      </div>
+      <div id="content-scroll-container" style="-webkit-overflow-scrolling: touch;">
+        <div id="content-container" style="-webkit-overflow-scrolling: touch;">
+          <div id="subpackage-spacer">
+            <div id="packages">
+              <h1>Packages</h1>
+              <ul>
+                <li name="_root_.root" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_root_"></a><a id="root:_root_"></a>
+      <span class="permalink">
+      <a href="index.html#_root_" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../index.html">
+              <span class="name">root</span>
+            </a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="_root_">root</a></dd></dl></div>
+    </li><li name="_root_.feature" visbl="pub" class="indented1 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="feature"></a><a id="feature:feature"></a>
+      <span class="permalink">
+      <a href="index.html#feature" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="Provides classes to represent genomic features, i.e., annotations with block coordinates, an orientation,
+and other associated information." href="index.html">
+              <span class="name">feature</span>
+            </a>
+      </span>
+      
+      <p class="shortcomment cmt">Provides classes to represent genomic features, i.e., annotations with block coordinates, an orientation,
+and other associated information.</p><div class="fullcomment"><div class="comment cmt"><p>Provides classes to represent genomic features, i.e., annotations with block coordinates, an orientation,
+and other associated information.</p><p>The main classes to use are <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">feature.GenericFeature</a>, <a href="Transcript.html" class="extype" name="feature.Transcript">feature.Transcript</a>, and <a href="MessengerRNA.html" class="extype" name="feature.MessengerRNA">feature.MessengerRNA</a>.
+These can be instantiated directly or by using a <a href="FeatureBuilder.html" class="extype" name="feature.FeatureBuilder">feature.FeatureBuilder</a>.</p><p>In addition, genomic annotations with no associated information can be represented with <a href="Block.html" class="extype" name="feature.Block">feature.Block</a>,
+a single contiguous block, and <a href="BlockSet.html" class="extype" name="feature.BlockSet">feature.BlockSet</a>, an annotation consisting of multiple blocks.
+</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="_root_">root</a></dd></dl></div>
+    </li><li name="feature.format" visbl="pub" class="indented2 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="format"></a><a id="format:format"></a>
+      <span class="permalink">
+      <a href="../feature/index.html#format" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="format/index.html">
+              <span class="name">format</span>
+            </a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="index.html" class="extype" name="feature">feature</a></dd></dl></div>
+    </li><li class="current-entities indented1">
+                        <a class="object" href="Block$.html" title="Companion functions for Block"></a>
+                        <a class="class" href="Block.html" title="A single contiguous block on a chromosome with an Orientation."></a>
+                        <a href="Block.html" title="A single contiguous block on a chromosome with an Orientation.">
+                          Block
+                        </a>
+                      </li><li class="current-entities indented1">
+                        <span class="separator"></span>
+                        <a class="class" href="BlockSet.html" title="A collection of non-overlapping Blocks on the same chromosome with the same Orientation"></a>
+                        <a href="BlockSet.html" title="A collection of non-overlapping Blocks on the same chromosome with the same Orientation">
+                          BlockSet
+                        </a>
+                      </li><li class="current-entities indented1">
+                        <span class="separator"></span>
+                        <a class="object" href="" title="An empty region."></a>
+                        <a href="" title="An empty region.">
+                          Empty
+                        </a>
+                      </li><li class="current-entities indented1">
+                        <span class="separator"></span>
+                        <a class="object" href="Exceptions$.html" title="Exceptions for invalid Features"></a>
+                        <a href="Exceptions$.html" title="Exceptions for invalid Features">
+                          Exceptions
+                        </a>
+                      </li><li class="current-entities indented1">
+                        <span class="separator"></span>
+                        <a class="class" href="Feature.html" title="A genomic feature."></a>
+                        <a href="Feature.html" title="A genomic feature.">
+                          Feature
+                        </a>
+                      </li><li class="current-entities indented1">
+                        <span class="separator"></span>
+                        <a class="class" href="FeatureBuilder.html" title="A builder for Features."></a>
+                        <a href="FeatureBuilder.html" title="A builder for Features.">
+                          FeatureBuilder
+                        </a>
+                      </li><li class="current-entities indented1">
+                        <span class="separator"></span>
+                        <a class="trait" href="FeatureBuilderModifier.html" title="A way to encapsulate arbitrary operations on a FeatureBuilder."></a>
+                        <a href="FeatureBuilderModifier.html" title="A way to encapsulate arbitrary operations on a FeatureBuilder.">
+                          FeatureBuilderModifier
+                        </a>
+                      </li><li class="current-entities indented1">
+                        <span class="separator"></span>
+                        <a class="class" href="Gene.html" title="A gene giving rise to one or more Transcripts."></a>
+                        <a href="Gene.html" title="A gene giving rise to one or more Transcripts.">
+                          Gene
+                        </a>
+                      </li><li class="current-entities indented1">
+                        <span class="separator"></span>
+                        <a class="class" href="GenericFeature.html" title="A Feature consisting of an underlying Region and an optional name."></a>
+                        <a href="GenericFeature.html" title="A Feature consisting of an underlying Region and an optional name.">
+                          GenericFeature
+                        </a>
+                      </li><li class="current-entities indented1">
+                        <span class="separator"></span>
+                        <a class="class" href="MessengerRNA.html" title="A representation of a spliced messenger RNA."></a>
+                        <a href="MessengerRNA.html" title="A representation of a spliced messenger RNA.">
+                          MessengerRNA
+                        </a>
+                      </li><li class="current-entities indented1">
+                        <span class="separator"></span>
+                        <a class="object" href="Minus$.html" title="The minus strand of DNA"></a>
+                        <a href="Minus$.html" title="The minus strand of DNA">
+                          Minus
+                        </a>
+                      </li><li class="current-entities indented1">
+                        <a class="object" href="Orientation$.html" title="Utility methods for calculations on Orientations"></a>
+                        <a class="trait" href="Orientation.html" title="An orientation for a genomic feature."></a>
+                        <a href="Orientation.html" title="An orientation for a genomic feature.">
+                          Orientation
+                        </a>
+                      </li><li class="current-entities indented1">
+                        <span class="separator"></span>
+                        <a class="object" href="Plus$.html" title="The plus strand of DNA"></a>
+                        <a href="Plus$.html" title="The plus strand of DNA">
+                          Plus
+                        </a>
+                      </li><li class="current-entities indented1">
+                        <span class="separator"></span>
+                        <a class="class" href="Region.html" title="A genomic region."></a>
+                        <a href="Region.html" title="A genomic region.">
+                          Region
+                        </a>
+                      </li><li class="current-entities indented1">
+                        <span class="separator"></span>
+                        <a class="class" href="Transcript.html" title="A representation of a spliced transcript."></a>
+                        <a href="Transcript.html" title="A representation of a spliced transcript.">
+                          Transcript
+                        </a>
+                      </li><li class="current-entities indented1">
+                        <span class="separator"></span>
+                        <a class="object" href="Unstranded$.html" title="Unstranded - not associated with a strand or strand unknown"></a>
+                        <a href="Unstranded$.html" title="Unstranded - not associated with a strand or strand unknown">
+                          Unstranded
+                        </a>
+                      </li>
+              </ul>
+            </div>
+          </div>
+          <div id="content">
+            <body class="object value">
+      <div id="definition">
+        <div class="big-circle object">o</div>
+        <p id="owner"><a href="index.html" class="extype" name="feature">feature</a></p>
+        <h1>Empty<span class="permalink">
+      <a href="../feature/Empty$.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span></h1>
+        <h3><span class="morelinks"></span></h3>
       </div>
 
       <h4 id="signature" class="signature">
@@ -48,40 +235,52 @@
         <span class="name">Empty</span><span class="result"> extends <a href="Region.html" class="extype" name="feature.Region">Region</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
+
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>An empty region. <a href="" class="extype" name="feature.Empty">Empty</a> has no chromosome, <a href="Block.html" class="extype" name="feature.Block">Block</a>s, or <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>.</p></div><div class="toggleContainer block">
-          <span class="toggle">Linear Supertypes</span>
+          <span class="toggle">
+            Linear Supertypes
+          </span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="Region.html" class="extype" name="feature.Region">Region</a>, <span class="extype" name="scala.math.Ordered">Ordered</span>[<a href="Region.html" class="extype" name="feature.Region">Region</a>], <span class="extype" name="java.lang.Comparable">Comparable</span>[<a href="Region.html" class="extype" name="feature.Region">Region</a>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
       <div id="mbrsel">
-        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
-        <div id="order">
-              <span class="filtertype">Ordering</span>
-              <ol>
-                
-                <li class="alpha in"><span>Alphabetic</span></li>
-                <li class="inherit out"><span>By Inheritance</span></li>
-              </ol>
-            </div>
-        <div id="ancestors">
-                <span class="filtertype">Inherited<br />
-                </span>
-                <ol id="linearization">
-                  <li class="in" name="feature.Empty"><span>Empty</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="feature.Region"><span>Region</span></li><li class="in" name="scala.math.Ordered"><span>Ordered</span></li><li class="in" name="java.lang.Comparable"><span>Comparable</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
-                </ol>
-              </div><div id="ancestors">
-            <span class="filtertype"></span>
+        <div class="toggle"></div>
+        <div id="memberfilter">
+          <i class="material-icons arrow"></i>
+          <span class="input">
+            <input id="mbrsel-input" placeholder="Filter all members" type="text" accesskey="/" />
+          </span>
+          <i class="clear material-icons"></i>
+        </div>
+        <div id="filterby">
+          <div id="order">
+            <span class="filtertype">Ordering</span>
             <ol>
-              <li class="hideall out"><span>Hide All</span></li>
-              <li class="showall in"><span>Show All</span></li>
+              
+              <li class="alpha in"><span>Alphabetic</span></li>
+              <li class="inherit out"><span>By Inheritance</span></li>
             </ol>
           </div>
-        <div id="visbl">
-            <span class="filtertype">Visibility</span>
-            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
-          </div>
+          <div class="ancestors">
+                  <span class="filtertype">Inherited<br />
+                  </span>
+                  <ol id="linearization">
+                    <li class="in" name="feature.Empty"><span>Empty</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="feature.Region"><span>Region</span></li><li class="in" name="scala.math.Ordered"><span>Ordered</span></li><li class="in" name="java.lang.Comparable"><span>Comparable</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  </ol>
+                </div><div class="ancestors">
+              <span class="filtertype"></span>
+              <ol>
+                <li class="hideall out"><span>Hide All</span></li>
+                <li class="showall in"><span>Show All</span></li>
+              </ol>
+            </div>
+          <div id="visbl">
+              <span class="filtertype">Visibility</span>
+              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+            </div>
+        </div>
       </div>
 
       <div id="template">
@@ -92,12 +291,16 @@
 
         
 
-        <div id="values" class="values members">
+        <div class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="!=(x$1:Any):Boolean"></a>
-      <a id="!=(Any):Boolean"></a>
-      <h4 class="signature">
+              <ol>
+                <li name="scala.AnyRef#!=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a><a id="!=(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#!=(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -105,16 +308,15 @@
       <span class="symbol">
         <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@!=(x$1:Any):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html###():Int" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="##():Int"></a>
-      <a id="##():Int"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -122,16 +324,15 @@
       <span class="symbol">
         <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@##():Int" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.math.Ordered#&lt;" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="&lt;(that:A):Boolean"></a><a id="&lt;(Region):Boolean"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#&lt;(that:A):Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.math.Ordered#&lt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;(that:A):Boolean"></a>
-      <a id="&lt;(Region):Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -139,16 +340,15 @@
       <span class="symbol">
         <span title="gt4s: $less" class="name">&lt;</span><span class="params">(<span name="that">that: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@&lt;(that:A):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Ordered</dd></dl></div>
+    </li><li name="scala.math.Ordered#&lt;=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="&lt;=(that:A):Boolean"></a><a id="&lt;=(Region):Boolean"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#&lt;=(that:A):Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Ordered</dd></dl></div>
-    </li><li name="scala.math.Ordered#&lt;=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;=(that:A):Boolean"></a>
-      <a id="&lt;=(Region):Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -156,16 +356,15 @@
       <span class="symbol">
         <span title="gt4s: $less$eq" class="name">&lt;=</span><span class="params">(<span name="that">that: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@&lt;=(that:A):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Ordered</dd></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a><a id="==(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#==(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Ordered</dd></dl></div>
-    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="==(x$1:Any):Boolean"></a>
-      <a id="==(Any):Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -173,16 +372,15 @@
       <span class="symbol">
         <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@==(x$1:Any):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.math.Ordered#&gt;" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="&gt;(that:A):Boolean"></a><a id="&gt;(Region):Boolean"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#&gt;(that:A):Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.math.Ordered#&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&gt;(that:A):Boolean"></a>
-      <a id="&gt;(Region):Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -190,16 +388,15 @@
       <span class="symbol">
         <span title="gt4s: $greater" class="name">&gt;</span><span class="params">(<span name="that">that: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@&gt;(that:A):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Ordered</dd></dl></div>
+    </li><li name="scala.math.Ordered#&gt;=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="&gt;=(that:A):Boolean"></a><a id="&gt;=(Region):Boolean"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#&gt;=(that:A):Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Ordered</dd></dl></div>
-    </li><li name="scala.math.Ordered#&gt;=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&gt;=(that:A):Boolean"></a>
-      <a id="&gt;=(Region):Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -207,16 +404,15 @@
       <span class="symbol">
         <span title="gt4s: $greater$eq" class="name">&gt;=</span><span class="params">(<span name="that">that: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@&gt;=(that:A):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Ordered</dd></dl></div>
+    </li><li name="feature.Empty#addBlock" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addBlock(block:feature.Block):feature.Region"></a><a id="addBlock(Block):Region"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#addBlock(block:feature.Block):feature.Region" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Ordered</dd></dl></div>
-    </li><li name="feature.Empty#addBlock" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="addBlock(block:feature.Block):feature.Region"></a>
-      <a id="addBlock(Block):Region"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -224,16 +420,15 @@
       <span class="symbol">
         <span class="name">addBlock</span><span class="params">(<span name="block">block: <a href="Block.html" class="extype" name="feature.Block">Block</a></span>)</span><span class="result">: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@addBlock(block:feature.Block):feature.Region" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Returns the <a href="Block.html" class="extype" name="feature.Block">Block</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the <a href="Block.html" class="extype" name="feature.Block">Block</a>.</p></div><dl class="paramcmts block"><dt class="param">block</dt><dd class="cmt"><p>New <a href="Block.html" class="extype" name="feature.Block">Block</a> to add</p></dd><dt>returns</dt><dd class="cmt"><p><a href="Region.html" class="extype" name="feature.Region">Region</a> representing this with the additional <a href="Block.html" class="extype" name="feature.Block">Block</a> merged in</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#asInstanceOf[T0]:T0" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Returns the <a href="Block.html" class="extype" name="feature.Block">Block</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the <a href="Block.html" class="extype" name="feature.Block">Block</a>.</p></div><dl class="paramcmts block"><dt class="param">block</dt><dd class="cmt"><p>New <a href="Block.html" class="extype" name="feature.Block">Block</a> to add</p></dd><dt>returns</dt><dd class="cmt"><p><a href="Region.html" class="extype" name="feature.Region">Region</a> representing this with the additional <a href="Block.html" class="extype" name="feature.Block">Block</a> merged in</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="asInstanceOf[T0]:T0"></a>
-      <a id="asInstanceOf[T0]:T0"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -241,16 +436,15 @@
       <span class="symbol">
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@asInstanceOf[T0]:T0" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="feature.Empty#blocks" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="blocks:List[feature.Block]"></a><a id="blocks:List[Block]"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#blocks:List[feature.Block]" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="feature.Empty#blocks" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="blocks:List[feature.Block]"></a>
-      <a id="blocks:List[Block]"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -258,16 +452,15 @@
       <span class="symbol">
         <span class="name">blocks</span><span class="result">: <span class="extype" name="scala.List">List</span>[<a href="Block.html" class="extype" name="feature.Block">Block</a>]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@blocks:List[feature.Block]" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Returns Nil.</p><div class="fullcomment"><div class="comment cmt"><p>Returns Nil.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+    </li><li name="feature.Empty#chr" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="chr:String"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#chr:String" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Returns Nil.</p><div class="fullcomment"><div class="comment cmt"><p>Returns Nil.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="feature.Empty#chr" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="chr:String"></a>
-      <a id="chr:String"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -275,16 +468,15 @@
       <span class="symbol">
         <span class="name">chr</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@chr:String" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Throws an IllegalStateException.</p><div class="fullcomment"><div class="comment cmt"><p>Throws an IllegalStateException.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+    </li><li name="feature.Empty#chrPos" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="chrPos(relativePos:Int):Int"></a><a id="chrPos(Int):Int"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#chrPos(relativePos:Int):Int" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Throws an IllegalStateException.</p><div class="fullcomment"><div class="comment cmt"><p>Throws an IllegalStateException.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="feature.Empty#chrPos" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="chrPos(relativePos:Int):Int"></a>
-      <a id="chrPos(Int):Int"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -292,16 +484,15 @@
       <span class="symbol">
         <span class="name">chrPos</span><span class="params">(<span name="relativePos">relativePos: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@chrPos(relativePos:Int):Int" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Throws an IllegalStateException.</p><div class="fullcomment"><div class="comment cmt"><p>Throws an IllegalStateException.</p></div><dl class="paramcmts block"><dt class="param">relativePos</dt><dd class="cmt"><p>Zero-based relative position with respect to this <a href="Region.html" class="extype" name="feature.Region">Region</a></p></dd><dt>returns</dt><dd class="cmt"><p>The zero-based position in chromosome coordinates</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+    </li><li name="scala.AnyRef#clone" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a><a id="clone():AnyRef"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#clone():Object" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Throws an IllegalStateException.</p><div class="fullcomment"><div class="comment cmt"><p>Throws an IllegalStateException.</p></div><dl class="paramcmts block"><dt class="param">relativePos</dt><dd class="cmt"><p>Zero-based relative position with respect to this <a href="Region.html" class="extype" name="feature.Region">Region</a></p></dd><dt>returns</dt><dd class="cmt"><p>The zero-based position in chromosome coordinates</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="clone():Object"></a>
-      <a id="clone():AnyRef"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -309,11 +500,7 @@
       <span class="symbol">
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@clone():Object" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -321,10 +508,13 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="feature.Empty#compare" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="compare(that:feature.Region):Int"></a>
-      <a id="compare(Region):Int"></a>
-      <h4 class="signature">
+    </li><li name="feature.Empty#compare" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="compare(that:feature.Region):Int"></a><a id="compare(Region):Int"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#compare(that:feature.Region):Int" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -332,16 +522,15 @@
       <span class="symbol">
         <span class="name">compare</span><span class="params">(<span name="that">that: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@compare(that:feature.Region):Int" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Returns zero if other <a href="Region.html" class="extype" name="feature.Region">Region</a> is <a href="" class="extype" name="feature.Empty">Empty</a>; a positive integer otherwise.</p><div class="fullcomment"><div class="comment cmt"><p>Returns zero if other <a href="Region.html" class="extype" name="feature.Region">Region</a> is <a href="" class="extype" name="feature.Empty">Empty</a>; a positive integer otherwise.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → Ordered</dd></dl></div>
+    </li><li name="scala.math.Ordered#compareTo" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="compareTo(that:A):Int"></a><a id="compareTo(Region):Int"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#compareTo(that:A):Int" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Returns zero if other <a href="Region.html" class="extype" name="feature.Region">Region</a> is <a href="" class="extype" name="feature.Empty">Empty</a>; a positive integer otherwise.</p><div class="fullcomment"><div class="comment cmt"><p>Returns zero if other <a href="Region.html" class="extype" name="feature.Region">Region</a> is <a href="" class="extype" name="feature.Empty">Empty</a>; a positive integer otherwise.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → Ordered</dd></dl></div>
-    </li><li name="scala.math.Ordered#compareTo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="compareTo(that:A):Int"></a>
-      <a id="compareTo(Region):Int"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -349,16 +538,15 @@
       <span class="symbol">
         <span class="name">compareTo</span><span class="params">(<span name="that">that: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@compareTo(that:A):Int" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Ordered → Comparable</dd></dl></div>
+    </li><li name="feature.Empty#contains" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="contains(feat:feature.Region):Boolean"></a><a id="contains(Region):Boolean"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#contains(feat:feature.Region):Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Ordered → Comparable</dd></dl></div>
-    </li><li name="feature.Empty#contains" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="contains(feat:feature.Region):Boolean"></a>
-      <a id="contains(Region):Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -366,16 +554,15 @@
       <span class="symbol">
         <span class="name">contains</span><span class="params">(<span name="feat">feat: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@contains(feat:feature.Region):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Returns false.</p><div class="fullcomment"><div class="comment cmt"><p>Returns false.</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>True if this <a href="Region.html" class="extype" name="feature.Region">Region</a> contains the other, false otherwise</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+    </li><li name="feature.Region#containsCompatibleIntrons" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="containsCompatibleIntrons(o:feature.Region):Boolean"></a><a id="containsCompatibleIntrons(Region):Boolean"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#containsCompatibleIntrons(o:feature.Region):Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Returns false.</p><div class="fullcomment"><div class="comment cmt"><p>Returns false.</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>True if this <a href="Region.html" class="extype" name="feature.Region">Region</a> contains the other, false otherwise</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="feature.Region#containsCompatibleIntrons" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="containsCompatibleIntrons(o:feature.Region):Boolean"></a>
-      <a id="containsCompatibleIntrons(Region):Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -383,21 +570,20 @@
       <span class="symbol">
         <span class="name">containsCompatibleIntrons</span><span class="params">(<span name="o">o: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@containsCompatibleIntrons(o:feature.Region):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Returns a boolean value representing whether this <a href="Region.html" class="extype" name="feature.Region">Region</a> contains another <a href="Region.html" class="extype" name="feature.Region">Region</a>
 and their introns are compatible.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a boolean value representing whether this <a href="Region.html" class="extype" name="feature.Region">Region</a> contains another <a href="Region.html" class="extype" name="feature.Region">Region</a>
 and their introns are compatible.</p><p>That is, no INTERNAL block boundary for one of the <a href="Region.html" class="extype" name="feature.Region">Region</a>s can fall strictly within a
 <a href="Block.html" class="extype" name="feature.Block">Block</a> of the other <a href="Region.html" class="extype" name="feature.Region">Region</a>.
 </p></div><dl class="paramcmts block"><dt class="param">o</dt><dd class="cmt"><p>Other <a href="Region.html" class="extype" name="feature.Region">Region</a></p></dd><dt>returns</dt><dd class="cmt"><p>True if this <a href="Region.html" class="extype" name="feature.Region">Region</a> contains the other and their introns are compatible,
         false otherwise</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="feature.Empty#end" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="feature.Empty#end" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="end:Int"></a>
-      <a id="end:Int"></a>
-      <h4 class="signature">
+      <span class="permalink">
+      <a href="../feature/Empty$.html#end:Int" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -405,16 +591,15 @@ and their introns are compatible.</p><p>That is, no INTERNAL block boundary for 
       <span class="symbol">
         <span class="name">end</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@end:Int" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Throws an IllegalStateException.</p><div class="fullcomment"><div class="comment cmt"><p>Throws an IllegalStateException.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+    </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#eq(x$1:AnyRef):Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Throws an IllegalStateException.</p><div class="fullcomment"><div class="comment cmt"><p>Throws an IllegalStateException.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="eq(x$1:AnyRef):Boolean"></a>
-      <a id="eq(AnyRef):Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -422,16 +607,15 @@ and their introns are compatible.</p><p>That is, no INTERNAL block boundary for 
       <span class="symbol">
         <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#equals" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a><a id="equals(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#equals(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="equals(x$1:Any):Boolean"></a>
-      <a id="equals(Any):Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -439,16 +623,15 @@ and their introns are compatible.</p><p>That is, no INTERNAL block boundary for 
       <span class="symbol">
         <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@equals(x$1:Any):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#finalize" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#finalize():Unit" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="finalize():Unit"></a>
-      <a id="finalize():Unit"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -456,11 +639,7 @@ and their introns are compatible.</p><p>That is, no INTERNAL block boundary for 
       <span class="symbol">
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@finalize():Unit" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -468,10 +647,13 @@ and their introns are compatible.</p><p>That is, no INTERNAL block boundary for 
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
-      <a id="getClass():Class[_]"></a>
-      <h4 class="signature">
+      <span class="permalink">
+      <a href="../feature/Empty$.html#getClass():Class[_]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -479,16 +661,15 @@ and their introns are compatible.</p><p>That is, no INTERNAL block boundary for 
       <span class="symbol">
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@getClass():Class[_]" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="feature.Region#getIntrons" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getIntrons:List[feature.Block]"></a><a id="getIntrons:List[Block]"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#getIntrons:List[feature.Block]" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="feature.Region#getIntrons" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="getIntrons:List[feature.Block]"></a>
-      <a id="getIntrons:List[Block]"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -496,11 +677,7 @@ and their introns are compatible.</p><p>That is, no INTERNAL block boundary for 
       <span class="symbol">
         <span class="name">getIntrons</span><span class="result">: <span class="extype" name="scala.List">List</span>[<a href="Block.html" class="extype" name="feature.Block">Block</a>]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@getIntrons:List[feature.Block]" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Returns a list of <a href="Block.html" class="extype" name="feature.Block">Block</a>s representing the introns of this <a href="Region.html" class="extype" name="feature.Region">Region</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a list of <a href="Block.html" class="extype" name="feature.Block">Block</a>s representing the introns of this <a href="Region.html" class="extype" name="feature.Region">Region</a>.</p><p>The returned list is in order from left to right. Each <a href="Block.html" class="extype" name="feature.Block">Block</a> in the returned list is the span of a gap
 between two <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="Region.html" class="extype" name="feature.Region">Region</a>. The returned <a href="Block.html" class="extype" name="feature.Block">Block</a>s have the same <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a>
 as this <a href="Region.html" class="extype" name="feature.Region">Region</a>. The start position of each returned <a href="Block.html" class="extype" name="feature.Block">Block</a> is equal to the end position (exclusive)
@@ -508,10 +685,13 @@ of the previous adjacent <a href="Block.html" class="extype" name="feature.Block
 is equal to the start position of the following adjacent <a href="Block.html" class="extype" name="feature.Block">Block</a> in this <a href="Region.html" class="extype" name="feature.Region">Region</a>.</p><p>If this <a href="Region.html" class="extype" name="feature.Region">Region</a> is empty or has only one <a href="Block.html" class="extype" name="feature.Block">Block</a>, Nil is returned.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>A list of <a href="Block.html" class="extype" name="feature.Block">Block</a>s representing the gaps between the <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="Region.html" class="extype" name="feature.Region">Region</a>, or Nil if this
         <a href="Region.html" class="extype" name="feature.Region">Region</a> has less than two <a href="Block.html" class="extype" name="feature.Block">Block</a>s.</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="feature.Empty#intersection" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="intersection(feat:feature.Region):feature.Region"></a>
-      <a id="intersection(Region):Region"></a>
-      <h4 class="signature">
+    </li><li name="feature.Empty#intersection" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="intersection(feat:feature.Region):feature.Region"></a><a id="intersection(Region):Region"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#intersection(feat:feature.Region):feature.Region" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -519,16 +699,15 @@ is equal to the start position of the following adjacent <a href="Block.html" cl
       <span class="symbol">
         <span class="name">intersection</span><span class="params">(<span name="feat">feat: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@intersection(feat:feature.Region):feature.Region" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Returns <a href="" class="extype" name="feature.Empty">Empty</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns <a href="" class="extype" name="feature.Empty">Empty</a>.</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><a href="Region.html" class="extype" name="feature.Region">Region</a> representing the intersection of this with the other <a href="Region.html" class="extype" name="feature.Region">Region</a></p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+    </li><li name="feature.Empty#isEmpty" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isEmpty:Boolean"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#isEmpty:Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Returns <a href="" class="extype" name="feature.Empty">Empty</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns <a href="" class="extype" name="feature.Empty">Empty</a>.</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><a href="Region.html" class="extype" name="feature.Region">Region</a> representing the intersection of this with the other <a href="Region.html" class="extype" name="feature.Region">Region</a></p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="feature.Empty#isEmpty" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="isEmpty:Boolean"></a>
-      <a id="isEmpty:Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -536,16 +715,15 @@ is equal to the start position of the following adjacent <a href="Block.html" cl
       <span class="symbol">
         <span class="name">isEmpty</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@isEmpty:Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Returns true.</p><div class="fullcomment"><div class="comment cmt"><p>Returns true.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#isInstanceOf[T0]:Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Returns true.</p><div class="fullcomment"><div class="comment cmt"><p>Returns true.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="isInstanceOf[T0]:Boolean"></a>
-      <a id="isInstanceOf[T0]:Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -553,16 +731,15 @@ is equal to the start position of the following adjacent <a href="Block.html" cl
       <span class="symbol">
         <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="feature.Empty#minus" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="minus(feat:feature.Region):feature.Region"></a><a id="minus(Region):Region"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#minus(feat:feature.Region):feature.Region" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="feature.Empty#minus" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="minus(feat:feature.Region):feature.Region"></a>
-      <a id="minus(Region):Region"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -570,16 +747,15 @@ is equal to the start position of the following adjacent <a href="Block.html" cl
       <span class="symbol">
         <span class="name">minus</span><span class="params">(<span name="feat">feat: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@minus(feat:feature.Region):feature.Region" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Returns <a href="" class="extype" name="feature.Empty">Empty</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns <a href="" class="extype" name="feature.Empty">Empty</a>.</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><a href="Region.html" class="extype" name="feature.Region">Region</a> representing this minus the other <a href="Region.html" class="extype" name="feature.Region">Region</a></p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+    </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#ne(x$1:AnyRef):Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Returns <a href="" class="extype" name="feature.Empty">Empty</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns <a href="" class="extype" name="feature.Empty">Empty</a>.</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><a href="Region.html" class="extype" name="feature.Region">Region</a> representing this minus the other <a href="Region.html" class="extype" name="feature.Region">Region</a></p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="ne(x$1:AnyRef):Boolean"></a>
-      <a id="ne(AnyRef):Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -587,16 +763,15 @@ is equal to the start position of the following adjacent <a href="Block.html" cl
       <span class="symbol">
         <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#notify():Unit" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="notify():Unit"></a>
-      <a id="notify():Unit"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -604,16 +779,15 @@ is equal to the start position of the following adjacent <a href="Block.html" cl
       <span class="symbol">
         <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@notify():Unit" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#notifyAll():Unit" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="notifyAll():Unit"></a>
-      <a id="notifyAll():Unit"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -621,16 +795,15 @@ is equal to the start position of the following adjacent <a href="Block.html" cl
       <span class="symbol">
         <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@notifyAll():Unit" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="feature.Empty#numBlocks" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="numBlocks:Int"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#numBlocks:Int" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="feature.Empty#numBlocks" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="numBlocks:Int"></a>
-      <a id="numBlocks:Int"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
@@ -638,16 +811,15 @@ is equal to the start position of the following adjacent <a href="Block.html" cl
       <span class="symbol">
         <span class="name">numBlocks</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@numBlocks:Int" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Returns zero.</p><div class="fullcomment"><div class="comment cmt"><p>Returns zero.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+    </li><li name="feature.Empty#orientation" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="orientation:feature.Orientation"></a><a id="orientation:Orientation"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#orientation:feature.Orientation" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Returns zero.</p><div class="fullcomment"><div class="comment cmt"><p>Returns zero.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="feature.Empty#orientation" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="orientation:feature.Orientation"></a>
-      <a id="orientation:Orientation"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -655,16 +827,15 @@ is equal to the start position of the following adjacent <a href="Block.html" cl
       <span class="symbol">
         <span class="name">orientation</span><span class="result">: <a href="Orientation.html" class="extype" name="feature.Orientation">Orientation</a></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@orientation:feature.Orientation" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Throws an IllegalStateException.</p><div class="fullcomment"><div class="comment cmt"><p>Throws an IllegalStateException.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+    </li><li name="feature.Empty#overlaps" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="overlaps(feat:feature.Region):Boolean"></a><a id="overlaps(Region):Boolean"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#overlaps(feat:feature.Region):Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Throws an IllegalStateException.</p><div class="fullcomment"><div class="comment cmt"><p>Throws an IllegalStateException.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="feature.Empty#overlaps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="overlaps(feat:feature.Region):Boolean"></a>
-      <a id="overlaps(Region):Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -672,16 +843,15 @@ is equal to the start position of the following adjacent <a href="Block.html" cl
       <span class="symbol">
         <span class="name">overlaps</span><span class="params">(<span name="feat">feat: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@overlaps(feat:feature.Region):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Returns false.</p><div class="fullcomment"><div class="comment cmt"><p>Returns false.</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>True if the <a href="Region.html" class="extype" name="feature.Region">Region</a>s overlap, false otherwise</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+    </li><li name="feature.Empty#overlapsCompatibleIntrons" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="overlapsCompatibleIntrons(o:feature.Region):Boolean"></a><a id="overlapsCompatibleIntrons(Region):Boolean"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#overlapsCompatibleIntrons(o:feature.Region):Boolean" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Returns false.</p><div class="fullcomment"><div class="comment cmt"><p>Returns false.</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>True if the <a href="Region.html" class="extype" name="feature.Region">Region</a>s overlap, false otherwise</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="feature.Empty#overlapsCompatibleIntrons" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="overlapsCompatibleIntrons(o:feature.Region):Boolean"></a>
-      <a id="overlapsCompatibleIntrons(Region):Boolean"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -689,17 +859,16 @@ is equal to the start position of the following adjacent <a href="Block.html" cl
       <span class="symbol">
         <span class="name">overlapsCompatibleIntrons</span><span class="params">(<span name="o">o: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@overlapsCompatibleIntrons(o:feature.Region):Boolean" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Returns false.</p><div class="fullcomment"><div class="comment cmt"><p>Returns false.</p></div><dl class="paramcmts block"><dt class="param">o</dt><dd class="cmt"><p>Other <a href="Region.html" class="extype" name="feature.Region">Region</a></p></dd><dt>returns</dt><dd class="cmt"><p>True if the <a href="Region.html" class="extype" name="feature.Region">Region</a>s overlap and their introns are compatible,
         false otherwise</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="feature.Empty#relativePos" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="relativePos(chrPos:Int):Option[Int]"></a>
-      <a id="relativePos(Int):Option[Int]"></a>
-      <h4 class="signature">
+    </li><li name="feature.Empty#relativePos" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="relativePos(chrPos:Int):Option[Int]"></a><a id="relativePos(Int):Option[Int]"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#relativePos(chrPos:Int):Option[Int]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -707,17 +876,16 @@ is equal to the start position of the following adjacent <a href="Block.html" cl
       <span class="symbol">
         <span class="name">relativePos</span><span class="params">(<span name="chrPos">chrPos: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Int">Int</span>]</span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@relativePos(chrPos:Int):Option[Int]" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Returns None.</p><div class="fullcomment"><div class="comment cmt"><p>Returns None.</p></div><dl class="paramcmts block"><dt class="param">chrPos</dt><dd class="cmt"><p>Zero-based position in chromosome coordinates</p></dd><dt>returns</dt><dd class="cmt"><p>The zero-based converted position with respect to this <a href="Region.html" class="extype" name="feature.Region">Region</a>, or <span class="extype" name="None">None</span> if the requested
         position does not overlap a <a href="Block.html" class="extype" name="feature.Block">Block</a> of this <a href="Region.html" class="extype" name="feature.Region">Region</a></p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="feature.Region#size" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="feature.Region#size" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="size:Int"></a>
-      <a id="size:Int"></a>
-      <h4 class="signature">
+      <span class="permalink">
+      <a href="../feature/Empty$.html#size:Int" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -725,19 +893,18 @@ is equal to the start position of the following adjacent <a href="Block.html" cl
       <span class="symbol">
         <span class="name">size</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@size:Int" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <p class="shortcomment cmt">Returns the sum of the lengths of the <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="Region.html" class="extype" name="feature.Region">Region</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the sum of the lengths of the <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="Region.html" class="extype" name="feature.Region">Region</a>.</p><p><a href="Block.html" class="extype" name="feature.Block">Block</a> length is the end position minus the start position, where, as always,
 start position is inclusive and end position is exclusive. Therefore, size is
 the number of individual genomic positions included in the <a href="Region.html" class="extype" name="feature.Region">Region</a>.</p><p>The size of <a href="" class="extype" name="feature.Empty">Empty</a> is zero.
 </p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>The sum of the lengths of the <a href="Block.html" class="extype" name="feature.Block">Block</a>s of this <a href="Region.html" class="extype" name="feature.Region">Region</a></p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="feature.Empty#start" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="feature.Empty#start" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="start:Int"></a>
-      <a id="start:Int"></a>
-      <h4 class="signature">
+      <span class="permalink">
+      <a href="../feature/Empty$.html#start:Int" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -745,16 +912,15 @@ the number of individual genomic positions included in the <a href="Region.html"
       <span class="symbol">
         <span class="name">start</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@start:Int" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Throws an IllegalStateException.</p><div class="fullcomment"><div class="comment cmt"><p>Throws an IllegalStateException.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Throws an IllegalStateException.</p><div class="fullcomment"><div class="comment cmt"><p>Throws an IllegalStateException.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
-      <a id="synchronized[T0](⇒T0):T0"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -762,16 +928,15 @@ the number of individual genomic positions included in the <a href="Region.html"
       <span class="symbol">
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="feature.Empty#toString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#toString():String" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="feature.Empty#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="toString():String"></a>
-      <a id="toString():String"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -779,16 +944,15 @@ the number of individual genomic positions included in the <a href="Region.html"
       <span class="symbol">
         <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@toString():String" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Returns &quot;Empty&quot;.</p><div class="fullcomment"><div class="comment cmt"><p>Returns &quot;Empty&quot;.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → AnyRef → Any</dd></dl></div>
+    </li><li name="feature.Empty#trim" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="trim(newStart:Int,newEnd:Int):feature.Region"></a><a id="trim(Int,Int):Region"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#trim(newStart:Int,newEnd:Int):feature.Region" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Returns &quot;Empty&quot;.</p><div class="fullcomment"><div class="comment cmt"><p>Returns &quot;Empty&quot;.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → AnyRef → Any</dd></dl></div>
-    </li><li name="feature.Empty#trim" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="trim(newStart:Int,newEnd:Int):feature.Region"></a>
-      <a id="trim(Int,Int):Region"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -796,16 +960,15 @@ the number of individual genomic positions included in the <a href="Region.html"
       <span class="symbol">
         <span class="name">trim</span><span class="params">(<span name="newStart">newStart: <span class="extype" name="scala.Int">Int</span></span>, <span name="newEnd">newEnd: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@trim(newStart:Int,newEnd:Int):feature.Region" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Returns <a href="" class="extype" name="feature.Empty">Empty</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns <a href="" class="extype" name="feature.Empty">Empty</a>.</p></div><dl class="paramcmts block"><dt class="param">newStart</dt><dd class="cmt"><p>New zero-based start position in chromosome coordinates</p></dd><dt class="param">newEnd</dt><dd class="cmt"><p>New zero-based end position in chromosome coordinates</p></dd><dt>returns</dt><dd class="cmt"><p><a href="Region.html" class="extype" name="feature.Region">Region</a> representing this with truncated start and end positions</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+    </li><li name="feature.Empty#union" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="union(feat:feature.Region):feature.Region"></a><a id="union(Region):Region"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#union(feat:feature.Region):feature.Region" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Returns <a href="" class="extype" name="feature.Empty">Empty</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns <a href="" class="extype" name="feature.Empty">Empty</a>.</p></div><dl class="paramcmts block"><dt class="param">newStart</dt><dd class="cmt"><p>New zero-based start position in chromosome coordinates</p></dd><dt class="param">newEnd</dt><dd class="cmt"><p>New zero-based end position in chromosome coordinates</p></dd><dt>returns</dt><dd class="cmt"><p><a href="Region.html" class="extype" name="feature.Region">Region</a> representing this with truncated start and end positions</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="feature.Empty#union" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="union(feat:feature.Region):feature.Region"></a>
-      <a id="union(Region):Region"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
@@ -813,16 +976,15 @@ the number of individual genomic positions included in the <a href="Region.html"
       <span class="symbol">
         <span class="name">union</span><span class="params">(<span name="feat">feat: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>)</span><span class="result">: <a href="Region.html" class="extype" name="feature.Region">Region</a></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@union(feat:feature.Region):feature.Region" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
+      
+      <p class="shortcomment cmt">Returns the other <a href="Region.html" class="extype" name="feature.Region">Region</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the other <a href="Region.html" class="extype" name="feature.Region">Region</a>.</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><a href="Region.html" class="extype" name="feature.Region">Region</a> representing the union of this with the other <a href="Region.html" class="extype" name="feature.Region">Region</a></p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#wait():Unit" title="Permalink">
+        <i class="material-icons"></i>
       </a>
     </span>
-      <p class="shortcomment cmt">Returns the other <a href="Region.html" class="extype" name="feature.Region">Region</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the other <a href="Region.html" class="extype" name="feature.Region">Region</a>.</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p><a href="Region.html" class="extype" name="feature.Region">Region</a> representing the union of this with the other <a href="Region.html" class="extype" name="feature.Region">Region</a></p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.Empty">Empty</a> → <a href="Region.html" class="extype" name="feature.Region">Region</a></dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="wait():Unit"></a>
-      <a id="wait():Unit"></a>
-      <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -830,11 +992,7 @@ the number of individual genomic positions included in the <a href="Region.html"
       <span class="symbol">
         <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@wait():Unit" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -842,10 +1000,13 @@ the number of individual genomic positions included in the <a href="Region.html"
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
-      <a id="wait(Long,Int):Unit"></a>
-      <h4 class="signature">
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a><a id="wait(Long,Int):Unit"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -853,11 +1014,7 @@ the number of individual genomic positions included in the <a href="Region.html"
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -865,10 +1022,13 @@ the number of individual genomic positions included in the <a href="Region.html"
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="wait(x$1:Long):Unit"></a>
-      <a id="wait(Long):Unit"></a>
-      <h4 class="signature">
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a><a id="wait(Long):Unit"></a>
+      <span class="permalink">
+      <a href="../feature/Empty$.html#wait(x$1:Long):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
       <span class="modifier_kind">
         <span class="modifier">final </span>
         <span class="kind">def</span>
@@ -876,11 +1036,7 @@ the number of individual genomic positions included in the <a href="Region.html"
       <span class="symbol">
         <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
-      </h4><span class="permalink">
-      <a href="../index.html#feature.Empty$@wait(x$1:Long):Unit" title="Permalink" target="_top">
-        <img src="../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
+      
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -888,7 +1044,8 @@ the number of individual genomic positions included in the <a href="Region.html"
     </span>)</span>
               
         </dd></dl></div>
-    </li></ol>
+    </li>
+              </ol>
             </div>
 
         
@@ -931,7 +1088,9 @@ the number of individual genomic positions included in the <a href="Region.html"
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-
-
+    </body>
+          </div>
+        </div>
+      </div>
     </body>
       </html>
