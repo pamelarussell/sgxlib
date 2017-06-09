@@ -96,6 +96,13 @@ val ENST00000613961: Feature = new Transcript(
   Block("20", 37499892, 37503975, Minus),
   Some("ENST00000613961"), Some("ENSG00000166619"))
 val featureOverlap: Iterator[Feature] = featureSet.overlappers(ENST00000613961) // ENST00000613961, ENST00000467603
+
+// Get nearest features to an interval
+val intervalNearest: Iterator[Feature] = featureSet.nearest("chr20", 37306985, 37306986) // ENST00000373606, ENST00000397150, ENST00000397152, ENST00000373605, ENST00000397151
+
+// Get nearest features to a feature
+val block = new GenericFeature(Block("20", 37249854, 37250291, Minus), None)
+val featureNearest: Iterator[Feature] = featureSet.nearest(block) // ENST00000373614
 ```
 
 ### Package [sequencing](http://pamelarussell.github.io/sgxlib/docs/api/#sequencing.package)
