@@ -20,7 +20,8 @@ testOptions in Test += Tests.Argument("-oF")
 // Coveralls
 import org.scoverage.coveralls.Imports.CoverallsKeys._
 coverallsTokenFile := Some("src/main/resources/token.txt")
-coverageEnabled := true
+coverageEnabled in(Test, compile) := true
+coverageEnabled in(Compile, compile) := false
 
 // htsjdk
 unmanagedJars in Compile += file("lib/htsjdk-2.9.0-1-g55bf01b-SNAPSHOT.jar")
