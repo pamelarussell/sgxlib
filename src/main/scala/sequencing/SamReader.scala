@@ -85,17 +85,20 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     * to the [[htsjdk.samtools.SamReader]] it iterates over.
     *
     * Only returns records evaluating to true under [[isValid]].
+    * Returns None if no valid records.
     *
     * @param chr Interval reference sequence name
     * @param start Zero-based inclusive interval start position
     * @param end Zero-based exclusive interval end position
     * @param contained Fully contained records only
-    * @return Pair of the implicated [[htsjdk.samtools.SamReader]] and the iterator over overlapping records.
-    *         The reader and iterator need to be closed.
+    * @return Pair of the implicated [[htsjdk.samtools.SamReader]] and the iterator over overlapping records,
+    *         or None if no valid records. The reader and iterator need to be closed.
     */
-  private def query(chr: String, start: Int, end: Int, contained: Boolean): (htsjdk.samtools.SamReader, SAMRecordIterator) = {
+  private def query(chr: String, start: Int, end: Int, contained: Boolean): Option[(htsjdk.samtools.SamReader, SAMRecordIterator)] = {
     val reader = makeReader
-    (reader, reader.query(convertChr(chr), SamMapping.zeroBasedToSam(start), SamMapping.zeroBasedToSam(end), contained))
+    val convChr = convertChr(chr)
+    if(reader.getFileHeader.getSequenceIndex(convChr) < 0) None
+    else Some((reader, reader.query(convChr, SamMapping.zeroBasedToSam(start), SamMapping.zeroBasedToSam(end), contained)))
   }
 
 
@@ -114,9 +117,10 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     *                                      should be [[Unstranded]].
     * @return Iterator over SAMRecords that are compatible with the [[Feature]]
     */
-  def compatibleRecords(feat: Feature, firstOfPairStrandOnTranscript: Orientation): Iterator[SAMRecord] = {
-    val q: (htsjdk.samtools.SamReader, SAMRecordIterator) = query(feat.getChr, feat.getStart, feat.getEnd, contained = true)
-    new FilteredSamRecordIterator(q._1, q._2,
+  def  compatibleRecords(feat: Feature, firstOfPairStrandOnTranscript: Orientation): Iterator[SAMRecord] = {
+    val q: Option[(htsjdk.samtools.SamReader, SAMRecordIterator)] = query(feat.getChr, feat.getStart, feat.getEnd, contained = true)
+    if(q.isEmpty) Iterator.empty
+    else new FilteredSamRecordIterator(q.get._1, q.get._2,
        rec => isValid(rec) && feat.containsCompatibleIntrons(SamMapping(rec, firstOfPairStrandOnTranscript)))
   }
 
@@ -162,14 +166,16 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     * @return
     */
   def compatibleFragments(feat: Feature, firstOfPairStrandOnTranscript: Orientation): Iterator[(SAMRecord, SAMRecord)] = {
-    val q: (htsjdk.samtools.SamReader, SAMRecordIterator) = query(feat.getChr, feat.getStart, feat.getEnd, contained = true)
-    new PairedIterator(
-      q._1,
-      new FilteredSamRecordIterator(
-        q._1, q._2,
-        rec => isValid(rec)
-          && !rec.getNotPrimaryAlignmentFlag
-          && feat.containsCompatibleIntrons(SamMapping(rec, firstOfPairStrandOnTranscript))))
+    val q: Option[(htsjdk.samtools.SamReader, SAMRecordIterator)] = query(feat.getChr, feat.getStart, feat.getEnd, contained = true)
+    if(q.isEmpty) Iterator.empty
+    else
+      new PairedIterator(
+        q.get._1,
+        new FilteredSamRecordIterator(
+          q.get._1, q.get._2,
+          rec => isValid(rec)
+            && !rec.getNotPrimaryAlignmentFlag
+            && feat.containsCompatibleIntrons(SamMapping(rec, firstOfPairStrandOnTranscript))))
   }
 
 

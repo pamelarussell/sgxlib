@@ -1,5 +1,5 @@
 val nm = "sgxlib"
-val ver = "1.0.2"
+val ver = "1.0.3"
 
 // Basic info
 name := nm

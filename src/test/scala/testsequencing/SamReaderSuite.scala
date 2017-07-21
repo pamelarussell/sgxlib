@@ -156,6 +156,13 @@ class SamReaderSuite extends FunSuite {
     assert(samReaderPaired.countCompatibleRecords(ENST00000411780, Plus) === 0)
   }
 
+  test("Count compatible records and fragments - nonexistent chromosome") {
+    assert(samReaderUnpaired.countCompatibleRecords(new GenericFeature(Block("xxx", 1000, 2000, Plus), None), Plus) === 0)
+    assert(samReaderPaired.countCompatibleRecords(new GenericFeature(Block("xxx", 1000, 2000, Plus), None), Plus) === 0)
+    assert(samReaderUnpaired.countCompatibleFragments(new GenericFeature(Block("xxx", 1000, 2000, Plus), None), Plus) === 0)
+    assert(samReaderPaired.countCompatibleFragments(new GenericFeature(Block("xxx", 1000, 2000, Plus), None), Plus) === 0)
+  }
+
   test("Iterator size - count compatible records with filter") {
     assert(new SamReader(new File(getClass.getResource("/DRR023752_chr20_37Mb_38Mb.bam").getPath),
       rec => rec.getReadNegativeStrandFlag).countCompatibleRecords(ENST00000411780, Minus) === 3)

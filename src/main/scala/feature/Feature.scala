@@ -308,6 +308,8 @@ sealed class Transcript(override val blocks: Region, name: Option[String], val g
     if(or != Plus && or != Minus) throw new IllegalArgumentException(s"Invalid orientation: $getOrientation. Options: ${Plus.toString}, ${Minus.toString}")
   }
 
+  def unapply(t: Transcript): Option[(Region, Option[String], Option[String])] = Some((t.blocks, t.name, t.geneId))
+
   /** Returns true if other is an instance of [[Transcript]], false otherwise. */
   override def canEqual(other: Any): Boolean = other.isInstanceOf[Transcript]
 
@@ -636,7 +638,7 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
         val gc = Feature.optStrCompare(geneId, tr.geneId)
         if(gc != 0) gc
         else 1
-      case gf: GenericFeature => 1
+      case _: GenericFeature => 1
     }
   }
 
@@ -644,7 +646,34 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
 
 /** A gene giving rise to one or more [[Transcript]]s.
   *
-  * @param transcripts Non-empty List of [[Transcript]]s
+  * @param transcripts Non-empty Set of [[Transcript]]s
   * @param name Gene name
   */
-final case class Gene(transcripts: List[Transcript], name: String)
+final case class Gene(transcripts: Set[Transcript], name: String) {
+
+  if(transcripts.isEmpty) throw new IllegalArgumentException("Set of transcripts must be non-empty")
+  val chr: String = transcripts.head.getChr
+  validate()
+
+  private def validate(): Unit = {
+    transcripts.foreach(t => {
+      if(t.geneId.isEmpty || t.geneId.get != name) throw new IllegalArgumentException(
+        s"Transcript ID (${t.toString}) does not match gene ID ($name)")
+      if(t.getChr != chr) throw new IllegalArgumentException(
+        s"All transcripts must come from same chromosome: $chr, ${t.getChr}")
+    })
+  }
+
+  /**
+    * The gene span from minimum start position of transcripts to maximum end position of transcripts
+    * Orientation is the common orientation if all transcripts have same orientation, or [[Unstranded]] otherwise
+    */
+  lazy val span: Block = {
+    val op: ((Int, Int, Orientation), Transcript) => (Int, Int, Orientation) =
+      (x, y) => (Math.min(x._1, y.getStart), Math.max(x._2, y.getEnd), Orientation.consensus(x._3, y.getOrientation))
+    val start_end_strand: (Int, Int, Orientation) =
+      transcripts.foldLeft[(Int, Int, Orientation)]((Integer.MAX_VALUE, Integer.MIN_VALUE, Unstranded))(op)
+    Block(chr, start_end_strand._1, start_end_strand._2, start_end_strand._3)
+  }
+
+}
