@@ -62,6 +62,30 @@ class FeatureSetSuite extends FunSuite {
     val plusOverlap = chr20_21_22.overlappers("chr20", 37476591, 37645612, Plus).toSet
     val minusOverlap = chr20_21_22.overlappers("20", 37476591, 37645612, Minus).toSet
     val bothOverlap = chr20_21_22.overlappers("chr20", 37476591, 37645612, Unstranded).toSet
+    val plusOverlapSpan = chr20_21_22.overlappersSpan("chr20", 37476591, 37645612, Plus).toSet
+    val minusOverlapSpan = chr20_21_22.overlappersSpan("20", 37476591, 37645612, Minus).toSet
+    val bothOverlapSpan = chr20_21_22.overlappersSpan("chr20", 37476591, 37645612, Unstranded).toSet
+    val minusOverlapInIntrons = chr20_21_22.overlappers("20", 37525082, 37526058, Minus).toSet
+    val plusOverlapSpanInIntrons = chr20_21_22.overlappersSpan("chr20", 37525082, 37526058, Plus).toSet
+    val minusOverlapSpanInIntrons = chr20_21_22.overlappersSpan("20", 37525082, 37526058, Minus).toSet
+    val bothOverlapSpanInIntrons = chr20_21_22.overlappersSpan("chr20", 37525082, 37526058, Unstranded).toSet
+
+    assert(plusOverlap === plusOverlapSpan)
+    assert(minusOverlap === minusOverlapSpan)
+    assert(bothOverlap === bothOverlapSpan)
+
+    assert(minusOverlapInIntrons.isEmpty)
+    assert(plusOverlapSpanInIntrons.isEmpty)
+
+    assert(minusOverlapSpanInIntrons === bothOverlapSpanInIntrons)
+    assert(minusOverlapSpanInIntrons.size === 7)
+    assert(minusOverlapSpanInIntrons.contains(ENST00000373537))
+    assert(minusOverlapSpanInIntrons.contains(ENST00000397137))
+    assert(minusOverlapSpanInIntrons.contains(ENST00000467603))
+    assert(minusOverlapSpanInIntrons.contains(ENST00000414542))
+    assert(minusOverlapSpanInIntrons.contains(ENST00000397135))
+    assert(minusOverlapSpanInIntrons.contains(ENST00000445723_transcript))
+    assert(minusOverlapSpanInIntrons.contains(ENST00000414080))
 
     assert(bothOverlap.size === 21)
     assert(bothOverlap.contains(ENST00000411780))
@@ -121,16 +145,21 @@ class FeatureSetSuite extends FunSuite {
 
     // Wrong orientation
     assert(chr20_21_22.overlappers("chr20", 37564882, 37590261, Minus).isEmpty)
+    assert(chr20_21_22.overlappersSpan("chr20", 37564882, 37590261, Minus).isEmpty)
 
     // In intron
     assert(chr20_21_22.overlappers("20", 37579497, 37581584, Plus).isEmpty)
+    assert(chr20_21_22.overlappersSpan("20", 37579497, 37581584, Plus).nonEmpty)
 
     // No genes
     assert(chr20_21_22.overlappers("chr20", 37584686, 37586304, Plus).isEmpty)
+    assert(chr20_21_22.overlappersSpan("chr20", 37584686, 37586304, Plus).isEmpty)
 
     // Nonexistent chromosome
     assert(chr20_21_22.overlappers("fakeChr", 100, 200, Plus).isEmpty)
     assert(chr20_21_22.overlappers(new GenericFeature(Block("fakeChr", 100, 200, Plus), None)).isEmpty)
+    assert(chr20_21_22.overlappersSpan("fakeChr", 100, 200, Plus).isEmpty)
+    assert(chr20_21_22.overlappersSpan(new GenericFeature(Block("fakeChr", 100, 200, Plus), None)).isEmpty)
 
   }
 
@@ -140,6 +169,12 @@ class FeatureSetSuite extends FunSuite {
     assert(featOverlap1.size === 2)
     assert(featOverlap1.contains(ENST00000613961))
     assert(featOverlap1.contains(ENST00000467603))
+
+    val featOverlapSpan1 = chr20_21_22.overlappersSpan(ENST00000613961).toSet
+    assert(featOverlapSpan1.size === 3)
+    assert(featOverlapSpan1.contains(ENST00000613961))
+    assert(featOverlapSpan1.contains(ENST00000467603))
+    assert(featOverlapSpan1.contains(ENST00000411780))
 
     val featOverlap2 = chr20_21_22.overlappers(ENST00000414542).toSet
     assert(featOverlap2.size === 11)
@@ -155,18 +190,25 @@ class FeatureSetSuite extends FunSuite {
     assert(featOverlap2.contains(ENST00000414080))
     assert(featOverlap2.contains(ENST00000456058))
 
+    val featOverlapSpan2 = chr20_21_22.overlappersSpan(ENST00000414542).toSet
+    assert(featOverlapSpan2.size === 12)
+    assert(featOverlapSpan2.contains(ENST00000620327))
+
   }
 
   test("Empty feature overlap") {
 
     // Wrong orientation
     assert(chr20_21_22.overlappers(new GenericFeature(Block("20", 37564882, 37590261, Minus), None)).isEmpty)
+    assert(chr20_21_22.overlappersSpan(new GenericFeature(Block("20", 37564882, 37590261, Minus), None)).isEmpty)
 
     // In intron
     assert(chr20_21_22.overlappers(new GenericFeature(Block("20", 37579497, 37581584, Plus), None)).isEmpty)
+    assert(chr20_21_22.overlappersSpan(new GenericFeature(Block("20", 37579497, 37581584, Plus), None)).nonEmpty)
 
     // No genes
     assert(chr20_21_22.overlappers(new GenericFeature(Block("20", 37584686, 37586304, Plus), None)).isEmpty)
+    assert(chr20_21_22.overlappersSpan(new GenericFeature(Block("20", 37584686, 37586304, Plus), None)).isEmpty)
 
   }
 

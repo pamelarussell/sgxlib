@@ -56,6 +56,24 @@ trait FeatureSet[T <: Feature] {
     */
   def overlappers(chr: String, start: Int, end: Int, orientation: Orientation): Iterator[T]
 
+  /** Returns an iterator over [[T]]s whose span overlaps a genomic interval.
+    *
+    * Overlappers are the [[Feature]]s contained in this set whose span overlaps the interval
+    * accounting for [[Orientation]], as defined by [[Feature.overlapsSpan]].
+    *
+    * The returned iterator is not guaranteed to conform to any particular ordering.
+    *
+    * @param chr Chromosome name of query interval
+    * @param start Zero-based inclusive start position of query interval
+    * @param end Zero-based exclusive end position of query interval
+    * @param orientation Orientation of query interval. Only overlappers with a compatible
+    *                    [[Orientation]] (as defined by [[Orientation.isCompatible]]) will
+    *                    be returned.
+    * @return Iterator over span overlappers in no particular order, or [[Iterator.empty]] if
+    *         there are none
+    */
+  def overlappersSpan(chr: String, start: Int, end: Int, orientation: Orientation): Iterator[T]
+
   /** Returns an iterator over overlappers of a given [[Feature]].
     *
     * Overlappers are the [[Feature]]s contained in this set that overlap the given
@@ -68,6 +86,19 @@ trait FeatureSet[T <: Feature] {
     *         or [[Iterator.empty]] if there are no overlappers
     */
   def overlappers(feat: Feature): Iterator[T]
+
+  /** Returns an iterator over [[T]]s whose span overlaps that of a given [[Feature]].
+    *
+    * Overlappers are the [[Feature]]s contained in this set whose span overlaps that of
+    * the given [[Feature]] as defined by [[Feature.overlapsSpan]].
+    *
+    * The returned iterator is not guaranteed to conform to any particular ordering.
+    *
+    * @param feat Query [[Feature]]
+    * @return Iterator over span overlappers of the given [[Feature]] in no particular order,
+    *         or [[Iterator.empty]] if there are none
+    */
+  def overlappersSpan(feat: Feature): Iterator[T]
 
   /** Returns an iterator over the nearest [[Feature]]s to a genomic interval.
     *
@@ -256,12 +287,8 @@ final class GTF22FeatureSet(file: File) extends FeatureSet[Feature] {
     *         there are no overlappers
     */
   override def overlappers(chr: String, start: Int, end: Int, orientation: Orientation): Iterator[Feature] =
-    if(tree.contains(chr)) overlappers(new GenericFeature(Block(chr, start, end, orientation), None))
-    else {
-      val c = chr.replaceFirst("^chr", "")
-      if(tree.contains(c)) overlappers(new GenericFeature(Block(c, start, end, orientation), None))
-      else Iterator.empty
-    }
+    overlappersSpan(chr, start, end, orientation).filter(f =>
+      f.overlaps(new GenericFeature(Block(chr.replaceFirst("^chr", ""), start, end, orientation), None)))
 
   /** Returns an iterator over overlappers of a given [[Feature]].
     *
@@ -274,15 +301,55 @@ final class GTF22FeatureSet(file: File) extends FeatureSet[Feature] {
     * @return Iterator over overlappers of the given [[Feature]] in no particular order,
     *         or [[Iterator.empty]] if there are no overlappers
     */
-  override def overlappers(feat: Feature): Iterator[Feature] = {
+  override def overlappers(feat: Feature): Iterator[Feature] =
+    overlappersSpan(feat).filter(f => feat.overlaps(f))
+
+  /** Returns an iterator over [[Feature]]s whose span overlaps a genomic interval.
+    *
+    * Overlappers are the [[Feature]]s contained in this set whose span overlaps the interval
+    * accounting for [[Orientation]], as defined by [[Feature.overlapsSpan]].
+    *
+    * The returned iterator is not guaranteed to conform to any particular ordering.
+    *
+    * @param chr         Chromosome name of query interval
+    * @param start       Zero-based inclusive start position of query interval
+    * @param end         Zero-based exclusive end position of query interval
+    * @param orientation Orientation of query interval. Only overlappers with a compatible
+    *                    [[Orientation]] (as defined by [[Orientation.isCompatible]]) will
+    *                    be returned.
+    * @return Iterator over span overlappers in no particular order, or [[Iterator.empty]] if
+    *         there are none
+    */
+  override def overlappersSpan(chr: String, start: Int, end: Int, orientation: Orientation): Iterator[Feature] =
+    if(tree.contains(chr)) overlappersSpan(new GenericFeature(Block(chr, start, end, orientation), None))
+    else {
+      val c = chr.replaceFirst("^chr", "")
+      if(tree.contains(c)) overlappersSpan(new GenericFeature(Block(c, start, end, orientation), None))
+      else Iterator.empty
+    }
+
+  /** Returns an iterator over [[Feature]]s whose span overlaps that of a given [[Feature]].
+    *
+    * Overlappers are the [[Feature]]s contained in this set whose span overlaps that of
+    * the given [[Feature]] as defined by [[Feature.overlapsSpan]].
+    *
+    * The returned iterator is not guaranteed to conform to any particular ordering.
+    *
+    * @param feat Query [[Feature]]
+    * @return Iterator over span overlappers of the given [[Feature]] in no particular order,
+    *         or [[Iterator.empty]] if there are none
+    */
+  override def overlappersSpan(feat: Feature): Iterator[Feature] = {
     tree.get(feat.getChr) match {
       case None => Iterator.empty
       case Some(it) =>
         asScalaIterator(it.overlappers(feat.getStart, feat.getEnd - 1))
           .map(node => node.getValue)
-          .flatMap(ts => ts.iterator.filter(f => feat.overlaps(f)))
+          .flatMap(ts => ts.iterator)
+          .filter(f => Orientation.isCompatible(feat.getOrientation, f.getOrientation))
     }
   }
+
 
   /** Returns an iterator over the entire set.
     *

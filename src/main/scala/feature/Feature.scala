@@ -50,6 +50,16 @@ sealed abstract class Feature(val blocks: Region, val name: Option[String]) exte
     */
   def overlapsCompatibleIntrons(other: Feature): Boolean = blocks.overlapsCompatibleIntrons(other.blocks)
 
+  /** Returns a boolean value representing whether the span of this [[Feature]] overlaps the
+    * span of another [[Feature]].
+    *
+    * Ignores feature name and calls [[Region.overlapsSpan]] on the two underlying [[Region]]s.
+    *
+    * @param other Other [[Feature]]
+    * @return True if the spans of the [[Feature]]s overlap, false otherwise
+    */
+  def overlapsSpan(other: Feature): Boolean = blocks.overlapsSpan(other.blocks)
+
   /** Returns a boolean value representing whether this [[Feature]] contains another [[Feature]]
     * and their introns are compatible.
     *

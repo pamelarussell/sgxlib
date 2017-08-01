@@ -33,6 +33,24 @@ sealed abstract class Region extends Ordered[Region] {
     */
   def overlapsCompatibleIntrons(o: Region): Boolean
 
+  /** Returns a boolean value representing whether the span of this [[Region]] overlaps the
+    * span of another [[Region]]. That is, intron/exon structure is ignored and only the full
+    * span (from start to end) of the [[Region]]s are considered. [[Orientation]]s must
+    * be compatible.
+    *
+    * @param o Other [[Region]]
+    * @return True if the spans of the [[Region]]s overlap, false otherwise
+    */
+  def overlapsSpan(o: Region): Boolean =
+    this match {
+      case Empty => false
+      case _ => o match {
+        case Empty => false
+        case _ => Block(chr, start, end, orientation).overlaps(Block(o.chr, o.start, o.end, o.orientation))
+      }
+    }
+
+
   /** Returns a boolean value representing whether this [[Region]] contains another [[Region]]
     * and their introns are compatible.
     *
