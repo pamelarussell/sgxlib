@@ -24,7 +24,7 @@ coverageEnabled in(Test, compile) := true
 coverageEnabled in(Compile, compile) := false
 
 // htsjdk
-unmanagedJars in Compile += file("lib/htsjdk-2.9.0-1-g55bf01b-SNAPSHOT.jar")
+unmanagedJars in Compile += file("lib/htsjdk-2.14.3-2-g7a38277-SNAPSHOT.jar")
 apiMappings += (
   (unmanagedBase.value / "lib/htsjdk-2.9.0-1-g55bf01b-SNAPSHOT.jar") ->
     url("http://samtools.github.io/htsjdk/javadoc/htsjdk/")
