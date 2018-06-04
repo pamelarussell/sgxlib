@@ -1,5 +1,5 @@
 val nm = "sgxlib"
-val ver = "1.0.4"
+val ver = "1.0.5"
 
 // Basic info
 name := nm
@@ -12,6 +12,7 @@ assemblyJarName in assembly := nm + "-" + ver + ".jar"
 
 // Compiler options
 scalacOptions += "-feature"
+scalacOptions += "-target:jvm-1.8"
 
 // Scalatest
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.1" % "test"
@@ -26,7 +27,7 @@ coverageEnabled in(Compile, compile) := false
 // htsjdk
 unmanagedJars in Compile += file("lib/htsjdk-2.14.3-2-g7a38277-SNAPSHOT.jar")
 apiMappings += (
-  (unmanagedBase.value / "lib/htsjdk-2.9.0-1-g55bf01b-SNAPSHOT.jar") ->
+  (unmanagedBase.value / "lib/htsjdk-2.14.3-2-g7a38277-SNAPSHOT.jar") ->
     url("http://samtools.github.io/htsjdk/javadoc/htsjdk/")
   )
 
