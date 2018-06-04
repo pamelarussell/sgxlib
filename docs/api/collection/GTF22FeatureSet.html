@@ -557,6 +557,46 @@ accounting for <span class="extype" name="Orientation">Orientation</span>, as de
                    <span class="extype" name="Orientation">Orientation</span> (as defined by <span class="extype" name="Orientation.isCompatible">Orientation.isCompatible</span>) will
                    be returned.</p></dd><dt>returns</dt><dd class="cmt"><p>Iterator over overlappers in no particular order, or <span class="extype" name="Iterator.empty">Iterator.empty</span> if
         there are no overlappers</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="collection.GTF22FeatureSet">GTF22FeatureSet</a> → <a href="FeatureSet.html" class="extype" name="collection.FeatureSet">FeatureSet</a></dd></dl></div>
+    </li><li name="collection.GTF22FeatureSet#overlappersSpan" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="overlappersSpan(feat:feature.Feature):Iterator[feature.Feature]"></a><a id="overlappersSpan(Feature):Iterator[Feature]"></a>
+      <span class="permalink">
+      <a href="../collection/GTF22FeatureSet.html#overlappersSpan(feat:feature.Feature):Iterator[feature.Feature]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">overlappersSpan</span><span class="params">(<span name="feat">feat: <a href="../feature/Feature.html" class="extype" name="feature.Feature">Feature</a></span>)</span><span class="result">: <span class="extype" name="scala.Iterator">Iterator</span>[<a href="../feature/Feature.html" class="extype" name="feature.Feature">Feature</a>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Returns an iterator over <span class="extype" name="Feature">Feature</span>s whose span overlaps that of a given <span class="extype" name="Feature">Feature</span>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an iterator over <span class="extype" name="Feature">Feature</span>s whose span overlaps that of a given <span class="extype" name="Feature">Feature</span>.</p><p>Overlappers are the <span class="extype" name="Feature">Feature</span>s contained in this set whose span overlaps that of
+the given <span class="extype" name="Feature">Feature</span> as defined by <span class="extype" name="Feature.overlapsSpan">Feature.overlapsSpan</span>.</p><p>The returned iterator is not guaranteed to conform to any particular ordering.
+</p></div><dl class="paramcmts block"><dt class="param">feat</dt><dd class="cmt"><p>Query <span class="extype" name="Feature">Feature</span></p></dd><dt>returns</dt><dd class="cmt"><p>Iterator over span overlappers of the given <span class="extype" name="Feature">Feature</span> in no particular order,
+        or <span class="extype" name="Iterator.empty">Iterator.empty</span> if there are none</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="collection.GTF22FeatureSet">GTF22FeatureSet</a> → <a href="FeatureSet.html" class="extype" name="collection.FeatureSet">FeatureSet</a></dd></dl></div>
+    </li><li name="collection.GTF22FeatureSet#overlappersSpan" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="overlappersSpan(chr:String,start:Int,end:Int,orientation:feature.Orientation):Iterator[feature.Feature]"></a><a id="overlappersSpan(String,Int,Int,Orientation):Iterator[Feature]"></a>
+      <span class="permalink">
+      <a href="../collection/GTF22FeatureSet.html#overlappersSpan(chr:String,start:Int,end:Int,orientation:feature.Orientation):Iterator[feature.Feature]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">overlappersSpan</span><span class="params">(<span name="chr">chr: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="start">start: <span class="extype" name="scala.Int">Int</span></span>, <span name="end">end: <span class="extype" name="scala.Int">Int</span></span>, <span name="orientation">orientation: <a href="../feature/Orientation.html" class="extype" name="feature.Orientation">Orientation</a></span>)</span><span class="result">: <span class="extype" name="scala.Iterator">Iterator</span>[<a href="../feature/Feature.html" class="extype" name="feature.Feature">Feature</a>]</span>
+      </span>
+      
+      <p class="shortcomment cmt">Returns an iterator over <span class="extype" name="Feature">Feature</span>s whose span overlaps a genomic interval.</p><div class="fullcomment"><div class="comment cmt"><p>Returns an iterator over <span class="extype" name="Feature">Feature</span>s whose span overlaps a genomic interval.</p><p>Overlappers are the <span class="extype" name="Feature">Feature</span>s contained in this set whose span overlaps the interval
+accounting for <span class="extype" name="Orientation">Orientation</span>, as defined by <span class="extype" name="Feature.overlapsSpan">Feature.overlapsSpan</span>.</p><p>The returned iterator is not guaranteed to conform to any particular ordering.
+</p></div><dl class="paramcmts block"><dt class="param">chr</dt><dd class="cmt"><p>Chromosome name of query interval</p></dd><dt class="param">start</dt><dd class="cmt"><p>Zero-based inclusive start position of query interval</p></dd><dt class="param">end</dt><dd class="cmt"><p>Zero-based exclusive end position of query interval</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>Orientation of query interval. Only overlappers with a compatible
+                   <span class="extype" name="Orientation">Orientation</span> (as defined by <span class="extype" name="Orientation.isCompatible">Orientation.isCompatible</span>) will
+                   be returned.</p></dd><dt>returns</dt><dd class="cmt"><p>Iterator over span overlappers in no particular order, or <span class="extype" name="Iterator.empty">Iterator.empty</span> if
+        there are none</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="collection.GTF22FeatureSet">GTF22FeatureSet</a> → <a href="FeatureSet.html" class="extype" name="collection.FeatureSet">FeatureSet</a></dd></dl></div>
     </li><li name="collection.GTF22FeatureSet#size" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="size:Long"></a>
       <span class="permalink">

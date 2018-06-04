@@ -1141,6 +1141,25 @@ and their introns are compatible.</p><p>That is, no INTERNAL block boundary for 
 <a href="Block.html" class="extype" name="feature.Block">Block</a> of the other <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>.
 </p></div><dl class="paramcmts block"><dt class="param">other</dt><dd class="cmt"><p>Other <a href="Feature.html" class="extype" name="feature.Feature">Feature</a></p></dd><dt>returns</dt><dd class="cmt"><p>True if the <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s overlap and their introns are compatible,
         false otherwise</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Feature.html" class="extype" name="feature.Feature">Feature</a></dd></dl></div>
+    </li><li name="feature.Feature#overlapsSpan" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="overlapsSpan(other:feature.Feature):Boolean"></a><a id="overlapsSpan(Feature):Boolean"></a>
+      <span class="permalink">
+      <a href="../feature/MessengerRNA.html#overlapsSpan(other:feature.Feature):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">overlapsSpan</span><span class="params">(<span name="other">other: <a href="Feature.html" class="extype" name="feature.Feature">Feature</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Returns a boolean value representing whether the span of this <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> overlaps the
+span of another <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a boolean value representing whether the span of this <a href="Feature.html" class="extype" name="feature.Feature">Feature</a> overlaps the
+span of another <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>.</p><p>Ignores feature name and calls <a href="Region.html#overlapsSpan(o:feature.Region):Boolean" class="extmbr" name="feature.Region#overlapsSpan">Region.overlapsSpan</a> on the two underlying <a href="Region.html" class="extype" name="feature.Region">Region</a>s.
+</p></div><dl class="paramcmts block"><dt class="param">other</dt><dd class="cmt"><p>Other <a href="Feature.html" class="extype" name="feature.Feature">Feature</a></p></dd><dt>returns</dt><dd class="cmt"><p>True if the spans of the <a href="Feature.html" class="extype" name="feature.Feature">Feature</a>s overlap, false otherwise</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Feature.html" class="extype" name="feature.Feature">Feature</a></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
       <span class="permalink">
@@ -1173,6 +1192,22 @@ and their introns are compatible.</p><p>That is, no INTERNAL block boundary for 
       </span>
       
       <p class="shortcomment cmt">Returns a string representation of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a string representation of this <a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a>.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="feature.MessengerRNA">MessengerRNA</a> → <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a> → <a href="GenericFeature.html" class="extype" name="feature.GenericFeature">GenericFeature</a> → AnyRef → Any</dd></dl></div>
+    </li><li name="feature.Transcript#unapply" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="unapply(t:feature.Transcript):Option[(feature.Region,Option[String],Option[String])]"></a><a id="unapply(Transcript):Option[(Region,Option[String],Option[String])]"></a>
+      <span class="permalink">
+      <a href="../feature/MessengerRNA.html#unapply(t:feature.Transcript):Option[(feature.Region,Option[String],Option[String])]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">unapply</span><span class="params">(<span name="t">t: <a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[(<a href="Region.html" class="extype" name="feature.Region">Region</a>, <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>], <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>])]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="Transcript.html" class="extype" name="feature.Transcript">Transcript</a></dd></dl></div>
     </li><li name="feature.GenericFeature#union" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="union(other:feature.Feature):feature.Feature"></a><a id="union(Feature):Feature"></a>
       <span class="permalink">
