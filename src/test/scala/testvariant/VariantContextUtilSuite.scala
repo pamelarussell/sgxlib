@@ -1,0 +1,5 @@
+package testvariant
+
+class VariantContextUtilSuite {
+
+}

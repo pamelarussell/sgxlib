@@ -19,7 +19,7 @@ import scala.io.Source
   *
   * @tparam T The type of [[Feature]]s contained in the set
   */
-trait FeatureSet[T <: Feature] {
+trait FeatureSet[T <: Feature] extends Iterable[T] {
 
   /** Returns a boolean value representing whether this set contains the given [[Feature]].
     *
@@ -28,7 +28,7 @@ trait FeatureSet[T <: Feature] {
   def contains(t: T): Boolean
 
   /** The number of features contained in this set. */
-  val size: Long
+  override lazy val size: Int = iterator.size
 
   /** Returns an iterator over the entire set.
     *
@@ -258,17 +258,6 @@ final class GTF22FeatureSet(file: File) extends FeatureSet[Feature] {
         }
     }
   }
-
-  /** The number of features contained in this set. */
-  override lazy val size: Long = tree.values.map(it => {
-    var cnt: Long = 0
-    val iter = it.iterator()
-    while(iter.hasNext) {
-      val tr = iter.next().getValue
-      cnt = cnt + tr.size
-    }
-    cnt
-  }).sum
 
   /** Returns an iterator over overlappers of a genomic interval.
     *
