@@ -30,7 +30,7 @@ View the [API docs](http://pamelarussell.github.io/sgxlib/docs/api/)
 
 ## Overview of packages
 
-### Package [feature](http://pamelarussell.github.io/sgxlib/docs/api/#feature.package)
+### Package [feature](http://pamelarussell.github.io/sgxlib/docs/api/feature/index.html)
 
 The `feature` package provides the concept of a genomic region with blocks and an orientation, as well as specific types of features such as transcripts and messenger RNAs. The package provides powerful feature arithmetic, with operations such as intersection, union, contains, minus, overlaps, and extraction of sub-features such as exons, introns, and sections of messenger RNAs.
 
@@ -73,7 +73,7 @@ val introns: List[Block] = mrna.blocks.getIntrons // List([1:2000-3000:+], [1:40
 // Note: all Region arithmetic operations are also available on Features
 ```
 
-### Package [collection](http://pamelarussell.github.io/sgxlib/docs/api/#collection.package)
+### Package [collection](http://pamelarussell.github.io/sgxlib/docs/api/collection/index.html)
 
 The `collection` package provides the concept of a collection of features, as well as methods to get the subcollection of features overlapping a given feature. An implementation is provided to create a feature collection from a [GTF2.2](http://mblab.wustl.edu/GTF22.html) annotation file.
 
@@ -105,7 +105,7 @@ val block = new GenericFeature(Block("20", 37249854, 37250291, Minus), None)
 val featureNearest: Iterator[Feature] = featureSet.nearest(block) // ENST00000373614
 ```
 
-### Package [sequencing](http://pamelarussell.github.io/sgxlib/docs/api/#sequencing.package)
+### Package [sequencing](http://pamelarussell.github.io/sgxlib/docs/api/sequencing/index.html)
 
 The `sequencing` package translates data in BAM files into the language of sgxlib, using the [samtools htsjdk](https://github.com/samtools/htsjdk) API under the hood. The `SamMapping` class expresses BAM records as sgxlib features. The `SamReader` class provides methods to query a BAM file by feature overlap. Feature overlap is defined strictly, requiring splice junctions and strand (where applicable) to match. This class also allows querying for full mapped fragments (matched mate pairs) where applicable.
 
@@ -141,6 +141,11 @@ val count: Int = samReader.countCompatibleFragments(
 /* Note: the above methods for fragments are also available for single records,
 regardless of whether the library is paired end. */
 ```
+
+### Package [variant](http://pamelarussell.github.io/sgxlib/docs/api/variant/index.html)
+
+The `variant` package provides functions to manipulate VCF records, using the [samtools htsjdk](https://github.com/samtools/htsjdk) API under the hood.
+
 
 ## Java interoperability
 
