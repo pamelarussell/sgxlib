@@ -636,6 +636,26 @@ final case class Block(chr: String, start: Int, end: Int, orientation: Orientati
 /** Companion functions for [[Block]] */
 object Block {
 
+  /**
+    * Returns the [[Block]] constructed from a string representation
+    * @param str Chr, start, end, strand delimited by ":" or "-". Example: "chr1:1000-2000:+", "chr2:500-300:unstranded"
+    * @return The corresponding [[Block]]
+    */
+  def fromString(str: String): Block = {
+    val tokens: Array[String] = str.split("[-:]")
+    val message = s"Invalid block string: $str. Format: chr:start-end:strand"
+    try {
+      if(tokens.length != 4) throw new IllegalArgumentException(message)
+      val chr: String = tokens(0)
+      val start: Int = tokens(1).toInt
+      val end: Int = tokens(2).toInt
+      val strand: Orientation = Orientation.fromString(tokens(3))
+      Block(chr, start, end, strand)
+    } catch {
+      case e: Exception => throw new IllegalArgumentException(s"\n$message.\nCaught exception: ${e.getMessage}")
+    }
+  }
+
   /** An implicit ordering on [[Block]]s. Forwards to [[Region.compare]]. */
   implicit val ord = new Ordering[Block] {
     def compare(b1: Block, b2: Block): Int = b1.compare(b2)

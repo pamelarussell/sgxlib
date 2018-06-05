@@ -20,6 +20,19 @@ class RegionMiscSuite extends FunSuite {
   regionChrPos()
   regionToString()
   regionGetIntrons()
+  blockFromString()
+
+  def blockFromString(): Unit = {
+    test("Block from string") {
+      assert(Block.fromString("1:500-600:+") === Block("1", 500, 600, Plus))
+      assert(Block.fromString("1:500-600:unstranded") === Block("1", 500, 600, Unstranded))
+      assertThrows[IllegalArgumentException](Block.fromString("xxx"))
+      assertThrows[IllegalArgumentException](Block.fromString("1:500-600"))
+      assertThrows[IllegalArgumentException](Block.fromString("1:600-500:unstranded"))
+      assertThrows[IllegalArgumentException](Block.fromString("1:500-600:plus"))
+      assertThrows[IllegalArgumentException](Block.fromString("1:500-600:+:xxx"))
+    }
+  }
 
   def regionGetIntrons(): Unit = {
     test("Get introns") {
