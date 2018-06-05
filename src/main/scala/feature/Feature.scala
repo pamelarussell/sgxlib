@@ -29,6 +29,45 @@ sealed abstract class Feature(val blocks: Region, val name: Option[String]) exte
   /** Returns the list of [[Block]]s of the underlying [[Region]] as in [[Region.blocks]]. */
   def getBlocks: List[Block] = blocks.blocks
 
+  /**
+    * Returns a BED12 representation of this [[Feature]]
+    * @param score BED record score
+    * @param rgb RGB values
+    * @param thickStartEnd Thick start and end positions
+    * @return BED12 string without trailing newline
+    */
+  def toBED(score : Int = 0,
+            rgb: (Int,Int,Int) = (0,0,0),
+            thickStartEnd: Option[(Int, Int)] = None): String =
+    s"$getChr\t" +
+    s"$getStart\t" +
+    s"$getEnd\t" +
+    s"${if(name.isDefined) name.get else "."}\t" +
+    s"$score\t" +
+    s"${getOrientation match {
+      case Plus => "+"
+      case Minus => "-"
+      case Unstranded => "."
+    }}\t" +
+    s"${thickStartEnd match {
+      case None => s"$getStart\t$getStart"
+      case Some((s,e)) => {
+        if(s < getStart || s > getEnd) throw new IllegalArgumentException(s"Invalid thick start: $s")
+        else if(e < getStart || e > getEnd) throw new IllegalArgumentException(s"Invalid thick end: $e")
+        else s"$s\t$e"
+      }
+    }}\t" +
+    s"${rgb match {
+      case (r,g,b) => {
+        if(r < 0 || g < 0 || b < 0 || r > 255 || g > 255 || b > 255)
+          throw new IllegalArgumentException(s"Invalid RGB values: $rgb")
+        else s"$r,$g,$b"
+      }
+    }}\t" +
+    s"$numBlocks\t" +
+    s"${getBlocks.map(blk => blk.size).map(i => i.toString).mkString(",")}\t" +
+    s"${getBlocks.map(blk => blk.start).map(i => i.toString).mkString(",")}"
+
   /** Returns a boolean value representing whether this [[Feature]] overlaps another [[Feature]].
     *
     * Ignores feature name and calls [[Region.overlaps]] on the two underlying [[Region]]s.
@@ -275,9 +314,9 @@ class GenericFeature(override val blocks: Region, override val name: Option[Stri
     if(c != 0) c
     else {
       that match {
-        case mr: MessengerRNA => -1
-        case tr: Transcript => -1
-        case gf: GenericFeature => c
+        case _: MessengerRNA => -1
+        case _: Transcript => -1
+        case _: GenericFeature => c
       }
     }
   }
@@ -384,7 +423,7 @@ sealed class Transcript(override val blocks: Region, name: Option[String], val g
           if(gc != 0) gc
           else -1
         case tr: Transcript => Feature.optStrCompare(geneId, tr.geneId)
-        case gf: GenericFeature => 1
+        case _: GenericFeature => 1
       }
     }
   }
@@ -570,6 +609,9 @@ final case class MessengerRNA(override val blocks: Region, cdsStart: Int, cdsEnd
       case _ => throw new IllegalStateException(s"Invalid orientation: $getOrientation")
     }
   }
+
+  override def toBED(score: Int, rgb: (Int, Int, Int), thickStartEnd: Option[(Int, Int)]): String =
+    super.toBED(score, rgb, Some((getCDS.start, getCDS.end)))
 
   /** Returns true if other is an instance of [[MessengerRNA]], false otherwise. */
   override def canEqual(other: Any): Boolean = other.isInstanceOf[MessengerRNA]
