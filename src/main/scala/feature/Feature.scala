@@ -66,7 +66,7 @@ sealed abstract class Feature(val blocks: Region, val name: Option[String]) exte
     }}\t" +
     s"$numBlocks\t" +
     s"${getBlocks.map(blk => blk.size).map(i => i.toString).mkString(",")}\t" +
-    s"${getBlocks.map(blk => blk.start).map(i => i.toString).mkString(",")}"
+    s"${getBlocks.map(blk => blk.start - getStart).map(i => i.toString).mkString(",")}"
 
   /** Returns a boolean value representing whether this [[Feature]] overlaps another [[Feature]].
     *

@@ -1,10 +1,11 @@
 package testvariant
 
 import variant.VariantContextMutations._
-
 import java.io.File
 
+import htsjdk.variant.variantcontext.Allele
 import org.scalatest.FunSuite
+import variant.VariantContextMutations
 
 class VariantContextMutationSuite extends FunSuite {
 
@@ -33,6 +34,22 @@ class VariantContextMutationSuite extends FunSuite {
 
   test("Set genotype to missing when there are incorrect info fields") {
     assertThrows[Exception] {setGenotypeToMissing(vcfRecordTriAllelicRs8143078wrongInfo, "HG01048")}
+  }
+
+  test("Remove allele") {
+    // Can't remove an allele that doesn't exist
+    assertThrows[Exception](VariantContextMutations.removeAllele(vcfRecordRs9628390, Allele.create("C")))
+    // Remove an allele that does exist; check correct samples are altered and allele list is altered
+    val vc = VariantContextMutations.removeAllele(vcfRecordTriAllelicRs9306245, Allele.create("A"))
+    assert(vc.getGenotype("HG01048").isNoCall)
+    assert(vc.getGenotype("HG00638").isHomRef)
+    assert(vc.getGenotype("HG02570").isHet)
+    assert(vc.getGenotype("HG01586").isHomVar)
+    assert(!vc.hasAllele(Allele.create("A")))
+    assert(vc.hasAllele(Allele.create("C"), true))
+    assert(vc.hasAllele(Allele.create("T")))
+    // Can't remove the reference allele
+    assertThrows[IllegalArgumentException](VariantContextMutations.removeAllele(vcfRecordTriAllelicRs9306245, Allele.create("C")))
   }
 
 }

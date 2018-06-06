@@ -23,6 +23,7 @@ package object testvariant {
     } else matches.head
   }
 
+  val vcfRecordRs9628390: VariantContext = getSnp("rs9628390", vcfReader)
   val vcfRecordTriAllelicRs9306245: VariantContext = getSnp("rs9306245", vcfReader)
   val vcfRecordTriAllelicRs8143078withInfo: VariantContext = getSnp("rs8143078", vcfReaderWithInfo)
   val vcfRecordTriAllelicRs8143078wrongInfo: VariantContext = getSnp("rs8143078", vcfReaderWrongInfo)

@@ -11,9 +11,9 @@ class FeatureMiscSuite extends FunSuite {
 
   test("GenericFeature toBED") {
     assert(new GenericFeature(chr1_1000_2000_plus_1, Some("name")).toBED() ===
-      "1\t1000\t2000\tname\t0\t+\t1000\t1000\t0,0,0\t1\t1000\t1000")
+      "1\t1000\t2000\tname\t0\t+\t1000\t1000\t0,0,0\t1\t1000\t0")
     assert(new GenericFeature(chr1_1000_2000_both, Some("name")).toBED(score = 5, thickStartEnd = Some((1500,1600))) ===
-      "1\t1000\t2000\tname\t5\t.\t1500\t1600\t0,0,0\t1\t1000\t1000")
+      "1\t1000\t2000\tname\t5\t.\t1500\t1600\t0,0,0\t1\t1000\t0")
     assertThrows[IllegalArgumentException](
       new GenericFeature(chr1_1000_2000_plus_1, Some("name")).toBED(score = 5, thickStartEnd = Some((1500,2600)))
     )
@@ -21,21 +21,21 @@ class FeatureMiscSuite extends FunSuite {
       new GenericFeature(chr1_1000_2000_plus_1, Some("name")).toBED(rgb = (256,0,0))
     )
     assert(new GenericFeature(chr1_1000_2000_plus_1, Some("name")).toBED(rgb = (0,0,255)) ===
-      "1\t1000\t2000\tname\t0\t+\t1000\t1000\t0,0,255\t1\t1000\t1000")
+      "1\t1000\t2000\tname\t0\t+\t1000\t1000\t0,0,255\t1\t1000\t0")
     assert(new GenericFeature(chr1_1000_2000_plus_1, None).toBED(rgb = (0,0,255), score = 5) ===
-      "1\t1000\t2000\t.\t5\t+\t1000\t1000\t0,0,255\t1\t1000\t1000")
+      "1\t1000\t2000\t.\t5\t+\t1000\t1000\t0,0,255\t1\t1000\t0")
     assert(new GenericFeature(chr1_1000_2000_3000_4000_5000_6000_both, None).toBED() ===
-      "1\t1000\t6000\t.\t0\t.\t1000\t1000\t0,0,0\t3\t1000,1000,1000\t1000,3000,5000")
+      "1\t1000\t6000\t.\t0\t.\t1000\t1000\t0,0,0\t3\t1000,1000,1000\t0,2000,4000")
   }
 
   test("Transcript toBED") {
     assert(new Transcript(chr1_1000_2000_3000_4000_5000_6000_plus, None, None).toBED() ===
-      "1\t1000\t6000\t.\t0\t+\t1000\t1000\t0,0,0\t3\t1000,1000,1000\t1000,3000,5000")
+      "1\t1000\t6000\t.\t0\t+\t1000\t1000\t0,0,0\t3\t1000,1000,1000\t0,2000,4000")
   }
 
   test("Messenger RNA toBED") {
     assert(transcript1400001.toBED() ===
-      "140\t65148\t73504\t140.000.1\t0\t-\t66992\t71807\t0,0,0\t5\t339,177,88,112,282\t65148,66822,70206,71695,73222")
+      "140\t65148\t73504\t140.000.1\t0\t-\t66992\t71807\t0,0,0\t5\t339,177,88,112,282\t0,1674,5058,6547,8074")
   }
 
   test("GenericFeature equals and hashCode") {

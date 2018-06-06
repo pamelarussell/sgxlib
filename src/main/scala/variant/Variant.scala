@@ -1,6 +1,7 @@
 package variant
 
 import htsjdk.variant.variantcontext._
+import scala.collection.JavaConverters._
 
 /**
   * A mirror of a [[VariantContext]] that can be instantiated
@@ -72,8 +73,22 @@ private final class VariantContextData(val vc: VariantContext) {
     * @param newGenotypes New genotypes
     * @return New [[VariantContextData]] created from this one with modified genotypes
     */
-  def setGenotypes(newGenotypes: GenotypesContext): VariantContextData = new VariantContextData(source, id, contig, start, stop, alleles,
-    newGenotypes, log10pError, filters, attributes, fullyDecoded)
+  def setGenotypes(newGenotypes: GenotypesContext): VariantContextData = {
+    val newAlleles: java.util.Collection[Allele] = asJavaCollection(
+      asScalaIterator(newGenotypes.iterator()).
+        flatMap[Allele](genotype => asScalaIterator(genotype.getAlleles.iterator())
+        .filter(allele => allele.isCalled))
+        .toSet)
+    new VariantContextData(source, id, contig, start, stop, newAlleles, newGenotypes, log10pError, filters, attributes, fullyDecoded)
+  }
+
+  /**
+    * Returns a new [[VariantContextData]] object with the allele list modified
+    * @param alleleList New set of alleles
+    * @return [[VariantContextData]] created from this one with modified alleles
+    */
+  def setAlleleList(alleleList: java.util.Collection[Allele]) = new VariantContextData(source, id, contig, start, stop, alleleList,
+    genotypes, log10pError, filters, attributes, fullyDecoded)
 
   /**
     * Get a new [[VariantContext]] with the data contained herein
@@ -81,6 +96,32 @@ private final class VariantContextData(val vc: VariantContext) {
     */
   def getVariantContext: VariantContext = new InstantiableVariantContext(source, id, contig, start, stop, alleles,
     genotypes, log10pError, filters, attributes, fullyDecoded)
+
+}
+
+/**
+  * Utilities for [[VariantContext]]s
+  */
+object VariantContextUtil {
+
+  /**
+    * Returns the names of samples whose genotypes include a given allele
+    * @param vc [[VariantContext]]
+    * @param allele Allele
+    * @return Sample names that have at least one copy of the allele in the given [[VariantContext]]
+    */
+  def samplesWithAllele(vc: VariantContext, allele: Allele): Iterable[String] = {
+
+    def hasAllele(genotype: Genotype) = {
+      asScalaIterator(genotype.getAlleles.iterator()).
+        exists(a => a.equals(allele, true))
+    }
+
+    asScalaIterator(vc.getGenotypes.iterator()).
+      filter(hasAllele).
+      map(genotype => genotype.getSampleName).
+      toSet
+  }
 
 }
 
@@ -102,7 +143,7 @@ object VariantContextMutations {
     val vcData = new VariantContextData(vc)
     val newGenotype: Genotype = new GenotypeBuilder(origGenotype).alleles(newAlleles).make()
     val newGenotypesContext: GenotypesContext = GenotypesContext.copy(vc.getGenotypes)
-    newGenotypesContext.add(newGenotype)
+    newGenotypesContext.replace(newGenotype)
     val newVcData: VariantContextData = vcData.setGenotypes(newGenotypesContext)
     newVcData.getVariantContext
   }
@@ -116,6 +157,23 @@ object VariantContextMutations {
   def setGenotypeToMissing(vc: VariantContext, sampleId: String): VariantContext = {
     val allelesMissing: java.util.List[Allele] = java.util.Arrays.asList(Allele.NO_CALL, Allele.NO_CALL)
     setGenotype(vc, sampleId, allelesMissing)
+  }
+
+  /**
+    * Returns a new [[VariantContext]] with genotypes set to missing for any individual
+    * who has at least one copy of a given allele. The given allele is also removed from
+    * the list of alleles.
+    * @param vc Original [[VariantContext]]
+    * @param allele Allele
+    * @return New [[VariantContext]] with individual genotypes set to missing for any
+    *         individual with at least one copy of the allele, and the allele removed from
+    *         the list of alleles
+    */
+  def removeAllele(vc: VariantContext, allele: Allele): VariantContext = {
+    val samplesWithAllele = VariantContextUtil.samplesWithAllele(vc, allele)
+    val vcGenotypesModified: VariantContext = samplesWithAllele.foldLeft[VariantContext](vc)((v, s) => setGenotypeToMissing(v, s))
+    new VariantContextData(vcGenotypesModified)
+      .getVariantContext
   }
 
 }
