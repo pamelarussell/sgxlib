@@ -11,10 +11,15 @@ import scala.collection.JavaConversions._
 /** A wrapper around an [[htsjdk.samtools.SamReader]].
   *
   * @param file the BAM file
+  * @param firstOfPairStrandOnTranscript Strand relative to transcription strand of read 1 (if reads are paired) or
+  *                                      all reads (if unpaired). If read 1 maps to the transcription strand, this parameter
+  *                                      should be [[Plus]]. If read 1 maps to the opposite of the transcription strand,
+  *                                      this parameter should be [[Minus]]. If reads are not strand-specific, this parameter
+  *                                      should be [[Unstranded]].
   * @param isValid Filter to apply to all SAMRecords in this reader.
   *                SAMRecords are returned only if they evaluate to true under this function.
   */
-class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ => true) {
+class SamReader(private val file: File, val firstOfPairStrandOnTranscript: Orientation, val isValid: SAMRecord => Boolean = _ => true) {
 
   /** Returns a [[htsjdk.samtools.SamReader]] reading from the same file as this object.
     *
@@ -84,9 +89,6 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
   /** Returns an iterator over SAMRecords overlapping an interval, along with a pointer
     * to the [[htsjdk.samtools.SamReader]] it iterates over.
     *
-    * Only returns records evaluating to true under [[isValid]].
-    * Returns None if no valid records.
-    *
     * @param chr Interval reference sequence name
     * @param start Zero-based inclusive interval start position
     * @param end Zero-based exclusive interval end position
@@ -101,6 +103,38 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     else Some((reader, reader.query(convChr, SamMapping.zeroBasedToSam(start), SamMapping.zeroBasedToSam(end), contained)))
   }
 
+  /**
+    * Returns an iterator over [[SAMRecord]]s that overlap a given interval and evaluate to true under a predicate
+    *
+    * Only returns records evaluating to true under [[isValid]].
+    *
+    * @param chr Interval reference sequence name
+    * @param start Zero-based inclusive interval start position
+    * @param end Zero-based exclusive interval end position
+    * @param keep Include [[SAMRecord]]s that evaluate to true under this function
+    * @param contained Only include records that are fully contained in the interval
+    * @return Iterator over [[SAMRecord]]s overlapping the interval and passing the predicate
+    */
+  def queryRecords(chr: String, start: Int, end: Int, keep: SAMRecord => Boolean, contained: Boolean = false): Iterator[SAMRecord] = {
+    val q: Option[(htsjdk.samtools.SamReader, SAMRecordIterator)] = query(chr, start, end, contained = contained)
+    if(q.isEmpty) Iterator.empty
+    else new FilteredSamRecordIterator(q.get._1, q.get._2, rec => isValid(rec) && keep(rec))
+  }
+
+  /** Returns an iterator over SAMRecords that overlap the [[Feature]].
+    *
+    * In other words, returned records include a block that overlaps a block of the [[Feature]],
+    * and originate from fragments transcribed from the same strand if strand specific
+    *
+    * Only returns records evaluating to true under [[isValid]].
+    *
+    * @param feat The [[Feature]]
+    * @return Iterator over SAMRecords that overlap the [[Feature]]
+    */
+  def overlappers(feat: Feature): Iterator[SAMRecord] = {
+    queryRecords(feat.getChr, feat.getStart, feat.getEnd,
+      rec => feat.overlaps(SamMapping(rec, firstOfPairStrandOnTranscript)))
+  }
 
   /** Returns an iterator over SAMRecords that are compatible with the [[Feature]].
     *
@@ -110,18 +144,12 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     * Only returns records evaluating to true under [[isValid]].
     *
     * @param feat The [[Feature]]
-    * @param firstOfPairStrandOnTranscript Strand relative to transcription strand of read 1 (if reads are paired) or
-    *                                      all reads (if unpaired). If read 1 maps to the transcription strand, this parameter
-    *                                      should be [[Plus]]. If read 1 maps to the opposite of the transcription strand,
-    *                                      this parameter should be [[Minus]]. If reads are not strand-specific, this parameter
-    *                                      should be [[Unstranded]].
     * @return Iterator over SAMRecords that are compatible with the [[Feature]]
     */
-  def  compatibleRecords(feat: Feature, firstOfPairStrandOnTranscript: Orientation): Iterator[SAMRecord] = {
-    val q: Option[(htsjdk.samtools.SamReader, SAMRecordIterator)] = query(feat.getChr, feat.getStart, feat.getEnd, contained = true)
-    if(q.isEmpty) Iterator.empty
-    else new FilteredSamRecordIterator(q.get._1, q.get._2,
-       rec => isValid(rec) && feat.containsCompatibleIntrons(SamMapping(rec, firstOfPairStrandOnTranscript)))
+  def compatibleRecords(feat: Feature): Iterator[SAMRecord] = {
+    queryRecords(feat.getChr, feat.getStart, feat.getEnd,
+      rec => feat.containsCompatibleIntrons(SamMapping(rec, firstOfPairStrandOnTranscript)),
+      contained = true)
   }
 
   /** Returns the number of SAMRecords that are compatible with the [[Feature]].
@@ -132,15 +160,10 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     * Only counts records evaluating to true under [[isValid]].
     *
     * @param feat The [[Feature]]
-    * @param firstOfPairStrandOnTranscript Strand relative to transcription strand of read 1 (if reads are paired) or
-    *                                      all reads (if unpaired). If read 1 maps to the transcription strand, this parameter
-    *                                      should be [[Plus]]. If read 1 maps to the opposite of the transcription strand,
-    *                                      this parameter should be [[Minus]]. If reads are not strand-specific, this parameter
-    *                                      should be [[Unstranded]].
     * @return Number of SAMRecords that are compatible with the [[Feature]]
     */
-  def countCompatibleRecords(feat: Feature, firstOfPairStrandOnTranscript: Orientation): Int = {
-    compatibleRecords(feat, firstOfPairStrandOnTranscript).size
+  def countCompatibleRecords(feat: Feature): Int = {
+    compatibleRecords(feat).size
   }
 
   /** Returns an iterator over pairs of SAMRecords that are compatible with the [[Feature]].
@@ -158,14 +181,9 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     * Throws [[IllegalArgumentException]] if records are not paired.
     *
     * @param feat The [[Feature]]
-    * @param firstOfPairStrandOnTranscript Strand relative to transcription strand of read 1 (if reads are paired) or
-    *                                      all reads (if unpaired). If read 1 maps to the transcription strand, this parameter
-    *                                      should be [[Plus]]. If read 1 maps to the opposite of the transcription strand,
-    *                                      this parameter should be [[Minus]]. If reads are not strand-specific, this parameter
-    *                                      should be [[Unstranded]].
     * @return
     */
-  def compatibleFragments(feat: Feature, firstOfPairStrandOnTranscript: Orientation): Iterator[(SAMRecord, SAMRecord)] = {
+  def compatibleFragments(feat: Feature): Iterator[(SAMRecord, SAMRecord)] = {
     val q: Option[(htsjdk.samtools.SamReader, SAMRecordIterator)] = query(feat.getChr, feat.getStart, feat.getEnd, contained = true)
     if(q.isEmpty) Iterator.empty
     else
@@ -190,16 +208,11 @@ class SamReader(private val file: File, val isValid: SAMRecord => Boolean = _ =>
     * are included. Only primary alignments are used.
     *
     * @param feat The [[Feature]]
-    * @param firstOfPairStrandOnTranscript Strand relative to transcription strand of read 1 (if reads are paired) or
-    *                                      all reads (if unpaired). If read 1 maps to the transcription strand, this parameter
-    *                                      should be [[Plus]]. If read 1 maps to the opposite of the transcription strand,
-    *                                      this parameter should be [[Minus]]. If reads are not strand-specific, this parameter
-    *                                      should be [[Unstranded]].
     * @return The number of compatible fragments defined as complete pairs if paired, or single records if unpaired.
     */
-  def countCompatibleFragments(feat: Feature, firstOfPairStrandOnTranscript: Orientation): Int = {
-    if(paired) compatibleFragments(feat, firstOfPairStrandOnTranscript).size
-    else countCompatibleRecords(feat, firstOfPairStrandOnTranscript)
+  def countCompatibleFragments(feat: Feature): Int = {
+    if(paired) compatibleFragments(feat).size
+    else countCompatibleRecords(feat)
   }
 
 
