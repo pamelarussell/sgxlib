@@ -173,6 +173,12 @@ class SamReaderSuite extends FunSuite {
       Plus, rec => !rec.getReadNegativeStrandFlag).countCompatibleRecords(ENST00000411780) === 0)
   }
 
+  test("Overlappers") {
+    assert(samReaderPairedMinus.overlappers(ENST00000411780).size === 5)
+    assert(samReaderPairedPlus.overlappers(ENST00000411780).size === 1)
+    assert(samReaderPairedUnstranded.overlappers(ENST00000411780).size === 6)
+  }
+
   test("No next element entire file") {
     val iter1 = samReaderPairedUnstranded.iterator
     while(iter1.hasNext) {iter1.next()}
@@ -257,6 +263,11 @@ class SamReaderSuite extends FunSuite {
     // Not primary alignment
     assert(notExistsFragment(new GenericFeature(Block("20", 37240662, 37240966, Unstranded), None), "DRR023752.35525881", Unstranded))
     assert(existsRecord(37240662, 37240966, Unstranded, "DRR023752.35525881", Unstranded))
+  }
+
+  test("queryRecords with other predicate") {
+    samReaderPairedMinus.queryRecords("20", 37945227, 37945318, rec => rec.getReadName == "DRR023752.26575011").size === 1
+    samReaderPairedMinus.queryRecords("20", 37945227, 37945318, rec => rec.getReadName == "???").size === 0
   }
 
   test("Count compatible fragments - reads unpaired") {
