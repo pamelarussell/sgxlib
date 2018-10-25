@@ -37,8 +37,6 @@ class VariantContextMutationSuite extends FunSuite {
   }
 
   test("Remove allele") {
-    // Can't remove an allele that doesn't exist
-    assertThrows[Exception](VariantContextMutations.removeAllele(vcfRecordRs9628390, Allele.create("C")))
     // Remove an allele that does exist; check correct samples are altered and allele list is altered
     val vc = VariantContextMutations.removeAllele(vcfRecordTriAllelicRs9306245, Allele.create("A"))
     assert(vc.getGenotype("HG01048").isNoCall)

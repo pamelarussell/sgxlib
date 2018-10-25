@@ -31,7 +31,7 @@ private final class InstantiableVariantContext(source: String,
   extends VariantContext(source, id, contig, start, stop, alleles, genotypes, log10pError, filters,
     attributes, fullyDecoded, java.util.EnumSet.of(VariantContext.Validation.ALLELES, VariantContext.Validation.GENOTYPES)) {
 
-  super.validateAlternateAlleles()
+  //super.validateAlternateAlleles()
   super.validateChromosomeCounts()
 
 }
@@ -162,7 +162,8 @@ object VariantContextMutations {
   /**
     * Returns a new [[VariantContext]] with genotypes set to missing for any individual
     * who has at least one copy of a given allele. The given allele is also removed from
-    * the list of alleles.
+    * the list of alleles. If no individuals have the allele, no individual genotypes
+    * are changed but the allele is still removed from the list of alleles.
     * @param vc Original [[VariantContext]]
     * @param allele Allele
     * @return New [[VariantContext]] with individual genotypes set to missing for any
@@ -172,8 +173,11 @@ object VariantContextMutations {
   def removeAllele(vc: VariantContext, allele: Allele): VariantContext = {
     val samplesWithAllele = VariantContextUtil.samplesWithAllele(vc, allele)
     val vcGenotypesModified: VariantContext = samplesWithAllele.foldLeft[VariantContext](vc)((v, s) => setGenotypeToMissing(v, s))
+    val newAlleleList = vc.getAlleles
+    newAlleleList.remove(allele)
     new VariantContextData(vcGenotypesModified)
-      .getVariantContext
+        .setAlleleList(newAlleleList)
+        .getVariantContext
   }
 
 }
